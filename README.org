@@ -1,0 +1,217 @@
+#+title: NFDI4BI-KG
+#+author: All contributors
+#+date: [2025-03-24 Mon] 
+* Repository for the NFDI4BIOIMAGE Knowledge Graph
+:PROPERTIES:
+:ID:       fc647655-1e49-41e7-96f2-6e7ce03c577d
+:END:
+
+** NFDI4BIOIMAGE Knowledge Graph Party :nfdi:knowledgegraph:wikidata:meeting:
+:PROPERTIES:
+:ID:       785808b2-c95a-4685-a1ab-976170415ba5
+:END:
+:PROPERTIES:  :nfdi:knowledgegraph:wikidata:meeting:
+:ID:       0602d4d7-f97f-4043-853e-9daa9fc36ba5
+:END:
+
+*** The NFDI4BI scholia page
+:PROPERTIES:
+:ID:       599fa125-1c19-4a6e-970b-3c37066c7adc
+:END:
+https://scholia.toolforge.org/topic/Q113500855
+**** Observations:
+:PROPERTIES:
+:ID:       785a8f5a-9e2a-46bd-9fc2-451ca960d3a0
+:END:
+- limited number of persons
+- affiliations complete?
+- linked topics
+- publications
+- events
+- data
+*** Editing wikidata
+:PROPERTIES:
+:ID:       b940169e-9fab-4ceb-9d79-3dc7398687e6
+:END:
+**** Online, e.g. https://www.wikidata.org/wiki/Q113500855
+:PROPERTIES:
+:ID:       82baecff-e2a3-4a56-a7d2-f94d3862d14a
+:END:
+  - click "edit" next to any statement
+  - what's a statement?
+  - RDF triple:
+     #+begin_example sparql
+     ?subject ?predicate ?object .
+     #+end_example
+     or
+     #+begin_example sparql
+     ?subject ?property_name ?property_value .
+     #+end_example
+  - Wikidata:
+  #+begin_example sparql
+  ?wd_term ?wd_property ?wd_statement .
+  ?wd_statement rdfs:label "foo"@en .
+                rdfs:label "bar"@de .
+                ...
+                wdp:P854  "http://example.org"
+                ...
+  #+end_example
+
+- Wikidata property values are almost never literals (strings, numbers), but rather Blank Nodes.
+- Subjects and Statements are prefixed: https://www.wikidata.org/entity/Q, followed by a unique ID number.
+- Properties are prefixed https://www.wikidata.org/prop/P, followed by a unique ID number
+
+*** Examples
+:PROPERTIES:
+:ID:       69b0670b-6859-49d4-84f9-549a4f026153
+:END:
+#+begin_src sparql :url https://query.wikidata.org/sparql
+  PREFIX wd: <http://www.wikidata.org/entity/>
+  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  PREFIX wikibase: <http://wikiba.se/ontology#>
+  PREFIX p: <http://www.wikidata.org/prop/>
+  PREFIX ps: <http://www.wikidata.org/prop/statement/>
+  PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX bd: <http://www.bigdata.com/rdf#>
+
+  select * where {
+    wd:Q113500855 ?property ?statement .
+    }
+  limit 30
+#+end_src
+
+#+RESULTS:
+| property                                   | statement                                                                                |
+|--------------------------------------------+------------------------------------------------------------------------------------------|
+| http://schema.org/version                  | 2326231438                                                                               |
+| http://schema.org/dateModified             | 2025-03-17T12:28:24Z                                                                     |
+| http://schema.org/description              | Nationale Forschungsdateninfrastruktur für Mikroskopie und Bildanalyse                   |
+| http://schema.org/description              | National Research Data Infrastructure for Microscopy and Bioimage Analysis               |
+| http://www.w3.org/2000/01/rdf-schema#label | NFDI4BIOIMAGE                                                                            |
+| http://www.w3.org/2000/01/rdf-schema#label | NFDI4BIOIMAGE                                                                            |
+| http://wikiba.se/ontology#statements       | 80                                                                                       |
+| http://wikiba.se/ontology#sitelinks        | 0                                                                                        |
+| http://wikiba.se/ontology#identifiers      | 6                                                                                        |
+| http://www.wikidata.org/prop/direct/P31    | http://www.wikidata.org/entity/Q30089794                                                 |
+| http://www.wikidata.org/prop/direct/P31    | http://www.wikidata.org/entity/Q98270496                                                 |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q420                                                      |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q431                                                      |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q441                                                      |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q7193                                                     |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q7215                                                     |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q11190                                                    |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q14620                                                    |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q21198                                                    |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q26383                                                    |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q101929                                                   |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q207011                                                   |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q489328                                                   |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q735602                                                   |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q2098469                                                  |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q30089794                                                 |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q96678462                                                 |
+| http://www.wikidata.org/prop/direct/P101   | http://www.wikidata.org/entity/Q115433545                                                |
+| http://www.wikidata.org/prop/P31           | http://www.wikidata.org/entity/statement/Q113500855-4170d701-4400-d41b-c518-6ec24ec3eb97 |
+| http://www.wikidata.org/prop/P31           | http://www.wikidata.org/entity/statement/Q113500855-a736a4bd-48d9-0052-bae1-a753dedefd55 |
+
+#+begin_src sparql :url https://query.wikidata.org/sparql
+  PREFIX wd: <http://www.wikidata.org/entity/>
+  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  PREFIX wikibase: <http://wikiba.se/ontology#>
+  PREFIX p: <http://www.wikidata.org/prop/>
+  PREFIX ps: <http://www.wikidata.org/prop/statement/>
+  PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX bd: <http://www.bigdata.com/rdf#>
+
+  select * where {
+    wd:Q113500855 wdt:P31 ?instance_of .
+    ?instance_of ?iprop ?ival .
+    }
+  limit 30
+#+end_src
+
+#+RESULTS:
+| instance_of                              | iprop                                        | ival                                                                                                         |
+|------------------------------------------+----------------------------------------------+--------------------------------------------------------------------------------------------------------------|
+| http://www.wikidata.org/entity/Q30089794 | http://schema.org/version                    | 2320780942                                                                                                   |
+| http://www.wikidata.org/entity/Q30089794 | http://schema.org/dateModified               | 2025-03-06T13:15:55Z                                                                                         |
+| http://www.wikidata.org/entity/Q30089794 | http://schema.org/description                | Aktivitäten rund um den Lebenszyklus von Forschungsdaten                                                     |
+| http://www.wikidata.org/entity/Q30089794 | http://schema.org/description                | activities around the life cycle of research-related data                                                    |
+| http://www.wikidata.org/entity/Q30089794 | http://schema.org/description                | desarrollo y ejecución de arquitecturas, políticas, prácticas y procedimientos de los datos de investigación |
+| http://www.wikidata.org/entity/Q30089794 | http://schema.org/description                | dejavnosti v življenjskem ciklu raziskovalnih podatkov                                                       |
+| http://www.wikidata.org/entity/Q30089794 | http://schema.org/description                | діяльності навколо життєвого циклу даних, пов’язаних з дослідженнями                                         |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | Forschungsdatenmanagement                                                                                    |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | research data management                                                                                     |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | gestión de datos de investigación                                                                            |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | Araştırma verisi yönetimi                                                                                    |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | 研究資料管理                                                                                                   |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | 研究資料管理                                                                                                   |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | 調査データ管理                                                                                                 |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | управління даними досліджень                                                                                 |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | hantering av forskningsdata                                                                                  |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | gestió de dades de recerca                                                                                   |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | gestion des données de recherche                                                                             |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2000/01/rdf-schema#label   | upravljanje raziskovalnih podatkov                                                                           |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | FDM                                                                                                          |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | RDM                                                                                                          |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | RDM                                                                                                          |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | リサーチ・データ・マネジメント                                                                                    |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | 調査データ・マネジメント                                                                                         |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | 調査データマネジメント                                                                                           |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | RDM                                                                                                          |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | research data management                                                                                     |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | forskningsdatahantering                                                                                      |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | management des données de recherche                                                                          |
+| http://www.wikidata.org/entity/Q30089794 | http://www.w3.org/2004/02/skos/core#altLabel | traitement des données de recherche                                                                          |
+
+*** Other ways to edit wikidata
+:PROPERTIES:
+:ID:       6856d416-79ee-45ea-9f34-0e6c1da6c0fb
+:END:
+- OpenRefine ("reconciliation")
+- QuickStatements -> https://quickstatements.toolforge.org/
+- See more at https://www.wikidata.org/wiki/Wikidata:Tools
+-
+*** Suggestions for adding/editing
+:PROPERTIES:
+:ID:       0bd42be1-749a-4598-9ca9-f932f3ef0ca6
+:END:
+- Yourself
+  - Name
+  - Affiliation
+  - *ORCID*
+  - other IDs
+  - Degree
+  - Field of work
+  - Website
+  - Social media, github handles
+  - Publications -> https://orcid-scraper.toolforge.org
+  - ...
+**** Your affiliation(s)
+:PROPERTIES:
+:ID:       1031e141-2a68-40a5-a7e6-9735f8863819
+:END:
+- ROR ID
+- Website
+**** Public OMERO istance
+:PROPERTIES:
+:ID:       7ab130e3-dce8-4e51-9c6f-96e6e462ff05
+:END:
+**** NFDI4BI Use cases
+:PROPERTIES:
+:ID:       c2db42f5-551a-4731-a61d-66a82e6e4761
+:END:
+**** NFDI4BI Use cases
+:PROPERTIES:
+:ID:       bb3f0446-7437-4fcd-b064-cb073b31dd2f
+:END:
+**** Task areas
+:PROPERTIES:
+:ID:       53ffd7ac-cf7a-4d37-9620-25138c6cf50d
+:END:
+**** NFDI Sections and Workgroups
+:PROPERTIES:
+:ID:       1bee5ed1-c28d-4eb3-8ba9-085aa5b4bdd3
+:END:
