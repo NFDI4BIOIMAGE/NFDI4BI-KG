@@ -6,7 +6,7 @@
 :ID:       fc647655-1e49-41e7-96f2-6e7ce03c577d
 :END:
 
-** NFDI4BIOIMAGE Knowledge Graph Party :nfdi:knowledgegraph:wikidata:meeting:
+** Introduction
 :PROPERTIES:
 :ID:       785808b2-c95a-4685-a1ab-976170415ba5
 :END:
@@ -23,12 +23,11 @@ https://scholia.toolforge.org/topic/Q113500855
 :PROPERTIES:
 :ID:       785a8f5a-9e2a-46bd-9fc2-451ca960d3a0
 :END:
-- limited number of persons
-- affiliations complete?
-- linked topics
-- publications
-- events
-- data
+- Participants are way incomplete
+- No linked topics
+- publications?
+- events?
+- data?
 *** Editing wikidata
 :PROPERTIES:
 :ID:       b940169e-9fab-4ceb-9d79-3dc7398687e6
@@ -47,21 +46,32 @@ https://scholia.toolforge.org/topic/Q113500855
      #+begin_example sparql
      ?subject ?property_name ?property_value .
      #+end_example
-  - Wikidata:
-  #+begin_example sparql
-  ?wd_term ?wd_property ?wd_statement .
-  ?wd_statement rdfs:label "foo"@en .
-                rdfs:label "bar"@de .
-                ...
-                wdp:P854  "http://example.org"
-                ...
+  - Adopted from the [[www.wikidata.org/wiki/Wikidata:Introduction][Wikidata introduction)]]
+  #+begin_example
+  <http://example.org/DouglasAdams> <http://example.org/educated_at> "St. John's College" .
   #+end_example
+- Wikidata subjects (=item=): has a label, a description and any number of aliases. URI pattern: https://www.wikidata.org/entity/Q123456789
+- Wikidata =statement= = =property= + =value=
 
-- Wikidata property values are almost never literals (strings, numbers), but rather Blank Nodes.
-- Subjects and Statements are prefixed: https://www.wikidata.org/entity/Q, followed by a unique ID number.
-- Properties are prefixed https://www.wikidata.org/prop/P, followed by a unique ID number
+| Item       | Property           | Value                                 |
+|------------+--------------------+---------------------------------------|
+| wd:Q42     | rdfs:label         | "Douglas Adams"^^xsd:string           |
+| wd:Q42     | schema:description | "A British writer"^^xsd:string@en     |
+| wd:Q42     | schema:description | "Ein britischer Autor"^^xsd:string@de |
+| wd:Q42     | schema:description | "Un écrivain français"^^xsd:string@fr |
+| wd:Q42     | wdp:P69            | Q691283                               |
+| wp:P69     | rdfs:label         | "educated at"^^xsd:string@en          |
+| wd:Q691283 | label              | "St. John's College"^^xsd:string      |
+ 
+- Each property-value pair (=statement=) can have additional annotations, such as references, validity dates, ...
 
-*** Examples
+Example:[[https://www.wikidata.org/wiki/Q113500855][NFDI4BIOIMAGE]]'s chairperson
+
+** Example queries 
+:PROPERTIES:
+:ID:       2c5092e9-98d2-4528-9d90-70e0242f1efa
+:END:
+*** Query all properties and values on NFDI4BIOIMAGE's item
 :PROPERTIES:
 :ID:       69b0670b-6859-49d4-84f9-549a4f026153
 :END:
@@ -76,13 +86,13 @@ https://scholia.toolforge.org/topic/Q113500855
   PREFIX bd: <http://www.bigdata.com/rdf#>
 
   select * where {
-    wd:Q113500855 ?property ?statement .
+    wd:Q113500855 ?property ?value .
     }
   limit 30
 #+end_src
 
 #+RESULTS:
-| property                                   | statement                                                                                |
+| property                                   | value                                                                                    |
 |--------------------------------------------+------------------------------------------------------------------------------------------|
 | http://schema.org/version                  | 2326231438                                                                               |
 | http://schema.org/dateModified             | 2025-03-17T12:28:24Z                                                                     |
