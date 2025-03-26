@@ -1,0 +1,157 @@
+#+title: SPARQL queries against Wikidata:Q113500855
+#+author: @CFGrote
+#+date: [2025-03-25 Tue] 
+#+property: header-args:sparql :url https://query.wikidata.org/sparql :noweb yes :cache yes :results replace
+
+* Prefixes                                                         :noexport:
+:PROPERTIES:
+:ID:       7e0ab5ee-f299-4fcb-8dce-3ee2f60f4b90
+:END:
+#+name: prefixes
+#+begin_src sparql
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+#+end_src
+* Affiliations
+:PROPERTIES:
+:ID:       36d37a39-0f18-47ab-9719-21ba11586b45
+:END:
+#+begin_src sparql
+  <<prefixes>>
+  select distinct ?affiliation ?ror ?url where {
+    wd:Q113500855 wdt:P1416 ?affiliation .
+    ?affiliation wdt:P6782 ?ror .
+    bind(concat("https://ror.org/", ?ror) as ?url)
+    }
+#+end_src
+
+#+RESULTS:
+| affiliation                               | ror       | url                       |
+|-------------------------------------------+-----------+---------------------------|
+| http://www.wikidata.org/entity/Q161982    | 023b0x485 | https://ror.org/023b0x485 |
+| http://www.wikidata.org/entity/Q153987    | 0245cg223 | https://ror.org/0245cg223 |
+| http://www.wikidata.org/entity/Q317032    | 024z2rq82 | https://ror.org/024z2rq82 |
+| http://www.wikidata.org/entity/Q116959508 | 05tpnw772 | https://ror.org/05tpnw772 |
+| http://www.wikidata.org/entity/Q1562772   | 00f5q5839 | https://ror.org/00f5q5839 |
+| http://www.wikidata.org/entity/Q449325    | 04cdgtt98 | https://ror.org/04cdgtt98 |
+| http://www.wikidata.org/entity/Q54096     | 00rcxh774 | https://ror.org/00rcxh774 |
+| http://www.wikidata.org/entity/Q697111    | 02nv7yv05 | https://ror.org/02nv7yv05 |
+| http://www.wikidata.org/entity/Q702499    | 04qmmjx98 | https://ror.org/04qmmjx98 |
+| http://www.wikidata.org/entity/Q835440    | 0546hnb39 | https://ror.org/0546hnb39 |
+| http://www.wikidata.org/entity/Q154804    | 03s7gtk40 | https://ror.org/03s7gtk40 |
+| http://www.wikidata.org/entity/Q880999    | 000h6jb29 | https://ror.org/000h6jb29 |
+| http://www.wikidata.org/entity/Q1248645   | 004hd5y14 | https://ror.org/004hd5y14 |
+| http://www.wikidata.org/entity/Q1664946   | 02se0t636 | https://ror.org/02se0t636 |
+| http://www.wikidata.org/entity/Q1813751   | 055s37c97 | https://ror.org/055s37c97 |
+| http://www.wikidata.org/entity/Q152838    | 01y9bpm73 | https://ror.org/01y9bpm73 |
+| http://www.wikidata.org/entity/Q1813719   | 02jhqqg57 | https://ror.org/02jhqqg57 |
+| http://www.wikidata.org/entity/Q1813753   | 01zwmgk08 | https://ror.org/01zwmgk08 |
+| http://www.wikidata.org/entity/Q695267    | 03mstc592 | https://ror.org/03mstc592 |
+| http://www.wikidata.org/entity/Q168426    | 00pd74e08 | https://ror.org/00pd74e08 |
+| http://www.wikidata.org/entity/Q1493545   | 0534re684 | https://ror.org/0534re684 |
+| http://www.wikidata.org/entity/Q151510    | 038t36y30 | https://ror.org/038t36y30 |
+| http://www.wikidata.org/entity/Q158158    | 042aqky30 | https://ror.org/042aqky30 |
+
+All good.
+
+* People
+:PROPERTIES:
+:ID:       a488548c-033b-40e3-9bc3-5d14cb84edc8
+:END:
+#+begin_src sparql
+  <<prefixes>>
+  select * where {
+    wd:Q113500855 wdt:P710 ?participant .
+    }
+#+end_src
+
+#+RESULTS:
+| participant                               |
+|-------------------------------------------|
+| http://www.wikidata.org/entity/Q551293    |
+| http://www.wikidata.org/entity/Q1410180   |
+| http://www.wikidata.org/entity/Q2501894   |
+| http://www.wikidata.org/entity/Q15994420  |
+| http://www.wikidata.org/entity/Q19595450  |
+| http://www.wikidata.org/entity/Q21264215  |
+| http://www.wikidata.org/entity/Q35704262  |
+| http://www.wikidata.org/entity/Q43198948  |
+| http://www.wikidata.org/entity/Q48367863  |
+| http://www.wikidata.org/entity/Q56112063  |
+| http://www.wikidata.org/entity/Q56512375  |
+| http://www.wikidata.org/entity/Q56754796  |
+| http://www.wikidata.org/entity/Q56826336  |
+| http://www.wikidata.org/entity/Q58296820  |
+| http://www.wikidata.org/entity/Q59959645  |
+| http://www.wikidata.org/entity/Q64885434  |
+| http://www.wikidata.org/entity/Q70220634  |
+| http://www.wikidata.org/entity/Q87216605  |
+| http://www.wikidata.org/entity/Q89164423  |
+| http://www.wikidata.org/entity/Q91533391  |
+| http://www.wikidata.org/entity/Q115556246 |
+| http://www.wikidata.org/entity/Q115556282 |
+| http://www.wikidata.org/entity/Q115556311 |
+| http://www.wikidata.org/entity/Q115556609 |
+| http://www.wikidata.org/entity/Q133300650 |
+
+** Persons with names and ORCIDs
+:PROPERTIES:
+:ID:       59485d9e-3ecc-4de0-ac90-b2b213c695ba
+:END:
+#+begin_src sparql
+  select distinct *
+     where {
+       service wikibase:label {bd:serviceParam wikibase:language "en" .}
+       {
+         {
+      ?person wdt:P31 wd:Q5;
+              ^wdt:P710 wd:Q113500855 ;
+           rdfs:label ?name .
+           }
+         optional {
+         ?person wdt:P496 ?orcid .
+           }
+       filter(langMatches(lang(?name), "en"))
+      }
+       }
+  order by ?name
+#+end_src
+
+#+RESULTS:
+| person                                    | name                         |               orcid |
+|-------------------------------------------+------------------------------+---------------------|
+| http://www.wikidata.org/entity/Q551293    | Anja Steinbeck               |                     |
+| http://www.wikidata.org/entity/Q115556246 | Astrid Schauss               |                     |
+| http://www.wikidata.org/entity/Q70220634  | Axel A Brakhage              | 0000-0002-8814-4193 |
+| http://www.wikidata.org/entity/Q89164423  | Carsten Fortmann-Grote       | 0000-0002-2579-5546 |
+| http://www.wikidata.org/entity/Q115556311 | Claire Chalopin              | 0000-0001-9309-7531 |
+| http://www.wikidata.org/entity/Q15994420  | Edith Heard                  | 0000-0001-8052-7117 |
+| http://www.wikidata.org/entity/Q56754796  | Jan Bumberger                |                     |
+| http://www.wikidata.org/entity/Q43198948  | Jan Huisken                  | 0000-0001-7250-3756 |
+| http://www.wikidata.org/entity/Q35704262  | Jan U. Lohmann               | 0000-0003-3667-187X |
+| http://www.wikidata.org/entity/Q58296820  | Jean-Marie Burel             | 0000-0002-1789-1861 |
+| http://www.wikidata.org/entity/Q115556609 | Jianxu Chen                  |                     |
+| http://www.wikidata.org/entity/Q1410180   | Johannes Wessels             |                     |
+| http://www.wikidata.org/entity/Q56512375  | Josh Moore                   | 0000-0003-4028-811X |
+| http://www.wikidata.org/entity/Q21264215  | Kerstin Krieglstein-Unsicker | 0000-0002-2130-7314 |
+| http://www.wikidata.org/entity/Q115556282 | Markus Becker                |                     |
+| http://www.wikidata.org/entity/Q59959645  | Michael Baumann              | 0000-0002-9340-974X |
+| http://www.wikidata.org/entity/Q133300650 | Niraj Kandpal                | 0009-0007-5101-4786 |
+| http://www.wikidata.org/entity/Q56112063  | Paul Czodrowski              | 0000-0002-7390-8795 |
+| http://www.wikidata.org/entity/Q19595450  | Petra Hätscher               |                     |
+| http://www.wikidata.org/entity/Q64885434  | Stefan Remy                  |                     |
+| http://www.wikidata.org/entity/Q87216605  | Stefanie Weidtkamp-Peters    | 0000-0001-7734-3771 |
+| http://www.wikidata.org/entity/Q56826336  | Susanne Menzel               |                     |
+| http://www.wikidata.org/entity/Q48367863  | Thomas Bocklitz              | 0000-0003-2778-6624 |
+| http://www.wikidata.org/entity/Q91533391  | Timo Dickscheid              | 0000-0002-9051-3701 |
+| http://www.wikidata.org/entity/Q2501894   | Ursula Staudinger            | 0000-0003-3833-4340 |
+| http://www.wikidata.org/entity/Q15994420  | Edith Heard                  | 0000-0001-8052-7117 |
+| http://www.wikidata.org/entity/Q43198948  | Jan Huisken                  | 0000-0001-7250-3756 |
+| http://www.wikidata.org/entity/Q15994420  | Edith Heard                  | 0000-0001-8052-7117 |
+| http://www.wikidata.org/entity/Q43198948  | Jan Huisken                  | 0000-0001-7250-3756 |
