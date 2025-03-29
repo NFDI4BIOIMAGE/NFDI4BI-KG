@@ -1,0 +1,349 @@
+#+title: A RDF Graph generator for Data Stewards activities in NFDI4BIOIMAGE
+#+author: Carsten Fortmann-Grote
+#+date: [2025-03-28 Fri] 
+#+property: header-args:python :session *rdf* :results output :noweb no-export :mkdirp yes
+
+* Layout the concept
+:PROPERTIES:
+:ID:       a3aeb679-5c5f-4426-bc8a-ac3732c39e69
+:END:
+The goal is to convert the Data Steward's (DaSt) activities spreadsheet into a a RDF graph.
+** Requirements
+:PROPERTIES:
+:ID:       2cf6a1e6-a173-4890-87cd-491574c85213
+:END:
+- Load all sheets in the DaSt spreadsheet as =pandas.DataFrame=.
+- Generate a graph that contains all data stewards, their names and qualifications as property values.
+** Code skeleton
+:PROPERTIES:
+:ID:       f9f99063-2ff9-4614-898f-c0d619c1799f
+:END:
+The code consists of module imports, namespace definitions and a number of functions. The =main()= function
+performs all steps to convert the sheets to graphs.
+
+#+name: dast2rdf.py
+#+begin_src python :tangle dast2rdf/dast2rdf.py
+  # Imports
+  <<imports>>
+
+  # Namespaces
+  <<namespaces>>
+
+  # Functions
+  <<functions>>
+
+  if __name__ == "__main__":
+      main()
+#+end_src
+** Imports
+:PROPERTIES:
+:ID:       67503526-a1d3-4bd7-8088-19a5629771eb
+:END:
+#+name:imports
+#+begin_src python
+  import pandas
+  import rdflib
+  from rdflib import Graph, URIRef,  Literal
+  from rdflib import RDF, FOAF, RDFS
+  import pandas
+  from SPARQLWrapper import SPARQLWrapper, JSON
+#+end_src
+
+#+RESULTS: imports
+
+** Namespaces
+:PROPERTIES:
+:ID:       6e049756-7f1b-49fb-b43f-c0d3e4ca6a02
+:END:
+We need to define some additional namespaces
+#+name:namespaces
+#+begin_src  python
+  dast = rdflib.Namespace("http://purl.nfdi4bi.org/rdf/dast/")
+  dastp = rdflib.Namespace("http://purl.nfdi4bi.org/rdf/dast#")
+  WD = rdflib.Namespace("http://www.wikidata.org/entity/")
+  WDT = rdflib.Namespace("http://www.wikidata.org/prop/direct/")
+#+end_src
+
+#+RESULTS: namespaces
+
+** Functions
+:PROPERTIES:
+:ID:       419e4d59-544c-48f8-bfcf-2e5b7855ece4
+:END:
+*** Load spreadsheet
+:PROPERTIES:
+:ID:       4c216e66-cb16-44ca-98a1-8fa2d42473b0
+:END:
+Our first function loads the spreadsheet and returns the individual sheets as =pandas.DataFrame=s.
+#+name:load_spreadsheet
+#+begin_src python :results output
+  def load_spreadsheet(path=None):
+      """ Load spreadsheet at path into a pandas DataFrame.
+
+      :param path: The filepath or URL of the spreadsheet to load.
+      :type  path: str
+
+      """
+
+      sheets = pandas.read_excel('/home/grotec/GerBI-Cloud/NFDI4BIOIMAGE Consortium/DaSt Team/Data Stewardship_documentation.xlsx', sheet_name=None, engine='openpyxl')
+
+      return sheets
+#+end_src
+
+#+RESULTS: load_spreadsheet
+
+*** Test
+:PROPERTIES:
+:ID:       98188a0d-4d5b-4c8c-aad5-2d7daa17d1eb
+:END:
+Let's test our new function.
+#+name: test_load_spreadsheet
+#+begin_src python 
+  sheets = load_spreadsheet()
+
+  assert "Helpdesk & TA Duties" in sheets.keys()
+#+end_src
+
+#+RESULTS: test_load_spreadsheet
+
+** Data Stewards
+:PROPERTIES:
+:ID:       927d7847-60bc-460e-94be-b525c31e875f
+:END:
+The sheet "Expertise & assigment reque" lists all data stewards and their skills. We'll start with this sheet. The
+first column, starting from row 7, has the DaSt's names appended by their a
+- Data Stewards are entered by their name, sometimes followed by affiliation. Turn every name and affiliation into a foaf:Person object. Add their wikidata and/or
+orcid ids if available. Consider usinc vcard instead of foaf.
+
+
+*** Function that cleans and returns the DaSts
+:PROPERTIES:
+:ID:       54e6f02f-5854-41c7-8f71-2c1e84aceb0b
+:END:
+#+name: clean_dasts
+#+begin_src python
+  def clean_dasts(sheets):
+      dasts = sheets['Expertise & assignment of reque']
+      
+      dasts.columns = dasts.loc[6]
+
+      return dasts.drop(axis=0, labels=range(6))
+#+end_src
+
+#+RESULTS: clean_dasts
+
+
+*** A function that returns a set of all DaSt names.
+:PROPERTIES:
+:ID:       bfaedfe2-be48-475e-8505-0958588691f5
+:END:
+#+name:dast_names
+#+begin_src python
+      def dast_names(dasts_df):
+          all_names = set(
+              [nm for nm in dasts_df.iloc[:8,0].dropna().values]
+          )
+
+          return all_names
+#+end_src
+
+#+RESULTS: dast_names
+
+*** Test
+:PROPERTIES:
+:ID:       724a7764-d4df-4e75-b268-1d0ac89200cf
+:END:
+We test that the function above returns 8 names.
+#+name:test_dast_names
+#+begin_src python :results value
+  sheets = load_spreadsheet()
+  dasts = clean_dasts(sheets)
+  all_names_set = dast_names(dasts)
+
+  assert len(all_names_set) == 8
+#+end_src
+
+#+RESULTS: test_dast_names
+: None
+
+
+** Conversion to RDF
+:PROPERTIES:
+:ID:       74962b8d-9e02-48ea-b8c3-fbc4dce2e0d0
+:END:
+Now we'll convert the entries in the expertise sheet to triples. Each subject is an
+instance of =foaf:Person= and of =dast:DataSteward=. We also add a =wdt:P31 wd:Q5= statement and, if available,
+the wikidata subject URI corresponding to the person. Finally, we add a statement declaring that the person
+is a participant in NFDI4BIOIMAGE (=wdt:P1344 wd:Q113500855=).
+
+We'll first implement a few functions to query the wikidata sparql endpoint for the wikidata URI given the name.
+Need a function to run a query on a given endpoint. The function =get_results()= runs a passed query on
+a given endpoint:
+#+name: run_query
+#+begin_src python
+    def get_results(endpoint_url, query):
+        sparql = SPARQLWrapper(endpoint_url)
+        sparql.setQuery(query)
+        sparql.setReturnFormat(JSON)
+
+        return sparql.query().convert()
+#+end_src
+
+#+RESULTS: run_query
+
+With this, we can now code a function that queries wikidata for the subject of an item that is labelled
+with a given name. As additional constraints, we assert that the item must be a participant in NFDI4BIOIMAGE.
+If the query does not yield any results, we return =None=:
+#+name: get_wikidata_id
+#+begin_src python
+  def get_wikidata_id(name):
+      query = f"""PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+        PREFIX wd: <http://www.wikidata.org/entity/>
+
+        select ?person ?personLabel where {{
+          service wikibase:label {{bd:serviceParam wikibase:language "en" .}}
+            ?person wdt:P31 wd:Q5;
+                    wdt:P1344 | ^wdt:P710 wd:Q113500855;
+                    rdfs:label ?name .
+            filter(regex(?name, "{name}"))
+      }}
+      limit 1
+      """
+
+
+      endpoint_url = "https://query.wikidata.org/sparql"
+      results = get_results(endpoint_url, query)
+
+      if len(results["results"]["bindings"]) > 0:
+          return URIRef(results["results"]["bindings"][0]['person']['value'])
+      
+      return None
+#+end_src
+
+#+RESULTS: get_wikidata_id
+
+Let's test this query execution: Passing a name that does not correspond to a NFDI4BIOIMAGE participant should
+return =None=, querying for a name that does indeed correspond to a participant, should return that person's wikidata
+item's URI:
+#+name:test_get_wikidata_id
+#+begin_src python :results output
+  assert get_wikidata_id("Ada Lovelace") is None
+  assert get_wikidata_id("Mohsen Ahmadi") == URIRef("http://www.wikidata.org/entity/Q91349605")
+#+end_src
+
+#+RESULTS: test_get_wikidata_id
+
+
+Finally, we have all components to code up the main workhorse function which converts a set of names
+to a graph which contains all Data Stewards and their statements.
+#+name: dast2rdf
+#+begin_src python
+  def dast2rdf(dast_names):
+
+      graph = Graph()
+      graph.bind("wdt", str(WDT))
+      graph.bind("wd", str(WD))
+      graph.bind("", str(dast))
+      graph.bind("this", str(dastp))
+      graph.base = dast
+
+      for name in sorted(dast_names):
+
+          first_last = " ".join(name.split(" ")[:-1])
+          subj = dast.term(f"DataSteward/{first_last.replace(' ', '_')}")
+
+          graph.add((subj, RDF.type, FOAF.Person)) # Is a person.
+          graph.add((subj, WDT.P31, WD.Q5))        # Is a human (wikidata)
+          graph.add((subj, RDF.type, dast.term("DataSteward")))
+          graph.add((subj, WDT.P1344, WD.Q113500855))        # Participant in nfdi4bioimage
+          graph.add((subj, RDFS.label, Literal(f"{first_last}^^xsd:string")))
+
+          wikidata_uri = get_wikidata_id(first_last)
+
+          if wikidata_uri is not None:
+              graph.add((subj, RDFS.seeAlso, wikidata_uri))
+      return graph
+#+end_src
+
+#+RESULTS: dast2rdf
+
+We test the last function by passing a list of just one name and assert that =dast2rdf= returns
+a graph.
+#+name: test_dast2rdf
+#+begin_src python :results output
+
+  names = ["Jens Wendt"]
+  graph = dast2rdf(names)
+  
+  assert len(graph) == 6
+#+end_src
+
+#+RESULTS: test_dast2rdf
+
+Now, we have everything together to get the graph for all Data Stewards.
+#+name: main
+#+begin_src python
+  def main():
+    sheets = load_spreadsheet()
+    dasts = clean_dasts(sheets)
+    all_names_set = dast_names(dasts)
+
+    graph = dast2rdf(all_names_set)
+
+    graph.serialize("data_stewards--20250328.ttl")
+#+end_src
+
+#+RESULTS: main
+
+We will now use our =main()= function to generate a graph of all Data Stewards:
+
+#+name: run
+#+begin_src python :results file link :file data_stewards--20250328.ttl
+  main()
+#+end_src
+
+#+RESULTS: run
+[[file:data_stewards--20250328.ttl]]
+
+* Collecting code blocks                                           :noexport:
+:PROPERTIES:
+:ID:       8d4ce3e0-082c-43fe-a255-899ff9178c03
+:END:
+Finally, we collect all functions in one named source block:
+
+#+name:functions
+#+begin_src python
+  <<load_spreadsheet>>
+
+  <<clean_dasts>>
+
+  <<dast_names>>
+
+  <<run_query>>
+
+  <<get_wikidata_id>>
+
+  <<dast2rdf>>
+
+  <<main>>
+#+end_src
+
+
+And the same for all tests
+
+#+name:tests
+#+begin_src python :tangle test/test_dast2rdf.py
+  import sys
+  import os
+  sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),'..', 'dast2rdf')))
+  print(sys.path)
+  from dast2rdf.dast2rdf import *
+
+  <<test_load_spreadsheet>>
+
+  <<test_dast_names>>
+
+  <<test_get_wikidata_id>>
+
+  <<test_dast2rdf>>
+#+end_src
