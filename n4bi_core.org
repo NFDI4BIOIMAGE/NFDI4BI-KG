@@ -1,0 +1,56 @@
+#+title: NFDI4BIOIMAGE Knowledge Graph -- core section
+#+author: Carsten Fortmann-Grote
+#+dateCreated: [2025-05-14 Wed] 
+
+In this document, we create a RDF graph for the NFDI4BIOIMAGE consortium based on the NFDI core ontology (https://nfdi.fiz-karlsruhe.de/ontology/3.0.1).
+
+The first subject we create represent the consortium itself.
+
+* Python code
+:PROPERTIES:
+:ID:       c90a39ee-274a-4895-a727-2b143101cb78
+:END:
+:PROPERTIES:
+:ID:       6cf75b8d-721e-45d2-a549-ca20aabfc749
+:header-args:python :session rdf :results output
+:END:
+
+#+begin_src python  :session rdf :results output
+  from rdflib import Graph, BNode, Literal, URIRef, DC, FOAF, XSD, RDF, RDFS,  Namespace
+  import pprint
+
+  # This and Default namespaces
+  nfdicore = Namespace("https://nfdi.fiz-karlsruhe.de/ontology/")
+
+  graph = Graph(bind_namespaces='rdflib')
+  graph.bind('nfdicore', nfdicore)
+
+  n4bi = URIRef("https://nfdi4bioimage.de/rdf/node")
+  graph.add((n4bi, RDF.type, nfdicore.NFDI_0001039))
+
+  # Foundation date
+  graph.add((n4bi, nfdicore.NFDI_0000136, Literal("2023-03-01", datatype=XSD.date)))
+
+  # URL
+  graph.add((n4bi, nfdicore.NFDI_0001008, Literal("https://nfdi4bioimage.de")))
+
+  # Wikidata entry
+  graph.add((n4bi, RDFS.seeAlso, URIRef("https://wikidata.org/entity/Q113500855")))
+
+  # Description, long title
+  graph.add((n4bi, DC.description, Literal("National Research Data Infrastructure for Microscopy and Bioimage Analysis", lang="en")))
+  graph.add((n4bi, DC.description, Literal("Nationale Forschungsdateninfrastruktur für Mikroskopie und Bildanalyse", lang="de")))
+
+  # Acronyms
+  graph.add((n4bi, nfdicore.NFDI_0010015, Literal("N4BI")))
+  graph.add((n4bi, nfdicore.NFDI_0010015, Literal("NFDI4BIOIMAGE")))
+
+  graph.serialize("/home/grotec/Repositories/NFDI4BI-KG/n4bi_core.n3")
+
+  for term in graph:
+      pprint.pprint(term)
+#+end_src
+
+#+RESULTS:
+: None
+
