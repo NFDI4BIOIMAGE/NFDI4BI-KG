@@ -1,0 +1,47 @@
+{
+    "creators": [
+        {
+            "name": "Fortmann-Grote, Carsten",
+            "orcid": "0000-0002-2579-5546",
+            "affiliation": "Max-Planck-Institute for Evolutionary Biology",
+            "type": "ContactPerson"
+        }
+    ],
+    "title": "The NFDI4BIOIMAGE Knowledge Graph",
+    "description": "This software repository contains code to generate the RDF files that represent the NFDI4BIOIMAGE Knowledge Graph. The RDF file itself is contained in the repo as well as the NFDI Core Ontology.",
+    "version": "0.0.1",
+    "access_right": "open",
+    "keywords": [
+        "NFDI",
+        "Bioimaging",
+        "Resource Description Framework",
+        "SPARQL",
+        "Knowledge Graph",
+        "Research Data Management"
+    ],
+    "license": "CC-0",
+    "upload_type": "software",
+    "language": "eng",
+    "related_identifiers": [
+        {
+            "identifier"    : "https://nfdi.fiz-karlsruhe.de/ontology/3.0.1",
+            "scheme"        : "URL",
+            "relation"      : "isDescribedBy",
+            "resource_type" : "publication-taxonomic_treatment"
+        },
+        {
+            "identifier"    : "https://github.com/NFDI4BIOIMAGE/NFDIBI-KG",
+            "scheme"        : "URL",
+            "relation"      : "isVersionOf",
+            "resource_type" : "software"
+        }
+    ],
+    "communities" : [
+        {
+            "identifier": "nfdi4bioimage"
+        },
+        {
+            "identifier": "max-planck-institute-for-evolutionary-biology"
+        }
+    ]
+}
