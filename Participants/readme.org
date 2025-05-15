@@ -1,0 +1,491 @@
+#+title: Participants in NFDI4BIOIMAGE
+#+author: @CFGrote
+#+date: [2025-03-26 Wed] 
+#+property: header-args:sparql :url https://query.wikidata.org/sparql :noweb yes :cache no :results replace
+#+property: header-args:python :noweb yes :cache yes :results replace :async yes
+
+* Prefixes
+:PROPERTIES:
+:ID:       58b19292-07a3-4d15-a985-1a0f4381326e
+:END:
+#+name: prefixes
+#+begin_src sparql
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+#+end_src
+* Load table
+:PROPERTIES:
+:ID:       ef6befc0-f9a2-46ca-9351-0f4cb44c661f
+:END:
+#+name: import_table
+#+begin_src python :results output
+  import pandas
+
+
+  data = pandas.read_excel("~/GerBI-Cloud/Documents/20250325_Liste_personen_wikidata.xlsx")
+
+  print("\n" + data.to_markdown())
+#+end_src
+
+
+#+name: list_of_participants
+|    | Full name                     | wikidata P | Wikidata ID                               | First name  | Surname               | Acad. Degree | Role in NFDI4BIOIMAGE               | Activity in NFDI4BIOIMAGE       | Email                                       |
+|----+-------------------------------+------------+-------------------------------------------+-------------+-----------------------+--------------+-------------------------------------+---------------------------------+---------------------------------------------|
+| 33 | Cornelia Wetzker              |            |                                           | Cornelia    | Wetzker               | Dr.          | Hired staff DaSt                    | nan                             | cornelia.wetzker@tu-dresden.de              |
+|  7 | Elisa May                     |            |                                           | Elisa       | May                   | Prof. Dr.    | Co-Spokesperson                     | Ausführende Stelle              | elisa.may@dkfz-heidelberg.de                |
+| 36 | Inga Mohr                     |            |                                           | Inga        | Mohr                  | Dr.          | Hired staff general                 | nan                             | inga.mohr@hhu.de                            |
+| 21 | Jan Lohmann                   |            |                                           | Jan         | Lohmann               | Prof. Dr.    | Member at Participating Institution | Ausführende Stelle              | jan.lohmann@cos.uni-heidelberg.de           |
+| 26 | Juliane Jäger                 |            |                                           | Juliane     | Jäger                 | nan          | Scientific Project Manager          | Ausführende Stelle              | Juliane.Jaeger@lin-magdeburg.de             |
+| 38 | Julia Thönnißen               |            |                                           | Julia       | Thönnißen             | nan          | Hired staff general                 | nan                             | j.thoennissen@fz-juelich.de                 |
+| 30 | Ksenia Kroos                  |            |                                           | Ksenia      | Krooß                 | nan          | Hired staff DaSt                    | nan                             | Ksenia.krooss@hhu.de                        |
+| 37 | Lucy Sonnet                   |            |                                           | Lucy        | Sonnet                | nan          | Hired staff general                 | nan                             | lucy.sonnet@informatik.uni-leipzig.de       |
+|  1 | Marc-Thilo Figge              |            |                                           | Marc-Thilo  | Figge                 | Prof. Dr.    | Co-Spokesperson                     | Ausführende Stelle              | Thilo.Figge@leibniz-hki.de                  |
+| 35 | Marie Baldenius               |            |                                           | Marie       | Baldenius             | Dr.          | Hired staff general                 | nan                             | m_bald03@uni-muenster.de                    |
+|  0 | Markus Blank-Burian           |            |                                           | Markus      | Blank-Burian          | Dr.          | Co-Spokesperson                     | Vertretung Wiss. Verantwortlich | blankburian@uni-muenster.de                 |
+| 20 | Matthias Landwehr             |            |                                           | Matthias    | Landwehr              | nan          | Member at Participating Institution | Vertretung Wiss. Verantwortlich | matthias.landwehr@uni-konstanz.de           |
+| 31 | Maximilan Müller              |            |                                           | Maximilan   | Müller                | nan          | Hired staff DaSt                    | nan                             | maximilian.mueller@uni-konstanz.de          |
+| 47 | Michael Scherle               |            |                                           | Michael     | Scherle               | nan          | Hired staff RSE                     | nan                             | michael.scherle@rz.uni-freiburg.de          |
+| 41 | Michele Bortolomeazzi         |            |                                           | Michele     | Bortolomeazzi         | Dr.          | Hired staff RSE                     | nan                             | michele.bortolomeazzi@dkfz-heidelberg.de    |
+| 40 | Robert Wagner                 |            |                                           | Robert      | Wagner                | nan          | Hired staff general                 | Vertretung Wiss. Verantwortlich | robert.wagner@inp-greifswald.de             |
+| 42 | Rodrigo Escobar Díaz Guerrero |            |                                           | Rodrigo     | Escobar Díaz Guerrero | nan          | Hired staff RSE                     | nan                             | rodrigo.escobar@uni-jena.de                 |
+| 43 | Ruman Gerst                   |            |                                           | Ruman       | Gerst                 | Dr.          | Hired staff RSE                     | Vertretung Wiss. Verantwortlich | ruman.gerst@leibniz-hki.de                  |
+|  5 | Susanne Kunis                 |            |                                           | Susanne     | Kunis                 | Dr.          | Co-Spokesperson                     | Ausführende Stelle              | sukunis@uos.de                              |
+| 29 | Vanessa Fuchs                 |            |                                           | Vanessa     | Fuchs                 | Dr.          | Hired staff DaSt                    | nan                             | vanessa.fuchs@hhu.de                        |
+| 46 | Yi Sun                        |            |                                           | Yi          | Sun                   | Dr.          | Hired staff RSE                     | nan                             | yi.sun@embl.de                              |
+| 45 | Haowen Jiang                  |            | http://www.wikidata.org/entity/Q9021675   | Haowen      | Jiang                 | nan          | Hired staff RSE                     | nan                             | haowen.jiang@hawk.de                        |
+| 45 | Haowen Jiang                  |            | http://www.wikidata.org/entity/Q9091718   | Haowen      | Jiang                 | nan          | Hired staff RSE                     | nan                             | haowen.jiang@hawk.de                        |
+| 45 | Haowen Jiang                  |            | http://www.wikidata.org/entity/Q9274457   | Haowen      | Jiang                 | nan          | Hired staff RSE                     | nan                             | haowen.jiang@hawk.de                        |
+| 45 | Haowen Jiang                  |            | http://www.wikidata.org/entity/Q9627686   | Haowen      | Jiang                 | nan          | Hired staff RSE                     | nan                             | haowen.jiang@hawk.de                        |
+|    |                               |            |                                           |             |                       |              |                                     |                                 |                                             |
+|----+-------------------------------+------------+-------------------------------------------+-------------+-----------------------+--------------+-------------------------------------+---------------------------------+---------------------------------------------|
+|    | Full name                     | wikidata P | Wikidata ID                               | First name  | Surname               | Acad. Degree | Role in NFDI4BIOIMAGE               | Activity in NFDI4BIOIMAGE       | Email                                       |
+|----+-------------------------------+------------+-------------------------------------------+-------------+-----------------------+--------------+-------------------------------------+---------------------------------+---------------------------------------------|
+| 10 | Janina Hanne                  |            | http://www.wikidata.org/entity/Q109650151 | Janina      | Hanne                 | Dr.          | Member at Co-Applicant              | Administrative Ansprechperson   | office@gerbi-gmb.de                         |
+| 32 | Jens Wendt                    |            | http://www.wikidata.org/entity/Q132290679 | Jens        | Wendt                 | nan          | Hired staff DaSt                    | nan                             | jens.wendt@uni-muenster.de                  |
+|  9 | Thomas Zobel                  |            | http://www.wikidata.org/entity/Q40172376  | Thomas      | Zobel                 | Dr.          | Co-Spokesperson                     | Ausführende Stelle              | thomas.zobel@uni-muenster.de                |
+|  2 | Björn Grüning                 |            | http://www.wikidata.org/entity/Q40615839  | Björn       | Grüning               | Dr.          | Co-Spokesperson                     | Ausführende Stelle              | gruening@informatik.uni-freiburg.de         |
+| 39 | Ami Trivedi                   |            | http://www.wikidata.org/entity/Q4746097   | Ami         | Trivedi               | nan          | Hired staff general                 | nan                             | ami.trivedi@uni-muenster.de                 |
+| 23 | Michael Schlierf              |            | http://www.wikidata.org/entity/Q47687016  | Michael     | Schlierf              | Prof. Dr.    | Member at Participating Institution | Ausführende Stelle              | michael.schlierf@tu-dresden.de              |
+|  3 | Robert Haase                  |            | http://www.wikidata.org/entity/Q56107317  | Robert      | Haase                 | Dr.          | Co-Spokesperson                     | Ausführende Stelle              | robert.haase@uni-leipzig.de                 |
+|  4 | Anna Kreshuk                  |            | http://www.wikidata.org/entity/Q67207690  | Anna        | Kreshuk               | Dr.          | Co-Spokesperson                     | Vertretung Wiss. Verantwortlich | anna.kreshuk@embl.de                        |
+| 25 | Andrea Leibfried              |            | http://www.wikidata.org/entity/Q80671621  | Andrea      | Leibfried             | Dr.          | Scientific Project Manager          | Administrative Ansprechperson   | andrea.leibfried@bioquant.uni-heidelberg.de |
+| 27 | Riccardo Massei               |            | http://www.wikidata.org/entity/Q89924709  | Riccardo    | Massei                | nan          | Hired staff DaSt                    | nan                             | riccardo.massei@ufz.de                      |
+|  6 | Jan-Philipp Mallm             |            | http://www.wikidata.org/entity/Q91106544  | Jan-Philipp | Mallm                 | Dr.          | Co-Spokesperson                     | Vertretung Wiss. Verantwortlich | j.mallm@Dkfz-Heidelberg.de                  |
+| 28 | Mohsen Ahmadi                 |            | http://www.wikidata.org/entity/Q91349605  | Mohsen      | Ahmadi                | Dr.          | Hired staff DaSt                    | Vertretung Wiss. Verantwortlich | mohsen.ahmadi@inp-greifswald.de             |
+| 24 | Peter Zentis                  |            | http://www.wikidata.org/entity/Q92562642  | Peter       | Zentis                | Dr.          | Member at Participating Institution | Vertretung Wiss. Verantwortlich | peter.zentis@uni-koeln.de                   |
+| 22 | Astrid Schauss                | x          | http://www.wikidata.org/entity/Q115556246 | Astrid      | Schauss               | Dr.          | Member at Participating Institution | Ausführende Stelle              | aschauss@uni-koeln.de                       |
+| 11 | Markus Becker                 | x          | http://www.wikidata.org/entity/Q115556282 | Markus      | Becker                | Dr.          | Member at Participating Institution | Ausführende Stelle              | markus.becker@inp-greifswald.de             |
+| 14 | Claire Chalopin               | x          | http://www.wikidata.org/entity/Q115556311 | Claire      | Chalopin              | Prof. Dr.    | Member at Participating Institution | Ausführende Stelle              | claire.chalopin@hawk.de                     |
+| 15 | Jianxu Chen                   | x          | http://www.wikidata.org/entity/Q115556609 | Jianxu      | Chen                  | Dr.          | Member at Participating Institution | Ausführende Stelle              | jianxu.chen@isas.de                         |
+| 34 | Niraj Kandpal                 | x          | http://www.wikidata.org/entity/Q133300650 | Niraj       | Kandpal               | nan          | Hired staff general                 | nan                             | nkandpa2@uni-koeln.de                       |
+| 44 | Tobias Gottschall             | x          | http://www.wikidata.org/entity/Q133538116 | Tobias      | Gottschall            | nan          | Hired staff RSE                     | nan                             | Tobias.Gottschall@lin-magdeburg.de          |
+| 19 | Jan Huisken                   | x          | http://www.wikidata.org/entity/Q43198948  | Jan         | Huisken               | Prof. Dr.    | Member at Participating Institution | Ausführende Stelle              | jan.huisken@uni-goettingen.de               |
+| 12 | Thomas Bocklitz               | x          | http://www.wikidata.org/entity/Q48367863  | Thomas      | Bocklitz              | Dr.          | Member at Participating Institution | Ausführende Stelle              | thomas.bocklitz@uni-jena.de                 |
+| 16 | Paul Czodrowski               | x          | http://www.wikidata.org/entity/Q56112063  | Paul        | Czodrowski            | Prof. Dr.    | Member at Participating Institution | Ausführende Stelle              | czodpaul@uni-mainz.de                       |
+|  8 | Josh Moore                    | x          | http://www.wikidata.org/entity/Q56512375  | Josh        | Moore                 | nan          | Co-Spokesperson                     | Ausführende Stelle              | joshua.moore@gerbi-gmb.de                   |
+| 13 | Jan Bumberger                 | x          | http://www.wikidata.org/entity/Q56754796  | Jan         | Bumberger             | Dr.          | Member at Participating Institution | Ausführende Stelle              | jan.bumberger@ufz.de                        |
+| 18 | Carsten Fortmann-Grote        | x          | http://www.wikidata.org/entity/Q89164423  | Carsten     | Fortmann-Grote        | Dr.          | Member at Participating Institution | Ausführende Stelle              | carsten.fortmann-grote@evolbio.mpg.de       |
+| 17 | Timo Dickscheid               | x          | http://www.wikidata.org/entity/Q91533391  | Timo        | Dickscheid            | Prof. Dr.    | Member at Participating Institution | Ausführende Stelle              | t.dickscheid@fz-juelich.de                  |
+
+** Quickstatements csv
+:PROPERTIES:
+:ID:       898e4a2d-fcff-491d-bc0b-d7065de8b8a0
+:END:
+| qid        | P710       | qal585                   |
+|------------+------------+--------------------------|
+| Q113500855 | Q109650151 | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q132290679 | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q40172376  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q40615839  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q4746097   | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q47687016  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q56107317  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q67207690  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q80671621  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q89924709  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q91106544  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q91349605  | +2025-03-25T00:00:00Z/11 |
+| Q113500855 | Q92562642  | +2025-03-25T00:00:00Z/11 |
+* SPARQL
+:PROPERTIES:
+:ID:       84722d65-efd4-4a95-8521-2c96df7d849d
+:END:
+** Prototype a query that attempts to find a wikidata item for a given name (fullname)
+:PROPERTIES:
+:ID:       1b535a07-8a01-4c5e-969a-ee8f67283fde
+:END:
+#+name: all_names
+#+begin_src sparql
+  <<prefixes>>
+  select distinct ?item ?lbl where {
+    ?item wdt:P31 wd:Q5 .
+    ?item rdfs:label ?lbl .
+
+    values ?lbl {
+      "Carsten Fortmann-Grote"@de
+      "Carsten Fortmann-Grote"@en
+      "Tobias Gottschall"@de
+      "Tobias Gottschall"@en
+      "Markus Blank-Burian"@de
+      "Markus Blank-Burian"@en
+      "Marc-Thilo Figge"@de
+      "Marc-Thilo Figge"@en
+      "Björn Grüning"@de
+      "Björn Grüning"@en
+      "Robert Haase"@de
+      "Robert Haase"@en
+      "Anna Kreshuk"@de
+      "Anna Kreshuk"@en
+      "Susanne Kunis"@de
+      "Susanne Kunis"@en
+      "Jan-Philipp Mallm"@de
+      "Jan-Philipp Mallm"@en
+      "Elisa May"@de
+      "Elisa May"@en
+      "Josh Moore"@de
+      "Josh Moore"@en
+      "Thomas Zobel"@de
+      "Thomas Zobel"@en
+      "Janina Hanne"@de
+      "Janina Hanne"@en
+      "Markus Becker"@de
+      "Markus Becker"@en
+      "Thomas Bocklitz"@de
+      "Thomas Bocklitz"@en
+      "Jan Bumberger"@de
+      "Jan Bumberger"@en
+      "Claire Chalopin"@de
+      "Claire Chalopin"@en
+      "Jianxu Chen"@de
+      "Jianxu Chen"@en
+      "Paul Czodrowski"@de
+      "Paul Czodrowski"@en
+      "Timo Dickscheid"@de
+      "Timo Dickscheid"@en
+      "Carsten Fortmann-Grote"@de
+      "Carsten Fortmann-Grote"@en
+      "Jan Huisken"@de
+      "Jan Huisken"@en
+      "Matthias Landwehr"@de
+      "Matthias Landwehr"@en
+      "Jan Lohmann"@de
+      "Jan Lohmann"@en
+      "Astrid Schauss"@de
+      "Astrid Schauss"@en
+      "Michael Schlierf"@de
+      "Michael Schlierf"@en
+      "Peter Zentis"@de
+      "Peter Zentis"@en
+      "Andrea Leibfried"@de
+      "Andrea Leibfried"@en
+      "Juliane Jäger"@de
+      "Juliane Jäger"@en
+      "Riccardo Massei"@de
+      "Riccardo Massei"@en
+      "Mohsen Ahmadi"@de
+      "Mohsen Ahmadi"@en
+      "Vanessa Fuchs"@de
+      "Vanessa Fuchs"@en
+      "Ksenia Kroos"@de
+      "Ksenia Kroos"@en
+      "Maximilan Müller"@de
+      "Maximilan Müller"@en
+      "Jens Wendt"@de
+      "Jens Wendt"@en
+      "Cornelia Wetzker"@de
+      "Cornelia Wetzker"@en
+      "Niraj Kandpal"@de
+      "Niraj Kandpal"@en
+      "Marie Balennius"@de
+      "Marie Balennius"@en
+      "Inga Mohr"@de
+      "Inga Mohr"@en
+      "Lucy Sonnet"@de
+      "Lucy Sonnet"@en
+      "Julia Thönnißen"@de
+      "Julia Thönnißen"@en
+      "Ami Trivedi"@de
+      "Ami Trivedi"@en
+      "Robert Wagner"@de
+      "Robert Wagner"@en
+      "Michele Bortolomeazzi"@de
+      "Michele Bortolomeazzi"@en
+      "Rodrigo Escobar Díaz Guerrero"@de
+      "Rodrigo Escobar Díaz Guerrero"@en
+      "Ruman Gerst"@de
+      "Ruman Gerst"@en
+      "Tobias Gottschall"@de
+      "Tobias Gottschall"@en
+      "Haowen Jiang"@de
+      "Haowen Jiang"@en
+      "Yi Sun"@de
+      "Yi Sun"@en
+      "Michael Scherle"@de
+      "Michael Scherle"@en
+    }
+    }
+  order by ?lbl
+#+end_src
+
+#+RESULTS[e9c5823237b655086205982667a5de58e05e1672]: all_names
+| item                                      | lbl                    |
+|-------------------------------------------+------------------------|
+| http://www.wikidata.org/entity/Q4746097   | Ami Trivedi            |
+| http://www.wikidata.org/entity/Q115556246 | Astrid Schauss         |
+| http://www.wikidata.org/entity/Q40615839  | Björn Grüning          |
+| http://www.wikidata.org/entity/Q89164423  | Carsten Fortmann-Grote |
+| http://www.wikidata.org/entity/Q43198948  | Jan Huisken            |
+| http://www.wikidata.org/entity/Q109650151 | Jan Lohmann            |
+| http://www.wikidata.org/entity/Q115556609 | Jianxu Chen            |
+| http://www.wikidata.org/entity/Q1720279   | Markus Becker          |
+| http://www.wikidata.org/entity/Q1901378   | Markus Becker          |
+| http://www.wikidata.org/entity/Q1901380   | Markus Becker          |
+| http://www.wikidata.org/entity/Q1901384   | Markus Becker          |
+| http://www.wikidata.org/entity/Q60053770  | Markus Becker          |
+| http://www.wikidata.org/entity/Q60169509  | Markus Becker          |
+| http://www.wikidata.org/entity/Q95770325  | Markus Becker          |
+| http://www.wikidata.org/entity/Q95770331  | Markus Becker          |
+| http://www.wikidata.org/entity/Q115556282 | Markus Becker          |
+| http://www.wikidata.org/entity/Q1929218   | Michael Schlierf       |
+| http://www.wikidata.org/entity/Q47687016  | Michael Schlierf       |
+| http://www.wikidata.org/entity/Q133300650 | Niraj Kandpal          |
+| http://www.wikidata.org/entity/Q7345138   | Robert Haase           |
+| http://www.wikidata.org/entity/Q128238736 | Robert Haase           |
+| http://www.wikidata.org/entity/Q71604     | Robert Wagner          |
+| http://www.wikidata.org/entity/Q310493    | Robert Wagner          |
+| http://www.wikidata.org/entity/Q471707    | Robert Wagner          |
+| http://www.wikidata.org/entity/Q698868    | Robert Wagner          |
+| http://www.wikidata.org/entity/Q2920078   | Robert Wagner          |
+| http://www.wikidata.org/entity/Q3436518   | Robert Wagner          |
+| http://www.wikidata.org/entity/Q4102226   | Robert Wagner          |
+| http://www.wikidata.org/entity/Q18710901  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q94850688  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q94879011  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q94882361  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q95238276  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q95250954  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q108101413 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q109238765 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q112447015 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q130469711 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q130778839 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q133538116 | Tobias Gottschall      |
+| http://www.wikidata.org/entity/Q20011325  | Vanessa Fuchs          |
+| http://www.wikidata.org/entity/Q33694887  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q48304805  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q4746097   | Ami Trivedi            |
+| http://www.wikidata.org/entity/Q80671621  | Andrea Leibfried       |
+| http://www.wikidata.org/entity/Q67207690  | Anna Kreshuk           |
+| http://www.wikidata.org/entity/Q115556246 | Astrid Schauss         |
+| http://www.wikidata.org/entity/Q89164423  | Carsten Fortmann-Grote |
+| http://www.wikidata.org/entity/Q115556311 | Claire Chalopin        |
+| http://www.wikidata.org/entity/Q90216755  | Haowen Jiang           |
+| http://www.wikidata.org/entity/Q90917187  | Haowen Jiang           |
+| http://www.wikidata.org/entity/Q92744574  | Haowen Jiang           |
+| http://www.wikidata.org/entity/Q96276864  | Haowen Jiang           |
+| http://www.wikidata.org/entity/Q56754796  | Jan Bumberger          |
+| http://www.wikidata.org/entity/Q43198948  | Jan Huisken            |
+| http://www.wikidata.org/entity/Q11718275  | Jan Lohmann            |
+| http://www.wikidata.org/entity/Q109650151 | Jan Lohmann            |
+| http://www.wikidata.org/entity/Q91106544  | Jan-Philipp Mallm      |
+| http://www.wikidata.org/entity/Q59436369  | Janina Hanne           |
+| http://www.wikidata.org/entity/Q132290679 | Jens Wendt             |
+| http://www.wikidata.org/entity/Q115556609 | Jianxu Chen            |
+| http://www.wikidata.org/entity/Q22006998  | Josh Moore             |
+| http://www.wikidata.org/entity/Q56512375  | Josh Moore             |
+| http://www.wikidata.org/entity/Q115245304 | Josh Moore             |
+| http://www.wikidata.org/entity/Q1720279   | Markus Becker          |
+| http://www.wikidata.org/entity/Q1901378   | Markus Becker          |
+| http://www.wikidata.org/entity/Q1901380   | Markus Becker          |
+| http://www.wikidata.org/entity/Q1901384   | Markus Becker          |
+| http://www.wikidata.org/entity/Q60053770  | Markus Becker          |
+| http://www.wikidata.org/entity/Q60169509  | Markus Becker          |
+| http://www.wikidata.org/entity/Q89369158  | Markus Becker          |
+| http://www.wikidata.org/entity/Q95770325  | Markus Becker          |
+| http://www.wikidata.org/entity/Q95770331  | Markus Becker          |
+| http://www.wikidata.org/entity/Q99075453  | Markus Becker          |
+| http://www.wikidata.org/entity/Q99394073  | Markus Becker          |
+| http://www.wikidata.org/entity/Q102301285 | Markus Becker          |
+| http://www.wikidata.org/entity/Q115556282 | Markus Becker          |
+| http://www.wikidata.org/entity/Q1929218   | Michael Schlierf       |
+| http://www.wikidata.org/entity/Q47687016  | Michael Schlierf       |
+| http://www.wikidata.org/entity/Q5911001   | Mohsen Ahmadi          |
+| http://www.wikidata.org/entity/Q59698915  | Mohsen Ahmadi          |
+| http://www.wikidata.org/entity/Q91349605  | Mohsen Ahmadi          |
+| http://www.wikidata.org/entity/Q93133769  | Mohsen Ahmadi          |
+| http://www.wikidata.org/entity/Q110805258 | Mohsen Ahmadi          |
+| http://www.wikidata.org/entity/Q133300650 | Niraj Kandpal          |
+| http://www.wikidata.org/entity/Q56112063  | Paul Czodrowski        |
+| http://www.wikidata.org/entity/Q92562642  | Peter Zentis           |
+| http://www.wikidata.org/entity/Q89924709  | Riccardo Massei        |
+| http://www.wikidata.org/entity/Q7345138   | Robert Haase           |
+| http://www.wikidata.org/entity/Q56107317  | Robert Haase           |
+| http://www.wikidata.org/entity/Q128238736 | Robert Haase           |
+| http://www.wikidata.org/entity/Q310493    | Robert Wagner          |
+| http://www.wikidata.org/entity/Q471707    | Robert Wagner          |
+| http://www.wikidata.org/entity/Q698868    | Robert Wagner          |
+| http://www.wikidata.org/entity/Q2920078   | Robert Wagner          |
+| http://www.wikidata.org/entity/Q3436518   | Robert Wagner          |
+| http://www.wikidata.org/entity/Q4102226   | Robert Wagner          |
+| http://www.wikidata.org/entity/Q18710901  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q37382596  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q43139753  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q86425320  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q86753939  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q94850688  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q94879011  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q94882361  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q95238276  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q95250954  | Robert Wagner          |
+| http://www.wikidata.org/entity/Q102364675 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q108101413 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q109238765 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q112406408 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q112447015 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q130267416 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q130469711 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q130778839 | Robert Wagner          |
+| http://www.wikidata.org/entity/Q48367863  | Thomas Bocklitz        |
+| http://www.wikidata.org/entity/Q40172376  | Thomas Zobel           |
+| http://www.wikidata.org/entity/Q91533391  | Timo Dickscheid        |
+| http://www.wikidata.org/entity/Q133538116 | Tobias Gottschall      |
+| http://www.wikidata.org/entity/Q20011325  | Vanessa Fuchs          |
+| http://www.wikidata.org/entity/Q33694887  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q48304805  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q57983130  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q58806734  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q58808626  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q61862141  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q86527013  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q87004252  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q87582824  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q87663173  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q87716739  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q88925530  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q89137286  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q90138465  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q90751165  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q91435316  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q91488203  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q91519912  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q91520417  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q92139822  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q92164845  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q92810044  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q92886580  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q93205063  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q93337698  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q95967093  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q96187116  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q96205808  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q98204782  | Yi Sun                 |
+| http://www.wikidata.org/entity/Q100381560 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q101120730 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q102143854 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q102301666 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q102328793 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q102390286 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q102457077 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q102876446 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q121289211 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q125821431 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q130841593 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q130870908 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q130883175 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q130914679 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q130967997 | Yi Sun                 |
+| http://www.wikidata.org/entity/Q131197890 | Yi Sun                 |
+
+Ok, this works. We'll now code up a python function to run this query on wikidata and return the =?item= value or =None=.
+
+#+name: pywikiperson
+#+begin_src python
+  // Imports
+  <<pywikipersons.imports>>
+
+  // function run_query()
+
+  // 
+
+#+end_src
+
+** Yi sun
+:PROPERTIES:
+:ID:       968f11a6-8ab3-4e10-a661-3ebb740b6ade
+:END:
+#+begin_src sparql
+   select distinct ?item ?lbl ?orcid where {
+     ?item wdt:P31 wd:Q5 .
+     ?item wdt:P496 "0000-0002-7636-0200" .
+     }
+  limit 10
+#+end_src
+
+** NFDI4BI participants
+:PROPERTIES:
+:ID:       e6123b3a-9373-4675-81e7-3b9548066918
+:END:
+#+begin_src sparql
+   <<prefixes>>
+   select ?item ?itemLabel where {
+     ?item wdt:P31 wd:Q5;
+           ^wdt:P710 wd:Q113500855 .
+     SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+
+     values ?item {
+  wd:Q109650151     
+  wd:Q115556246
+  wd:Q115556282
+  wd:Q115556311
+  wd:Q115556609
+  wd:Q132290679
+  wd:Q133300650
+  wd:Q133538116
+  wd:Q40172376
+  wd:Q40615839
+  wd:Q43198948
+  wd:Q4746097
+  wd:Q47687016
+  wd:Q48367863
+  wd:Q56107317
+  wd:Q56112063
+  wd:Q56512375
+  wd:Q56754796
+  wd:Q67207690
+  wd:Q80671621
+  wd:Q89164423
+  wd:Q89924709
+  wd:Q9021675
+  wd:Q9091718
+  wd:Q91106544
+  wd:Q91349605
+  wd:Q91533391      
+  wd:Q92562642      
+  wd:Q9274457     
+  wd:Q9627686   
+       }
+     }
+#+end_src
+
+#+RESULTS[16f482b0f80f87fe5367d3b2121f87cc39faee6f]:
+| item                                      | itemLabel              |
+|-------------------------------------------+------------------------|
+| http://www.wikidata.org/entity/Q43198948  | Jan Huisken            |
+| http://www.wikidata.org/entity/Q48367863  | Thomas Bocklitz        |
+| http://www.wikidata.org/entity/Q56112063  | Paul Czodrowski        |
+| http://www.wikidata.org/entity/Q56512375  | Josh Moore             |
+| http://www.wikidata.org/entity/Q56754796  | Jan Bumberger          |
+| http://www.wikidata.org/entity/Q89164423  | Carsten Fortmann-Grote |
+| http://www.wikidata.org/entity/Q91533391  | Timo Dickscheid        |
+| http://www.wikidata.org/entity/Q115556246 | Astrid Schauss         |
+| http://www.wikidata.org/entity/Q115556282 | Markus Becker          |
+| http://www.wikidata.org/entity/Q115556311 | Claire Chalopin        |
+| http://www.wikidata.org/entity/Q115556609 | Jianxu Chen            |
+| http://www.wikidata.org/entity/Q133300650 | Niraj Kandpal          |
+| http://www.wikidata.org/entity/Q133538116 | Tobias Gottschall      |
