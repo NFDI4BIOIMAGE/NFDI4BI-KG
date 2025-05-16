@@ -3,3 +3,4 @@ queries.md
 .pdf-view-restore
 *.properties
 __pycache__/
+/sandbox/
