@@ -306,7 +306,7 @@ type ['info:eu-repo/semantics/conferencePoster']
 #+end_src
 
 #+RESULTS:
-: dc11d685-0aef-476f-bba5-1fedbc6b22e5
+: 3265
 
 
 ** Convert datacite xsd schema to owl ontology

@@ -238,8 +238,9 @@ The default graph will contain the URIs of all named graphs, not more.
 :PROPERTIES:
 :ID:       3bbe4960-5160-46ef-a6f2-93d63bfdfa7a
 :END:
-- core
-- zenodo_community
+- n4bi_core: https://nfdi4bioimage.de/kg/n4bi_core
+- n4bi_zenodo_community : https://nfdi4bioimage.de/kg/n4bi_zenodo_community
+- nfdi_core: https://nfdi4bioimage.de/owl/nfdi_core
 - ...
 *** configuration
 :PROPERTIES:
