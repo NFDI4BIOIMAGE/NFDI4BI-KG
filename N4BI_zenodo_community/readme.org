@@ -307,7 +307,7 @@ type ['info:eu-repo/semantics/conferencePoster']
 #+end_src
 
 #+RESULTS:
-: 3265
+: 3419
 
 
 ** Convert datacite xsd schema to owl ontology
@@ -503,17 +503,25 @@ type ['info:eu-repo/semantics/conferencePoster']
   {
     <https://doi.org/10.5281/zenodo.14013026> dcite:contributor ?contributor ;
                                               dcite:creator ?creator .
+    ?creator dcite:affiliation ?affilation .
+    ?affiliation rdfs:label ?affiliation_name .
   }
+  limit 10
 #+end_src
 
 #+RESULTS:
-| contributor | creator                               |
-|-------------+---------------------------------------|
-| b0          | https://orcid.org/0000-0001-9568-895X |
-| b0          | https://orcid.org/0000-0001-7734-3771 |
-| b0          | https://orcid.org/0000-0001-6523-7496 |
-| b0          | b1                                    |
-| b0          | b2                                    |
+| contributor | creator                               | affilation                | affiliation               | affiliation_name                       |
+|-------------+---------------------------------------+---------------------------+---------------------------+----------------------------------------|
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/01v7r4v08 | DataPLANT                              |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b1                        | Riccardo                               |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/01vnkaz16 | NFDI4BIOIMAGE                          |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b2                        | NFDI4BIOIMAGE                          |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/05qj6w324 | Nationale Forschungsdateninfrastruktur |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b3                        | Jan                                    |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b4                        | Stefan                                 |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b5                        | Thomas                                 |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b6                        | Wibke                                  |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b7                        | Hannes                                 |
 ** Count number of creators and contributors per record.
 :PROPERTIES:
 :ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
