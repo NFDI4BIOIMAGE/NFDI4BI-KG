@@ -225,3 +225,24 @@ Example:[[https://www.wikidata.org/wiki/Q113500855][NFDI4BIOIMAGE]]'s chairperso
 :PROPERTIES:
 :ID:       1bee5ed1-c28d-4eb3-8ba9-085aa5b4bdd3
 :END:
+** Graphs
+:PROPERTIES:
+:ID:       0e01ef08-fb7c-4336-971f-de43a7763409
+:END:
+*** Default graph
+:PROPERTIES:
+:ID:       bcd055b3-f942-4f05-8652-2583307ef7c6
+:END:
+The default graph will contain the URIs of all named graphs, not more.
+*** Named graphs
+:PROPERTIES:
+:ID:       3bbe4960-5160-46ef-a6f2-93d63bfdfa7a
+:END:
+- core
+- zenodo_community
+- ...
+*** configuration
+:PROPERTIES:
+:ID:       c4a29000-c714-4874-bbe1-f9b7701c9474
+:END:
+=fuseki --set tdb:unionDefaultGraph=true=

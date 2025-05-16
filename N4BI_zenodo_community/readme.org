@@ -149,7 +149,7 @@ type ['info:eu-repo/semantics/conferencePoster']
 
       orcid = person.find('nameIdentifier', attrs={'nameIdentifierScheme':'ORCID'})
       if orcid is not None:
-          person_uri = ORCID[orcid]
+          person_uri = ORCID[orcid.string]
       else:
           person_uri = BNode()
 
@@ -163,24 +163,41 @@ type ['info:eu-repo/semantics/conferencePoster']
 
       affiliation = person.find('affiliation')
       if affiliation is not None:
-          ror = affiliation.get('affiliationIdentifier', None)
-
-          if ror is not None:
-              graph.add((person_uri, DCITE.affiliation, URIRef(ror)))
-          else:
-              bn = BNode()
-              graph.add((bn, RDFS.label, Literal(affiliation.string)))
-              graph.add((person_uri, DCITE.affiliation, bn))
+          graph, affiliation_ref = parse_institution(graph, affiliation)
+          graph.add((person_uri, DCITE.affiliation, affiliation_ref))
 
       return graph, person_uri
 
   def parse_institution(graph, institution):
-      ror = institution.get('affiliationIdentifier', None)
-      if ror is not None:
-          graph.add((URIRef(ror), RDFS.label, Literal(affiliation.string)))
-          graph.add((URIRef(ror), RDF.type, NFDI.NFDI_0000003))
+      """ Parse identifier and name of (academic) institution """
 
-      return graph
+      identifier = institution.get('affiliationIdentifier', None)
+
+      # If no identifier, return blank node with only the name.
+      if identifier is None:
+          bn = BNode()
+          graph.add((bn, RDFS.label, Literal(institution.string)))
+
+          return graph, bn
+
+      # If we have an id, get its scheme, too.
+      identifier_scheme = institution.get('affiliationIdentifierScheme')
+
+      # Handle ROR
+      if identifier_scheme == "ROR":
+          ror_uri = ROR[identifier]
+          graph.add((ror_uri, RDF.type, NFDI.NFDI_0000003))
+          graph.add((ror_uri, RDFS.label, Literal(institution.string)))
+          graph.add((ror_uri, DCITE.identifier, Literal(identifier)))
+
+          return graph, ror_uri
+
+      # If not a ROR, return blank node with name and id as string.
+      bn = BNode()
+      graph.add((bn, RDFS.label, Literal(institution.string)))
+      graph.add((bn, DCITE.identifier, Literal(identifier)))
+
+      return graph, bn
 
   def parse_date(date):
       date_type = date.get('dateType')
@@ -188,40 +205,53 @@ type ['info:eu-repo/semantics/conferencePoster']
       return DCITE[date_type], Literal(date.string, datatype=XSD.date)
 
   def parse_relation(relation):
-      rel_id_tpe = relation.get('relationIdentifierType')
+      rel_id_tpe = relation.get('relatedIdentifierType')
       rel_tpe = relation.get('relationType')
 
       if rel_id_tpe == "URL":
           return DCITE[rel_tpe], URIRef(relation.string)
       else:
-          return DCITE[rel_tpe], Namespace(rel_id_tpe)[relation.string]
+          return DCITE[rel_tpe], ns_dict[rel_id_tpe.lower()][relation.string]
 
-  DCITE=Namespace("http://datacite.org/schema/kernel-4/")
-  NFDI = Namespace("https://nfdi.fiz-karlsruhe.de/ontology/")
-  ORCID = Namespace("https://orcid.org/")
-
+  # Init graph.
   graph = Graph(bind_namespaces='rdflib')
-  graph.bind("orcid", ORCID)
-  graph.bind("nfdicore", NFDI)
-  graph.bind("datacite", DCITE)
 
+  # Namespaces and prefixes.
+  ns_dict = dict([
+                  ("datacite", DCITE := Namespace("https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#")),
+                  ("nfdicore", NFDI  := Namespace("https://nfdi.fiz-karlsruhe.de/ontology/")),
+                  ("orcid"   , ORCID := Namespace("https://orcid.org/")),
+                  ("ror"     , ROR   := Namespace("https://ror.org/")),
+                  ("doi"     , DOI   := Namespace("https://doi.org/"))
+  ])
+
+  for prefix, ns in ns_dict.items():
+      graph.bind(prefix, ns)
+
+  # Add core information about NFDI4BIOIMAGE.
   n4bi = URIRef("https://nfdi4bioimage.de/rdf/node")
   n4bicomm = URIRef("https://zenodo.org/communities/nfdi4bioimage")
 
-  graph.add((n4bi, RDF.type, NFDI.NFDI_0000006))
-  graph.add((n4bi, NFDI.NFDI_0000195, n4bicomm))
-  graph.add((n4bicomm, DC.identifier, Literal('user-nfdi4bioimage')))
-  graph.add((n4bicomm, NFDI.NFDI_0001008, URIRef('https://zenodo.org/communities/nfdi4bioimage')))
+  graph.add((n4bi     , NFDI.NFDI_0000195, n4bicomm))                                                   # We have a collection aka zenodo community.
+  graph.add((n4bicomm , DC.identifier,     Literal('nfdi4bioimage')))                                   # Our collection has an identifier ...
+  graph.add((n4bicomm , NFDI.NFDI_0001008, Literal('https://zenodo.org/communities/nfdi4bioimage')))    # ... and a website.
 
+  # Harvest the zenodo OAI-PMH API endpoint.
   with Scythe("https://zenodo.org/oai2d") as scythe:
     records = scythe.list_records(set_='user-nfdi4bioimage', metadata_prefix='oai_datacite')
+
+
+  # `records` is a list of xml strings.
+  # Loop over all records.
   for i, rec0 in enumerate(records):
 
+    # Get a proper navigable xml object.
     xml_root = BeautifulSoup(str(rec0), 'xml').find('resource')
+    
+    # Get the record's DOI.
     doi = xml_root.find('identifier', attrs={"identifierType":"DOI"})
 
-    print(doi.string)
-
+    # The record's DOI is the subject for most of the triples to be constructed.
     subj = URIRef("https://doi.org/"+doi.string)
 
     # Get creators and contributors.
@@ -237,7 +267,6 @@ type ['info:eu-repo/semantics/conferencePoster']
     relations = xml_root.find_all('relatedIdentifier')
     dates = xml_root.find_all('date')
 
-    graph = Graph(bind_namespaces='rdflib')
     graph.add((subj, DCITE.title, Literal(title.string)))
 
     if description is not None:
@@ -252,8 +281,8 @@ type ['info:eu-repo/semantics/conferencePoster']
     for right in rights:
         graph.add((subj, DCITE['right'], Literal(right.string)))
 
-    for affiliation in affiliations:
-        graph = parse_institution(graph, affiliation)
+    # for affiliation in affiliations:
+    #     graph = parse_institution(graph, affiliation)
 
     for creator in creators:
         graph, person = parse_person(graph, creator)
@@ -271,134 +300,148 @@ type ['info:eu-repo/semantics/conferencePoster']
         property, val = parse_relation(relation)
         graph.add((subj, property, val))
 
+  graph.serialize('../RDF_dumps/n4bi_zenodo_community.n3')
+
+  print(len(graph))
+#+end_src
+
+#+RESULTS:
+: dc11d685-0aef-476f-bba5-1fedbc6b22e5
+
+
+** Convert datacite xsd schema to owl ontology
+:PROPERTIES:
+:ID:       71f8edf7-1675-4504-83e7-116fbfde65dd
+:END:
+#+begin_src bash
+  curl -L https://redefer.rhizomik.net/xsd2owl?xsd=https://schema.datacite.org/meta/kernel-4.6/metadata.xsd > datacite.owl.rdf.xml
+#+end_src
+
+#+RESULTS:
+
+*** Query the converted ontology
+:PROPERTIES:
+:ID:       f4f92b3a-bb3e-4eb0-b5cb-5a3bb6e583df
+:END:
+#+begin_src
+#+end_src
+#+begin_src bash :results output
+  export PATH=/opt/apache-jena-5.2.0/bin:$PATH
+  echo """
+     prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+     prefix owl: <http://www.w3.org/2002/07/owl#>
+     prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+     select distinct ?prop where {
+   ?prop a ?tp .
+
+   values ?tp {owl:DatatypeProperty owl:ObjectProperty}
+    }
+  order by ?prop
+  """ > query.rq
+              arq --data=datacite.owl.rdf.xml --query=query.rq
+
 #+end_src
 
 #+RESULTS:
 #+begin_example
-10.5281/zenodo.14979253
-10.5281/zenodo.15047849
-10.5281/zenodo.6504714
-10.5281/zenodo.14997835
-10.5281/zenodo.14234608
-10.5281/zenodo.11235513
-10.5281/zenodo.10793700
-10.5281/zenodo.14278058
-10.5281/zenodo.7394675
-10.5281/zenodo.11259495
-10.5281/zenodo.14412107
-10.5281/zenodo.14044640
-10.5281/zenodo.13506641
-10.5281/zenodo.13628852
-10.5281/zenodo.14988921
-10.5281/zenodo.8329306
-10.5281/zenodo.14014252
-10.5281/zenodo.14035822
-10.5281/zenodo.15026373
-10.5281/zenodo.14975462
-10.5281/zenodo.15083018
-10.5281/zenodo.13831274
-10.5281/zenodo.11146807
-10.5281/zenodo.13970736
-10.5281/zenodo.11350689
-10.5281/zenodo.7890311
-10.5281/zenodo.7015307
-10.5281/zenodo.11503289
-10.5281/zenodo.10968458
-10.5281/zenodo.11574994
-10.5281/zenodo.10886750
-10.5281/zenodo.14013026
-10.5281/zenodo.13380289
-10.5281/zenodo.10947701
-10.5281/zenodo.11122233
-10.5281/zenodo.11448638
-10.5281/zenodo.11235081
-10.5281/zenodo.14954254
-10.5281/zenodo.8434325
-10.5281/zenodo.10730424
-10.5281/zenodo.14792534
-10.5281/zenodo.15308773
-10.5281/zenodo.8340248
-10.5281/zenodo.6504467
-10.5281/zenodo.15152576
-10.5281/zenodo.7928333
-10.5281/zenodo.15225616
-10.5281/zenodo.10389955
-10.5281/zenodo.14950686
-10.5281/zenodo.11501662
-10.5281/zenodo.14937632
-10.5281/zenodo.8414319
-10.5281/zenodo.8139354
-10.5281/zenodo.14620253
-10.5281/zenodo.11261115
-10.5281/zenodo.14418209
-10.5281/zenodo.10083555
-10.5281/zenodo.13640979
-10.5281/zenodo.15268798
-10.5281/zenodo.11109616
-10.5281/zenodo.13991322
-10.5281/zenodo.14381522
-10.5281/zenodo.6560026
-10.5281/zenodo.7082514
-10.5281/zenodo.12077569
-10.5281/zenodo.10907116
-10.5281/zenodo.11574435
-10.5281/zenodo.11080237
-10.5281/zenodo.11126631
-10.5281/zenodo.11031747
-10.5281/zenodo.10808486
-10.5281/zenodo.11525313
-10.5281/zenodo.12623730
-10.5281/zenodo.14178789
-10.5281/zenodo.11502721
-10.5281/zenodo.10935236
-10.5281/zenodo.14006558
-10.5281/zenodo.14953098
-10.5281/zenodo.14951142
-10.5281/zenodo.15033241
-10.5281/zenodo.10939520
-10.5281/zenodo.11548617
-10.5281/zenodo.7656540
-10.5281/zenodo.14623257
-10.5281/zenodo.14626054
-10.5281/zenodo.11344132
-10.5281/zenodo.14909526
-10.5281/zenodo.14044380
-10.5281/zenodo.14999220
-10.1038/s41598-019-56067-w
-10.5281/zenodo.14650434
-10.5281/zenodo.7082609
-10.5281/zenodo.14832855
-10.5281/zenodo.5101158
-10.5281/zenodo.14001388
-10.5281/zenodo.8070038
-10.5281/zenodo.14998017
-10.5281/zenodo.10008465
-10.5281/zenodo.15031842
-10.5281/zenodo.10617006
-10.5281/zenodo.10609771
-10.5281/zenodo.13747937
-10.5281/zenodo.15065070
-10.5281/zenodo.14845059
-10.5281/zenodo.14716546
-10.5281/zenodo.8349563
-10.5281/zenodo.14186101
-10.5281/zenodo.13168693
-10.5281/zenodo.13837146
-10.5281/zenodo.15423904
-10.5281/zenodo.15373555
-10.5281/zenodo.10687659
-10.5281/zenodo.6504208
-10.5281/zenodo.13861026
-10.5281/zenodo.6501614
-10.5281/zenodo.12699637
-10.5281/zenodo.8019760
-10.5281/zenodo.12521485
-10.5281/zenodo.11369042
-10.5281/zenodo.11191762
-10.5281/zenodo.11412513
-10.5281/zenodo.10978831
-10.5281/zenodo.12087272
-10.5281/zenodo.11220181
-10.5281/zenodo.11312181
-10.5281/zenodo.13684187
+-------------------------------------
+| prop                              |
+=====================================
+| dcite:affiliation                 |
+| dcite:affiliationIdentifier       |
+| dcite:affiliationIdentifierScheme |
+| dcite:alternateIdentifier         |
+| dcite:alternateIdentifierType     |
+| dcite:alternateIdentifiers        |
+| dcite:any                         |
+| dcite:awardNumber                 |
+| dcite:awardTitle                  |
+| dcite:awardURI                    |
+| dcite:br                          |
+| dcite:classificationCode          |
+| dcite:contributor                 |
+| dcite:contributorName             |
+| dcite:contributorType             |
+| dcite:contributors                |
+| dcite:creator                     |
+| dcite:creatorName                 |
+| dcite:creators                    |
+| dcite:date                        |
+| dcite:dateInformation             |
+| dcite:dateType                    |
+| dcite:dates                       |
+| dcite:description                 |
+| dcite:descriptionType             |
+| dcite:descriptions                |
+| dcite:eastBoundLongitude          |
+| dcite:edition                     |
+| dcite:familyName                  |
+| dcite:firstPage                   |
+| dcite:format                      |
+| dcite:formats                     |
+| dcite:funderIdentifier            |
+| dcite:funderIdentifierType        |
+| dcite:funderName                  |
+| dcite:fundingReference            |
+| dcite:fundingReferences           |
+| dcite:geoLocation                 |
+| dcite:geoLocationBox              |
+| dcite:geoLocationPlace            |
+| dcite:geoLocationPoint            |
+| dcite:geoLocationPolygon          |
+| dcite:geoLocations                |
+| dcite:givenName                   |
+| dcite:identifier                  |
+| dcite:identifierType              |
+| dcite:inPolygonPoint              |
+| dcite:issue                       |
+| dcite:language                    |
+| dcite:lastPage                    |
+| dcite:nameIdentifier              |
+| dcite:nameIdentifierScheme        |
+| dcite:nameType                    |
+| dcite:northBoundLatitude          |
+| dcite:number                      |
+| dcite:numberType                  |
+| dcite:pointLatitude               |
+| dcite:pointLongitude              |
+| dcite:polygonPoint                |
+| dcite:publicationYear             |
+| dcite:publisher                   |
+| dcite:publisherIdentifier         |
+| dcite:publisherIdentifierScheme   |
+| dcite:relatedIdentifier           |
+| dcite:relatedIdentifierType       |
+| dcite:relatedIdentifiers          |
+| dcite:relatedItem                 |
+| dcite:relatedItemIdentifier       |
+| dcite:relatedItemIdentifierType   |
+| dcite:relatedItemType             |
+| dcite:relatedItems                |
+| dcite:relatedMetadataScheme       |
+| dcite:relationType                |
+| dcite:resource                    |
+| dcite:resourceType                |
+| dcite:resourceTypeGeneral         |
+| dcite:rights                      |
+| dcite:rightsIdentifier            |
+| dcite:rightsIdentifierScheme      |
+| dcite:rightsList                  |
+| dcite:rightsURI                   |
+| dcite:schemeType                  |
+| dcite:schemeURI                   |
+| dcite:size                        |
+| dcite:sizes                       |
+| dcite:southBoundLatitude          |
+| dcite:subject                     |
+| dcite:subjectScheme               |
+| dcite:subjects                    |
+| dcite:title                       |
+| dcite:titleType                   |
+| dcite:titles                      |
+| dcite:valueURI                    |
+| dcite:version                     |
+| dcite:volume                      |
+| dcite:westBoundLongitude          |
+-------------------------------------
 #+end_example

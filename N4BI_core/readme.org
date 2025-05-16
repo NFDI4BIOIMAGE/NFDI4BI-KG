@@ -35,7 +35,7 @@ The first subject we create represent the consortium itself.
   graph.add((n4bi, nfdicore.NFDI_0001008, Literal("https://nfdi4bioimage.de")))
 
   # Wikidata entry
-  graph.add((n4bi, RDFS.seeAlso, URIRef("https://wikidata.org/entity/Q113500855")))
+  graph.add((n4bi, nfdicore.NFDI_0001006, URIRef("https://wikidata.org/entity/Q113500855")))
 
   # Description, long title
   graph.add((n4bi, DC.description, Literal("National Research Data Infrastructure for Microscopy and Bioimage Analysis", lang="en")))
@@ -45,12 +45,11 @@ The first subject we create represent the consortium itself.
   graph.add((n4bi, nfdicore.NFDI_0010015, Literal("N4BI")))
   graph.add((n4bi, nfdicore.NFDI_0010015, Literal("NFDI4BIOIMAGE")))
 
-  graph.serialize("/home/grotec/Repositories/NFDI4BI-KG/n4bi_core.n3")
+  graph.serialize("/home/grotec/Repositories/NFDI4BI-KG/RDF_dumps/n4bi_core.n3")
 
-  for term in graph:
-      pprint.pprint(term)
+  print(len(graph))
 #+end_src
 
 #+RESULTS:
-: None
+: 8
 
