@@ -1,4 +1,45 @@
-*** Generate RDF from NFDI4BIOIMAGE's zenodo community
+#+title: Harvesting the zenodo OAI-PMH API for all records in the nfdi4bioimage community
+#+author: Carsten Fortmann-Grote
+#+license: CC-BY-SA
+#+dateCreated: [2025-05-15 Thu] 
+* OAI-PMH API with Scythe 
+:PROPERTIES:
+:ID:       71e7d956-3288-4586-acaf-c8eb072ac48f
+:END:
+** Run on nfdi4bioimage community
+:PROPERTIES:
+:ID:       9ae10ebb-ddf2-42c0-9b28-35655ef08457
+:END:
+#+begin_src python :session rdf :results output :async yes
+  from oaipmh_scythe import Scythe
+  import pprint
+  with Scythe("https://zenodo.org/oai2d") as scythe:
+    records = scythe.list_records(set_='user-nfdi4bioimage', metadata_prefix='oai_datacite')
+
+    rec0 = next(records)
+
+  for key, val in rec.metadata.items():
+    
+      print(key, val)
+  print(rec0.xml)
+#+end_src
+#+RESULTS:
+#+begin_example
+creator ['Moore, Josh', 'Waagmeester, Andra', 'Hettne, Kristina', 'Wolstencroft, Katherine', 'Kunis, Susanne']
+date ['2024-02-26']
+description ['&lt;p&gt;In 2005, the first version of OMERO stored RDF natively. However, just a year after the 1.0 release of RDF, performance considerations led to the development of a more traditional SQL approach for OMERO. A binary protocol makes it possible to query and retrieve metadata but the resulting information cannot immediately be combined with other sources. This is the adventure of rediscovering the benefit of RDF triples as a -- if not the -- common exchange mechanism.&lt;/p&gt;\n&lt;p&gt;&nbsp;&lt;/p&gt;\n&lt;p&gt;This poster was presented at SWAT4HCLS in Leiden, NL, 2024 as &lt;strong&gt;Poster 54&lt;/strong&gt;. See &lt;a href="https://www.swat4ls.org/workshops/leiden2024"&gt;https://www.swat4ls.org/workshops/leiden2024&lt;/a&gt; for more information.&lt;/p&gt;', '&lt;p&gt;NFDI4BIOIMAGE is funded by DFG grant number NFDI 46/1, project number 501864659.&lt;/p&gt;']
+identifier ['https://doi.org/10.5281/zenodo.10687659', 'oai:zenodo.org:10687659']
+language ['eng']
+publisher ['Zenodo']
+relation ['https://zenodo.org/communities/nfdi4bioimage/', 'https://doi.org/10.5281/zenodo.10687658']
+rights ['info:eu-repo/semantics/openAccess', 'Creative Commons Attribution 4.0 International', 'https://creativecommons.org/licenses/by/4.0/legalcode']
+source ['SWAT4HCLS, 15th International Semantic Web Applications and Tools for Health Care and Life Sciences Conference, Leiden, The Netherlands, 26-29 February, 2024']
+subject ['Open Microscopy Environment (OME)', 'Bioimaging', 'Resource Description Framework (RDF)']
+title ['RDF as a bridge to domain-platforms like OMERO, or There and back again.']
+type ['info:eu-repo/semantics/conferencePoster']
+<Element {http://www.openarchives.org/OAI/2.0/}record at 0x7f5d52b86580>
+#+end_example
+** Generate RDF from NFDI4BIOIMAGE's zenodo community
 :PROPERTIES:
 :ID:       7719c86c-b08a-4642-9cd1-f78942e5c44f
 :END:
@@ -43,7 +84,6 @@
 
   with Scythe("https://zenodo.org/oai2d") as scythe:
     records = scythe.list_records(set_='user-nfdi4bioimage')
-
 
   for rec0 in records:
 
@@ -95,3 +135,270 @@
 #+end_src
 
 #+RESULTS:
+: fe35bb5c-223d-4e77-919b-ba877a4781a8
+
+** Convert xml returned from scythe to rdf
+:PROPERTIES:
+:ID:       71f8edf7-1675-4504-83e7-116fbfde65dd
+:END:
+#+begin_src python :session rdf :results output :async yes
+  from bs4 import BeautifulSoup
+  from rdflib import Graph, Namespace, URIRef, Literal, FOAF, DC
+
+  def parse_person(graph, person):
+
+      orcid = person.find('nameIdentifier', attrs={'nameIdentifierScheme':'ORCID'})
+      if orcid is not None:
+          person_uri = ORCID[orcid]
+      else:
+          person_uri = BNode()
+
+      given_name = person.find('givenName')
+      family_name = person.find('familyName')
+
+      if given_name is not None:
+          graph.add((person_uri, DCITE.givenName, Literal(given_name.string)))
+      if family_name is not None:
+          graph.add((person_uri, DCITE.familyName, Literal(family_name.string)))
+
+      affiliation = person.find('affiliation')
+      if affiliation is not None:
+          ror = affiliation.get('affiliationIdentifier', None)
+
+          if ror is not None:
+              graph.add((person_uri, DCITE.affiliation, URIRef(ror)))
+          else:
+              bn = BNode()
+              graph.add((bn, RDFS.label, Literal(affiliation.string)))
+              graph.add((person_uri, DCITE.affiliation, bn))
+
+      return graph, person_uri
+
+  def parse_institution(graph, institution):
+      ror = institution.get('affiliationIdentifier', None)
+      if ror is not None:
+          graph.add((URIRef(ror), RDFS.label, Literal(affiliation.string)))
+          graph.add((URIRef(ror), RDF.type, NFDI.NFDI_0000003))
+
+      return graph
+
+  def parse_date(date):
+      date_type = date.get('dateType')
+
+      return DCITE[date_type], Literal(date.string, datatype=XSD.date)
+
+  def parse_relation(relation):
+      rel_id_tpe = relation.get('relationIdentifierType')
+      rel_tpe = relation.get('relationType')
+
+      if rel_id_tpe == "URL":
+          return DCITE[rel_tpe], URIRef(relation.string)
+      else:
+          return DCITE[rel_tpe], Namespace(rel_id_tpe)[relation.string]
+
+  DCITE=Namespace("http://datacite.org/schema/kernel-4/")
+  NFDI = Namespace("https://nfdi.fiz-karlsruhe.de/ontology/")
+  ORCID = Namespace("https://orcid.org/")
+
+  graph = Graph(bind_namespaces='rdflib')
+  graph.bind("orcid", ORCID)
+  graph.bind("nfdicore", NFDI)
+  graph.bind("datacite", DCITE)
+
+  n4bi = URIRef("https://nfdi4bioimage.de/rdf/node")
+  n4bicomm = URIRef("https://zenodo.org/communities/nfdi4bioimage")
+
+  graph.add((n4bi, RDF.type, NFDI.NFDI_0000006))
+  graph.add((n4bi, NFDI.NFDI_0000195, n4bicomm))
+  graph.add((n4bicomm, DC.identifier, Literal('user-nfdi4bioimage')))
+  graph.add((n4bicomm, NFDI.NFDI_0001008, URIRef('https://zenodo.org/communities/nfdi4bioimage')))
+
+  with Scythe("https://zenodo.org/oai2d") as scythe:
+    records = scythe.list_records(set_='user-nfdi4bioimage', metadata_prefix='oai_datacite')
+  for i, rec0 in enumerate(records):
+
+    xml_root = BeautifulSoup(str(rec0), 'xml').find('resource')
+    doi = xml_root.find('identifier', attrs={"identifierType":"DOI"})
+
+    print(doi.string)
+
+    subj = URIRef("https://doi.org/"+doi.string)
+
+    # Get creators and contributors.
+    title = xml_root.find('title')
+    description = xml_root.find('description')
+    resource_type = xml_root.find('resourceType')
+    subjects = xml_root.find_all('subject')
+    rights = xml_root.find_all('rights')
+
+    creators = xml_root.find_all('creator')
+    contributors = xml_root.find_all('contributor')
+    affiliations = xml_root.find_all('affiliation')
+    relations = xml_root.find_all('relatedIdentifier')
+    dates = xml_root.find_all('date')
+
+    graph = Graph(bind_namespaces='rdflib')
+    graph.add((subj, DCITE.title, Literal(title.string)))
+
+    if description is not None:
+        graph.add((subj, DCITE.description, Literal(description.string)))
+
+    if resource_type is not None:
+        graph.add((subj, DCITE.resourceType, Literal(resource_type.string)))
+
+    for subject in subjects:
+        graph.add((subj, DCITE['subject'], Literal(subject.string)))
+
+    for right in rights:
+        graph.add((subj, DCITE['right'], Literal(right.string)))
+
+    for affiliation in affiliations:
+        graph = parse_institution(graph, affiliation)
+
+    for creator in creators:
+        graph, person = parse_person(graph, creator)
+        graph.add((subj, DCITE.creator, person))
+
+    for contributor in contributors:
+        graph, person = parse_person(graph, contributor)
+        graph.add((subj, DCITE.contributor, person))
+
+    for date in dates:
+        property, val = parse_date(date)
+        graph.add((subj, property, val))
+
+    for relation in relations:
+        property, val = parse_relation(relation)
+        graph.add((subj, property, val))
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+10.5281/zenodo.14979253
+10.5281/zenodo.15047849
+10.5281/zenodo.6504714
+10.5281/zenodo.14997835
+10.5281/zenodo.14234608
+10.5281/zenodo.11235513
+10.5281/zenodo.10793700
+10.5281/zenodo.14278058
+10.5281/zenodo.7394675
+10.5281/zenodo.11259495
+10.5281/zenodo.14412107
+10.5281/zenodo.14044640
+10.5281/zenodo.13506641
+10.5281/zenodo.13628852
+10.5281/zenodo.14988921
+10.5281/zenodo.8329306
+10.5281/zenodo.14014252
+10.5281/zenodo.14035822
+10.5281/zenodo.15026373
+10.5281/zenodo.14975462
+10.5281/zenodo.15083018
+10.5281/zenodo.13831274
+10.5281/zenodo.11146807
+10.5281/zenodo.13970736
+10.5281/zenodo.11350689
+10.5281/zenodo.7890311
+10.5281/zenodo.7015307
+10.5281/zenodo.11503289
+10.5281/zenodo.10968458
+10.5281/zenodo.11574994
+10.5281/zenodo.10886750
+10.5281/zenodo.14013026
+10.5281/zenodo.13380289
+10.5281/zenodo.10947701
+10.5281/zenodo.11122233
+10.5281/zenodo.11448638
+10.5281/zenodo.11235081
+10.5281/zenodo.14954254
+10.5281/zenodo.8434325
+10.5281/zenodo.10730424
+10.5281/zenodo.14792534
+10.5281/zenodo.15308773
+10.5281/zenodo.8340248
+10.5281/zenodo.6504467
+10.5281/zenodo.15152576
+10.5281/zenodo.7928333
+10.5281/zenodo.15225616
+10.5281/zenodo.10389955
+10.5281/zenodo.14950686
+10.5281/zenodo.11501662
+10.5281/zenodo.14937632
+10.5281/zenodo.8414319
+10.5281/zenodo.8139354
+10.5281/zenodo.14620253
+10.5281/zenodo.11261115
+10.5281/zenodo.14418209
+10.5281/zenodo.10083555
+10.5281/zenodo.13640979
+10.5281/zenodo.15268798
+10.5281/zenodo.11109616
+10.5281/zenodo.13991322
+10.5281/zenodo.14381522
+10.5281/zenodo.6560026
+10.5281/zenodo.7082514
+10.5281/zenodo.12077569
+10.5281/zenodo.10907116
+10.5281/zenodo.11574435
+10.5281/zenodo.11080237
+10.5281/zenodo.11126631
+10.5281/zenodo.11031747
+10.5281/zenodo.10808486
+10.5281/zenodo.11525313
+10.5281/zenodo.12623730
+10.5281/zenodo.14178789
+10.5281/zenodo.11502721
+10.5281/zenodo.10935236
+10.5281/zenodo.14006558
+10.5281/zenodo.14953098
+10.5281/zenodo.14951142
+10.5281/zenodo.15033241
+10.5281/zenodo.10939520
+10.5281/zenodo.11548617
+10.5281/zenodo.7656540
+10.5281/zenodo.14623257
+10.5281/zenodo.14626054
+10.5281/zenodo.11344132
+10.5281/zenodo.14909526
+10.5281/zenodo.14044380
+10.5281/zenodo.14999220
+10.1038/s41598-019-56067-w
+10.5281/zenodo.14650434
+10.5281/zenodo.7082609
+10.5281/zenodo.14832855
+10.5281/zenodo.5101158
+10.5281/zenodo.14001388
+10.5281/zenodo.8070038
+10.5281/zenodo.14998017
+10.5281/zenodo.10008465
+10.5281/zenodo.15031842
+10.5281/zenodo.10617006
+10.5281/zenodo.10609771
+10.5281/zenodo.13747937
+10.5281/zenodo.15065070
+10.5281/zenodo.14845059
+10.5281/zenodo.14716546
+10.5281/zenodo.8349563
+10.5281/zenodo.14186101
+10.5281/zenodo.13168693
+10.5281/zenodo.13837146
+10.5281/zenodo.15423904
+10.5281/zenodo.15373555
+10.5281/zenodo.10687659
+10.5281/zenodo.6504208
+10.5281/zenodo.13861026
+10.5281/zenodo.6501614
+10.5281/zenodo.12699637
+10.5281/zenodo.8019760
+10.5281/zenodo.12521485
+10.5281/zenodo.11369042
+10.5281/zenodo.11191762
+10.5281/zenodo.11412513
+10.5281/zenodo.10978831
+10.5281/zenodo.12087272
+10.5281/zenodo.11220181
+10.5281/zenodo.11312181
+10.5281/zenodo.13684187
+#+end_example
