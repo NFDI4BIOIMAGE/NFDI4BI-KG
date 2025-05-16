@@ -19,7 +19,7 @@
         "Knowledge Graph",
         "Research Data Management"
     ],
-    "license": "CC-0",
+    "license": ["MIT", "CC-BY-SA"],
     "upload_type": "software",
     "language": "eng",
     "related_identifiers": [
@@ -41,7 +41,7 @@
             "identifier": "nfdi4bioimage"
         },
         {
-            "identifier": "max-planck-institute-for-evolutionary-biology"
+            "identifier": "mpievolbio"
         }
     ]
 }
