@@ -7,7 +7,20 @@ PREFIX ror:      <https://ror.org/>
 PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
 
 orcid:0000-0001-5949-2327
-        datacite:affiliation  ror:03s7gtk40 , ror:01vnkaz16;
+        datacite:affiliation  ror:042aqky30 , ror:03s7gtk40 , ror:01vnkaz16;
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "NFDI4BioImage" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "NFDI4BioImage" ];
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
@@ -27,90 +40,80 @@ orcid:0000-0001-5949-2327
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
-        datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
+        datacite:affiliation  [ rdfs:label  "NFDI4BioImage" ];
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
         datacite:affiliation  [ rdfs:label  "ScaDS.AI" ];
         datacite:familyName   "Haase";
         datacite:givenName    "Robert";
-        datacite:identifier   "0000-0001-5949-2327" .
+        datacite:identifier   "https://orcid.org/0000-0001-5949-2327"^^xsd:anyURI .
 
 orcid:0000-0003-4028-811X
-        datacite:affiliation  ror:05tpnw772;
+        datacite:affiliation  ror:01vnkaz16 , ror:05tpnw772;
         datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
         datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
         datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
         datacite:affiliation  [ rdfs:label  "German BioImaging e.V." ];
-        datacite:affiliation  [ rdfs:label  "German BioImaging e.V." ];
+        datacite:affiliation  [ rdfs:label  "German BioImaging e.V  Society for Microscopy\n and Image Analysis  Konstanz, Germany" ];
+        datacite:affiliation  [ rdfs:label  "German BioImaging—Society for Microscopy and Image Analysis e.V., Constance, Germany" ];
+        datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
+        datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
+        datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
+        datacite:affiliation  [ rdfs:label  "German BioImaging—Society for Microscopy and Image Analysis e.V., Constance, Germany" ];
         datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
         datacite:affiliation  [ rdfs:label  "German BioImaging – Gesellschaft für Mikroskopie und Bildanalyse e.V., Konstanz, Germany" ];
-        datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
-        datacite:affiliation  [ rdfs:label  "German BioImaging—Society for Microscopy and Image Analysis e.V., Constance, Germany" ];
-        datacite:affiliation  [ rdfs:label  "German BioImaging e.V  Society for Microscopy\n and Image Analysis  Konstanz, Germany" ];
-        datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
-        datacite:affiliation  [ rdfs:label  "German BioImaging—Society for Microscopy and Image Analysis e.V., Constance, Germany" ];
-        datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
-        datacite:familyName   "Moore" , "Moore. Joshua Allen";
+        datacite:affiliation  [ rdfs:label  "German BioImaging e.V." ];
+        datacite:familyName   "Moore. Joshua Allen" , "Moore";
         datacite:givenName    "Joshua Allenm" , "Joshua Allen" , "Joshua A." , "Joshua" , "Josh";
-        datacite:identifier   "0000-0003-4028-811X" .
+        datacite:identifier   "https://orcid.org/0000-0003-4028-811X"^^xsd:anyURI .
 
 orcid:0000-0001-9568-895X
         datacite:affiliation  ror:0546hnb39 , ror:04cdgtt98;
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
+        datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
         datacite:affiliation  [ rdfs:label  "Universität Konstanz" ];
-        datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
-        datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
-        datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center" ];
+        datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
+        datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
         datacite:familyName   "Schmidt" , "Christian Schmidt";
         datacite:givenName    "Christian";
-        datacite:identifier   "0000-0001-9568-895X" .
+        datacite:identifier   "https://orcid.org/0000-0001-9568-895X"^^xsd:anyURI .
 
 ror:04cdgtt98  a             nfdicore:NFDI_0000003;
         rdfs:label           "German Cancer Research Center";
-        datacite:identifier  "https://ror.org/04cdgtt98" .
+        datacite:identifier  "https://ror.org/04cdgtt98"^^xsd:anyURI .
 
 orcid:0000-0001-7734-3771
         datacite:affiliation  ror:01vnkaz16 , ror:024z2rq82;
+        datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
         datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
         datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
         datacite:affiliation  [ rdfs:label  "Heinrich Heine Universität Düsseldorf" ];
         datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
         datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
         datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Heinrich-Heine-University Düsseldorf, Center for Advanced Imaging" ];
         datacite:affiliation  [ rdfs:label           "Heinrich-Heine-University Düsseldorf";
                                 datacite:identifier  "edmo:3484"
                               ];
-        datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
-        datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
-        datacite:affiliation  [ rdfs:label  "Heinrich-Heine University of Düsseldorf, Center for Advanced Imaging, Düsseldorf, Germany" ];
-        datacite:affiliation  [ rdfs:label  "Heinrich-Heine-University Düsseldorf, Center for Advanced Imaging" ];
         datacite:familyName   "Stefanie Weidtkamp-Peters" , "Weidtkamp-Peters";
         datacite:givenName    "Stefanie";
-        datacite:identifier   "0000-0001-7734-3771" .
+        datacite:identifier   "https://orcid.org/0000-0001-7734-3771"^^xsd:anyURI .
 
 orcid:0000-0002-6999-132X
         datacite:affiliation  ror:04c4bwh63 , ror:00rcxh774;
-        datacite:affiliation  [ rdfs:label  "Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases (CECAD), University of Cologne, Cologne, Germany" ];
-        datacite:affiliation  [ rdfs:label  "Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases (CECAD), University of Cologne, Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Imaging Facility, Cellular Stress Responses in Aging-Associated Diseases (CECAD), Cologne, University of Cologne, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases (CECAD), University of Cologne, Cologne, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases (CECAD), University of Cologne, Cologne, Germany" ];
         datacite:familyName   "Zentis";
         datacite:givenName    "Peter";
-        datacite:identifier   "0000-0002-6999-132X" .
+        datacite:identifier   "https://orcid.org/0000-0002-6999-132X"^^xsd:anyURI .
 
 orcid:0009-0007-5101-4786
         datacite:affiliation  ror:00rcxh774;
@@ -119,32 +122,32 @@ orcid:0009-0007-5101-4786
         datacite:affiliation  [ rdfs:label  "Imaging Facility, Cellular Stress Responses in Aging-Associated Diseases (CECAD), Cologne, University of Cologne, Germany" ];
         datacite:familyName   "Kandpal";
         datacite:givenName    "Niraj";
-        datacite:identifier   "0009-0007-5101-4786" .
+        datacite:identifier   "https://orcid.org/0009-0007-5101-4786"^^xsd:anyURI .
 
 orcid:0000-0003-2104-9519
         datacite:affiliation  ror:000h6jb29;
-        datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
-                                datacite:identifier  "edmo:1152"
-                              ];
         datacite:affiliation  [ rdfs:label  "Helmholtz-Zentrum für Umweltforschung UFZ, Leipzig" ];
         datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
                                 datacite:identifier  "edmo:1152"
                               ];
-        datacite:affiliation  [ rdfs:label  "Helmholtz Centre for Environmental Research (UFZ), Leipzig, Germany" ];
         datacite:affiliation  [ rdfs:label  "Riccardo" ];
+        datacite:affiliation  [ rdfs:label  "Helmholtz Centre for Environmental Research (UFZ), Leipzig, Germany" ];
+        datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
+                                datacite:identifier  "edmo:1152"
+                              ];
         datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
                                 datacite:identifier  "edmo:1152"
                               ];
         datacite:familyName   "Massei";
         datacite:givenName    "Riccardo";
-        datacite:identifier   "0000-0003-2104-9519" .
+        datacite:identifier   "https://orcid.org/0000-0003-2104-9519"^^xsd:anyURI .
 
 orcid:0000-0002-6658-2192
-        datacite:affiliation  ror:04c4bwh63;
+        datacite:affiliation  ror:04c4bwh63 , ror:00rcxh774;
+        datacite:affiliation  [ rdfs:label  "Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases (CECAD), University of Cologne, Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Imaging Facility, Cellular Stress Responses in Aging-Associated Diseases (CECAD), Cologne, University of Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Exzellenzcluster CECAD in der Universität zu Köln" ];
         datacite:affiliation  [ rdfs:label  "Exzellenzcluster CECAD in der Universität zu Köln" ];
-        datacite:affiliation  [ rdfs:label  "Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases (CECAD), University of Cologne, Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Exzellenzcluster CECAD in der Universität zu Köln" ];
         datacite:affiliation  [ rdfs:label  "Exzellenzcluster CECAD in der Universität zu Köln" ];
         datacite:affiliation  [ rdfs:label  "Exzellenzcluster CECAD in der Universität zu Köln" ];
@@ -154,7 +157,7 @@ orcid:0000-0002-6658-2192
         datacite:affiliation  [ rdfs:label  "Exzellenzcluster CECAD in der Universität zu Köln" ];
         datacite:familyName   "Schauss";
         datacite:givenName    "Astrid";
-        datacite:identifier   "0000-0002-6658-2192" .
+        datacite:identifier   "https://orcid.org/0000-0002-6658-2192"^^xsd:anyURI .
 
 orcid:0000-0001-5805-5774
         datacite:affiliation  ror:04cdgtt98;
@@ -162,19 +165,19 @@ orcid:0000-0001-5805-5774
         datacite:affiliation  [ rdfs:label  "Single-cell Open Lab, German Cancer Research Center (DKFZ), Heidelberg, Germany" ];
         datacite:familyName   "Bortolomeazzi";
         datacite:givenName    "Michele";
-        datacite:identifier   "0000-0001-5805-5774" .
+        datacite:identifier   "https://orcid.org/0000-0001-5805-5774"^^xsd:anyURI .
 
 orcid:0000-0003-3430-2683
         datacite:affiliation  ror:00rcxh774;
-        datacite:affiliation  [ rdfs:label  "Regional Computer Center (RRZK), University of Cologne, Cologne, Germany" ];
-        datacite:affiliation  [ rdfs:label  "Regional Computer Center (RRZK), University of Cologne, Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Regional Computing Centre (RRZK), University of Cologne" ];
+        datacite:affiliation  [ rdfs:label  "Regional Computer Center (RRZK), University of Cologne, Cologne, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Regional Computer Center (RRZK), University of Cologne, Cologne, Germany" ];
         datacite:familyName   "Valencia-Schneider" , "Valencia-S.";
         datacite:givenName    "Mónica E." , "Monica";
-        datacite:identifier   "0000-0003-3430-2683" .
+        datacite:identifier   "https://orcid.org/0000-0003-3430-2683"^^xsd:anyURI .
 
 orcid:0000-0002-5567-8690
-        datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  ror:0546hnb39 , ror:04cdgtt98;
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ), Department Enabling Technology, Heidelberg, Germany" ];
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ), Department Enabling Technology, Heidelberg, Germany" ];
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ), Department Enabling Technology, Heidelberg, Germany" ];
@@ -184,10 +187,10 @@ orcid:0000-0002-5567-8690
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ), Department Enabling Technology, Heidelberg, Germany" ];
         datacite:familyName   "Ferrando-May";
         datacite:givenName    "Elisa";
-        datacite:identifier   "0000-0002-5567-8690" .
+        datacite:identifier   "https://orcid.org/0000-0002-5567-8690"^^xsd:anyURI .
 
 orcid:0000-0002-3328-9467
-        datacite:affiliation  ror:024z2rq82;
+        datacite:affiliation  ror:024z2rq82 , ror:01vnkaz16;
         datacite:affiliation  [ rdfs:label  "Center for Advanced Imaging, Heinrich-Heine-Universität Düsseldorf, Düsseldorf, Germany" ];
         datacite:affiliation  [ rdfs:label           "Heinrich-Heine-University Düsseldorf";
                                 datacite:identifier  "edmo:3484"
@@ -195,23 +198,27 @@ orcid:0000-0002-3328-9467
         datacite:affiliation  [ rdfs:label  "Center for Advanced Imaging, Heinrich-Heine-Universität Düsseldorf, Düsseldorf, Germany" ];
         datacite:familyName   "Boissonnet";
         datacite:givenName    "Tom";
-        datacite:identifier   "0000-0002-3328-9467" .
+        datacite:identifier   "https://orcid.org/0000-0002-3328-9467"^^xsd:anyURI .
+
+ror:0546hnb39  a             nfdicore:NFDI_0000003;
+        rdfs:label           "University of Konstanz";
+        datacite:identifier  "https://ror.org/0546hnb39"^^xsd:anyURI .
 
 ror:038t36y30  a             nfdicore:NFDI_0000003;
         rdfs:label           "Heidelberg University";
-        datacite:identifier  "https://ror.org/038t36y30" .
+        datacite:identifier  "https://ror.org/038t36y30"^^xsd:anyURI .
 
 orcid:0000-0002-8367-5163
         datacite:affiliation  ror:042aqky30 , ror:01vnkaz16;
         datacite:affiliation  [ rdfs:label  "Technische Universität Dresden" ];
-        datacite:affiliation  [ rdfs:label  "NFDI4BIOIMAGE" ];
-        datacite:affiliation  [ rdfs:label  "TU Dresden" ];
-        datacite:affiliation  [ rdfs:label  "B CUBE, TU Dresden" ];
-        datacite:affiliation  [ rdfs:label  "Technische Universität Dresden" ];
         datacite:affiliation  [ rdfs:label  "Technische Universität Dresden, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Technische Universität Dresden" ];
+        datacite:affiliation  [ rdfs:label  "B CUBE, TU Dresden" ];
+        datacite:affiliation  [ rdfs:label  "TU Dresden" ];
+        datacite:affiliation  [ rdfs:label  "NFDI4BIOIMAGE" ];
         datacite:familyName   "Wetzker";
         datacite:givenName    "Cornelia" , "Conni";
-        datacite:identifier   "0000-0002-8367-5163" .
+        datacite:identifier   "https://orcid.org/0000-0002-8367-5163"^^xsd:anyURI .
 
 orcid:0000-0002-5332-3589
         datacite:affiliation  ror:05tpnw772;
@@ -225,32 +232,32 @@ orcid:0000-0002-5332-3589
         datacite:affiliation  [ rdfs:label  "German BioImaging - Society for Microscopy and Image Analysis" ];
         datacite:familyName   "Janina Hanne" , "Hanne";
         datacite:givenName    "Janina";
-        datacite:identifier   "0000-0002-5332-3589" .
-
-ror:0546hnb39  a             nfdicore:NFDI_0000003;
-        rdfs:label           "University of Konstanz";
-        datacite:identifier  "https://ror.org/0546hnb39" .
+        datacite:identifier   "https://orcid.org/0000-0002-5332-3589"^^xsd:anyURI .
 
 ror:024z2rq82  a             nfdicore:NFDI_0000003;
         rdfs:label           "Heinrich Heine University Düsseldorf";
-        datacite:identifier  "https://ror.org/024z2rq82" .
+        datacite:identifier  "https://ror.org/024z2rq82"^^xsd:anyURI .
+
+ror:01vnkaz16  a             nfdicore:NFDI_0000003;
+        rdfs:label           "NFDI4BIOIMAGE";
+        datacite:identifier  "https://ror.org/01vnkaz16"^^xsd:anyURI .
 
 ror:000h6jb29  a             nfdicore:NFDI_0000003;
         rdfs:label           "Helmholtz Centre for Environmental Research";
-        datacite:identifier  "https://ror.org/000h6jb29" .
+        datacite:identifier  "https://ror.org/000h6jb29"^^xsd:anyURI .
 
 orcid:0000-0003-3780-8663
         datacite:affiliation  ror:000h6jb29;
-        datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
-                                datacite:identifier  "edmo:1152"
-                              ];
-        datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
-                                datacite:identifier  "edmo:1152"
-                              ];
         datacite:affiliation  [ rdfs:label  "Jan" ];
+        datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
+                                datacite:identifier  "edmo:1152"
+                              ];
+        datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
+                                datacite:identifier  "edmo:1152"
+                              ];
         datacite:familyName   "Bumberger";
         datacite:givenName    "Jan";
-        datacite:identifier   "0000-0003-3780-8663" .
+        datacite:identifier   "https://orcid.org/0000-0003-3780-8663"^^xsd:anyURI .
 
 orcid:0000-0003-2408-7588
         datacite:affiliation  ror:023b0x485;
@@ -263,29 +270,33 @@ orcid:0000-0003-2408-7588
         datacite:affiliation  [ rdfs:label  "University of Mainz, High Performance Computing Group, Mainz, Germany" ];
         datacite:familyName   "Meesters";
         datacite:givenName    "Christian";
-        datacite:identifier   "0000-0003-2408-7588" .
+        datacite:identifier   "https://orcid.org/0000-0003-2408-7588"^^xsd:anyURI .
 
 orcid:0000-0002-3879-7057
         datacite:affiliation  ror:034waa237;
-        datacite:affiliation  [ rdfs:label  "Data Science and Management & Cluster of Excellence on Plant Sciences (CEPLAS), University of Cologne, Cologne, Germany" ];
-        datacite:affiliation  [ rdfs:label  "Data Science and Management & Cluster of Excellence on Plant Sciences (CEPLAS), University of Cologne, Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Data Science and Management, Cluster of Excellence on Plant Sciences (CEPLAS), University of Cologne" ];
+        datacite:affiliation  [ rdfs:label  "Data Science and Management & Cluster of Excellence on Plant Sciences (CEPLAS), University of Cologne, Cologne, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Data Science and Management & Cluster of Excellence on Plant Sciences (CEPLAS), University of Cologne, Cologne, Germany" ];
         datacite:familyName   "Schrader";
         datacite:givenName    "Andrea";
-        datacite:identifier   "0000-0002-3879-7057" .
+        datacite:identifier   "https://orcid.org/0000-0002-3879-7057"^^xsd:anyURI .
 
 orcid:0000-0001-6523-7496
         datacite:affiliation  ror:04qmmjx98;
-        datacite:affiliation  [ rdfs:label  "Department of Biology/Chemistry  Center for Cellular Nanoanalytics  University Osnabrück, Germany" ];
-        datacite:affiliation  [ rdfs:label  "University Osnabrück" ];
         datacite:affiliation  [ rdfs:label  "Department of Biology/Chemistry  Center for Cellular Nanoanalytics, University of Osnabrück, Germany" ];
+        datacite:affiliation  [ rdfs:label  "University Osnabrück" ];
+        datacite:affiliation  [ rdfs:label  "Department of Biology/Chemistry  Center for Cellular Nanoanalytics  University Osnabrück, Germany" ];
         datacite:familyName   "Kunis";
         datacite:givenName    "Susanne";
-        datacite:identifier   "0000-0001-6523-7496" .
+        datacite:identifier   "https://orcid.org/0000-0001-6523-7496"^^xsd:anyURI .
 
 ror:0245cg223  a             nfdicore:NFDI_0000003;
         rdfs:label           "University of Freiburg";
-        datacite:identifier  "https://ror.org/0245cg223" .
+        datacite:identifier  "https://ror.org/0245cg223"^^xsd:anyURI .
+
+ror:00rcxh774  a             nfdicore:NFDI_0000003;
+        rdfs:label           "University of Cologne";
+        datacite:identifier  "https://ror.org/00rcxh774"^^xsd:anyURI .
 
 orcid:0000-0002-5862-6132
         datacite:affiliation  ror:05d78xc36;
@@ -294,15 +305,7 @@ orcid:0000-0002-5862-6132
         datacite:affiliation  [ rdfs:label  "University of Freiburg" ];
         datacite:familyName   "Serrano-Solano";
         datacite:givenName    "Beatriz";
-        datacite:identifier   "0000-0002-5862-6132" .
-
-ror:01vnkaz16  a             nfdicore:NFDI_0000003;
-        rdfs:label           "NFDI4BIOIMAGE";
-        datacite:identifier  "https://ror.org/01vnkaz16" .
-
-ror:00rcxh774  a             nfdicore:NFDI_0000003;
-        rdfs:label           "University of Cologne";
-        datacite:identifier  "https://ror.org/00rcxh774" .
+        datacite:identifier   "https://orcid.org/0000-0002-5862-6132"^^xsd:anyURI .
 
 orcid:0009-0002-1826-7099
         datacite:affiliation  ror:01vnkaz16 , ror:00pd74e08;
@@ -310,25 +313,25 @@ orcid:0009-0002-1826-7099
         datacite:affiliation  [ rdfs:label  "Muenster Imaging Network, University of Muenster, Muenster, Germany" ];
         datacite:familyName   "Wendt";
         datacite:givenName    "Jens";
-        datacite:identifier   "0009-0002-1826-7099" .
+        datacite:identifier   "https://orcid.org/0009-0002-1826-7099"^^xsd:anyURI .
 
 orcid:0000-0002-6626-2463
-        datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  ror:04cdgtt98 , ror:013czdx64;
         datacite:familyName   "Maier-Hein" , "Maier-Hain";
         datacite:givenName    "Klaus";
-        datacite:identifier   "0000-0002-6626-2463" .
+        datacite:identifier   "https://orcid.org/0000-0002-6626-2463"^^xsd:anyURI .
 
 orcid:0000-0002-4101-6987
-        datacite:affiliation  ror:024z2rq82;
+        datacite:affiliation  ror:024z2rq82 , ror:01vnkaz16;
+        datacite:affiliation  [ rdfs:label  "Center for Advanced Imaging, Heinrich-Heine-Universität Düsseldorf, Düsseldorf, Germany" ];
+        datacite:affiliation  [ rdfs:label  "Center for Advanced Imaging, Heinrich-Heine-Universität Düsseldorf, Düsseldorf, Germany" ];
         datacite:affiliation  [ rdfs:label           "Heinrich-Heine-University Düsseldorf";
                                 datacite:identifier  "edmo:3484"
                               ];
-        datacite:affiliation  [ rdfs:label  "Center for Advanced Imaging, Heinrich-Heine-Universität Düsseldorf, Düsseldorf, Germany" ];
-        datacite:affiliation  [ rdfs:label  "Center for Advanced Imaging, Heinrich-Heine-Universität Düsseldorf, Düsseldorf, Germany" ];
         datacite:affiliation  [ rdfs:label  "Heinrich Heine Institut" ];
         datacite:familyName   "Fuchs";
         datacite:givenName    "Vanessa Aphaia Fiona" , "Vanessa A. F.";
-        datacite:identifier   "0000-0002-4101-6987" .
+        datacite:identifier   "https://orcid.org/0000-0002-4101-6987"^^xsd:anyURI .
 
 orcid:0000-0002-2579-5546
         datacite:affiliation  ror:0534re684;
@@ -336,123 +339,137 @@ orcid:0000-0002-2579-5546
         datacite:affiliation  [ rdfs:label  "Max Planck Institute for Evolutionary Biology" ];
         datacite:familyName   "Fortmann-Grote";
         datacite:givenName    "Carsten";
-        datacite:identifier   "0000-0002-2579-5546" .
+        datacite:identifier   "https://orcid.org/0000-0002-2579-5546"^^xsd:anyURI .
 
 orcid:0000-0001-9629-0564
-        datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  ror:04v4h0v24 , ror:04cdgtt98 , ror:013czdx64;
+        datacite:affiliation  [ rdfs:label  "Helmholtz Metadata Collaboration (HMC) Hub Health" ];
         datacite:familyName   "Nolden";
         datacite:givenName    "Marco";
-        datacite:identifier   "0000-0001-9629-0564" .
+        datacite:identifier   "https://orcid.org/0000-0001-9629-0564"^^xsd:anyURI .
 
 orcid:0000-0001-7769-0167
-        datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  ror:04v4h0v24 , ror:04cdgtt98;
         datacite:familyName   "Dvoretskii";
         datacite:givenName    "Stefan";
-        datacite:identifier   "0000-0001-7769-0167" .
+        datacite:identifier   "https://orcid.org/0000-0001-7769-0167"^^xsd:anyURI .
 
 ror:05wwzbv21  a             nfdicore:NFDI_0000003;
         rdfs:label           "NFDI4Chem";
-        datacite:identifier  "https://ror.org/05wwzbv21" .
+        datacite:identifier  "https://ror.org/05wwzbv21"^^xsd:anyURI .
 
 ror:05d78xc36  a             nfdicore:NFDI_0000003;
         rdfs:label           "Euro-BioImaging ERIC";
-        datacite:identifier  "https://ror.org/05d78xc36" .
+        datacite:identifier  "https://ror.org/05d78xc36"^^xsd:anyURI .
 
 ror:055s37c97  a             nfdicore:NFDI_0000003;
         rdfs:label           "Leibniz-Institut für Naturstoff-Forschung und Infektionsbiologie e. V. - Hans-Knöll-Institut (HKI)";
-        datacite:identifier  "https://ror.org/055s37c97" .
+        datacite:identifier  "https://ror.org/055s37c97"^^xsd:anyURI .
 
 ror:03a4sp974  a             nfdicore:NFDI_0000003;
         rdfs:label           "NFDI4Microbiota";
-        datacite:identifier  "https://ror.org/03a4sp974" .
+        datacite:identifier  "https://ror.org/03a4sp974"^^xsd:anyURI .
 
 ror:01f5dqg10  a             nfdicore:NFDI_0000003;
         rdfs:label           "NFDI4Earth";
-        datacite:identifier  "https://ror.org/01f5dqg10" .
+        datacite:identifier  "https://ror.org/01f5dqg10"^^xsd:anyURI .
+
+ror:00r0qs524  a             nfdicore:NFDI_0000003;
+        rdfs:label           "FAIRAgro";
+        datacite:identifier  "https://ror.org/00r0qs524"^^xsd:anyURI .
 
 ror:00pd74e08  a             nfdicore:NFDI_0000003;
         rdfs:label           "University of Münster";
-        datacite:identifier  "https://ror.org/00pd74e08" .
+        datacite:identifier  "https://ror.org/00pd74e08"^^xsd:anyURI .
 
 orcid:0000-0003-1717-3138
         datacite:affiliation  ror:024z2rq82 , ror:01vnkaz16;
         datacite:familyName   "Krooß";
         datacite:givenName    "Ksenia";
-        datacite:identifier   "0000-0003-1717-3138" .
+        datacite:identifier   "https://orcid.org/0000-0003-1717-3138"^^xsd:anyURI .
 
 orcid:0000-0002-7059-4030
         datacite:affiliation  ror:04cdgtt98;
         datacite:affiliation  [ rdfs:label  "Deutsches Krebsforschungszentrum" ];
         datacite:familyName   "Mallm";
         datacite:givenName    "Jan-Philipp";
-        datacite:identifier   "0000-0002-7059-4030" .
+        datacite:identifier   "https://orcid.org/0000-0002-7059-4030"^^xsd:anyURI .
 
 orcid:0000-0002-6990-4716
         datacite:affiliation  ror:000h6jb29;
         datacite:affiliation  [ rdfs:label  "Stefan" ];
         datacite:familyName   "Scholz";
         datacite:givenName    "Stefan";
-        datacite:identifier   "0000-0002-6990-4716" .
+        datacite:identifier   "https://orcid.org/0000-0002-6990-4716"^^xsd:anyURI .
 
 orcid:0000-0002-5497-6266
         datacite:affiliation  [ rdfs:label  "Wibke" ];
         datacite:familyName   "Busch";
         datacite:givenName    "Wibke";
-        datacite:identifier   "0000-0002-5497-6266" .
+        datacite:identifier   "https://orcid.org/0000-0002-5497-6266"^^xsd:anyURI .
 
 ror:05tpnw772  a             nfdicore:NFDI_0000003;
         rdfs:label           "German BioImaging – Gesellschaft für Mikroskopie und Bildanalyse";
-        datacite:identifier  "https://ror.org/05tpnw772" .
+        datacite:identifier  "https://ror.org/05tpnw772"^^xsd:anyURI .
 
 ror:05nfk7108  a             nfdicore:NFDI_0000003;
         rdfs:label           "German Human Genome-Phenome Archive";
-        datacite:identifier  "https://ror.org/05nfk7108" .
+        datacite:identifier  "https://ror.org/05nfk7108"^^xsd:anyURI .
+
+ror:04v4h0v24  a             nfdicore:NFDI_0000003;
+        rdfs:label           "Helmholtz Metadata Collaboration";
+        datacite:identifier  "https://ror.org/04v4h0v24"^^xsd:anyURI .
 
 ror:04c4bwh63  a             nfdicore:NFDI_0000003;
         rdfs:label           "Cologne Excellence Cluster on Cellular Stress Responses in Aging Associated Diseases";
-        datacite:identifier  "https://ror.org/04c4bwh63" .
+        datacite:identifier  "https://ror.org/04c4bwh63"^^xsd:anyURI .
+
+ror:042aqky30  a             nfdicore:NFDI_0000003;
+        rdfs:label           "TU Dresden";
+        datacite:identifier  "https://ror.org/042aqky30"^^xsd:anyURI .
 
 ror:03fqpzb44  a             nfdicore:NFDI_0000003;
         rdfs:label           "NFDI4Biodiversity";
-        datacite:identifier  "https://ror.org/03fqpzb44" .
+        datacite:identifier  "https://ror.org/03fqpzb44"^^xsd:anyURI .
 
 ror:0305k8y39  a             nfdicore:NFDI_0000003;
         rdfs:label           "NFDI4Health";
-        datacite:identifier  "https://ror.org/0305k8y39" .
+        datacite:identifier  "https://ror.org/0305k8y39"^^xsd:anyURI .
+
+ror:023b0x485  a             nfdicore:NFDI_0000003;
+        rdfs:label           "Johannes Gutenberg University Mainz";
+        datacite:identifier  "https://ror.org/023b0x485"^^xsd:anyURI .
 
 ror:01zwmgk08  a             nfdicore:NFDI_0000003;
         rdfs:label           "Leibniz Institute for Neurobiology";
-        datacite:identifier  "https://ror.org/01zwmgk08" .
+        datacite:identifier  "https://ror.org/01zwmgk08"^^xsd:anyURI .
 
 ror:01v7r4v08  a             nfdicore:NFDI_0000003;
         rdfs:label           "DataPLANT";
-        datacite:identifier  "https://ror.org/01v7r4v08" .
-
-ror:00r0qs524  a             nfdicore:NFDI_0000003;
-        rdfs:label           "FAIRAgro";
-        datacite:identifier  "https://ror.org/00r0qs524" .
+        datacite:identifier  "https://ror.org/01v7r4v08"^^xsd:anyURI .
 
 ror:004hd5y14  a             nfdicore:NFDI_0000003;
         rdfs:label           "Leibniz Institute for Plasma Science and Technology";
-        datacite:identifier  "https://ror.org/004hd5y14" .
+        datacite:identifier  "https://ror.org/004hd5y14"^^xsd:anyURI .
 
 orcid:0009-0007-5222-2683
         datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  [ rdfs:label  "Helmholtz Imaging" ];
         datacite:familyName   "Wald";
         datacite:givenName    "Tassilo";
-        datacite:identifier   "0009-0007-5222-2683" .
+        datacite:identifier   "https://orcid.org/0009-0007-5222-2683"^^xsd:anyURI .
 
 orcid:0009-0003-6932-023X
         datacite:affiliation  ror:01zwmgk08;
         datacite:familyName   "Stöter";
         datacite:givenName    "Torsten";
-        datacite:identifier   "0009-0003-6932-023X" .
+        datacite:identifier   "https://orcid.org/0009-0003-6932-023X"^^xsd:anyURI .
 
 orcid:0000-0003-3002-8170
         datacite:affiliation  ror:04cdgtt98;
         datacite:familyName   "Ulrich";
         datacite:givenName    "Constantin";
-        datacite:identifier   "0000-0003-3002-8170" .
+        datacite:identifier   "https://orcid.org/0000-0003-3002-8170"^^xsd:anyURI .
 
 orcid:0000-0003-2778-7483
         datacite:affiliation  ror:0030f2a11;
@@ -460,79 +477,88 @@ orcid:0000-0003-2778-7483
         datacite:affiliation  [ rdfs:label  "Department of Biology/Chemistry and Center for Cellular Nanoanalytics, University Osnabrück, Germany" ];
         datacite:familyName   "Abdrabbou";
         datacite:givenName    "Mohamed M.";
-        datacite:identifier   "0000-0003-2778-7483" .
+        datacite:identifier   "https://orcid.org/0000-0003-2778-7483"^^xsd:anyURI .
 
 orcid:0000-0003-1323-3762
         datacite:affiliation  ror:038t36y30;
         datacite:familyName   "Kostrykin";
         datacite:givenName    "Leonid";
-        datacite:identifier   "0000-0003-1323-3762" .
+        datacite:identifier   "https://orcid.org/0000-0003-1323-3762"^^xsd:anyURI .
 
 orcid:0000-0002-9051-3701
         datacite:affiliation  ror:02nv7yv05;
         datacite:affiliation  [ rdfs:label  "Big Data Analytics Working Group, Forschungszentrum Jülich, Germany" ];
         datacite:familyName   "Dickscheid";
         datacite:givenName    "Timo";
-        datacite:identifier   "0000-0002-9051-3701" .
+        datacite:identifier   "https://orcid.org/0000-0002-9051-3701"^^xsd:anyURI .
 
 orcid:0000-0002-7452-1146
         datacite:affiliation  [ rdfs:label  "Regional Computer Center (RRZK), University of Cologne, Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Regional Computer Center (RRZK), University of Cologne, Cologne, Germany" ];
         datacite:familyName   "Dahms";
         datacite:givenName    "Eik";
-        datacite:identifier   "0000-0002-7452-1146" .
+        datacite:identifier   "https://orcid.org/0000-0002-7452-1146"^^xsd:anyURI .
 
 orcid:0000-0002-6243-2568
         datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  [ rdfs:label  "Helmholtz Imaging" ];
         datacite:familyName   "Jäger";
         datacite:givenName    "Paul F" , "Paul";
-        datacite:identifier   "0000-0002-6243-2568" .
+        datacite:identifier   "https://orcid.org/0000-0002-6243-2568"^^xsd:anyURI .
 
 orcid:0000-0002-6075-0757
         datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  [ rdfs:label           "University of Heidelberg";
+                                datacite:identifier  "edmo:3433"
+                              ];
+        datacite:affiliation  [ rdfs:label           "University of Heidelberg";
+                                datacite:identifier  "edmo:3433"
+                              ];
         datacite:familyName   "Schader";
         datacite:givenName    "Philipp";
-        datacite:identifier   "0000-0002-6075-0757" .
+        datacite:identifier   "https://orcid.org/0000-0002-6075-0757"^^xsd:anyURI .
 
 orcid:0000-0002-5467-871X
         datacite:affiliation  [ rdfs:label  "Institute of Neuroscience and Medicine (INM-1), Forschungszentrum Jülich, Germany" ];
         datacite:affiliation  [ rdfs:label  "Institute of Neuroscience and Medicine (INM-1), Forschungszentrum Jülich, Germany" ];
         datacite:familyName   "Thönnißen" , "Thoennissen";
         datacite:givenName    "Julia";
-        datacite:identifier   "0000-0002-5467-871X" .
+        datacite:identifier   "https://orcid.org/0000-0002-5467-871X"^^xsd:anyURI .
 
 orcid:0000-0002-4382-5104
         datacite:affiliation  ror:0245cg223 , ror:01v7r4v08;
         datacite:affiliation  [ rdfs:label  "Albert-Ludwigs-Universität Freiburg, Germany" ];
         datacite:familyName   "von Suchodoletz";
         datacite:givenName    "Dirk";
-        datacite:identifier   "0000-0002-4382-5104" .
+        datacite:identifier   "https://orcid.org/0000-0002-4382-5104"^^xsd:anyURI .
 
 orcid:0000-0002-3519-5886
         datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  [ rdfs:label  "Helmholtz Imaging" ];
         datacite:familyName   "Isensee";
         datacite:givenName    "Fabian";
-        datacite:identifier   "0000-0002-3519-5886" .
+        datacite:identifier   "https://orcid.org/0000-0002-3519-5886"^^xsd:anyURI .
 
 orcid:0000-0002-3079-6586
         datacite:affiliation  ror:0245cg223;
         datacite:familyName   "Grüning";
         datacite:givenName    "Björn";
-        datacite:identifier   "0000-0002-3079-6586" .
+        datacite:identifier   "https://orcid.org/0000-0002-3079-6586"^^xsd:anyURI .
 
 orcid:0000-0002-2484-2742
-        datacite:affiliation  ror:04cdgtt98;
+        datacite:affiliation  ror:04v4h0v24 , ror:04cdgtt98;
+        datacite:affiliation  [ rdfs:label  "Helmholtz Metadata Collaboration (HMC) Hub Health" ];
         datacite:familyName   "Kulla";
         datacite:givenName    "Lucas";
-        datacite:identifier   "0000-0002-2484-2742" .
+        datacite:identifier   "https://orcid.org/0000-0002-2484-2742"^^xsd:anyURI .
 
 orcid:0000-0002-2101-8416
         datacite:affiliation  ror:00pd74e08;
-        datacite:affiliation  [ rdfs:label  "University of Münster" ];
         datacite:affiliation  [ rdfs:label  "Münster Imaging Network, Cells in Motion Interfaculty Centre, University of Münster" ];
+        datacite:affiliation  [ rdfs:label  "University of Münster" ];
         datacite:familyName   "Zobel";
         datacite:givenName    "Thomas";
-        datacite:identifier   "0000-0002-2101-8416" .
+        datacite:identifier   "https://orcid.org/0000-0002-2101-8416"^^xsd:anyURI .
 
 orcid:0000-0002-1964-4960
         datacite:affiliation  ror:02s376052;
@@ -540,364 +566,375 @@ orcid:0000-0002-1964-4960
         datacite:affiliation  [ rdfs:label  "École Polytechnique Fédérale de Lausanne" ];
         datacite:familyName   "Lopez-Delisle";
         datacite:givenName    "Lucille";
-        datacite:identifier   "0000-0002-1964-4960" .
+        datacite:identifier   "https://orcid.org/0000-0002-1964-4960"^^xsd:anyURI .
 
 orcid:0000-0001-8665-6382
         datacite:affiliation  ror:04ers2y35 , ror:03fqpzb44 , ror:03a4sp974;
+        datacite:affiliation  [ rdfs:label  "Uni Bremen" ];
         datacite:familyName   "Engel";
         datacite:givenName    "Judith Sophie" , "Judith";
-        datacite:identifier   "0000-0001-8665-6382" .
+        datacite:identifier   "https://orcid.org/0000-0001-8665-6382"^^xsd:anyURI .
 
 ror:0534re684  a             nfdicore:NFDI_0000003;
         rdfs:label           "Max Planck Institute for Evolutionary Biology";
-        datacite:identifier  "https://ror.org/0534re684" .
+        datacite:identifier  "https://ror.org/0534re684"^^xsd:anyURI .
 
 ror:04xx1tc24  a             nfdicore:NFDI_0000003;
         rdfs:label           "Max Planck Institute for Biology of Ageing";
-        datacite:identifier  "https://ror.org/04xx1tc24" .
+        datacite:identifier  "https://ror.org/04xx1tc24"^^xsd:anyURI .
 
 ror:03s7gtk40  a             nfdicore:NFDI_0000003;
         rdfs:label           "Leipzig University";
-        datacite:identifier  "https://ror.org/03s7gtk40" .
+        datacite:identifier  "https://ror.org/03s7gtk40"^^xsd:anyURI .
+
+ror:034waa237  a             nfdicore:NFDI_0000003;
+        rdfs:label           "Cluster of Excellence on Plant Sciences";
+        datacite:identifier  "https://ror.org/034waa237"^^xsd:anyURI .
 
 ror:02se0t636  a             nfdicore:NFDI_0000003;
         rdfs:label           "Leibniz Institute of Photonic Technology";
-        datacite:identifier  "https://ror.org/02se0t636" .
+        datacite:identifier  "https://ror.org/02se0t636"^^xsd:anyURI .
 
-ror:023b0x485  a             nfdicore:NFDI_0000003;
-        rdfs:label           "Johannes Gutenberg University Mainz";
-        datacite:identifier  "https://ror.org/023b0x485" .
+ror:013czdx64  a             nfdicore:NFDI_0000003;
+        rdfs:label           "University Hospital Heidelberg";
+        datacite:identifier  "https://ror.org/013czdx64"^^xsd:anyURI .
 
 orcid:0000-0003-3685-3673
         datacite:affiliation  ror:04cdgtt98;
         datacite:familyName   "Krämer";
         datacite:givenName    "Lena";
-        datacite:identifier   "0000-0003-3685-3673" .
+        datacite:identifier   "https://orcid.org/0000-0003-3685-3673"^^xsd:anyURI .
 
 orcid:0000-0003-3099-618X
         datacite:affiliation  [ rdfs:label  "Center for Molecular Medicine Cologne and CECAD Research Center, University of Cologne, Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Center for Molecular Medicine Cologne and CECAD Research Center, University of Cologne, Cologne, Germany" ];
         datacite:familyName   "Babaki";
         datacite:givenName    "Mehrnaz";
-        datacite:identifier   "0000-0003-3099-618X" .
+        datacite:identifier   "https://orcid.org/0000-0003-3099-618X"^^xsd:anyURI .
 
 orcid:0000-0003-1945-6342
         datacite:affiliation  [ rdfs:label  "Computational Systems Biology, University of Kaiserslautern-Landau, Kaiserslautern, Germany" ];
         datacite:affiliation  [ rdfs:label  "Computational Systems Biology, University of Kaiserslautern-Landau, Kaiserslautern, Germany" ];
         datacite:familyName   "Weil";
         datacite:givenName    "H. Lukas";
-        datacite:identifier   "0000-0003-1945-6342" .
+        datacite:identifier   "https://orcid.org/0000-0003-1945-6342"^^xsd:anyURI .
 
 orcid:0000-0002-9845-6393
         datacite:affiliation  ror:01zwmgk08;
         datacite:affiliation  [ rdfs:label  "Combinatorial NeuroImaging Core Facility, Leibniz Institute for Neurobiology, Magdeburg, Germany" ];
         datacite:familyName   "Zuschratter";
         datacite:givenName    "Werner";
-        datacite:identifier   "0000-0002-9845-6393" .
+        datacite:identifier   "https://orcid.org/0000-0002-9845-6393"^^xsd:anyURI .
 
 orcid:0000-0002-6165-4679
         datacite:affiliation  [ rdfs:label  "Technische Universität Dresden" ];
         datacite:affiliation  [ rdfs:label  "TU Dresden" ];
         datacite:familyName   "Zoccoler";
         datacite:givenName    "Marcelo";
-        datacite:identifier   "0000-0002-6165-4679" .
+        datacite:identifier   "https://orcid.org/0000-0002-6165-4679"^^xsd:anyURI .
 
 orcid:0000-0002-5546-5521
         datacite:affiliation  ror:00r0qs524;
         datacite:affiliation  [ rdfs:label  "ZALF e. V." ];
         datacite:familyName   "Schmidt";
         datacite:givenName    "Marcus";
-        datacite:identifier   "0000-0002-5546-5521" .
+        datacite:identifier   "https://orcid.org/0000-0002-5546-5521"^^xsd:anyURI .
 
 orcid:0000-0002-4526-2472
         datacite:affiliation  ror:02h2x0161 , ror:01f5dqg10;
         datacite:familyName   "Mehrtens";
         datacite:givenName    "Hela";
-        datacite:identifier   "0000-0002-4526-2472" .
+        datacite:identifier   "https://orcid.org/0000-0002-4526-2472"^^xsd:anyURI .
 
 orcid:0000-0002-4044-9166
         datacite:affiliation  ror:055s37c97;
         datacite:affiliation  [ rdfs:label  "Leibniz Institute for Natural Product Research and Infection  Biology - Hans Knöll Institute, Friedrich Schiller University Jena, Germany" ];
         datacite:familyName   "Figge";
         datacite:givenName    "Marc Thilo";
-        datacite:identifier   "0000-0002-4044-9166" .
+        datacite:identifier   "https://orcid.org/0000-0002-4044-9166"^^xsd:anyURI .
 
 orcid:0000-0002-1789-1861
         datacite:affiliation  ror:03h2bxq36;
         datacite:familyName   "Burel";
         datacite:givenName    "Jean-marie" , "Jean-Marie";
-        datacite:identifier   "0000-0002-1789-1861" .
+        datacite:identifier   "https://orcid.org/0000-0002-1789-1861"^^xsd:anyURI .
 
 orcid:0000-0002-1481-2996
-        datacite:affiliation  ror:03a4sp974;
+        datacite:affiliation  ror:03a4sp974 , ror:014nnvj65;
         datacite:familyName   "Förstner";
         datacite:givenName    "Konrad";
-        datacite:identifier   "0000-0002-1481-2996" .
+        datacite:identifier   "https://orcid.org/0000-0002-1481-2996"^^xsd:anyURI .
 
 orcid:0000-0002-1279-5133
         datacite:affiliation  [ rdfs:label  "Leiden Institute of  Advanced Computer Science, The Netherlands" ];
         datacite:affiliation  [ rdfs:label  "Leiden University" ];
         datacite:familyName   "Wolstencroft";
         datacite:givenName    "Katherine";
-        datacite:identifier   "0000-0002-1279-5133" .
+        datacite:identifier   "https://orcid.org/0000-0002-1279-5133"^^xsd:anyURI .
 
 orcid:0000-0002-0829-5101
         datacite:affiliation  [ rdfs:label  "Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases (CECAD), University of Cologne, Cologne, Germany" ];
         datacite:affiliation  [ rdfs:label  "Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases (CECAD), University of Cologne, Cologne, Germany" ];
         datacite:familyName   "Möhl";
         datacite:givenName    "Christoph";
-        datacite:identifier   "0000-0002-0829-5101" .
+        datacite:identifier   "https://orcid.org/0000-0002-0829-5101"^^xsd:anyURI .
 
 orcid:0000-0002-0723-6038
         datacite:affiliation  ror:055s37c97;
         datacite:familyName   "Gerst";
         datacite:givenName    "Ruman";
-        datacite:identifier   "0000-0002-0723-6038" .
+        datacite:identifier   "https://orcid.org/0000-0002-0723-6038"^^xsd:anyURI .
 
 orcid:0000-0001-9324-3236
         datacite:affiliation  ror:004hd5y14;
         datacite:familyName   "Becker";
         datacite:givenName    "Markus M.";
-        datacite:identifier   "0000-0001-9324-3236" .
+        datacite:identifier   "https://orcid.org/0000-0001-9324-3236"^^xsd:anyURI .
 
 orcid:0000-0001-6178-2884
         datacite:affiliation  ror:02catss52;
         datacite:affiliation  [ rdfs:label  "European Bioinformatics Institute" ];
         datacite:familyName   "Hartley";
         datacite:givenName    "Matthew";
-        datacite:identifier   "0000-0001-6178-2884" .
+        datacite:identifier   "https://orcid.org/0000-0001-6178-2884"^^xsd:anyURI .
 
 <https://zenodo.org/communities/nfdi4bioimage>
         dc:identifier          "nfdi4bioimage";
         nfdicore:NFDI_0001008  "https://zenodo.org/communities/nfdi4bioimage" .
 
+ror:05qpz1x62  a             nfdicore:NFDI_0000003;
+        rdfs:label           "Friedrich Schiller University Jena";
+        datacite:identifier  "https://ror.org/05qpz1x62"^^xsd:anyURI .
+
 ror:05qj6w324  a             nfdicore:NFDI_0000003;
         rdfs:label           "Nationale Forschungsdateninfrastruktur";
-        datacite:identifier  "https://ror.org/05qj6w324" .
+        datacite:identifier  "https://ror.org/05qj6w324"^^xsd:anyURI .
 
 ror:05mxhda18  a             nfdicore:NFDI_0000003;
         rdfs:label           "University Hospital Cologne";
-        datacite:identifier  "https://ror.org/05mxhda18" .
+        datacite:identifier  "https://ror.org/05mxhda18"^^xsd:anyURI .
 
 ror:05745n787  a             nfdicore:NFDI_0000003;
         rdfs:label           "Niedersächsische Staats-und Universitätsbibliothek Göttingen";
-        datacite:identifier  "https://ror.org/05745n787" .
+        datacite:identifier  "https://ror.org/05745n787"^^xsd:anyURI .
 
 ror:04qmmjx98  a             nfdicore:NFDI_0000003;
         rdfs:label           "Osnabrück University";
-        datacite:identifier  "https://ror.org/04qmmjx98" .
+        datacite:identifier  "https://ror.org/04qmmjx98"^^xsd:anyURI .
 
 ror:04mz5ra38  a             nfdicore:NFDI_0000003;
         rdfs:label           "University of Duisburg-Essen";
-        datacite:identifier  "https://ror.org/04mz5ra38" .
+        datacite:identifier  "https://ror.org/04mz5ra38"^^xsd:anyURI .
 
 ror:04ers2y35  a             nfdicore:NFDI_0000003;
         rdfs:label           "University of Bremen";
-        datacite:identifier  "https://ror.org/04ers2y35" .
-
-ror:042aqky30  a             nfdicore:NFDI_0000003;
-        rdfs:label           "TU Dresden";
-        datacite:identifier  "https://ror.org/042aqky30" .
+        datacite:identifier  "https://ror.org/04ers2y35"^^xsd:anyURI .
 
 ror:03mstc592  a             nfdicore:NFDI_0000003;
         rdfs:label           "European Molecular Biology Laboratory";
-        datacite:identifier  "https://ror.org/03mstc592" .
+        datacite:identifier  "https://ror.org/03mstc592"^^xsd:anyURI .
 
 ror:03h2bxq36  a             nfdicore:NFDI_0000003;
         rdfs:label           "University of Dundee";
-        datacite:identifier  "https://ror.org/03h2bxq36" .
+        datacite:identifier  "https://ror.org/03h2bxq36"^^xsd:anyURI .
 
 ror:03av75f26  a             nfdicore:NFDI_0000003;
         rdfs:label           "Max Planck Institute for Multidisciplinary Sciences";
-        datacite:identifier  "https://ror.org/03av75f26" .
+        datacite:identifier  "https://ror.org/03av75f26"^^xsd:anyURI .
 
-ror:034waa237  a             nfdicore:NFDI_0000003;
-        rdfs:label           "Cluster of Excellence on Plant Sciences";
-        datacite:identifier  "https://ror.org/034waa237" .
+ror:03a1kwz48  a             nfdicore:NFDI_0000003;
+        rdfs:label           "University of Tübingen";
+        datacite:identifier  "https://ror.org/03a1kwz48"^^xsd:anyURI .
 
 ror:0327sr118  a             nfdicore:NFDI_0000003;
         rdfs:label           "DIPF | Leibniz Institute for Research and Information in Education";
-        datacite:identifier  "https://ror.org/0327sr118" .
+        datacite:identifier  "https://ror.org/0327sr118"^^xsd:anyURI .
 
 ror:02s376052  a             nfdicore:NFDI_0000003;
         rdfs:label           "École Polytechnique Fédérale de Lausanne";
-        datacite:identifier  "https://ror.org/02s376052" .
+        datacite:identifier  "https://ror.org/02s376052"^^xsd:anyURI .
 
 ror:02nv7yv05  a             nfdicore:NFDI_0000003;
         rdfs:label           "Forschungszentrum Jülich";
-        datacite:identifier  "https://ror.org/02nv7yv05" .
+        datacite:identifier  "https://ror.org/02nv7yv05"^^xsd:anyURI .
 
 ror:02jhqqg57  a             nfdicore:NFDI_0000003;
         rdfs:label           "Leibniz Institute for Analytical Sciences - ISAS";
-        datacite:identifier  "https://ror.org/02jhqqg57" .
+        datacite:identifier  "https://ror.org/02jhqqg57"^^xsd:anyURI .
 
 ror:02h2x0161  a             nfdicore:NFDI_0000003;
         rdfs:label           "GEOMAR Helmholtz Centre for Ocean Research Kiel";
-        datacite:identifier  "https://ror.org/02h2x0161" .
+        datacite:identifier  "https://ror.org/02h2x0161"^^xsd:anyURI .
 
 ror:02catss52  a             nfdicore:NFDI_0000003;
         rdfs:label           "European Bioinformatics Institute";
-        datacite:identifier  "https://ror.org/02catss52" .
+        datacite:identifier  "https://ror.org/02catss52"^^xsd:anyURI .
 
 ror:02778hg05  a             nfdicore:NFDI_0000003;
         rdfs:label           "Universität Trier";
-        datacite:identifier  "https://ror.org/02778hg05" .
+        datacite:identifier  "https://ror.org/02778hg05"^^xsd:anyURI .
 
 ror:0259fwx54  a             nfdicore:NFDI_0000003;
         rdfs:label           "ZB MED - Information Centre for Life Sciences";
-        datacite:identifier  "https://ror.org/0259fwx54" .
+        datacite:identifier  "https://ror.org/0259fwx54"^^xsd:anyURI .
 
 ror:01zjc6908  a             nfdicore:NFDI_0000003;
         rdfs:label           "European Molecular Biology Laboratory";
-        datacite:identifier  "https://ror.org/01zjc6908" .
+        datacite:identifier  "https://ror.org/01zjc6908"^^xsd:anyURI .
 
 ror:01y9bpm73  a             nfdicore:NFDI_0000003;
         rdfs:label           "University of Göttingen";
-        datacite:identifier  "https://ror.org/01y9bpm73" .
+        datacite:identifier  "https://ror.org/01y9bpm73"^^xsd:anyURI .
 
 ror:01k97gp34  a             nfdicore:NFDI_0000003;
         rdfs:label           "TU Dortmund University";
-        datacite:identifier  "https://ror.org/01k97gp34" .
+        datacite:identifier  "https://ror.org/01k97gp34"^^xsd:anyURI .
 
 ror:01k8bwd50  a             nfdicore:NFDI_0000003;
         rdfs:label           "NFDI4Immuno";
-        datacite:identifier  "https://ror.org/01k8bwd50" .
+        datacite:identifier  "https://ror.org/01k8bwd50"^^xsd:anyURI .
+
+ror:014nnvj65  a             nfdicore:NFDI_0000003;
+        rdfs:label           "TH Köln - University of Applied Sciences";
+        datacite:identifier  "https://ror.org/014nnvj65"^^xsd:anyURI .
 
 ror:00vn06n10  a             nfdicore:NFDI_0000003;
         rdfs:label           "Simula Research Laboratory";
-        datacite:identifier  "https://ror.org/00vn06n10" .
+        datacite:identifier  "https://ror.org/00vn06n10"^^xsd:anyURI .
 
 ror:00v34f693  a             nfdicore:NFDI_0000003;
         rdfs:label           "Quantitative Biology Center";
-        datacite:identifier  "https://ror.org/00v34f693" .
+        datacite:identifier  "https://ror.org/00v34f693"^^xsd:anyURI .
 
 ror:00ggpsq73  a             nfdicore:NFDI_0000003;
         rdfs:label           "Otto-von-Guericke University Magdeburg";
-        datacite:identifier  "https://ror.org/00ggpsq73" .
+        datacite:identifier  "https://ror.org/00ggpsq73"^^xsd:anyURI .
 
 ror:0030f2a11  a             nfdicore:NFDI_0000003;
         rdfs:label           "Universitätsklinikum Erlangen";
-        datacite:identifier  "https://ror.org/0030f2a11" .
+        datacite:identifier  "https://ror.org/0030f2a11"^^xsd:anyURI .
 
 orcid:0009-0009-8508-8585
         datacite:affiliation  ror:05nfk7108;
         datacite:familyName   "Brück";
         datacite:givenName    "Maike";
-        datacite:identifier   "0009-0009-8508-8585" .
+        datacite:identifier   "https://orcid.org/0009-0009-8508-8585"^^xsd:anyURI .
 
 orcid:0009-0005-1758-1790
         datacite:affiliation  ror:0546hnb39;
         datacite:familyName   "Mikautsch";
         datacite:givenName    "Emilia";
-        datacite:identifier   "0009-0005-1758-1790" .
+        datacite:identifier   "https://orcid.org/0009-0005-1758-1790"^^xsd:anyURI .
 
 orcid:0009-0004-5318-5966
         datacite:affiliation  ror:023b0x485;
         datacite:familyName   "Hülsmann";
         datacite:givenName    "Bastian";
-        datacite:identifier   "0009-0004-5318-5966" .
+        datacite:identifier   "https://orcid.org/0009-0004-5318-5966"^^xsd:anyURI .
 
 orcid:0009-0002-1414-3291
         datacite:affiliation  ror:0534re684;
         datacite:familyName   "Schwarz";
         datacite:givenName    "Michael";
-        datacite:identifier   "0009-0002-1414-3291" .
+        datacite:identifier   "https://orcid.org/0009-0002-1414-3291"^^xsd:anyURI .
 
 orcid:0000-0003-4813-5927
         datacite:affiliation  ror:00r0qs524;
         datacite:familyName   "Rey-Mazon";
         datacite:givenName    "Elena";
-        datacite:identifier   "0000-0003-4813-5927" .
+        datacite:identifier   "https://orcid.org/0000-0003-4813-5927"^^xsd:anyURI .
 
 orcid:0000-0003-4726-2481
         datacite:affiliation  ror:02778hg05;
+        datacite:affiliation  [ rdfs:label  "Servicecenter eSciences" ];
         datacite:familyName   "Lemaire";
         datacite:givenName    "Marina";
-        datacite:identifier   "0000-0003-4726-2481" .
+        datacite:identifier   "https://orcid.org/0000-0003-4726-2481"^^xsd:anyURI .
 
 orcid:0000-0003-4358-2269
         datacite:affiliation  ror:05d78xc36;
         datacite:familyName   "Keppler";
         datacite:givenName    "Antje";
-        datacite:identifier   "0000-0003-4358-2269" .
+        datacite:identifier   "https://orcid.org/0000-0003-4358-2269"^^xsd:anyURI .
 
 orcid:0000-0003-4328-7171
         datacite:affiliation  ror:01zwmgk08;
         datacite:familyName   "Bauer";
         datacite:givenName    "Pavol";
-        datacite:identifier   "0000-0003-4328-7171" .
+        datacite:identifier   "https://orcid.org/0000-0003-4328-7171"^^xsd:anyURI .
 
 orcid:0000-0003-4105-1990
         datacite:affiliation  ror:01zjc6908;
         datacite:familyName   "Tischer";
         datacite:givenName    "Christian";
-        datacite:identifier   "0000-0003-4105-1990" .
+        datacite:identifier   "https://orcid.org/0000-0003-4105-1990"^^xsd:anyURI .
 
 orcid:0000-0003-4043-165X
         datacite:affiliation  ror:00rcxh774;
+        datacite:affiliation  [ rdfs:label  "Data Center for the Humanities (DCH)" ];
         datacite:familyName   "Helling";
         datacite:givenName    "Patrick";
-        datacite:identifier   "0000-0003-4043-165X" .
+        datacite:identifier   "https://orcid.org/0000-0003-4043-165X"^^xsd:anyURI .
 
 orcid:0000-0003-4025-1712
         datacite:affiliation  ror:004hd5y14;
         datacite:familyName   "Vilardell Scholten";
         datacite:givenName    "Laura";
-        datacite:identifier   "0000-0003-4025-1712" .
+        datacite:identifier   "https://orcid.org/0000-0003-4025-1712"^^xsd:anyURI .
 
 orcid:0000-0003-3925-6778
         datacite:affiliation  [ rdfs:label  "Rheinland-Pfälzische Technische Universität Kaiserslautern-Landau, Germany" ];
         datacite:familyName   "Mühlhaus";
         datacite:givenName    "Timo";
-        datacite:identifier   "0000-0003-3925-6778" .
+        datacite:identifier   "https://orcid.org/0000-0003-3925-6778"^^xsd:anyURI .
 
 orcid:0000-0003-3763-0797
         datacite:affiliation  ror:000h6jb29;
         datacite:familyName   "Bernt";
         datacite:givenName    "Matthias";
-        datacite:identifier   "0000-0003-3763-0797" .
+        datacite:identifier   "https://orcid.org/0000-0003-3763-0797"^^xsd:anyURI .
 
 orcid:0000-0003-3667-187X
         datacite:affiliation  ror:038t36y30;
         datacite:familyName   "Lohmann";
         datacite:givenName    "Jan";
-        datacite:identifier   "0000-0003-3667-187X" .
+        datacite:identifier   "https://orcid.org/0000-0003-3667-187X"^^xsd:anyURI .
 
 orcid:0000-0003-3399-7532
         datacite:affiliation  ror:0546hnb39;
         datacite:familyName   "Heber";
         datacite:givenName    "Maximilian";
-        datacite:identifier   "0000-0003-3399-7532" .
+        datacite:identifier   "https://orcid.org/0000-0003-3399-7532"^^xsd:anyURI .
 
 orcid:0000-0003-3385-4232
         datacite:affiliation  ror:05wwzbv21;
         datacite:familyName   "Koepler";
         datacite:givenName    "Oliver";
-        datacite:identifier   "0000-0003-3385-4232" .
+        datacite:identifier   "https://orcid.org/0000-0003-3385-4232"^^xsd:anyURI .
 
 orcid:0000-0003-3001-1491
         datacite:affiliation  [ rdfs:label  "Combinatorial NeuroImaging Core Facility, Leibniz Institute for Neurobiology, Magdeburg, Germany" ];
         datacite:familyName   "Gottschall";
         datacite:givenName    "Tobias";
-        datacite:identifier   "0000-0003-3001-1491" .
+        datacite:identifier   "https://orcid.org/0000-0003-3001-1491"^^xsd:anyURI .
 
 orcid:0000-0003-2778-6624
         datacite:affiliation  ror:02se0t636;
         datacite:familyName   "Bocklitz";
         datacite:givenName    "Thomas";
-        datacite:identifier   "0000-0003-2778-6624" .
+        datacite:identifier   "https://orcid.org/0000-0003-2778-6624"^^xsd:anyURI .
 
 orcid:0000-0003-2547-933X
         datacite:affiliation  ror:0305k8y39;
         datacite:familyName   "Fürst";
         datacite:givenName    "Julia";
-        datacite:identifier   "0000-0003-2547-933X" .
+        datacite:identifier   "https://orcid.org/0000-0003-2547-933X"^^xsd:anyURI .
 
 orcid:0000-0003-2528-5391
         datacite:affiliation  ror:05qj6w324;
         datacite:familyName   "Wiljes";
         datacite:givenName    "Cord";
-        datacite:identifier   "0000-0003-2528-5391" .
+        datacite:identifier   "https://orcid.org/0000-0003-2528-5391"^^xsd:anyURI .
 
 orcid:0000-0003-2380-8830
         datacite:affiliation  [ rdfs:label           "Helmholtz Centre for Environmental Research GmbH - UFZ";
@@ -905,436 +942,436 @@ orcid:0000-0003-2380-8830
                               ];
         datacite:familyName   "Bernt";
         datacite:givenName    "Matthias";
-        datacite:identifier   "0000-0003-2380-8830" .
+        datacite:identifier   "https://orcid.org/0000-0003-2380-8830"^^xsd:anyURI .
 
 orcid:0000-0003-2370-3430
         datacite:affiliation  ror:03a4sp974;
         datacite:familyName   "McHardy";
         datacite:givenName    "Alice C.";
-        datacite:identifier   "0000-0003-2370-3430" .
+        datacite:identifier   "https://orcid.org/0000-0003-2370-3430"^^xsd:anyURI .
 
 orcid:0000-0003-2237-1147
         datacite:affiliation  ror:0546hnb39;
         datacite:familyName   "Müller";
         datacite:givenName    "Maximilian";
-        datacite:identifier   "0000-0003-2237-1147" .
+        datacite:identifier   "https://orcid.org/0000-0003-2237-1147"^^xsd:anyURI .
 
 orcid:0000-0003-1896-9031
         datacite:affiliation  ror:038t36y30;
         datacite:familyName   "Kuner";
         datacite:givenName    "Thomas";
-        datacite:identifier   "0000-0003-1896-9031" .
+        datacite:identifier   "https://orcid.org/0000-0003-1896-9031"^^xsd:anyURI .
 
 orcid:0000-0003-1379-7023
         datacite:affiliation  ror:0305k8y39;
         datacite:familyName   "Fluck";
         datacite:givenName    "Juliane";
-        datacite:identifier   "0000-0003-1379-7023" .
+        datacite:identifier   "https://orcid.org/0000-0003-1379-7023"^^xsd:anyURI .
 
 orcid:0000-0003-1334-6388
         datacite:affiliation  ror:03mstc592;
         datacite:familyName   "Kreshuk";
         datacite:givenName    "Anna";
-        datacite:identifier   "0000-0003-1334-6388" .
+        datacite:identifier   "https://orcid.org/0000-0003-1334-6388"^^xsd:anyURI .
 
 orcid:0000-0002-9723-9063
         datacite:affiliation  ror:055s37c97;
         datacite:familyName   "Svensson";
         datacite:givenName    "Carl-Magnus";
-        datacite:identifier   "0000-0002-9723-9063" .
+        datacite:identifier   "https://orcid.org/0000-0002-9723-9063"^^xsd:anyURI .
 
 orcid:0000-0002-9574-9553
         datacite:affiliation  ror:05d78xc36;
         datacite:familyName   "Pfander";
         datacite:givenName    "Claudia";
-        datacite:identifier   "0000-0002-9574-9553" .
+        datacite:identifier   "https://orcid.org/0000-0002-9574-9553"^^xsd:anyURI .
 
 orcid:0000-0002-9397-8475
         datacite:affiliation  ror:0245cg223;
         datacite:familyName   "Nitschke";
         datacite:givenName    "Roland";
-        datacite:identifier   "0000-0002-9397-8475" .
+        datacite:identifier   "https://orcid.org/0000-0002-9397-8475"^^xsd:anyURI .
 
 orcid:0000-0002-9134-5295
         datacite:affiliation  [ rdfs:label  "University of Münster" ];
         datacite:familyName   "Blank-Burian";
         datacite:givenName    "Markus";
-        datacite:identifier   "0000-0002-9134-5295" .
+        datacite:identifier   "https://orcid.org/0000-0002-9134-5295"^^xsd:anyURI .
 
 orcid:0000-0002-9071-2356
         datacite:affiliation  ror:038t36y30;
         datacite:familyName   "Baumann";
         datacite:givenName    "Martin";
-        datacite:identifier   "0000-0002-9071-2356" .
+        datacite:identifier   "https://orcid.org/0000-0002-9071-2356"^^xsd:anyURI .
 
 orcid:0000-0002-8818-7193
         datacite:affiliation  ror:05nfk7108;
         datacite:familyName   "Stegle";
         datacite:givenName    "Oliver";
-        datacite:identifier   "0000-0002-8818-7193" .
+        datacite:identifier   "https://orcid.org/0000-0002-8818-7193"^^xsd:anyURI .
 
 orcid:0000-0002-8516-8034
         datacite:affiliation  ror:0546hnb39;
         datacite:familyName   "Kralj";
         datacite:givenName    "Sonja";
-        datacite:identifier   "0000-0002-8516-8034" .
+        datacite:identifier   "https://orcid.org/0000-0002-8516-8034"^^xsd:anyURI .
 
 orcid:0000-0002-8500-1357
         datacite:affiliation  ror:02jhqqg57;
         datacite:familyName   "Chen";
         datacite:givenName    "Jianxu";
-        datacite:identifier   "0000-0002-8500-1357" .
+        datacite:identifier   "https://orcid.org/0000-0002-8500-1357"^^xsd:anyURI .
 
 orcid:0000-0002-8251-1597
-        datacite:affiliation  ror:0305k8y39;
+        datacite:affiliation  ror:0305k8y39 , ror:00r0qs524;
         datacite:familyName   "Lindstädt";
         datacite:givenName    "Birte";
-        datacite:identifier   "0000-0002-8251-1597" .
+        datacite:identifier   "https://orcid.org/0000-0002-8251-1597"^^xsd:anyURI .
 
 orcid:0000-0002-7390-8795
-        datacite:affiliation  ror:01k97gp34;
+        datacite:affiliation  ror:023b0x485 , ror:01k97gp34;
         datacite:familyName   "Czodrowski";
         datacite:givenName    "Paul";
-        datacite:identifier   "0000-0002-7390-8795" .
+        datacite:identifier   "https://orcid.org/0000-0002-7390-8795"^^xsd:anyURI .
 
 orcid:0000-0002-7018-0460
         datacite:affiliation  [ rdfs:label  "INP Greifswald" ];
         datacite:familyName   "Ahmadi";
         datacite:givenName    "Mohsen";
-        datacite:identifier   "0000-0002-7018-0460" .
+        datacite:identifier   "https://orcid.org/0000-0002-7018-0460"^^xsd:anyURI .
 
 orcid:0000-0002-6681-1530
         datacite:affiliation  ror:00pd74e08;
         datacite:familyName   "Vogl";
         datacite:givenName    "Raimund";
-        datacite:identifier   "0000-0002-6681-1530" .
+        datacite:identifier   "https://orcid.org/0000-0002-6681-1530"^^xsd:anyURI .
 
 orcid:0000-0002-6634-9729
         datacite:affiliation  [ rdfs:label  "Max-Delbrück-Centrum für Molekulare Medizin in der Helmholtz-Gemeinschaft" ];
         datacite:familyName   "Margineanu";
         datacite:givenName    "Anca";
-        datacite:identifier   "0000-0002-6634-9729" .
+        datacite:identifier   "https://orcid.org/0000-0002-6634-9729"^^xsd:anyURI .
 
 orcid:0000-0002-6586-7129
         datacite:affiliation  ror:04c4bwh63;
         datacite:familyName   "Jüngst";
         datacite:givenName    "Christian";
-        datacite:identifier   "0000-0002-6586-7129" .
+        datacite:identifier   "https://orcid.org/0000-0002-6586-7129"^^xsd:anyURI .
 
 orcid:0000-0002-6574-2588
         datacite:affiliation  ror:055s37c97;
         datacite:familyName   "Cseresnyes";
         datacite:givenName    "Zoltan";
-        datacite:identifier   "0000-0002-6574-2588" .
+        datacite:identifier   "https://orcid.org/0000-0002-6574-2588"^^xsd:anyURI .
 
 orcid:0000-0002-6209-2364
         datacite:affiliation  [ rdfs:label  "Technische Universität Dresden" ];
         datacite:familyName   "Schlierf";
         datacite:givenName    "Michael";
-        datacite:identifier   "0000-0002-6209-2364" .
+        datacite:identifier   "https://orcid.org/0000-0002-6209-2364"^^xsd:anyURI .
 
 orcid:0000-0002-6027-0796
         datacite:affiliation  ror:038t36y30;
         datacite:familyName   "Beretta";
         datacite:givenName    "Carlo";
-        datacite:identifier   "0000-0002-6027-0796" .
+        datacite:identifier   "https://orcid.org/0000-0002-6027-0796"^^xsd:anyURI .
 
 orcid:0000-0002-5884-4471
         datacite:affiliation  ror:04mz5ra38;
         datacite:familyName   "Rehwald";
         datacite:givenName    "Stephanie";
-        datacite:identifier   "0000-0002-5884-4471" .
+        datacite:identifier   "https://orcid.org/0000-0002-5884-4471"^^xsd:anyURI .
 
 orcid:0000-0002-5857-1477
         datacite:affiliation  ror:0245cg223;
         datacite:familyName   "Chiang Jurado";
         datacite:givenName    "Diana";
-        datacite:identifier   "0000-0002-5857-1477" .
+        datacite:identifier   "https://orcid.org/0000-0002-5857-1477"^^xsd:anyURI .
 
 orcid:0000-0002-5513-954X
         datacite:affiliation  ror:0546hnb39;
         datacite:familyName   "Habinger";
         datacite:givenName    "Sophie";
-        datacite:identifier   "0000-0002-5513-954X" .
+        datacite:identifier   "https://orcid.org/0000-0002-5513-954X"^^xsd:anyURI .
 
 orcid:0000-0002-5444-5246
         datacite:affiliation  [ rdfs:label  "BioCampus Montpellier" ];
         datacite:familyName   "Gay";
         datacite:givenName    "Guillaume";
-        datacite:identifier   "0000-0002-5444-5246" .
+        datacite:identifier   "https://orcid.org/0000-0002-5444-5246"^^xsd:anyURI .
 
 orcid:0000-0002-5192-126X
         datacite:affiliation  ror:0245cg223;
         datacite:familyName   "Videm";
         datacite:givenName    "Pavankumar";
-        datacite:identifier   "0000-0002-5192-126X" .
+        datacite:identifier   "https://orcid.org/0000-0002-5192-126X"^^xsd:anyURI .
 
 orcid:0000-0002-4894-1913
         datacite:affiliation  ror:03a4sp974;
         datacite:familyName   "Schober";
         datacite:givenName    "Isabel";
-        datacite:identifier   "0000-0002-4894-1913" .
+        datacite:identifier   "https://orcid.org/0000-0002-4894-1913"^^xsd:anyURI .
 
 orcid:0000-0002-4666-9610
         datacite:affiliation  [ rdfs:label  "Technische Universität Dresden" ];
         datacite:familyName   "Bertinetti";
         datacite:givenName    "Luca";
-        datacite:identifier   "0000-0002-4666-9610" .
+        datacite:identifier   "https://orcid.org/0000-0002-4666-9610"^^xsd:anyURI .
 
 orcid:0000-0002-4482-6010
         datacite:affiliation  [ rdfs:label  "Technische Universität Dresden" ];
         datacite:familyName   "Gentzel";
         datacite:givenName    "Marc";
-        datacite:identifier   "0000-0002-4482-6010" .
+        datacite:identifier   "https://orcid.org/0000-0002-4482-6010"^^xsd:anyURI .
 
 orcid:0000-0002-4392-8154
         datacite:affiliation  ror:00r0qs524;
         datacite:familyName   "Ewert";
         datacite:givenName    "Frank";
-        datacite:identifier   "0000-0002-4392-8154" .
+        datacite:identifier   "https://orcid.org/0000-0002-4392-8154"^^xsd:anyURI .
 
 orcid:0000-0002-4378-6061
         datacite:affiliation  ror:05wwzbv21;
         datacite:familyName   "Hunold";
         datacite:givenName    "Johannes";
-        datacite:identifier   "0000-0002-4378-6061" .
+        datacite:identifier   "https://orcid.org/0000-0002-4378-6061"^^xsd:anyURI .
 
 orcid:0000-0002-4375-0691
-        datacite:affiliation  ror:00v34f693;
+        datacite:affiliation  ror:03a1kwz48 , ror:00v34f693;
         datacite:familyName   "Nahnsen";
         datacite:givenName    "Sven";
-        datacite:identifier   "0000-0002-4375-0691" .
+        datacite:identifier   "https://orcid.org/0000-0002-4375-0691"^^xsd:anyURI .
 
 orcid:0000-0002-4232-4543
         datacite:affiliation  ror:004hd5y14;
         datacite:familyName   "Chaerony Siffa";
         datacite:givenName    "Ihda";
-        datacite:identifier   "0000-0002-4232-4543" .
+        datacite:identifier   "https://orcid.org/0000-0002-4232-4543"^^xsd:anyURI .
 
 orcid:0000-0002-4182-7560
         datacite:affiliation  [ rdfs:label  "Centre for Digital Scholarship  Leiden University Libraries, The Netherlands" ];
         datacite:familyName   "Hettne";
         datacite:givenName    "Kristina";
-        datacite:identifier   "0000-0002-4182-7560" .
+        datacite:identifier   "https://orcid.org/0000-0002-4182-7560"^^xsd:anyURI .
 
 orcid:0000-0002-3885-5253
         datacite:affiliation  ror:0546hnb39;
         datacite:familyName   "Becks";
         datacite:givenName    "Lutz";
-        datacite:identifier   "0000-0002-3885-5253" .
+        datacite:identifier   "https://orcid.org/0000-0002-3885-5253"^^xsd:anyURI .
 
 orcid:0000-0002-3439-1674
         datacite:affiliation  ror:05nfk7108;
         datacite:familyName   "Eufinger";
         datacite:givenName    "Jan";
-        datacite:identifier   "0000-0002-3439-1674" .
+        datacite:identifier   "https://orcid.org/0000-0002-3439-1674"^^xsd:anyURI .
 
 orcid:0000-0002-3333-9129
         datacite:affiliation  ror:038t36y30;
         datacite:familyName   "Kuner";
         datacite:givenName    "Rohini";
-        datacite:identifier   "0000-0002-3333-9129" .
+        datacite:identifier   "https://orcid.org/0000-0002-3333-9129"^^xsd:anyURI .
 
 orcid:0000-0002-3085-7457
         datacite:affiliation  ror:01f5dqg10;
         datacite:familyName   "Bernard";
         datacite:givenName    "Lars";
-        datacite:identifier   "0000-0002-3085-7457" .
+        datacite:identifier   "https://orcid.org/0000-0002-3085-7457"^^xsd:anyURI .
 
 orcid:0000-0002-2902-7165
         datacite:affiliation  ror:03av75f26;
         datacite:familyName   "Möbius";
         datacite:givenName    "Wiebke";
-        datacite:identifier   "0000-0002-2902-7165" .
+        datacite:identifier   "https://orcid.org/0000-0002-2902-7165"^^xsd:anyURI .
 
 orcid:0000-0002-2542-0867
         datacite:affiliation  ror:05wwzbv21;
         datacite:familyName   "Schröter";
         datacite:givenName    "Annett";
-        datacite:identifier   "0000-0002-2542-0867" .
+        datacite:identifier   "https://orcid.org/0000-0002-2542-0867"^^xsd:anyURI .
 
 orcid:0000-0002-2382-9722
-        datacite:affiliation  ror:03fqpzb44;
+        datacite:affiliation  ror:05qpz1x62 , ror:03fqpzb44;
         datacite:familyName   "König-Ries";
         datacite:givenName    "Birgitta";
-        datacite:identifier   "0000-0002-2382-9722" .
+        datacite:identifier   "https://orcid.org/0000-0002-2382-9722"^^xsd:anyURI .
 
 orcid:0000-0002-2217-7558
         datacite:affiliation  ror:038t36y30;
         datacite:familyName   "Heuveline";
         datacite:givenName    "Vincent";
-        datacite:identifier   "0000-0002-2217-7558" .
+        datacite:identifier   "https://orcid.org/0000-0002-2217-7558"^^xsd:anyURI .
 
 orcid:0000-0002-2198-5262
         datacite:familyName  "Schneider";
         datacite:givenName   "Kevin";
-        datacite:identifier  "0000-0002-2198-5262" .
+        datacite:identifier  "https://orcid.org/0000-0002-2198-5262"^^xsd:anyURI .
 
 orcid:0000-0002-2068-4695
         datacite:affiliation  ror:0245cg223;
         datacite:familyName   "Kumar";
         datacite:givenName    "Anup";
-        datacite:identifier   "0000-0002-2068-4695" .
+        datacite:identifier   "https://orcid.org/0000-0002-2068-4695"^^xsd:anyURI .
 
 orcid:0000-0002-1784-2920
         datacite:affiliation  ror:00vn06n10;
         datacite:familyName   "Fouilloux";
         datacite:givenName    "Anne";
-        datacite:identifier   "0000-0002-1784-2920" .
+        datacite:identifier   "https://orcid.org/0000-0002-1784-2920"^^xsd:anyURI .
 
 orcid:0000-0002-1355-5043
         datacite:affiliation  ror:0327sr118;
         datacite:familyName   "Herrenbrück";
         datacite:givenName    "Robert";
-        datacite:identifier   "0000-0002-1355-5043" .
+        datacite:identifier   "https://orcid.org/0000-0002-1355-5043"^^xsd:anyURI .
 
 orcid:0000-0002-0550-7463
         datacite:affiliation  [ rdfs:label  "CNRS Délégation Ile-de-France Sud" ];
         datacite:familyName   "Stringari";
         datacite:givenName    "Chiara";
-        datacite:identifier   "0000-0002-0550-7463" .
+        datacite:identifier   "https://orcid.org/0000-0002-0550-7463"^^xsd:anyURI .
 
 orcid:0000-0002-0347-7838
         datacite:affiliation  ror:01f5dqg10;
         datacite:familyName   "Getzlaff";
         datacite:givenName    "Klaus";
-        datacite:identifier   "0000-0002-0347-7838" .
+        datacite:identifier   "https://orcid.org/0000-0002-0347-7838"^^xsd:anyURI .
 
 orcid:0000-0002-0024-5046
-        datacite:affiliation  ror:01f5dqg10;
+        datacite:affiliation  ror:042aqky30 , ror:01f5dqg10;
         datacite:familyName   "Nüst";
         datacite:givenName    "Daniel";
-        datacite:identifier   "0000-0002-0024-5046" .
+        datacite:identifier   "https://orcid.org/0000-0002-0024-5046"^^xsd:anyURI .
 
 orcid:0000-0001-9993-533X
         datacite:affiliation  [ rdfs:label  "Deutsches Krebsforschungszentrum" ];
         datacite:familyName   "Parker";
         datacite:givenName    "Simon";
-        datacite:identifier   "0000-0001-9993-533X" .
+        datacite:identifier   "https://orcid.org/0000-0001-9993-533X"^^xsd:anyURI .
 
 orcid:0000-0001-9868-4671
         datacite:affiliation  [ rdfs:label  "Thomas" ];
         datacite:familyName   "Schnike";
-        datacite:identifier   "0000-0001-9868-4671" .
+        datacite:identifier   "https://orcid.org/0000-0001-9868-4671"^^xsd:anyURI .
 
 orcid:0000-0001-9773-4008
         datacite:affiliation  [ rdfs:label  "Micelio, Belgium" ];
         datacite:familyName   "Waagmeester";
         datacite:givenName    "Andra";
-        datacite:identifier   "0000-0001-9773-4008" .
+        datacite:identifier   "https://orcid.org/0000-0001-9773-4008"^^xsd:anyURI .
 
 orcid:0000-0001-9734-9767
         datacite:affiliation  ror:05d78xc36;
         datacite:familyName   "Mathur";
         datacite:givenName    "Aastha";
-        datacite:identifier   "0000-0001-9734-9767" .
+        datacite:identifier   "https://orcid.org/0000-0001-9734-9767"^^xsd:anyURI .
 
 orcid:0000-0001-9309-7531
         datacite:affiliation  ror:03s7gtk40;
         datacite:familyName   "Chalopin";
         datacite:givenName    "Claire";
-        datacite:identifier   "0000-0001-9309-7531" .
+        datacite:identifier   "https://orcid.org/0000-0001-9309-7531"^^xsd:anyURI .
 
 orcid:0000-0001-9274-2578
         datacite:affiliation  ror:0546hnb39;
         datacite:familyName   "Landwehr";
         datacite:givenName    "Matthias";
-        datacite:identifier   "0000-0001-9274-2578" .
+        datacite:identifier   "https://orcid.org/0000-0001-9274-2578"^^xsd:anyURI .
 
 orcid:0000-0001-9227-9798
         datacite:familyName  "Meireles";
         datacite:givenName   "Mariana";
-        datacite:identifier  "0000-0001-9227-9798" .
+        datacite:identifier  "https://orcid.org/0000-0001-9227-9798"^^xsd:anyURI .
 
 orcid:0000-0001-9021-3197
-        datacite:affiliation  ror:024z2rq82;
+        datacite:affiliation  ror:034waa237 , ror:024z2rq82;
         datacite:familyName   "Brilhaus";
         datacite:givenName    "Dominik";
-        datacite:identifier   "0000-0001-9021-3197" .
+        datacite:identifier   "https://orcid.org/0000-0001-9021-3197"^^xsd:anyURI .
 
 orcid:0000-0001-8736-8796
         datacite:affiliation  [ rdfs:label  "Bundesanstalt für Materialforschung und -prüfung" ];
         datacite:familyName   "Bekemeier";
         datacite:givenName    "Simon";
-        datacite:identifier   "0000-0001-8736-8796" .
+        datacite:identifier   "https://orcid.org/0000-0001-8736-8796"^^xsd:anyURI .
 
 orcid:0000-0001-8698-5389
         datacite:affiliation  ror:05mxhda18;
         datacite:familyName   "Höhne";
         datacite:givenName    "Martin";
-        datacite:identifier   "0000-0001-8698-5389" .
+        datacite:identifier   "https://orcid.org/0000-0001-8698-5389"^^xsd:anyURI .
 
 orcid:0000-0001-8528-9023
         datacite:affiliation  ror:03fqpzb44;
         datacite:familyName   "Glöckner";
         datacite:givenName    "Frank Oliver";
-        datacite:identifier   "0000-0001-8528-9023" .
+        datacite:identifier   "https://orcid.org/0000-0001-8528-9023"^^xsd:anyURI .
 
 orcid:0000-0001-7713-024X
         datacite:affiliation  ror:038t36y30;
         datacite:familyName   "Leibfried";
         datacite:givenName    "Andrea";
-        datacite:identifier   "0000-0001-7713-024X" .
+        datacite:identifier   "https://orcid.org/0000-0001-7713-024X"^^xsd:anyURI .
 
 orcid:0000-0001-7553-905X
         datacite:affiliation  ror:01k8bwd50;
         datacite:familyName   "Busse";
         datacite:givenName    "Christian";
-        datacite:identifier   "0000-0001-7553-905X" .
+        datacite:identifier   "https://orcid.org/0000-0001-7553-905X"^^xsd:anyURI .
 
 orcid:0000-0001-7292-8308
         datacite:affiliation  [ rdfs:label  "Münster Imaging Network, Cells in Motion Interfaculty Centre, University of Münster" ];
         datacite:familyName   "Weischer";
         datacite:givenName    "Sarah";
-        datacite:identifier   "0000-0001-7292-8308" .
+        datacite:identifier   "https://orcid.org/0000-0001-7292-8308"^^xsd:anyURI .
 
 orcid:0000-0001-7276-776X
         datacite:affiliation  ror:000h6jb29;
         datacite:familyName   "Dunker";
         datacite:givenName    "Susanne";
-        datacite:identifier   "0000-0001-7276-776X" .
+        datacite:identifier   "https://orcid.org/0000-0001-7276-776X"^^xsd:anyURI .
 
 orcid:0000-0001-7250-3756
         datacite:affiliation  ror:01y9bpm73;
         datacite:familyName   "Huisken";
         datacite:givenName    "Jan";
-        datacite:identifier   "0000-0001-7250-3756" .
+        datacite:identifier   "https://orcid.org/0000-0001-7250-3756"^^xsd:anyURI .
 
 orcid:0000-0001-6966-0814
         datacite:affiliation  ror:05wwzbv21;
         datacite:familyName   "Steinbeck";
         datacite:givenName    "Christoph";
-        datacite:identifier   "0000-0001-6966-0814" .
+        datacite:identifier   "https://orcid.org/0000-0001-6966-0814"^^xsd:anyURI .
 
 orcid:0000-0001-6919-3646
         datacite:affiliation  ror:05745n787;
         datacite:familyName   "Weimer";
         datacite:givenName    "Lukas";
-        datacite:identifier   "0000-0001-6919-3646" .
+        datacite:identifier   "https://orcid.org/0000-0001-6919-3646"^^xsd:anyURI .
 
 orcid:0000-0001-6107-567X
         datacite:affiliation  [ rdfs:label  "Center for Molecular Medicine Cologne, University of Cologne" ];
         datacite:familyName   "Moreau";
         datacite:givenName    "Noémie";
-        datacite:identifier   "0000-0001-6107-567X" .
+        datacite:identifier   "https://orcid.org/0000-0001-6107-567X"^^xsd:anyURI .
 
 orcid:0000-0001-5655-0130
         datacite:affiliation  [ rdfs:label  "SLUB Dresden" ];
         datacite:familyName   "Stellmacher";
         datacite:givenName    "Martha";
-        datacite:identifier   "0000-0001-5655-0130" .
+        datacite:identifier   "https://orcid.org/0000-0001-5655-0130"^^xsd:anyURI .
 
 orcid:0000-0001-5525-5973
         datacite:affiliation  ror:00ggpsq73;
         datacite:familyName   "Zinke";
         datacite:givenName    "Wolf";
-        datacite:identifier   "0000-0001-5525-5973" .
+        datacite:identifier   "https://orcid.org/0000-0001-5525-5973"^^xsd:anyURI .
 
 orcid:0000-0001-5246-9351
         datacite:affiliation  ror:0259fwx54;
         datacite:familyName   "Baum";
         datacite:givenName    "Roman";
-        datacite:identifier   "0000-0001-5246-9351" .
+        datacite:identifier   "https://orcid.org/0000-0001-5246-9351"^^xsd:anyURI .
 
 <https://doi.org/10.5281/zenodo.15268798>
         datacite:IsPartOf      <https://zenodo.org/communities/nfdi4bioimage/>;
@@ -1715,12 +1752,12 @@ orcid:0000-0001-5246-9351
         datacite:Updated       "2025-04-11"^^xsd:date;
         datacite:creator       orcid:0009-0009-8508-8585 , orcid:0009-0002-1826-7099 , orcid:0000-0003-4813-5927 , orcid:0000-0003-3385-4232 , orcid:0000-0003-2547-933X , orcid:0000-0003-2370-3430 , orcid:0000-0003-1717-3138 , orcid:0000-0003-1379-7023 , orcid:0000-0002-8818-7193 , orcid:0000-0002-8367-5163 , orcid:0000-0002-8251-1597 , orcid:0000-0002-5546-5521 , orcid:0000-0002-4894-1913 , orcid:0000-0002-4526-2472 , orcid:0000-0002-4392-8154 , orcid:0000-0002-4382-5104 , orcid:0000-0002-4378-6061 , orcid:0000-0002-3439-1674 , orcid:0000-0002-3085-7457 , orcid:0000-0002-2542-0867 , orcid:0000-0002-1481-2996 , orcid:0000-0002-0347-7838 , orcid:0000-0001-8665-6382 , orcid:0000-0001-8528-9023 , orcid:0000-0001-7734-3771 , orcid:0000-0001-7553-905X , orcid:0000-0001-6966-0814;
         datacite:creator       [ datacite:affiliation  ror:01v7r4v08;
-                                 datacite:familyName   "Gauza";
-                                 datacite:givenName    "Holger"
-                               ];
-        datacite:creator       [ datacite:affiliation  ror:01v7r4v08;
                                  datacite:familyName   "Steinhart";
                                  datacite:givenName    "Feray"
+                               ];
+        datacite:creator       [ datacite:affiliation  ror:01v7r4v08;
+                                 datacite:familyName   "Gauza";
+                                 datacite:givenName    "Holger"
                                ];
         datacite:description   "In a Memorandum of Understanding, the undersigned consortia agree to work together to enhance their support capabilities (helpdesks) to meet the needs of interdisciplinary research in Earth-, Chemical and Life Sciences.";
         datacite:resourceType  "None";
@@ -1913,15 +1950,15 @@ orcid:0000-0001-5246-9351
         datacite:creator       [ datacite:familyName  "Bohring";
                                  datacite:givenName   "Hannes"
                                ];
-        datacite:creator       [ datacite:familyName  "Nyffeler";
-                                 datacite:givenName   "Jo"
+        datacite:creator       [ datacite:affiliation  ror:000h6jb29;
+                                 datacite:familyName   "Berndt";
+                                 datacite:givenName    "Matthias"
                                ];
         datacite:creator       [ datacite:familyName  "Reger";
                                  datacite:givenName   "Luise"
                                ];
-        datacite:creator       [ datacite:affiliation  ror:000h6jb29;
-                                 datacite:familyName   "Berndt";
-                                 datacite:givenName    "Matthias"
+        datacite:creator       [ datacite:familyName  "Nyffeler";
+                                 datacite:givenName   "Jo"
                                ];
         datacite:description   "Imaging is crucial across various scientific disciplines, particularly in life sciences, where it plays a key role in studies ranging from single molecules to whole organisms. However, the complexity and sheer volume of image data, especially from high-content screening (HCS) experiments involving cell lines or other organisms, present significant challenges. Managing and analysing this data efficiently requires well-defined image processing tools and analysis pipelines that align with the FAIR principles—ensuring they are findable, accessible, interoperable, and reusable across different domains.\n\nIn the frame of NFDI4BioImaging (the National Research Data Infrastructure focusing on bioimaging in Germany), we want to find viable solutions for storing, processing, analysing, and sharing HCS data. In particular, we want to develop solutions to make findable and machine-readable metadata using (semi)automatic analysis pipelines. In scientific research, such pipelines are crucial for maintaining data integrity, supporting reproducibility, and enabling interdisciplinary collaboration. These tools can be used by different users to retrieve images based on specific attributes as well as support quality control by identifying appropriate metadata.\n\nGalaxy, an open-source, web-based platform for data-intensive research, offers a solution by enabling the construction of reproducible pipelines for image analysis. By integrating popular analysis software like CellProfiler and connecting with cloud services such as OMERO and IDR, Galaxy facilitates the seamless access and management of image data. This capability is particularly valuable in bioimaging, where automated pipelines can streamline the handling of complex metadata, ensuring data integrity and fostering interdisciplinary collaboration. This approach not only increases the efficiency of HCS bioimaging but also contributes to the broader scientific community's efforts to embrace FAIR principles, ultimately advancing scientific discovery and innovation.\n\nIn the present study, we proposed an automated analysis pipeline for storing, processing, analysing, and sharing HCS bioimaging data. The (semi)automatic workflow was developed by taking as a case study a dataset of zebrafish larvae and cell lines images previously obtained from an automated imaging system generating data in an HCS fashion. In our workflows, images are automatically enriched with metadata (i.e. key-value pairs, tags, raw data, regions of interest) and uploaded to the UFZ-OME Remote Objects (OMERO) server using a novel OMERO tool suite developed with GALAXY. Workflows give the possibility to the user to intuitively fetch images from the local server and perform image analysis (i.e. annotation) or even more complex toxicological analyses (dose response modelling). Furthermore, we want to improve the FAIRness of the protocol by adding a direct upload link to the Image Data Resource (IDR) repository to automatically prepare the data for publication and sharing.";
         datacite:resourceType  "Presentation";
@@ -2090,21 +2127,21 @@ orcid:0000-0001-5246-9351
         datacite:IsVersionOf   <https://doi.org/10.5281/zenodo.14186100>;
         datacite:Issued        "2024-11-29"^^xsd:date;
         datacite:Updated       "2024-12-12"^^xsd:date;
+        datacite:contributor   [ datacite:affiliation  ror:04cdgtt98;
+                                 datacite:familyName   "Schmidt";
+                                 datacite:givenName    "Christian"
+                               ];
         datacite:contributor   [ datacite:affiliation  ror:024z2rq82;
                                  datacite:familyName   "Kubitz";
                                  datacite:givenName    "Mira"
                                ];
-        datacite:contributor   [ datacite:affiliation  ror:024z2rq82;
-                                 datacite:familyName   "Krooß";
-                                 datacite:givenName    "Ksenia"
-                               ];
-        datacite:contributor   [] ;
         datacite:contributor   [ datacite:familyName  "Falk";
                                  datacite:givenName   "Henning"
                                ];
-        datacite:contributor   [ datacite:affiliation  ror:04cdgtt98;
-                                 datacite:familyName   "Schmidt";
-                                 datacite:givenName    "Christian"
+        datacite:contributor   [] ;
+        datacite:contributor   [ datacite:affiliation  ror:024z2rq82;
+                                 datacite:familyName   "Krooß";
+                                 datacite:givenName    "Ksenia"
                                ];
         datacite:creator       [] ;
         datacite:description   "These illustrations were contracted by the Heinrich Heine University Düsseldorf in the frame of the consortium NFDI4BIOIMAGE from Henning Falk for the purpose of education and public outreach. The illustrations are free to use under a CC-BY 4.0 license.AttributionPlease include an attribution similar to: \"Data annoation matters\", NFDI4BIOIMAGE Consortium (2024): NFDI4BIOIMAGE data management illustrations by Henning Falk, Zenodo, https://doi.org/10.5281/zenodo.14186100, is used under a CC-BY 4.0 license. Modifications to this illustration include cropping.\n\n ";
@@ -2140,18 +2177,18 @@ orcid:0000-0001-5246-9351
                                  datacite:givenName   "Leonid"
                                ];
         datacite:creator       orcid:0000-0002-1964-4960 , orcid:0000-0002-5497-6266 , orcid:0000-0002-5862-6132 , orcid:0000-0002-6990-4716 , orcid:0000-0003-2104-9519 , orcid:0000-0003-3780-8663;
+        datacite:creator       [ datacite:familyName  "Bohring";
+                                 datacite:givenName   "Hannes"
+                               ];
         datacite:creator       [ datacite:familyName  "Reger";
                                  datacite:givenName   "Luise"
-                               ];
-        datacite:creator       [ datacite:familyName  "Nyffeler";
-                                 datacite:givenName   "Jo"
                                ];
         datacite:creator       [ datacite:affiliation  ror:000h6jb29;
                                  datacite:familyName   "Berndt";
                                  datacite:givenName    "Matthias"
                                ];
-        datacite:creator       [ datacite:familyName  "Bohring";
-                                 datacite:givenName   "Hannes"
+        datacite:creator       [ datacite:familyName  "Nyffeler";
+                                 datacite:givenName   "Jo"
                                ];
         datacite:description   "Imaging is crucial across various scientific disciplines, particularly in life sciences, where it plays a key role in studies ranging from single molecules to whole organisms. However, the complexity and sheer volume of image data, especially from high-content screening (HCS) experiments involving cell lines or other organisms, present significant challenges. Managing and analysing this data efficiently requires well-defined image processing tools and analysis pipelines that align with the FAIR principles—ensuring they are findable, accessible, interoperable, and reusable across different domains.\n\nIn the frame of NFDI4BioImaging (the National Research Data Infrastructure focusing on bioimaging in Germany), we want to find viable solutions for storing, processing, analysing, and sharing HCS data. In particular, we want to develop solutions to make findable and machine-readable metadata using (semi)automatic analysis pipelines. In scientific research, such pipelines are crucial for maintaining data integrity, supporting reproducibility, and enabling interdisciplinary collaboration. These tools can be used by different users to retrieve images based on specific attributes as well as support quality control by identifying appropriate metadata.\n\nGalaxy, an open-source, web-based platform for data-intensive research, offers a solution by enabling the construction of reproducible pipelines for image analysis. By integrating popular analysis software like CellProfiler and connecting with cloud services such as OMERO and IDR, Galaxy facilitates the seamless access and management of image data. This capability is particularly valuable in bioimaging, where automated pipelines can streamline the handling of complex metadata, ensuring data integrity and fostering interdisciplinary collaboration. This approach not only increases the efficiency of HCS bioimaging but also contributes to the broader scientific community's efforts to embrace FAIR principles, ultimately advancing scientific discovery and innovation.\n\nIn the present study, we proposed an automated analysis pipeline for storing, processing, analysing, and sharing HCS bioimaging data. The (semi)automatic workflow was developed by taking as a case study a dataset of zebrafish larvae and cell lines images previously obtained from an automated imaging system generating data in an HCS fashion. In our workflows, images are automatically enriched with metadata (i.e. key-value pairs, tags, raw data, regions of interest) and uploaded to the UFZ-OME Remote Objects (OMERO) server using a novel OMERO tool suite developed with GALAXY. Workflows give the possibility to the user to intuitively fetch images from the local server and perform image analysis (i.e. annotation) or even more complex toxicological analyses (dose response modelling). Furthermore, we want to improve the FAIRness of the protocol by adding a direct upload link to the Image Data Resource (IDR) repository to automatically prepare the data for publication and sharing.";
         datacite:resourceType  "Presentation";
@@ -2168,12 +2205,12 @@ orcid:0000-0001-5246-9351
                                  datacite:givenName   "Leonid"
                                ];
         datacite:creator       orcid:0000-0002-5497-6266 , orcid:0000-0002-5862-6132 , orcid:0000-0002-6990-4716 , orcid:0000-0003-2104-9519 , orcid:0000-0003-3780-8663;
-        datacite:creator       [ datacite:familyName  "Bohring";
-                                 datacite:givenName   "Hannes"
-                               ];
         datacite:creator       [ datacite:affiliation  ror:000h6jb29;
                                  datacite:familyName   "Berndt";
                                  datacite:givenName    "Matthias"
+                               ];
+        datacite:creator       [ datacite:familyName  "Bohring";
+                                 datacite:givenName   "Hannes"
                                ];
         datacite:creator       [ datacite:familyName  "Reger";
                                  datacite:givenName   "Luise"
@@ -2220,13 +2257,13 @@ orcid:0000-0001-5246-9351
                                  datacite:givenName    "Lena"
                                ];
         datacite:creator       orcid:0000-0001-9568-895X , orcid:0000-0001-7734-3771 , orcid:0000-0001-6523-7496;
-        datacite:creator       [ datacite:affiliation  ror:024z2rq82;
-                                 datacite:familyName   "Boissonnet";
-                                 datacite:givenName    "Tom"
-                               ];
         datacite:creator       [ datacite:affiliation  ror:04xx1tc24;
                                  datacite:familyName   "Hagen";
                                  datacite:givenName    "Bettina"
+                               ];
+        datacite:creator       [ datacite:affiliation  ror:024z2rq82;
+                                 datacite:familyName   "Boissonnet";
+                                 datacite:givenName    "Tom"
                                ];
         datacite:description   "Fit for OMERO: How imaging facilities and IT departments work together to enable RDM for bioimaging\n\nDescription:\n\nResearch data management (RDM) in bioimaging is challenging because of large file sizes, heterogeneous file formats and the variability of imaging methods. The image data management system OMERO (OME Remote Objects) allows for centralized and secure storage, organization, annotation, and interrogation of microscopy data by researchers. It is an internationally well-supported open-source software tool that has become one of the best-known image data management tools among bioimaging scientists. Nevertheless, the de novo setup of OMERO at an institute is a multi-stakeholder process that demands time, funds, organization and iterative implementation. In this workshop, participants learn how to begin setting up OMERO-based image data management at their institution. The topics include:\n\n\n\nStakeholder identification at the university / research institute\n\nProcess management, time line expectations, and resources planning\n\nLearning about each other‘s perspectives on chances and challenges for RDM\n\nFunding opportunities and strategies for IT and imaging core facilities\n\nHands-on: Setting up an OMERO server in a virtual machine environment\n\n\nTarget audience:\n\nThis workshop was directed at universities and research institutions who consider or plan to implement OMERO, or are in an early phase of implementation. This workshop was intended for teams from IT departments and imaging facilities to participate together with one person from the IT department, and one person from the imaging core facility at the same institution.\n\nThe trainers:\n\n\n\nProf. Dr. Stefanie Weidtkamp-Peters (Imaging Core Facility Head, Center for Advanced Imaging, Heinrich Heine University of Düsseldorf)\n\nDr. Susanne Kunis (Software architect, OMERO administrator, metadata specialist, University of Osnabrück)\n\nDr. Tom Boissonnet (OMERO admin and image metadata specialist, Center for Advanced Imaging, Heinrich Heine University of Düsseldorf)\n\nDr. Bettina Hagen (IT Administration and service specialist, Max Planck Institute for the Biology of Ageing, Cologne) \n\nDr. Christian Schmidt (Science Manager for Research Data Management in Bioimaging, German Cancer Research Center (DKFZ), Heidelberg)\n\n\nTime and place\n\nThe format was a two-day, in-person workshop (October 16-17, 2024). Location: Heidelberg, Germany\n\nWorkshop learning goals\n\n\n\nLearn the steps to establish a local RDM environment fit for bioimaging data\n\nCreate a network of IT experts and bioimaging specialists for bioimage RDM across institutions\n\nEstablish a stakeholder process management for installing OMERO-based RDM\n\nLearn from each other, leverage different expertise\n\nLearn how to train users, establish sustainability strategies, and foster FAIR RDM for bioimaging at your institution";
         datacite:resourceType  "Presentation";
@@ -2890,13 +2927,13 @@ orcid:0000-0001-5246-9351
         datacite:Issued          "2024-02-02"^^xsd:date;
         datacite:Updated         "2024-02-05"^^xsd:date;
         datacite:creator         orcid:0009-0007-5101-4786 , orcid:0009-0002-1826-7099 , orcid:0000-0003-4028-811X , orcid:0000-0003-3430-2683 , orcid:0000-0003-3099-618X , orcid:0000-0003-2778-7483 , orcid:0000-0003-1945-6342 , orcid:0000-0002-7452-1146 , orcid:0000-0001-5805-5774 , orcid:0000-0002-0829-5101 , orcid:0000-0002-3328-9467 , orcid:0000-0002-3879-7057 , orcid:0000-0002-4101-6987 , orcid:0000-0002-5467-871X , orcid:0000-0002-6658-2192 , orcid:0000-0002-6999-132X;
-        datacite:creator         [ datacite:affiliation  [ rdfs:label  "Regional Computing Centre (RRZK/ITCC), University of Cologne, Cologne, Germany" ];
-                                   datacite:familyName   "Hoevels";
-                                   datacite:givenName    "Moritz"
-                                 ];
         datacite:creator         [ datacite:affiliation  [ rdfs:label  "Leibniz Institute for Neurobiology (LIN), Magdeburg, Germany" ];
                                    datacite:familyName   "Stöter";
                                    datacite:givenName    "Torsten"
+                                 ];
+        datacite:creator         [ datacite:affiliation  [ rdfs:label  "Regional Computing Centre (RRZK/ITCC), University of Cologne, Cologne, Germany" ];
+                                   datacite:familyName   "Hoevels";
+                                   datacite:givenName    "Moritz"
                                  ];
         datacite:description     "This is the repository for documentation during the first NFDI4Bioimage - TA3-Hackathon - UoC-2023 (in short: Cologne Hackathon). Potential topics were identified in a preparatory meeting and covered with introductory talks. In a joint discussion and workflow as well as roadmap session, graphical workflows were created and tasks were defined. Eventually intensive work on the topics 'Interoperability', 'REMBI / Mapping', 'Neuroglancer (OMERO / zarr)' was conducted in groups and final reports summarized the outcome of this initial hackathon which also bridged from NFDI4Bioimage to DataPLANT on the topic of OMERO-ARC interoperability. From the beginning, there was a focus on documentation and on including use cases. The interoperability and REMBI topic served as preparatory work for a project at the 2nd de.NBI BioHackathon in Bielefeld: 'Towards OMERO and ARC interoperability for RDM-compliant bio-image data'. For the OMERO-ARC topic, we are thankful for the collaboration with DataPLANT (funded by the German Research Foundation (DFG) within the framework of the NFDI - project number: 442077441). We thank Heinrich Lukas Weil (DataPLANT) for participating and contributing as a guest, also providing the introductory talk on ARC. Furthermore, we acknowledge the contribution of Timo Mühlhaus in discussions during planning for the OMERO-ARC project and of Kevin Schneider in preparatory meetings on the OMERO-ARC project (both: DataPLANT). Funding allowing this event including enabling for organization, participation and finalizing this repository including the Zenodo submission: NFDI4Bioimage, funded by the German Research Foundation (DFG) within the framework of the NFDI-project number: 501864659; CEPLAS, Cluster of Excellence on Plant Sciences, funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Germany's Excellence Strategy, EXC-2048/1'; CECAD, Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases, funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Germany's Excellence Strategy - EXC 2030 - 390661388; CRC TRR341, Funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - Project-ID 456082119.";
         datacite:resourceType    "None";
@@ -2911,13 +2948,13 @@ orcid:0000-0001-5246-9351
         datacite:Issued          "2024-02-02"^^xsd:date;
         datacite:Updated         "2024-02-02"^^xsd:date;
         datacite:creator         orcid:0009-0007-5101-4786 , orcid:0009-0002-1826-7099 , orcid:0000-0003-4028-811X , orcid:0000-0003-3430-2683 , orcid:0000-0003-3099-618X , orcid:0000-0003-2778-7483 , orcid:0000-0003-1945-6342 , orcid:0000-0002-7452-1146 , orcid:0000-0001-5805-5774 , orcid:0000-0002-0829-5101 , orcid:0000-0002-3328-9467 , orcid:0000-0002-3879-7057 , orcid:0000-0002-4101-6987 , orcid:0000-0002-5467-871X , orcid:0000-0002-6658-2192 , orcid:0000-0002-6999-132X;
-        datacite:creator         [ datacite:affiliation  [ rdfs:label  "Regional Computing Centre (RRZK/ITCC), University of Cologne, Cologne, Germany" ];
-                                   datacite:familyName   "Hoevels";
-                                   datacite:givenName    "Moritz"
-                                 ];
         datacite:creator         [ datacite:affiliation  [ rdfs:label  "Leibniz Institute for Neurobiology (LIN), Magdeburg, Germany" ];
                                    datacite:familyName   "Stöter";
                                    datacite:givenName    "Torsten"
+                                 ];
+        datacite:creator         [ datacite:affiliation  [ rdfs:label  "Regional Computing Centre (RRZK/ITCC), University of Cologne, Cologne, Germany" ];
+                                   datacite:familyName   "Hoevels";
+                                   datacite:givenName    "Moritz"
                                  ];
         datacite:description     "This is the repository for documentation during the first NFDI4Bioimage - TA3-Hackathon - UoC-2023 (in short: Cologne Hackathon). Potential topics were identified in a preparatory meeting and covered with introductory talks. In a joint discussion and workflow as well as roadmap session, graphical workflows were created and tasks were defined. Eventually intensive work on the topics 'Interoperability', 'REMBI / Mapping', 'Neuroglancer (OMERO / zarr)' was conducted in groups and final reports summarized the outcome of this initial hackathon which also bridged from NFDI4Bioimage to DataPLANT on the topic of OMERO-ARC interoperability. From the beginning, there was a focus on documentation and on including use cases. The interoperability and REMBI topic served as preparatory work for a project at the 2nd de.NBI BioHackathon in Bielefeld: 'Towards OMERO and ARC interoperability for RDM-compliant bio-image data'. For the OMERO-ARC topic, we are thankful for the collaboration with DataPLANT (funded by the German Research Foundation (DFG) within the framework of the NFDI - project number: 442077441). We thank Heinrich Lukas Weil (DataPLANT) for participating and contributing as a guest, also providing the introductory talk on ARC. Furthermore, we acknowledge the contribution of Timo Mühlhaus in discussions during planning for the OMERO-ARC project and of Kevin Schneider in preparatory meetings on the OMERO-ARC project (both: DataPLANT). Funding allowing this event including enabling for organization, participation and finalizing this repository including the Zenodo submission: NFDI4Bioimage, funded by the German Research Foundation (DFG) within the framework of the NFDI-project number: 501864659; CEPLAS, Cluster of Excellence on Plant Sciences, funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Germany's Excellence Strategy, EXC-2048/1'; CECAD, Cologne Excellence Cluster on Cellular Stress Responses in Aging-Associated Diseases, funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) under Germany's Excellence Strategy - EXC 2030 - 390661388; CRC TRR341, Funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - Project-ID 456082119.";
         datacite:resourceType    "None";

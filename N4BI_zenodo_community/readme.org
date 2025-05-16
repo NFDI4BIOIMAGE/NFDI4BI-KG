@@ -6,7 +6,20 @@
 :PROPERTIES:
 :ID:       71e7d956-3288-4586-acaf-c8eb072ac48f
 :END:
-** Run on nfdi4bioimage community
+** Get one record based on DOI
+:PROPERTIES:
+:ID:       8ded542a-1c03-4158-8b21-9a905cf5b507
+:END:
+#+begin_src python :session rdf :results output :async yes
+  from oaipmh_scythe import Scythe
+  from bs4 import BeautifulSoup
+  from rdflib import Graph, Namespace, URIRef, Literal, FOAF, DC
+
+  with Scythe("https://zenodo.org/oai2d") as scythe:
+    record = scythe. list_records(set_='user-nfdi4bioimage', metadata_prefix='oai_datacite')
+#+end_src
+
+** Testrun on nfdi4bioimage community
 :PROPERTIES:
 :ID:       9ae10ebb-ddf2-42c0-9b28-35655ef08457
 :END:
@@ -39,7 +52,7 @@ title ['RDF as a bridge to domain-platforms like OMERO, or There and back again.
 type ['info:eu-repo/semantics/conferencePoster']
 <Element {http://www.openarchives.org/OAI/2.0/}record at 0x7f5d52b86580>
 #+end_example
-** Generate RDF from NFDI4BIOIMAGE's zenodo community
+** Obsolete: Generate RDF from NFDI4BIOIMAGE's zenodo community
 :PROPERTIES:
 :ID:       7719c86c-b08a-4642-9cd1-f78942e5c44f
 :END:
@@ -142,15 +155,15 @@ type ['info:eu-repo/semantics/conferencePoster']
 :ID:       71f8edf7-1675-4504-83e7-116fbfde65dd
 :END:
 #+begin_src python :session rdf :results output :async yes
+  from oaipmh_scythe import Scythe
   from bs4 import BeautifulSoup
   from rdflib import Graph, Namespace, URIRef, Literal, FOAF, DC
-
   def parse_person(graph, person):
 
       orcid = person.find('nameIdentifier', attrs={'nameIdentifierScheme':'ORCID'})
       if orcid is not None:
           person_uri = ORCID[orcid.string]
-          graph.add((person_uri, DCITE.identifier, Literal(orcid.string)))
+          graph.add((person_uri, DCITE.identifier, Literal(person_uri, datatype=XSD.anyURI)))
       else:
           person_uri = BNode()
 
@@ -162,8 +175,8 @@ type ['info:eu-repo/semantics/conferencePoster']
       if family_name is not None:
           graph.add((person_uri, DCITE.familyName, Literal(family_name.string)))
 
-      affiliation = person.find('affiliation')
-      if affiliation is not None:
+      affiliations = person.find_all('affiliation')
+      for affiliation in affiliations:
           graph, affiliation_ref = parse_institution(graph, affiliation)
           graph.add((person_uri, DCITE.affiliation, affiliation_ref))
 
@@ -189,7 +202,7 @@ type ['info:eu-repo/semantics/conferencePoster']
           ror_uri = URIRef(identifier)
           graph.add((ror_uri, RDF.type, NFDI.NFDI_0000003))
           graph.add((ror_uri, RDFS.label, Literal(institution.string)))
-          graph.add((ror_uri, DCITE.identifier, Literal(identifier)))
+          graph.add((ror_uri, DCITE.identifier, Literal(identifier, datatype=XSD.anyURI)))
 
           return graph, ror_uri
 
@@ -307,7 +320,7 @@ type ['info:eu-repo/semantics/conferencePoster']
 #+end_src
 
 #+RESULTS:
-: 3419
+: 3480
 
 
 ** Convert datacite xsd schema to owl ontology
@@ -447,117 +460,3 @@ type ['info:eu-repo/semantics/conferencePoster']
 -------------------------------------
 #+end_example
 
-* Queries against NFDI4BI-KG
-:PROPERTIES:
-:ID:       88e593e5-defe-4211-ab3d-c407739d75f7
-:END:
-
-** spo
-:PROPERTIES:
-:ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
-:END:
-#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
-  PREFIX owl: <http://www.w3.org/2002/07/owl#>
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
-  select ?s ?p ?plabel ?o ?olabel where 
-  {
-    ?s ?p ?o
-    optional {
-      ?p rdfs:label ?plabel.
-    }
-    optional {
-      ?o rdfs:label ?olabel .
-    }
-  }
-  limit 10
-#+end_src
-
-#+RESULTS:
-| s                                            | p                                                                     | plabel  | o                                                | olabel |
-|----------------------------------------------+-----------------------------------------------------------------------+---------+--------------------------------------------------+--------|
-| https://zenodo.org/communities/nfdi4bioimage | http://purl.org/dc/elements/1.1/identifier                            |         | nfdi4bioimage                                    |        |
-| https://zenodo.org/communities/nfdi4bioimage | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008                   | has url | https://zenodo.org/communities/nfdi4bioimage     |        |
-| http://purl.org/dc/elements/1.1/identifier   | http://www.w3.org/1999/02/22-rdf-syntax-ns#type                       |         | http://www.w3.org/2002/07/owl#AnnotationProperty |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#IsPartOf     |         | https://zenodo.org/communities/nfdi4bioimage/    |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#Issued       |         | 2019-12-20                                       |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#Updated      |         | 2023-02-02                                       |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#creator      |         | https://orcid.org/0000-0002-8367-5163            |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#resourceType |         | None                                             |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#right        |         | Creative Commons Attribution 4.0 International   |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#subject      |         | FLIM, sdt, image analysis                        |        |
-
-** Creators and contributors for a record
-:PROPERTIES:
-:ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
-:END:
-#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
-  PREFIX owl: <http://www.w3.org/2002/07/owl#>
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
-  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
-  select *
-  where
-  {
-    <https://doi.org/10.5281/zenodo.14013026> dcite:contributor ?contributor ;
-                                              dcite:creator ?creator .
-    ?creator dcite:affiliation ?affilation .
-    ?affiliation rdfs:label ?affiliation_name .
-  }
-  limit 10
-#+end_src
-
-#+RESULTS:
-| contributor | creator                               | affilation                | affiliation               | affiliation_name                       |
-|-------------+---------------------------------------+---------------------------+---------------------------+----------------------------------------|
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/01v7r4v08 | DataPLANT                              |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b1                        | Riccardo                               |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/01vnkaz16 | NFDI4BIOIMAGE                          |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b2                        | NFDI4BIOIMAGE                          |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/05qj6w324 | Nationale Forschungsdateninfrastruktur |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b3                        | Jan                                    |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b4                        | Stefan                                 |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b5                        | Thomas                                 |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b6                        | Wibke                                  |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b7                        | Hannes                                 |
-** Count number of creators and contributors per record.
-:PROPERTIES:
-:ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
-:END:
-#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
-  PREFIX owl: <http://www.w3.org/2002/07/owl#>
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
-  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
-  select ?record (count(distinct ?creator) as ?ncreators) (count(distinct ?contributor) as ?ncontributor)
-  where
-  {
-    ?record dcite:contributor ?contributor ;
-            dcite:creator ?creator .
-  }
-  group by ?record
-#+end_src
-
-#+RESULTS:
-| record                                     | ncreators | ncontributor |
-|--------------------------------------------+-----------+--------------|
-| https://doi.org/10.5281/zenodo.11502721    |         1 |            9 |
-| https://doi.org/10.5281/zenodo.5101158     |         1 |            1 |
-| https://doi.org/10.5281/zenodo.15308773    |         1 |            2 |
-| https://doi.org/10.5281/zenodo.14937632    |         1 |            1 |
-| https://doi.org/10.5281/zenodo.11031747    |         1 |            1 |
-| https://doi.org/10.1038/s41598-019-56067-w |         1 |            1 |
-| https://doi.org/10.5281/zenodo.14178789    |         5 |            1 |
-| https://doi.org/10.5281/zenodo.14951142    |         1 |            3 |
-| https://doi.org/10.5281/zenodo.14044640    |        10 |            1 |
-| https://doi.org/10.5281/zenodo.11350689    |         3 |            2 |
-| https://doi.org/10.5281/zenodo.15225616    |         1 |            3 |
-| https://doi.org/10.5281/zenodo.14044380    |         9 |            1 |
-| https://doi.org/10.5281/zenodo.11109616    |         3 |            1 |
-| https://doi.org/10.5281/zenodo.14909526    |        10 |            1 |
-| https://doi.org/10.5281/zenodo.15373555    |         3 |            2 |
-| https://doi.org/10.5281/zenodo.14186101    |         1 |            5 |
-| https://doi.org/10.5281/zenodo.14013026    |         5 |            1 |

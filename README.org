@@ -247,3 +247,118 @@ The default graph will contain the URIs of all named graphs, not more.
 :ID:       c4a29000-c714-4874-bbe1-f9b7701c9474
 :END:
 =fuseki --set tdb:unionDefaultGraph=true=
+
+* Example queries
+:PROPERTIES:
+:ID:       88e593e5-defe-4211-ab3d-c407739d75f7
+:END:
+
+** spo
+:PROPERTIES:
+:ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
+:END:
+#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
+  PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+  select ?s ?p ?plabel ?o ?olabel where 
+  {
+    ?s ?p ?o
+    optional {
+      ?p rdfs:label ?plabel.
+    }
+    optional {
+      ?o rdfs:label ?olabel .
+    }
+  }
+  limit 10
+#+end_src
+
+#+RESULTS:
+| s                                            | p                                                                     | plabel  | o                                                | olabel |
+|----------------------------------------------+-----------------------------------------------------------------------+---------+--------------------------------------------------+--------|
+| https://zenodo.org/communities/nfdi4bioimage | http://purl.org/dc/elements/1.1/identifier                            |         | nfdi4bioimage                                    |        |
+| https://zenodo.org/communities/nfdi4bioimage | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008                   | has url | https://zenodo.org/communities/nfdi4bioimage     |        |
+| http://purl.org/dc/elements/1.1/identifier   | http://www.w3.org/1999/02/22-rdf-syntax-ns#type                       |         | http://www.w3.org/2002/07/owl#AnnotationProperty |        |
+| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#IsPartOf     |         | https://zenodo.org/communities/nfdi4bioimage/    |        |
+| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#Issued       |         | 2019-12-20                                       |        |
+| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#Updated      |         | 2023-02-02                                       |        |
+| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#creator      |         | https://orcid.org/0000-0002-8367-5163            |        |
+| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#resourceType |         | None                                             |        |
+| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#right        |         | Creative Commons Attribution 4.0 International   |        |
+| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#subject      |         | FLIM, sdt, image analysis                        |        |
+
+** Creators and contributors for a record
+:PROPERTIES:
+:ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
+:END:
+#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
+  PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+  select *
+  where
+  {
+    <https://doi.org/10.5281/zenodo.14013026> dcite:contributor ?contributor ;
+                                              dcite:creator ?creator .
+    ?creator dcite:affiliation ?affilation .
+    ?affiliation rdfs:label ?affiliation_name .
+  }
+  limit 10
+#+end_src
+
+#+RESULTS:
+| contributor | creator                               | affilation                | affiliation               | affiliation_name                       |
+|-------------+---------------------------------------+---------------------------+---------------------------+----------------------------------------|
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/01v7r4v08 | DataPLANT                              |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b1                        | Riccardo                               |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/01vnkaz16 | NFDI4BIOIMAGE                          |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b2                        | NFDI4BIOIMAGE                          |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/05qj6w324 | Nationale Forschungsdateninfrastruktur |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b3                        | Jan                                    |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b4                        | Stefan                                 |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b5                        | Thomas                                 |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b6                        | Wibke                                  |
+| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b7                        | Hannes                                 |
+** Count number of creators and contributors per record.
+:PROPERTIES:
+:ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
+:END:
+#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
+  PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+  select ?record (count(distinct ?creator) as ?ncreators) (count(distinct ?contributor) as ?ncontributor)
+  where
+  {
+    ?record dcite:contributor ?contributor ;
+            dcite:creator ?creator .
+  }
+  group by ?record
+#+end_src
+
+#+RESULTS:
+| record                                     | ncreators | ncontributor |
+|--------------------------------------------+-----------+--------------|
+| https://doi.org/10.5281/zenodo.11502721    |         1 |            9 |
+| https://doi.org/10.5281/zenodo.5101158     |         1 |            1 |
+| https://doi.org/10.5281/zenodo.15308773    |         1 |            2 |
+| https://doi.org/10.5281/zenodo.14937632    |         1 |            1 |
+| https://doi.org/10.5281/zenodo.11031747    |         1 |            1 |
+| https://doi.org/10.1038/s41598-019-56067-w |         1 |            1 |
+| https://doi.org/10.5281/zenodo.14178789    |         5 |            1 |
+| https://doi.org/10.5281/zenodo.14951142    |         1 |            3 |
+| https://doi.org/10.5281/zenodo.14044640    |        10 |            1 |
+| https://doi.org/10.5281/zenodo.11350689    |         3 |            2 |
+| https://doi.org/10.5281/zenodo.15225616    |         1 |            3 |
+| https://doi.org/10.5281/zenodo.14044380    |         9 |            1 |
+| https://doi.org/10.5281/zenodo.11109616    |         3 |            1 |
+| https://doi.org/10.5281/zenodo.14909526    |        10 |            1 |
+| https://doi.org/10.5281/zenodo.15373555    |         3 |            2 |
+| https://doi.org/10.5281/zenodo.14186101    |         1 |            5 |
+| https://doi.org/10.5281/zenodo.14013026    |         5 |            1 |
