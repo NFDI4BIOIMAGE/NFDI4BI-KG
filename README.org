@@ -6,7 +6,7 @@
 :ID:       fc647655-1e49-41e7-96f2-6e7ce03c577d
 :END:
 
-** Introduction
+** NFDI4BIOIMAGe on WikiData
 :PROPERTIES:
 :ID:       785808b2-c95a-4685-a1ab-976170415ba5
 :END:
@@ -66,11 +66,6 @@ https://scholia.toolforge.org/topic/Q113500855
 - Each property-value pair (=statement=) can have additional annotations, such as references, validity dates, ...
 
 Example:[[https://www.wikidata.org/wiki/Q113500855][NFDI4BIOIMAGE]]'s chairperson
-
-** Example queries 
-:PROPERTIES:
-:ID:       2c5092e9-98d2-4528-9d90-70e0242f1efa
-:END:
 *** Query all properties and values on NFDI4BIOIMAGE's item
 :PROPERTIES:
 :ID:       69b0670b-6859-49d4-84f9-549a4f026153
@@ -225,6 +220,12 @@ Example:[[https://www.wikidata.org/wiki/Q113500855][NFDI4BIOIMAGE]]'s chairperso
 :PROPERTIES:
 :ID:       1bee5ed1-c28d-4eb3-8ba9-085aa5b4bdd3
 :END:
+* NFDI self hosted KG
+:PROPERTIES:
+:ID:       f275722e-acb8-48c0-9875-ca191e1fb562
+:header-args:sparql: :url https://kg.nfdi4bioimage.de/N4BIKG/sparql
+:END:
+Since June 16 2025, the NFDI4BIOIMAGE Knowledge Graph is operational at https://kg.nfdi4bioimage.de. 
 ** Graphs
 :PROPERTIES:
 :ID:       0e01ef08-fb7c-4336-971f-de43a7763409
@@ -233,31 +234,37 @@ Example:[[https://www.wikidata.org/wiki/Q113500855][NFDI4BIOIMAGE]]'s chairperso
 :PROPERTIES:
 :ID:       bcd055b3-f942-4f05-8652-2583307ef7c6
 :END:
-The default graph will contain the URIs of all named graphs, not more.
+The default graph is the union of all named graphs.
 *** Named graphs
 :PROPERTIES:
 :ID:       3bbe4960-5160-46ef-a6f2-93d63bfdfa7a
 :END:
-- n4bi_core: https://nfdi4bioimage.de/kg/n4bi_core
-- n4bi_zenodo_community : https://nfdi4bioimage.de/kg/n4bi_zenodo_community
-- nfdi_core: https://nfdi4bioimage.de/owl/nfdi_core
-- ...
-*** configuration
-:PROPERTIES:
-:ID:       c4a29000-c714-4874-bbe1-f9b7701c9474
-:END:
-=fuseki --set tdb:unionDefaultGraph=true=
+#+begin_src sparql
 
-* Example queries
+SELECT ?graph (count(?subject) as ?number_of_triples)
+WHERE {
+  graph ?graph {  ?subject ?predicate ?object }
+}
+group by ?graph
+#+end_src
+
+#+RESULTS:
+| graph                                                    | number_of_triples |
+|----------------------------------------------------------+-------------------|
+| https://kg.nfdi4bioimage.de/n4bikg/core                  |                 8 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community |              3482 |
+| https://kg.nfdi4bioimage.de/n4bikg/owl                   |              3993 |
+
+** Example queries
 :PROPERTIES:
 :ID:       88e593e5-defe-4211-ab3d-c407739d75f7
 :END:
 
-** spo
+*** spo
 :PROPERTIES:
 :ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
 :END:
-#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
+#+begin_src sparql
   PREFIX owl: <http://www.w3.org/2002/07/owl#>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -276,24 +283,24 @@ The default graph will contain the URIs of all named graphs, not more.
 #+end_src
 
 #+RESULTS:
-| s                                            | p                                                                     | plabel  | o                                                | olabel |
-|----------------------------------------------+-----------------------------------------------------------------------+---------+--------------------------------------------------+--------|
-| https://zenodo.org/communities/nfdi4bioimage | http://purl.org/dc/elements/1.1/identifier                            |         | nfdi4bioimage                                    |        |
-| https://zenodo.org/communities/nfdi4bioimage | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008                   | has url | https://zenodo.org/communities/nfdi4bioimage     |        |
-| http://purl.org/dc/elements/1.1/identifier   | http://www.w3.org/1999/02/22-rdf-syntax-ns#type                       |         | http://www.w3.org/2002/07/owl#AnnotationProperty |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#IsPartOf     |         | https://zenodo.org/communities/nfdi4bioimage/    |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#Issued       |         | 2019-12-20                                       |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#Updated      |         | 2023-02-02                                       |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#creator      |         | https://orcid.org/0000-0002-8367-5163            |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#resourceType |         | None                                             |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#right        |         | Creative Commons Attribution 4.0 International   |        |
-| https://doi.org/10.1038/s41598-019-56067-w   | https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#subject      |         | FLIM, sdt, image analysis                        |        |
+| s                                                   | p                                                   | plabel                  | o                                                                          | olabel          |
+|-----------------------------------------------------+-----------------------------------------------------+-------------------------+----------------------------------------------------------------------------+-----------------|
+| https://nfdi4bioimage.de/rdf/node                   | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     |                         | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001039                        | nfdi consortium |
+| https://nfdi4bioimage.de/rdf/node                   | http://purl.org/dc/elements/1.1/description         |                         | Nationale Forschungsdateninfrastruktur für Mikroskopie und Bildanalyse     |                 |
+| https://nfdi4bioimage.de/rdf/node                   | http://purl.org/dc/elements/1.1/description         |                         | National Research Data Infrastructure for Microscopy and Bioimage Analysis |                 |
+| https://nfdi4bioimage.de/rdf/node                   | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000136 | foundation date         | 2023-03-01                                                                 |                 |
+| https://nfdi4bioimage.de/rdf/node                   | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001006 | has external identifier | https://wikidata.org/entity/Q113500855                                     |                 |
+| https://nfdi4bioimage.de/rdf/node                   | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008 | has url                 | https://nfdi4bioimage.de                                                   |                 |
+| https://nfdi4bioimage.de/rdf/node                   | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0010015 | has acronym             | N4BI                                                                       |                 |
+| https://nfdi4bioimage.de/rdf/node                   | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0010015 | has acronym             | NFDI4BIOIMAGE                                                              |                 |
+| https://nfdi4bioimage.de/rdf/node                   | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000195 | represents collection   | https://zenodo.org/communities/nfdi4bioimage                               |                 |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001039 | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     |                         | http://www.w3.org/2002/07/owl#Class                                        |                 |
 
-** Creators and contributors for a record
+*** Creators and contributors for a record
 :PROPERTIES:
 :ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
 :END:
-#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
+#+begin_src sparql 
   PREFIX owl: <http://www.w3.org/2002/07/owl#>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -302,32 +309,62 @@ The default graph will contain the URIs of all named graphs, not more.
   select *
   where
   {
-    <https://doi.org/10.5281/zenodo.14013026> dcite:contributor ?contributor ;
-                                              dcite:creator ?creator .
-    ?creator dcite:affiliation ?affilation .
+    <https://doi.org/10.5281/zenodo.14013026> dcite:creator ?creator .
+    ?creator dcite:givenName ?creator_given_name ;
+             dcite:familyName ?creator_family_name .
+    ?creator dcite:affiliation ?affiliation .
+    filter(isiri(?affiliation))
     ?affiliation rdfs:label ?affiliation_name .
   }
-  limit 10
+  limit 40
 #+end_src
 
 #+RESULTS:
-| contributor | creator                               | affilation                | affiliation               | affiliation_name                       |
-|-------------+---------------------------------------+---------------------------+---------------------------+----------------------------------------|
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/01v7r4v08 | DataPLANT                              |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b1                        | Riccardo                               |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/01vnkaz16 | NFDI4BIOIMAGE                          |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b2                        | NFDI4BIOIMAGE                          |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | https://ror.org/05qj6w324 | Nationale Forschungsdateninfrastruktur |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b3                        | Jan                                    |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b4                        | Stefan                                 |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b5                        | Thomas                                 |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b6                        | Wibke                                  |
-| b0          | https://orcid.org/0000-0001-9568-895X | https://ror.org/0546hnb39 | b7                        | Hannes                                 |
-** Count number of creators and contributors per record.
+| creator                               | creator_given_name | creator_family_name       | affiliation               | affiliation_name                           |
+|---------------------------------------+--------------------+---------------------------+---------------------------+--------------------------------------------|
+| https://orcid.org/0000-0001-9568-895X | Christian          | Schmidt                   | https://ror.org/0546hnb39 | University of Konstanz                     |
+| https://orcid.org/0000-0001-9568-895X | Christian          | Schmidt                   | https://ror.org/04cdgtt98 | German Cancer Research Center              |
+| https://orcid.org/0000-0001-9568-895X | Christian          | Christian Schmidt         | https://ror.org/0546hnb39 | University of Konstanz                     |
+| https://orcid.org/0000-0001-9568-895X | Christian          | Christian Schmidt         | https://ror.org/04cdgtt98 | German Cancer Research Center              |
+| https://orcid.org/0000-0001-7734-3771 | Stefanie           | Stefanie Weidtkamp-Peters | https://ror.org/01vnkaz16 | NFDI4BIOIMAGE                              |
+| https://orcid.org/0000-0001-7734-3771 | Stefanie           | Stefanie Weidtkamp-Peters | https://ror.org/024z2rq82 | Heinrich Heine University Düsseldorf       |
+| https://orcid.org/0000-0001-7734-3771 | Stefanie           | Weidtkamp-Peters          | https://ror.org/01vnkaz16 | NFDI4BIOIMAGE                              |
+| https://orcid.org/0000-0001-7734-3771 | Stefanie           | Weidtkamp-Peters          | https://ror.org/024z2rq82 | Heinrich Heine University Düsseldorf       |
+| https://orcid.org/0000-0001-6523-7496 | Susanne            | Kunis                     | https://ror.org/04qmmjx98 | Osnabrück University                       |
+| b0                                    | Tom                | Boissonnet                | https://ror.org/024z2rq82 | Heinrich Heine University Düsseldorf       |
+| b1                                    | Bettina            | Hagen                     | https://ror.org/04xx1tc24 | Max Planck Institute for Biology of Ageing |
+
+Some records must have the full name set as 'family name'.
+
+*** ORCID properties
+:PROPERTIES:
+:ID:       7329c725-8e84-49eb-ad67-d3c7a238c970
+:END:
+#+begin_src sparql 
+  PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+  select *
+  where
+  {
+    <https://orcid.org/0000-0001-7734-3771> dcite:givenName ?first;
+                                            dcite:familyName ?last .
+  }
+ #+end_src
+
+ #+RESULTS:
+ | first    | last                      |
+ |----------+---------------------------|
+ | Stefanie | Stefanie Weidtkamp-Peters |
+ | Stefanie | Weidtkamp-Peters          |
+
+*** Count number of creators and contributors per record.
 :PROPERTIES:
 :ID:       bd5e3d52-41fe-4676-b6bf-78a0be8a0a55
 :END:
-#+begin_src sparql :url http://193.196.20.26:3030/N4BIKG/sparql
+#+begin_src sparql :session sparql
   PREFIX owl: <http://www.w3.org/2002/07/owl#>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -347,7 +384,6 @@ The default graph will contain the URIs of all named graphs, not more.
 |--------------------------------------------+-----------+--------------|
 | https://doi.org/10.5281/zenodo.11502721    |         1 |            9 |
 | https://doi.org/10.5281/zenodo.5101158     |         1 |            1 |
-| https://doi.org/10.5281/zenodo.15308773    |         1 |            2 |
 | https://doi.org/10.5281/zenodo.14937632    |         1 |            1 |
 | https://doi.org/10.5281/zenodo.11031747    |         1 |            1 |
 | https://doi.org/10.1038/s41598-019-56067-w |         1 |            1 |
@@ -355,10 +391,306 @@ The default graph will contain the URIs of all named graphs, not more.
 | https://doi.org/10.5281/zenodo.14951142    |         1 |            3 |
 | https://doi.org/10.5281/zenodo.14044640    |        10 |            1 |
 | https://doi.org/10.5281/zenodo.11350689    |         3 |            2 |
-| https://doi.org/10.5281/zenodo.15225616    |         1 |            3 |
 | https://doi.org/10.5281/zenodo.14044380    |         9 |            1 |
 | https://doi.org/10.5281/zenodo.11109616    |         3 |            1 |
 | https://doi.org/10.5281/zenodo.14909526    |        10 |            1 |
 | https://doi.org/10.5281/zenodo.15373555    |         3 |            2 |
 | https://doi.org/10.5281/zenodo.14186101    |         1 |            5 |
 | https://doi.org/10.5281/zenodo.14013026    |         5 |            1 |
+
+*** Records by institution (affiliation)
+:PROPERTIES:
+:ID:       a912f0e1-3273-46b7-b664-f8ed560028d2
+:END:
+
+#+begin_src sparql 
+  PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+  select ?institution (count(distinct ?record) as ?nrecords)
+  where
+
+  {
+    ?record dcite:creator ?creator .
+    ?creator dcite:affiliation ?institution .
+    filter(isiri(?institution))
+  }
+  group by ?institution
+  order by desc(?nrecords)
+#+end_src
+
+#+RESULTS:
+| institution               | nrecords |
+|---------------------------+----------|
+| https://ror.org/01vnkaz16 |       86 |
+| https://ror.org/042aqky30 |       44 |
+| https://ror.org/03s7gtk40 |       35 |
+| https://ror.org/05tpnw772 |       33 |
+| https://ror.org/04cdgtt98 |       27 |
+| https://ror.org/024z2rq82 |       25 |
+| https://ror.org/0546hnb39 |       22 |
+| https://ror.org/00rcxh774 |       16 |
+| https://ror.org/000h6jb29 |       14 |
+| https://ror.org/04c4bwh63 |       13 |
+| https://ror.org/034waa237 |        9 |
+| https://ror.org/023b0x485 |        8 |
+| https://ror.org/04qmmjx98 |        8 |
+| https://ror.org/00pd74e08 |        7 |
+| https://ror.org/05d78xc36 |        6 |
+| https://ror.org/0245cg223 |        5 |
+| https://ror.org/04v4h0v24 |        5 |
+| https://ror.org/0534re684 |        5 |
+| https://ror.org/013czdx64 |        4 |
+| https://ror.org/01zwmgk08 |        4 |
+| https://ror.org/038t36y30 |        4 |
+| https://ror.org/0030f2a11 |        3 |
+| https://ror.org/01f5dqg10 |        3 |
+| https://ror.org/01v7r4v08 |        3 |
+| https://ror.org/02nv7yv05 |        3 |
+| https://ror.org/02s376052 |        3 |
+| https://ror.org/03a4sp974 |        3 |
+| https://ror.org/03fqpzb44 |        3 |
+| https://ror.org/04ers2y35 |        3 |
+| https://ror.org/004hd5y14 |        2 |
+| https://ror.org/00r0qs524 |        2 |
+| https://ror.org/014nnvj65 |        2 |
+| https://ror.org/02catss52 |        2 |
+| https://ror.org/02h2x0161 |        2 |
+| https://ror.org/02se0t636 |        2 |
+| https://ror.org/03h2bxq36 |        2 |
+| https://ror.org/04xx1tc24 |        2 |
+| https://ror.org/055s37c97 |        2 |
+| https://ror.org/00ggpsq73 |        1 |
+| https://ror.org/00v34f693 |        1 |
+| https://ror.org/00vn06n10 |        1 |
+| https://ror.org/01k8bwd50 |        1 |
+| https://ror.org/01k97gp34 |        1 |
+| https://ror.org/01y9bpm73 |        1 |
+| https://ror.org/01zjc6908 |        1 |
+| https://ror.org/0259fwx54 |        1 |
+| https://ror.org/02778hg05 |        1 |
+| https://ror.org/02jhqqg57 |        1 |
+| https://ror.org/0305k8y39 |        1 |
+| https://ror.org/0327sr118 |        1 |
+| https://ror.org/03a1kwz48 |        1 |
+| https://ror.org/03av75f26 |        1 |
+| https://ror.org/03mstc592 |        1 |
+| https://ror.org/04mz5ra38 |        1 |
+| https://ror.org/05745n787 |        1 |
+| https://ror.org/05mxhda18 |        1 |
+| https://ror.org/05nfk7108 |        1 |
+| https://ror.org/05qj6w324 |        1 |
+| https://ror.org/05qpz1x62 |        1 |
+| https://ror.org/05wwzbv21 |        1 |
+
+*** Records by creator
+:PROPERTIES:
+:ID:       2f1a50dd-cb6d-468a-9c16-a048e95bc503
+:END:
+
+#+begin_src sparql 
+  PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  prefix dcite: <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+  select ?creator (count(distinct ?record) as ?nrecords)
+  where
+  
+  {
+    ?record dcite:creator ?creator .
+    ?creator dcite:familyName ?name .
+  }
+  group by ?creator
+  order by desc(?nrecords)
+#+end_src
+
+#+RESULTS:
+| creator                               | nrecords |
+|---------------------------------------+----------|
+| https://orcid.org/0000-0001-5949-2327 |       35 |
+| https://orcid.org/0000-0003-4028-811X |       31 |
+| https://orcid.org/0000-0001-9568-895X |       20 |
+| https://orcid.org/0000-0001-7734-3771 |       16 |
+| https://orcid.org/0000-0002-6999-132X |       13 |
+| https://orcid.org/0000-0003-2104-9519 |       13 |
+| https://orcid.org/0009-0007-5101-4786 |       13 |
+| https://orcid.org/0000-0001-5805-5774 |       11 |
+| https://orcid.org/0000-0002-6658-2192 |       11 |
+| https://orcid.org/0000-0002-5567-8690 |       10 |
+| https://orcid.org/0000-0003-3430-2683 |       10 |
+| https://orcid.org/0000-0002-3328-9467 |        9 |
+| https://orcid.org/0000-0002-5332-3589 |        9 |
+| https://orcid.org/0000-0002-8367-5163 |        9 |
+| https://orcid.org/0000-0001-6523-7496 |        8 |
+| https://orcid.org/0000-0002-3879-7057 |        8 |
+| https://orcid.org/0000-0003-2408-7588 |        8 |
+| https://orcid.org/0000-0003-3780-8663 |        8 |
+| https://orcid.org/0000-0002-5862-6132 |        6 |
+| https://orcid.org/0000-0001-7769-0167 |        5 |
+| https://orcid.org/0000-0002-4101-6987 |        5 |
+| https://orcid.org/0000-0003-1717-3138 |        5 |
+| https://orcid.org/0000-0001-9629-0564 |        4 |
+| https://orcid.org/0000-0002-2579-5546 |        4 |
+| https://orcid.org/0000-0002-5497-6266 |        4 |
+| https://orcid.org/0000-0002-6626-2463 |        4 |
+| https://orcid.org/0000-0002-6990-4716 |        4 |
+| https://orcid.org/0000-0002-7059-4030 |        4 |
+| https://orcid.org/0009-0002-1826-7099 |        4 |
+| https://orcid.org/0000-0001-8665-6382 |        3 |
+| https://orcid.org/0000-0002-1964-4960 |        3 |
+| https://orcid.org/0000-0002-2101-8416 |        3 |
+| https://orcid.org/0000-0002-3079-6586 |        3 |
+| https://orcid.org/0000-0002-4382-5104 |        3 |
+| https://orcid.org/0000-0002-5467-871X |        3 |
+| https://orcid.org/0000-0002-7452-1146 |        3 |
+| https://orcid.org/0000-0002-9051-3701 |        3 |
+| https://orcid.org/0000-0003-1323-3762 |        3 |
+| https://orcid.org/0000-0003-2778-7483 |        3 |
+| https://orcid.org/0009-0003-6932-023X |        3 |
+| https://orcid.org/0000-0001-6178-2884 |        2 |
+| https://orcid.org/0000-0001-9324-3236 |        2 |
+| https://orcid.org/0000-0002-0723-6038 |        2 |
+| https://orcid.org/0000-0002-0829-5101 |        2 |
+| https://orcid.org/0000-0002-1279-5133 |        2 |
+| https://orcid.org/0000-0002-1481-2996 |        2 |
+| https://orcid.org/0000-0002-1789-1861 |        2 |
+| https://orcid.org/0000-0002-2484-2742 |        2 |
+| https://orcid.org/0000-0002-3519-5886 |        2 |
+| https://orcid.org/0000-0002-4044-9166 |        2 |
+| https://orcid.org/0000-0002-4526-2472 |        2 |
+| https://orcid.org/0000-0002-5546-5521 |        2 |
+| https://orcid.org/0000-0002-6075-0757 |        2 |
+| https://orcid.org/0000-0002-6165-4679 |        2 |
+| https://orcid.org/0000-0002-6243-2568 |        2 |
+| https://orcid.org/0000-0002-9845-6393 |        2 |
+| https://orcid.org/0000-0003-1945-6342 |        2 |
+| https://orcid.org/0000-0003-3002-8170 |        2 |
+| https://orcid.org/0000-0003-3099-618X |        2 |
+| https://orcid.org/0009-0007-5222-2683 |        2 |
+| b0                                    |        1 |
+| b1                                    |        1 |
+| b2                                    |        1 |
+| b3                                    |        1 |
+| b4                                    |        1 |
+| b5                                    |        1 |
+| b6                                    |        1 |
+| b7                                    |        1 |
+| b8                                    |        1 |
+| b9                                    |        1 |
+| b10                                   |        1 |
+| b11                                   |        1 |
+| b12                                   |        1 |
+| b13                                   |        1 |
+| b14                                   |        1 |
+| b15                                   |        1 |
+| b16                                   |        1 |
+| b17                                   |        1 |
+| b18                                   |        1 |
+| b19                                   |        1 |
+| b20                                   |        1 |
+| b21                                   |        1 |
+| b22                                   |        1 |
+| b23                                   |        1 |
+| b24                                   |        1 |
+| b25                                   |        1 |
+| b26                                   |        1 |
+| b27                                   |        1 |
+| b28                                   |        1 |
+| b29                                   |        1 |
+| b30                                   |        1 |
+| https://orcid.org/0000-0001-5246-9351 |        1 |
+| https://orcid.org/0000-0001-5525-5973 |        1 |
+| https://orcid.org/0000-0001-5655-0130 |        1 |
+| https://orcid.org/0000-0001-6107-567X |        1 |
+| https://orcid.org/0000-0001-6919-3646 |        1 |
+| https://orcid.org/0000-0001-6966-0814 |        1 |
+| https://orcid.org/0000-0001-7250-3756 |        1 |
+| https://orcid.org/0000-0001-7276-776X |        1 |
+| https://orcid.org/0000-0001-7292-8308 |        1 |
+| https://orcid.org/0000-0001-7553-905X |        1 |
+| https://orcid.org/0000-0001-7713-024X |        1 |
+| https://orcid.org/0000-0001-8528-9023 |        1 |
+| https://orcid.org/0000-0001-8698-5389 |        1 |
+| https://orcid.org/0000-0001-8736-8796 |        1 |
+| https://orcid.org/0000-0001-9021-3197 |        1 |
+| https://orcid.org/0000-0001-9227-9798 |        1 |
+| https://orcid.org/0000-0001-9274-2578 |        1 |
+| https://orcid.org/0000-0001-9309-7531 |        1 |
+| https://orcid.org/0000-0001-9734-9767 |        1 |
+| https://orcid.org/0000-0001-9773-4008 |        1 |
+| https://orcid.org/0000-0001-9868-4671 |        1 |
+| https://orcid.org/0000-0001-9993-533X |        1 |
+| https://orcid.org/0000-0002-0024-5046 |        1 |
+| https://orcid.org/0000-0002-0347-7838 |        1 |
+| https://orcid.org/0000-0002-0550-7463 |        1 |
+| https://orcid.org/0000-0002-1355-5043 |        1 |
+| https://orcid.org/0000-0002-1784-2920 |        1 |
+| https://orcid.org/0000-0002-2068-4695 |        1 |
+| https://orcid.org/0000-0002-2198-5262 |        1 |
+| https://orcid.org/0000-0002-2217-7558 |        1 |
+| https://orcid.org/0000-0002-2382-9722 |        1 |
+| https://orcid.org/0000-0002-2542-0867 |        1 |
+| https://orcid.org/0000-0002-2902-7165 |        1 |
+| https://orcid.org/0000-0002-3085-7457 |        1 |
+| https://orcid.org/0000-0002-3333-9129 |        1 |
+| https://orcid.org/0000-0002-3439-1674 |        1 |
+| https://orcid.org/0000-0002-3885-5253 |        1 |
+| https://orcid.org/0000-0002-4182-7560 |        1 |
+| https://orcid.org/0000-0002-4232-4543 |        1 |
+| https://orcid.org/0000-0002-4375-0691 |        1 |
+| https://orcid.org/0000-0002-4378-6061 |        1 |
+| https://orcid.org/0000-0002-4392-8154 |        1 |
+| https://orcid.org/0000-0002-4482-6010 |        1 |
+| https://orcid.org/0000-0002-4666-9610 |        1 |
+| https://orcid.org/0000-0002-4894-1913 |        1 |
+| https://orcid.org/0000-0002-5192-126X |        1 |
+| https://orcid.org/0000-0002-5444-5246 |        1 |
+| https://orcid.org/0000-0002-5513-954X |        1 |
+| https://orcid.org/0000-0002-5857-1477 |        1 |
+| https://orcid.org/0000-0002-5884-4471 |        1 |
+| https://orcid.org/0000-0002-6027-0796 |        1 |
+| https://orcid.org/0000-0002-6209-2364 |        1 |
+| https://orcid.org/0000-0002-6574-2588 |        1 |
+| https://orcid.org/0000-0002-6586-7129 |        1 |
+| https://orcid.org/0000-0002-6634-9729 |        1 |
+| https://orcid.org/0000-0002-6681-1530 |        1 |
+| https://orcid.org/0000-0002-7018-0460 |        1 |
+| https://orcid.org/0000-0002-7390-8795 |        1 |
+| https://orcid.org/0000-0002-8251-1597 |        1 |
+| https://orcid.org/0000-0002-8500-1357 |        1 |
+| https://orcid.org/0000-0002-8516-8034 |        1 |
+| https://orcid.org/0000-0002-8818-7193 |        1 |
+| https://orcid.org/0000-0002-9071-2356 |        1 |
+| https://orcid.org/0000-0002-9134-5295 |        1 |
+| https://orcid.org/0000-0002-9397-8475 |        1 |
+| https://orcid.org/0000-0002-9574-9553 |        1 |
+| https://orcid.org/0000-0002-9723-9063 |        1 |
+| https://orcid.org/0000-0003-1334-6388 |        1 |
+| https://orcid.org/0000-0003-1379-7023 |        1 |
+| https://orcid.org/0000-0003-1896-9031 |        1 |
+| https://orcid.org/0000-0003-2237-1147 |        1 |
+| https://orcid.org/0000-0003-2370-3430 |        1 |
+| https://orcid.org/0000-0003-2380-8830 |        1 |
+| https://orcid.org/0000-0003-2528-5391 |        1 |
+| https://orcid.org/0000-0003-2547-933X |        1 |
+| https://orcid.org/0000-0003-2778-6624 |        1 |
+| https://orcid.org/0000-0003-3001-1491 |        1 |
+| https://orcid.org/0000-0003-3385-4232 |        1 |
+| https://orcid.org/0000-0003-3399-7532 |        1 |
+| https://orcid.org/0000-0003-3667-187X |        1 |
+| https://orcid.org/0000-0003-3763-0797 |        1 |
+| https://orcid.org/0000-0003-3925-6778 |        1 |
+| https://orcid.org/0000-0003-4025-1712 |        1 |
+| https://orcid.org/0000-0003-4043-165X |        1 |
+| https://orcid.org/0000-0003-4105-1990 |        1 |
+| https://orcid.org/0000-0003-4328-7171 |        1 |
+| https://orcid.org/0000-0003-4358-2269 |        1 |
+| https://orcid.org/0000-0003-4726-2481 |        1 |
+| https://orcid.org/0000-0003-4813-5927 |        1 |
+| https://orcid.org/0009-0002-1414-3291 |        1 |
+| https://orcid.org/0009-0004-5318-5966 |        1 |
+| https://orcid.org/0009-0005-1758-1790 |        1 |
+| https://orcid.org/0009-0009-8508-8585 |        1 |

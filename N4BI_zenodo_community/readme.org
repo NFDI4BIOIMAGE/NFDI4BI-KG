@@ -157,7 +157,8 @@ type ['info:eu-repo/semantics/conferencePoster']
 #+begin_src python :session rdf :results output :async yes
   from oaipmh_scythe import Scythe
   from bs4 import BeautifulSoup
-  from rdflib import Graph, Namespace, URIRef, Literal, FOAF, DC
+  from rdflib import Graph, Namespace, URIRef, Literal, BNode, FOAF, DC, XSD, RDF, RDFS
+
   def parse_person(graph, person):
 
       orcid = person.find('nameIdentifier', attrs={'nameIdentifierScheme':'ORCID'})
@@ -175,7 +176,9 @@ type ['info:eu-repo/semantics/conferencePoster']
       if family_name is not None:
           graph.add((person_uri, DCITE.familyName, Literal(family_name.string)))
 
-      affiliations = person.find_all('affiliation')
+      # Get affiliations.
+      # Skip nfdi4bioimage because it's not an affiliation in the legal sense.
+      affiliations = (aff for aff in person.find_all('affiliation') if not aff.get('affiliatinIdentifier', "").split('/')[-1] == '01vnkaz16')
       for affiliation in affiliations:
           graph, affiliation_ref = parse_institution(graph, affiliation)
           graph.add((person_uri, DCITE.affiliation, affiliation_ref))
@@ -320,7 +323,7 @@ type ['info:eu-repo/semantics/conferencePoster']
 #+end_src
 
 #+RESULTS:
-: 3480
+: 3482
 
 
 ** Convert datacite xsd schema to owl ontology
