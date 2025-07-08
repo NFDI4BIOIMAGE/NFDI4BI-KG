@@ -7,7 +7,7 @@ PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
 PREFIX zenodo:   <https://zenodo.org/ns/>
 
 <https://doi.org/10.5281/zenodo.11261115>
-        dc:contributor  [ foaf:firstName  "Tom";
+    dc:contributor  [ foaf:firstName  "Tom";
                           foaf:lastName   "Boissonnet"
                         ];
         dc:contributor  [ foaf:firstName  "Lena";
@@ -129,7 +129,7 @@ PREFIX zenodo:   <https://zenodo.org/ns/>
                           foaf:lastName   "Moore"
                         ];
         dc:date         "2023-09-13"^^xsd:date;
-        dc:description  "&lt;p&gt;For decades, the sharing of large N-dimensional datasets has posed issues across multiple domains. Interactively accessing terabyte-scale data has previously required significant server resources to properly prepare cropped or down-sampled representations on the fly. Now, a cloud-native chunked format easing this burden has been adopted in the bioimaging domain for standardization. The format &mdash; Zarr &mdash; is potentially of interest for other consortia and sections of NFDI.&lt;/p&gt;\n\n&lt;p&gt;Full text is available in the proceedings at&nbsp;&lt;a href=\"https://www.tib-op.org/ojs/index.php/CoRDI/article/view/285\"&gt;https://www.tib-op.org/ojs/index.php/CoRDI/article/view/285&lt;/a&gt;&lt;/p&gt;";
+    dc:description  "&lt;p&gt;For decades, the sharing of large N-dimensional datasets has posed issues across multiple domains. Interactively accessing terabyte-scale data has previously required significant server resources to properly prepare cropped or down-sampled representations on the fly. Now, a cloud-native chunked format easing this burden has been adopted in the bioimaging domain for standardization. The format &mdash; Zarr &mdash; is potentially of interest for other consortia and sections of NFDI.&lt;/p&gt;\n\n&lt;p&gt;Full text is available in the proceedings at&nbsp;&lt;a href=\"https://www.tib-op.org/ojs/index.php/CoRDI/article/view/285\"&gt;https://www.tib-op.org/ojs/index.php/CoRDI/article/view/285&lt;/a&gt;&lt;/p&gt;";
         dc:identifier   <https://doi.org/10.5281/zenodo.8340248> , <oai:zenodo.org:8340248>;
         dc:publisher    "Zenodo";
         dc:relation     <https://doi.org/10.5281/zenodo.8340247> , <https://zenodo.org/communities/cordi-2023/> , <https://zenodo.org/communities/nfdi4bioimage/>;

@@ -1,0 +1,14 @@
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX wd:       <http://www.wikidata.org/entity/>
+
+<https://kg.nfdi4bioimage.de/n4bikg/owl>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .
+
+<https://kg.nfdi4bioimage.de/n4bikg/services>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .
+
+<https://kg.nfdi4bioimage.de/n4bikg/core>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .

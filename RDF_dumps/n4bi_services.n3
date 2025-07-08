@@ -1,0 +1,20 @@
+PREFIX dc:       <http://purl.org/dc/elements/1.1/>
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
+PREFIX ncit:     <http://purl.obolibrary.org/obo/NCIT_>
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio:      <http://semanticscience.org/resource/>
+PREFIX wd:       <http://www.wikidata.org/entity/>
+PREFIX wdt:      <http://www.wikidata.org/prop/direct/>
+PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+PREFIX zenodo:   <https://zenodo.org/ns/>
+
+<https://nfdi4bioimage.de/rdf/node>
+        wdt:P121  <https://omero-nfdi.uni-muenster.de> .
+
+<https://omero-nfdi.uni-muenster.de/vkg/sparql>
+        a       wd:Q33002955 .
+
+<https://omero-nfdi.uni-muenster.de>
+        a                      nfdicore:NFDI_0000001 , ncit:C15426;
+        nfdicore:NFDI_0000201  <https://omero-nfdi.uni-muenster.de/vkg/sparql> .
