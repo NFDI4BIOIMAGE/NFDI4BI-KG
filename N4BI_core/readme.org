@@ -53,3 +53,131 @@ The first subject we create represent the consortium itself.
 #+RESULTS:
 : 8
 
+
+** Adding a license to each graph
+:PROPERTIES:
+:ID:       08470056-1ad3-44c2-beb2-5966cff60a25
+:header-args:rdf: :noweb no-export :tangle ../RDF_dumps/graph_licenses.n3
+:END:
+All graphs should be licensed CC-BY (for now, can always pick a different license later).
+
+So, write corresponding statements into each graph
+
+The skeleton is as always:
+#+begin_src rdf
+  <<prefixes>>
+
+  <<statements>>
+#+end_src
+
+For the prefixes, we copy from the [[file:~/Repositories/NFDI4BIOIMAGE/NFDI4BI-KG/N4BI_Services/readme.org][services section]].
+#+begin_src rdf :noweb-ref prefixes
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX wd:       <http://www.wikidata.org/entity/>
+base <https://kg.nfdi4bioimage.de/n4bikg/>
+#+end_src
+
+The statements are a single line for each graph.
+
+Let's get a list of graphs:
+#+begin_src sparql :url https://kg.nfdi4bioimage.de/N4BIKG/sparql
+  select distinct ?g ?cls where {
+    graph ?g {?s ?p ?o.}
+    }
+#+end_src
+
+#+RESULTS:
+| g                                                        | cls |
+|----------------------------------------------------------+-----|
+| https://kg.nfdi4bioimage.de/n4bikg/core                  |     |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community |     |
+| https://kg.nfdi4bioimage.de/n4bikg/services              |     |
+| https://kg.nfdi4bioimage.de/n4bikg/owl                   |     |
+
+Add these IRIs as =owl:Graph= to the core KG
+#+begin_src rdf :noweb-ref statements
+# Define graphs as such with wd:31386861 (RDF graph) and under CC-BY-SA License.
+<core> a wd:Q31386861 ;
+         nfdicore:NFDI_0000142 wd:Q18199165 .
+<services> a wd:Q31386861 ;
+          nfdicore:NFDI_0000142 wd:Q18199165 .
+<owl> a wd:Q31386861 ;
+          nfdicore:NFDI_0000142 wd:Q18199165 .
+#+end_src
+
+Cleanup:
+#+begin_src bash :dir ../RDF_dumps :results output :session noconda
+  JAVA=$(which java)
+  export JAVA_HOME=/usr
+  echo $JAVA
+  echo $JAVA_HOME
+  cat graph_licenses.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
+  /opt/apache-jena-5.2.0/bin/riot --output n3 tmp.n3 | tee graph_licenses.n3
+  rm -v tmp.n3
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+/usr/bin/java
+/usr
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX wd:       <http://www.wikidata.org/entity/>
+
+<https://kg.nfdi4bioimage.de/n4bikg/owl>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .
+
+<https://kg.nfdi4bioimage.de/n4bikg/services>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .
+
+<https://kg.nfdi4bioimage.de/n4bikg/core>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .
+removed 'tmp.n3'
+#+end_example
+
+** Query for license information
+:PROPERTIES:
+:ID:       74a16fec-4643-4fa3-9ab4-cd6fbcfa6955
+:END:
+After submitting the generated RDF above to the KG, we can now query for the license of each graph:
+#+begin_src sparql :url https://kg.nfdi4bioimage.de/N4BIKG/sparql
+  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  PREFIX wd: <http://www.wikidata.org/entity/>
+  PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+  prefix ome_core: <https://ld.openmicroscopy.org/core/>
+  prefix wikibase: <http://wikiba.se/ontology#>
+  prefix bd: <http://www.bigdata.com/rdf#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+  base <https://kg.nfdi4bioimage.de/n4bikg/>
+
+  SELECT * where {
+    graph <core> {?rdf_graph a wd:Q31386861;
+                     nfdicore:NFDI_0000142 ?license .
+    } .
+
+    # Get more information on the license from wikidata.
+    service <https://query.wikidata.org/sparql> {
+      SERVICE wikibase:label {
+        bd:serviceParam wikibase:language "en" .
+        ?license rdfs:label ?license_name .
+      }
+        ?license skos:altLabel ?license_url .
+        filter(strstarts(?license_url, "https"))
+        filter(strends(?license_url, "id"))
+    }
+  }
+#+end_src
+
+#+RESULTS:
+| rdf_graph                                   | license                                  | license_name                                              | license_url                                            |
+|---------------------------------------------+------------------------------------------+-----------------------------------------------------------+--------------------------------------------------------|
+| https://kg.nfdi4bioimage.de/n4bikg/core     | http://www.wikidata.org/entity/Q18199165 | Creative Commons Attribution-ShareAlike 4.0 International | https://creativecommons.org/licenses/by-sa/4.0/deed.id |
+| https://kg.nfdi4bioimage.de/n4bikg/owl      | http://www.wikidata.org/entity/Q18199165 | Creative Commons Attribution-ShareAlike 4.0 International | https://creativecommons.org/licenses/by-sa/4.0/deed.id |
+| https://kg.nfdi4bioimage.de/n4bikg/services | http://www.wikidata.org/entity/Q18199165 | Creative Commons Attribution-ShareAlike 4.0 International | https://creativecommons.org/licenses/by-sa/4.0/deed.id |
+
