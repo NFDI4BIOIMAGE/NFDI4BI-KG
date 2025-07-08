@@ -1,0 +1,142 @@
+#+name: N4BI Services Graph
+#+author: Carsten Fortmann-Grote (github:@CFGrote)
+#+dateCreated: 20250626
+
+* Introduction
+:PROPERTIES:
+:ID:       3aaf0468-5036-4bb4-85e2-8b567db52dbb
+:END:
+This document adds digital services provided or otherwise related to the NFDI4BIOIMAGE consortium such
+as databases, websites, knowledge graphs.
+
+* OMERO Instances
+:PROPERTIES:
+:ID:       6b1ca646-bae3-4347-8385-33de2ea0ef86
+:header-args:rdf: :noweb no-export :tangle ../RDF_dumps/n4bi_services.n3
+:END:
+
+#+name: n4bi_services.skeleton
+#+begin_src rdf
+  <<prefixes>>
+
+  <<statements>>
+#+end_src
+
+
+** Prefixes
+:PROPERTIES:
+:ID:       facc66e8-f32c-4c9b-878f-0518c999ee77
+:END:
+#+begin_src rdf :noweb-ref prefixes
+PREFIX dc:       <http://purl.org/dc/elements/1.1/>
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio:      <http://semanticscience.org/resource/>
+PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+PREFIX zenodo:   <https://zenodo.org/ns/>
+#+end_src
+
+** Statements
+:PROPERTIES:
+:ID:       704a7f5c-a99c-4c15-8fd8-bc9f566bd114
+:END:
+
+*** OMERO-NFDI
+:PROPERTIES:
+:ID:       7e1c6594-643a-4655-8b69-85da5c0bf6fb
+:END:
+
+Our first OMERO instance to add in the public "all plugins" instance https://omero-nfdi.uni-muenster.de. 
+We define this instance as a Database (to be reconsidered but should be ok for a start).
+#+begin_src rdf :noweb-ref statements
+  <https://omero-nfdi.uni-muenster.de> a ncit:C15426 , <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> .
+#+end_src
+
+The =ncit= prefix must be defined, too:
+#+begin_src rdf :noweb-ref prefixes
+  prefix ncit: <http://purl.obolibrary.org/obo/NCIT_>
+#+end_src
+
+**** Adding properties
+:PROPERTIES:
+:ID:       c30b9baa-60f4-4638-8b73-69ea5a2d2246
+:END:
+By adding the SPARQL endpoint of this omero instance, we make it part of the n4bi knowledge graph system.
+#+begin_src rdf :noweb-ref statements
+  <https://omero-nfdi.uni-muenster.de> nfdicore:NFDI_0000201 <https://omero-nfdi.uni-muenster.de/vkg/sparql> .
+#+end_src
+
+
+*** Adding wikidata properties and types
+:PROPERTIES:
+:ID:       f3f884c6-bdb6-46c3-8ea1-50de2deb2459
+:END:
+First, I did not find a class for Knowledge Graph but actually wikidata has one: [[https://www.wikidata.org/wiki/Q33002955][=wd:Q33002955=]].
+
+#+begin_src rdf :noweb-ref statements
+ <https://omero-nfdi.uni-muenster.de/vkg/sparql> a wd:Q33002955 .
+
+#+end_src
+I'll also add a relation between the NFDI4BIOIMAGE consortium and the Münster public OMERO. [[http://www.wikidata.org/prop/P121][wp:P121]] is labelled "item operated".
+ #+begin_src rdf :noweb-ref statements
+ <https://nfdi4bioimage.de/rdf/node> wdt:P121 <https://omero-nfdi.uni-muenster.de> .
+ #+end_src
+
+and the prefixes
+#+begin_src rdf :noweb-ref prefixes
+  prefix wd: <http://www.wikidata.org/entity/>
+  prefix wdt: <http://www.wikidata.org/prop/direct/>
+#+end_src
+
+* clean up
+:PROPERTIES:
+:ID:       21be22b1-1c18-405d-a5e6-eaa004f7f37e
+:END:
+
+#+begin_src shell :dir ../RDF_dumps/ :results output
+    export PATH=/opt/apache-jena-5.2.0/bin:$PATH
+    cat n4bi_services.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
+    riot --output=n3 tmp.n3 > n4bi_services.n3
+#+end_src
+
+#+RESULTS:
+#+begin_example
+PREFIX dc:       <http://purl.org/dc/elements/1.1/>
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio:      <http://semanticscience.org/resource/>
+PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+PREFIX zenodo:   <https://zenodo.org/ns/>
+prefix ncit: <http://purl.obolibrary.org/obo/NCIT_>
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+
+<https://omero-nfdi.uni-muenster.de> a ncit:C15426 , <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> .
+<https://omero-nfdi.uni-muenster.de> nfdicore:NFDI_0000201 <https://omero-nfdi.uni-muenster.de/vkg/sparql> .
+<https://omero-nfdi.uni-muenster.de/vkg/sparql> a wd:Q33002955 .
+
+<https://nfdi4bioimage.de/rdf/node> wdt:P121 <https://omero-nfdi.uni-muenster.de> .
+
+PREFIX dc:       <http://purl.org/dc/elements/1.1/>
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio:      <http://semanticscience.org/resource/>
+PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+PREFIX zenodo:   <https://zenodo.org/ns/>
+
+<https://omero-nfdi.uni-muenster.de> a ncit:C15426 , <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> .
+
+prefix ncit: <http://purl.obolibrary.org/obo/NCIT_>
+
+<https://omero-nfdi.uni-muenster.de> nfdicore:NFDI_0000201 <https://omero-nfdi.uni-muenster.de/vkg/sparql> .
+
+<https://omero-nfdi.uni-muenster.de/vkg/sparql> a wd:Q33002955 .
+
+<https://nfdi4bioimage.de/rdf/node> wdt:P121 <https://omero-nfdi.uni-muenster.de> .
+
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+#+end_example
