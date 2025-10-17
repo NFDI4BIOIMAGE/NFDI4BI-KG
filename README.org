@@ -694,3 +694,120 @@ Some records must have the full name set as 'family name'.
 | https://orcid.org/0009-0004-5318-5966 |        1 |
 | https://orcid.org/0009-0005-1758-1790 |        1 |
 | https://orcid.org/0009-0009-8508-8585 |        1 |
+
+* Update nfdicore ontology
+:PROPERTIES:
+:ID:       dda0ca04-9f7e-4b8d-9083-7a3fc76eadca
+:END:
+- related to [[https://github.com/NFDI4BIOIMAGE/NFDI4BI-KG/issues/8]]
+
+  
+** Affected terms
+:PROPERTIES:
+:ID:       64427198-2322-481d-90c0-996a89055036
+:END:
+which of the terms we use are affected?
+#+name: query affected terms
+#+begin_src sparql :url https://kg.nfdi4bioimage.de/N4BIKG/query
+
+  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_>
+  select ?g ?p ?o where {
+    graph ?g {?s ?p ?o}
+
+    values ?g {
+      <https://kg.nfdi4bioimage.de/n4bikg/core>
+      <https://kg.nfdi4bioimage.de/n4bikg/services>
+      <https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community>
+    }
+
+    bind(concat(str(?p), str(?o)) as ?spo)
+    filter(contains(?spo, str(nfdicore:)))
+    }
+#+end_src
+
+#+RESULTS: query affected terms
+| g                                                        | p                                                   | o                                                   |
+|----------------------------------------------------------+-----------------------------------------------------+-----------------------------------------------------|
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001039 |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000136 | 2023-03-01                                          |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001006 | https://wikidata.org/entity/Q113500855              |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008 | https://nfdi4bioimage.de                            |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0010015 | N4BI                                                |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0010015 | NFDI4BIOIMAGE                                       |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142 | http://www.wikidata.org/entity/Q18199165            |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142 | http://www.wikidata.org/entity/Q18199165            |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142 | http://www.wikidata.org/entity/Q18199165            |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201 | https://omero-nfdi.uni-muenster.de/vkg/sparql       |
+| https://kg.nfdi4bioimage.de/n4bikg/services              | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
+| https://kg.nfdi4bioimage.de/n4bikg/services              | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201 | https://omero-nfdi.uni-muenster.de/vkg/sparql       |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000195 | https://zenodo.org/communities/nfdi4bioimage        |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008 | https://zenodo.org/communities/nfdi4bioimage        |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000003 |
+
+*** List of deleted terms 3.0.1 -> 3.0.2 affecting us here.
+:PROPERTIES:
+:ID:       91e7998b-0aa6-43b4-96c4-ae9ca46c40ab
+:END:
+- nfdicore0000003 deleted, can be replaced by obi_0000245 (organization)
+- related; nfdicore0000136 changed domain to obi_0000245
+  

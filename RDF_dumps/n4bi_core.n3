@@ -1,10 +1,13 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://nfdi4bioimage.de/rdf/node> a nfdicore:NFDI_0001039 ;
+    rdfs:label "The NFDI4BIOIMAGE consortium" ;
     dc:description "Nationale Forschungsdateninfrastruktur für Mikroskopie und Bildanalyse"@de,
         "National Research Data Infrastructure for Microscopy and Bioimage Analysis"@en ;
+    rdfs:comment "This IRI represents the NFDI4BIOIMAGE consortium as an object in the RDF sense." ;
     nfdicore:NFDI_0000136 "2023-03-01"^^xsd:date ;
     nfdicore:NFDI_0001006 <https://wikidata.org/entity/Q113500855> ;
     nfdicore:NFDI_0001008 "https://nfdi4bioimage.de" ;

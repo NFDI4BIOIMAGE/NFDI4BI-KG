@@ -35,6 +35,7 @@ PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX sio:      <http://semanticscience.org/resource/>
 PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
 PREFIX zenodo:   <https://zenodo.org/ns/>
+PREFIX t4fs:     <http://purl.obolibrary.org/obo/T4FS_>
 #+end_src
 
 ** Statements
@@ -50,12 +51,8 @@ PREFIX zenodo:   <https://zenodo.org/ns/>
 Our first OMERO instance to add in the public "all plugins" instance https://omero-nfdi.uni-muenster.de. 
 We define this instance as a Database (to be reconsidered but should be ok for a start).
 #+begin_src rdf :noweb-ref statements
-  <https://omero-nfdi.uni-muenster.de> a ncit:C15426 , <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> .
-#+end_src
-
-The =ncit= prefix must be defined, too:
-#+begin_src rdf :noweb-ref prefixes
-  prefix ncit: <http://purl.obolibrary.org/obo/NCIT_>
+  <https://omero-nfdi.uni-muenster.de> a t4fs:0000397 , <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> .
+  <https://evolomero.evolbio.mpg.de> a t4fs:0000397 , <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> .
 #+end_src
 
 **** Adding properties
@@ -65,6 +62,7 @@ The =ncit= prefix must be defined, too:
 By adding the SPARQL endpoint of this omero instance, we make it part of the n4bi knowledge graph system.
 #+begin_src rdf :noweb-ref statements
   <https://omero-nfdi.uni-muenster.de> nfdicore:NFDI_0000201 <https://omero-nfdi.uni-muenster.de/vkg/sparql> .
+  <https://evolomero.evolbio.mpg.de> nfdicore:NFDI_0000201 <https://evolomero.evolbio.mpg.de/vkg/sparql> .
 #+end_src
 
 
@@ -76,6 +74,7 @@ First, I did not find a class for Knowledge Graph but actually wikidata has one:
 
 #+begin_src rdf :noweb-ref statements
  <https://omero-nfdi.uni-muenster.de/vkg/sparql> a wd:Q33002955 .
+ <https://evolomero.evolbio.mpg.de/vkg/sparql> a wd:Q33002955 .
 
 #+end_src
 I'll also add a relation between the NFDI4BIOIMAGE consortium and the Münster public OMERO. [[http://www.wikidata.org/prop/P121][wp:P121]] is labelled "item operated".
@@ -95,48 +94,9 @@ and the prefixes
 :END:
 
 #+begin_src shell :dir ../RDF_dumps/ :results output
-    export PATH=/opt/apache-jena-5.2.0/bin:$PATH
+    export PATH=/opt/apache-jena/bin:$PATH
     cat n4bi_services.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
     riot --output=n3 tmp.n3 > n4bi_services.n3
 #+end_src
 
 #+RESULTS:
-#+begin_example
-PREFIX dc:       <http://purl.org/dc/elements/1.1/>
-PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
-PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
-PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX sio:      <http://semanticscience.org/resource/>
-PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
-PREFIX zenodo:   <https://zenodo.org/ns/>
-prefix ncit: <http://purl.obolibrary.org/obo/NCIT_>
-prefix wd: <http://www.wikidata.org/entity/>
-prefix wdt: <http://www.wikidata.org/prop/direct/>
-
-<https://omero-nfdi.uni-muenster.de> a ncit:C15426 , <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> .
-<https://omero-nfdi.uni-muenster.de> nfdicore:NFDI_0000201 <https://omero-nfdi.uni-muenster.de/vkg/sparql> .
-<https://omero-nfdi.uni-muenster.de/vkg/sparql> a wd:Q33002955 .
-
-<https://nfdi4bioimage.de/rdf/node> wdt:P121 <https://omero-nfdi.uni-muenster.de> .
-
-PREFIX dc:       <http://purl.org/dc/elements/1.1/>
-PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
-PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
-PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX sio:      <http://semanticscience.org/resource/>
-PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
-PREFIX zenodo:   <https://zenodo.org/ns/>
-
-<https://omero-nfdi.uni-muenster.de> a ncit:C15426 , <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> .
-
-prefix ncit: <http://purl.obolibrary.org/obo/NCIT_>
-
-<https://omero-nfdi.uni-muenster.de> nfdicore:NFDI_0000201 <https://omero-nfdi.uni-muenster.de/vkg/sparql> .
-
-<https://omero-nfdi.uni-muenster.de/vkg/sparql> a wd:Q33002955 .
-
-<https://nfdi4bioimage.de/rdf/node> wdt:P121 <https://omero-nfdi.uni-muenster.de> .
-
-prefix wd: <http://www.wikidata.org/entity/>
-prefix wdt: <http://www.wikidata.org/prop/direct/>
-#+end_example

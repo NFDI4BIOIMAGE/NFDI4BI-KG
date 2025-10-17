@@ -28,6 +28,10 @@ The first subject we create represent the consortium itself.
   n4bi = URIRef("https://nfdi4bioimage.de/rdf/node")
   graph.add((n4bi, RDF.type, nfdicore.NFDI_0001039))
 
+  # Label and description
+  graph.add((n4bi, RDFS.label, Literal("The NFDI4BIOIMAGE consortium")))
+  graph.add((n4bi, RDFS.comment, Literal("This IRI represents the NFDI4BIOIMAGE consortium as an object in the RDF sense.")))
+
   # Foundation date
   graph.add((n4bi, nfdicore.NFDI_0000136, Literal("2023-03-01", datatype=XSD.date)))
 
@@ -51,7 +55,7 @@ The first subject we create represent the consortium itself.
 #+end_src
 
 #+RESULTS:
-: 8
+: 10
 
 
 ** Adding a license to each graph
@@ -93,6 +97,7 @@ Let's get a list of graphs:
 | https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community |     |
 | https://kg.nfdi4bioimage.de/n4bikg/services              |     |
 | https://kg.nfdi4bioimage.de/n4bikg/owl                   |     |
+| https://nfdi4bioimage.de/kg/owl                          |     |
 
 Add these IRIs as =owl:Graph= to the core KG
 #+begin_src rdf :noweb-ref statements
@@ -112,8 +117,7 @@ Cleanup:
   echo $JAVA
   echo $JAVA_HOME
   cat graph_licenses.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
-  /opt/apache-jena-5.2.0/bin/riot --output n3 tmp.n3 | tee graph_licenses.n3
-  rm -v tmp.n3
+  /opt/apache-jena/bin/riot --output n3 tmp.n3 | tee graph_licenses.n3
 
 #+end_src
 
@@ -135,7 +139,6 @@ PREFIX wd:       <http://www.wikidata.org/entity/>
 <https://kg.nfdi4bioimage.de/n4bikg/core>
         a                      wd:Q31386861;
         nfdicore:NFDI_0000142  wd:Q18199165 .
-removed 'tmp.n3'
 #+end_example
 
 ** Query for license information
