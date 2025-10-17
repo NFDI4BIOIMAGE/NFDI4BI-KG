@@ -811,3 +811,12 @@ which of the terms we use are affected?
 - nfdicore0000003 deleted, can be replaced by obi_0000245 (organization)
 - related; nfdicore0000136 changed domain to obi_0000245
   
+
+* Update on server
+:PROPERTIES:
+:ID:       9133d148-448c-4f57-88c0-abd547ad60a2
+:END:
+1. log in to n4bi-kg server
+2. =sudo -i=
+3. =rupdate --server http://localhost:3030/N4BIKG/update "drop ALL"
+4. Upload data via online admin interface
