@@ -195,8 +195,7 @@ type ['info:eu-repo/semantics/conferencePoster']
       if identifier is None:
           bn = BNode()
 
-          if not (bn, RDFS.label, Literal(institution.string)) in graph:
-              graph.add((bn, RDFS.label, Literal(institution.string)))
+          graph.add((bn, RDFS.label, Literal(institution.string)))
           graph.add((bn, RDF.type, OBI['0000245']))
 
           return graph, bn
@@ -215,8 +214,7 @@ type ['info:eu-repo/semantics/conferencePoster']
 
       # If not a ROR, return blank node with name and id as string.
       bn = BNode()
-      if not (bn, RDFS.label, Literal(institution.string)) in graph:
-          graph.add((bn, RDFS.label, Literal(institution.string)))
+      graph.add((bn, RDFS.label, Literal(institution.string)))
       graph.add((bn, DCITE.identifier, Literal(identifier)))
       graph.add((bn, RDF.type, OBI['0000245']))
 
