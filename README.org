@@ -820,3 +820,64 @@ which of the terms we use are affected?
 2. =sudo -i=
 3. =rupdate --server http://localhost:3030/N4BIKG/update "drop ALL"
 4. Upload data via online admin interface
+
+   
+* Dump entire graph and feed to gephi
+:PROPERTIES:
+:ID:       b3524e57-8d3c-4732-b6f5-35cf58e06867
+:END:
+
+#+begin_src sparql :url https://kg.nfdi4bioimage.de/N4BIKG/sparql :results output file link
+  construct {?s ?p ?o} where {graph ?g {?s ?p ?o}}
+#+end_src
+
+#+RESULTS:
+[[file:HTTP/1.1 400 Bad Request
+Alt-Svc: h3=":443"; ma=2592000
+Cache-Control: must-revalidate,no-cache,no-store
+Content-Length: 63
+Content-Type: text/plain;charset=utf-8
+Date: Fri, 17 Oct 2025 13:53:40 GMT
+Fuseki-Request-Id: 34
+Pragma: no-cache
+Vary: Origin
+Via: 1.1 Caddy
+
+Parse error: Encountered " <VAR1> "?o "" at line 1, column 21.
+]]
+PREFIX adms:         <http://www.w3.org/ns/adms#>
+PREFIX bibo:         <http://purl.org/ontology/bibo/>
+PREFIX core:         <https://ld.openmicroscopy.org/core/>
+PREFIX datacite:     <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+PREFIX dc:           <http://purl.org/dc/elements/1.1/>
+PREFIX dcite:        <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+PREFIX dcterms:      <http://purl.org/dc/terms/>
+PREFIX doap:         <http://usefulinc.com/ns/doap#>
+PREFIX edam:         <http://purl.obolibrary.org/obo/edam#>
+PREFIX edamontology: <http://edamontology.org/>
+PREFIX foaf:         <http://xmlns.com/foaf/0.1/>
+PREFIX linkml:       <https://w3id.org/linkml/>
+PREFIX ncit:         <http://purl.obolibrary.org/obo/NCIT_>
+PREFIX nfdicore:     <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX obo:          <http://purl.obolibrary.org/obo/>
+PREFIX oboInOwl:     <http://www.geneontology.org/formats/oboInOwl#>
+PREFIX ontology:     <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX orcid:        <https://orcid.org/>
+PREFIX owl:          <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:         <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ror:          <https://ror.org/>
+PREFIX sio:          <http://semanticscience.org/resource/>
+PREFIX skos:         <http://www.w3.org/2004/02/skos/core#>
+PREFIX t4fs:         <http://purl.obolibrary.org/obo/T4FS_>
+PREFIX terms:        <http://purl.org/dc/terms/>
+PREFIX vann:         <http://purl.org/vocab/vann/>
+PREFIX wd:           <http://www.wikidata.org/entity/>
+PREFIX wdt:          <http://www.wikidata.org/prop/direct/>
+PREFIX xml:          <http://www.w3.org/XML/1998/namespace>
+PREFIX xo:           <http://rhizomik.net/redefer/xsl/xsd2owl-functions.xsl>
+PREFIX xs:           <http://www.w3.org/2001/XMLSchema#>
+PREFIX xsd:          <http://www.w3.org/2001/XMLSchema#>
+PREFIX xsi:          <http://www.w3.org/2001/XMLSchema-instance#>
+PREFIX zenodo:       <https://zenodo.org/ns/>
+]]

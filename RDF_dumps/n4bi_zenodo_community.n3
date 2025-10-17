@@ -85,7 +85,7 @@ orcid:0000-0001-9568-895X
         datacite:affiliation  [ rdfs:label  "German Cancer Research Center (DKFZ),  Department Enabling Technology, Heidelberg, Germany" ];
         datacite:familyName   "Schmidt" , "Christian Schmidt";
         datacite:givenName    "Christian";
-        datacite:identifier   "https://orcid.org/0000-0001-9568-895X"^^xsd:anyURI .
+    datacite:identifier   "https://orcid.org/0000-0001-9568-895X"^^xsd:anyURI .
 
 ror:04cdgtt98  a             obo:OBI_0000245;
         rdfs:label           "German Cancer Research Center";
