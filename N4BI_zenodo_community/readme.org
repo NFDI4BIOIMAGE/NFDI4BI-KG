@@ -162,20 +162,40 @@ type ['info:eu-repo/semantics/conferencePoster']
   def parse_person(graph, person):
 
       orcid = person.find('nameIdentifier', attrs={'nameIdentifierScheme':'ORCID'})
-      if orcid is not None:
+
+      # Parse given name
+      given_name = person.find('givenName')
+      if given_name is not None:
+          given_name = given_name.string
+      else:
+          given_name = ""
+
+      # Parse family name
+      family_name = person.find('familyName')
+      if family_name is not None:
+          family_name  = family_name.string
+      else:
+          family_name = ""
+      name = given_name + " " + family_name
+
+      if name == " ": name = "NN"
+
+      if orcid is None:
+          try:
+              person_uri = next(graph.subjects(predicate=RDFS.label, object=Literal(name)))
+          except StopIteration:
+              person_uri = BNode()
+
+          except:
+              raise
+      else:
           person_uri = ORCID[orcid.string]
           graph.add((person_uri, DCITE.identifier, Literal(person_uri, datatype=XSD.anyURI)))
-      else:
-          person_uri = BNode()
-
+          
       graph.add((person_uri, RDF.type, FOAF.Person))
-      given_name = person.find('givenName')
-      family_name = person.find('familyName')
-
-      if given_name is not None:
-          graph.add((person_uri, DCITE.givenName, Literal(given_name.string)))
-      if family_name is not None:
-          graph.add((person_uri, DCITE.familyName, Literal(family_name.string)))
+      graph.add((person_uri, RDFS.label, Literal(name)))
+      graph.add((person_uri, DCITE.givenName, Literal(given_name)))
+      graph.add((person_uri, DCITE.familyName, Literal(family_name)))
 
       # Get affiliations.
       # Skip nfdi4bioimage because it's not an affiliation in the legal sense.
@@ -193,10 +213,22 @@ type ['info:eu-repo/semantics/conferencePoster']
 
       # If no identifier, return blank node with only the name.
       if identifier is None:
-          bn = BNode()
 
-          graph.add((bn, RDFS.label, Literal(institution.string)))
-          graph.add((bn, RDF.type, OBI['0000245']))
+          # Identify institution by name string.
+          predicate = RDFS.label
+          object = Literal(institution.string)
+
+          # First see if this institution is already in the graph
+          try:
+              bn = next(graph.subjects(predicate=predicate, object=object))
+          except StopIteration:  # not found, create it
+              bn = BNode()
+
+              graph.add((bn, RDFS.label, Literal(institution.string)))
+              graph.add((bn, RDF.type, OBI['0000245']))
+
+          except:
+              raise
 
           return graph, bn
 
@@ -213,10 +245,17 @@ type ['info:eu-repo/semantics/conferencePoster']
           return graph, ror_uri
 
       # If not a ROR, return blank node with name and id as string.
-      bn = BNode()
-      graph.add((bn, RDFS.label, Literal(institution.string)))
-      graph.add((bn, DCITE.identifier, Literal(identifier)))
-      graph.add((bn, RDF.type, OBI['0000245']))
+      # But first check if institution with this identifier already exists
+      try:
+          bn = next(graph.subjects(predicate=DCITE.identifier, object=Literal(identifier)))
+      except StopIteration:
+          bn = BNode()
+          graph.add((bn, RDFS.label, Literal(institution.string)))
+          graph.add((bn, DCITE.identifier, Literal(identifier)))
+          graph.add((bn, RDF.type, OBI['0000245']))
+
+      except:
+          raise
 
       return graph, bn
 
@@ -245,6 +284,7 @@ type ['info:eu-repo/semantics/conferencePoster']
                   ("ror"     , ROR   := Namespace("https://ror.org/")),
                   ("doi"     , DOI   := Namespace("https://doi.org/")),
                   ("obi"     , OBI   := Namespace("http://purl.obolibrary.org/OBI_")),
+                  ("t4fs"    , T4FS  := Namespace("http://purl.obolibrary.org/T4FS_")),
   ])
 
   for prefix, ns in ns_dict.items():
@@ -289,6 +329,7 @@ type ['info:eu-repo/semantics/conferencePoster']
     relations = xml_root.find_all('relatedIdentifier')
     dates = xml_root.find_all('date')
 
+    graph.add((subj, RDF.type, T4FS['0000113']))
     graph.add((subj, DCITE.title, Literal(title.string)))
 
     if description is not None:
@@ -302,9 +343,6 @@ type ['info:eu-repo/semantics/conferencePoster']
 
     for right in rights:
         graph.add((subj, DCITE['right'], Literal(right.string)))
-
-    # for affiliation in affiliations:
-    #     graph = parse_institution(graph, affiliation)
 
     for creator in creators:
         graph, person = parse_person(graph, creator)
@@ -328,7 +366,30 @@ type ['info:eu-repo/semantics/conferencePoster']
 #+end_src
 
 #+RESULTS:
-: 5595
+: 5296
+
+*** Clean up
+:PROPERTIES:
+:ID:       5604910a-a506-487f-bf36-c64d8c1de3f8
+:END:
+
+Cleanup:
+#+begin_src bash :dir ../RDF_dumps :results output :session noconda
+  JAVA=$(which java)
+  export JAVA_HOME=/usr
+  echo $JAVA
+  echo $JAVA_HOME
+  RIOT=/opt/apache-jena/bin/riot
+  cat n4bi_zenodo_community.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
+  $RIOT --output n3 n4bi_zenodo_community.n3 > tmp.n3
+  $RIOT --output turtle tmp.n3 > n4bi_zenodo_community.ttl
+  mv tmp.n3 n4bi_zenodo_community.n3
+#+end_src
+
+#+RESULTS:
+: /usr/bin/java
+: /usr
+
 
 ** Convert datacite xsd schema to owl ontology
 :PROPERTIES:
