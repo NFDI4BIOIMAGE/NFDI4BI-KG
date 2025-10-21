@@ -278,13 +278,13 @@ type ['info:eu-repo/semantics/conferencePoster']
 
   # Namespaces and prefixes.
   ns_dict = dict([
-                  ("datacite", DCITE := Namespace("https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#")),
+      ("datacite", DCITE := Namespace("https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#")),
                   ("nfdicore", NFDI  := Namespace("https://nfdi.fiz-karlsruhe.de/ontology/")),
                   ("orcid"   , ORCID := Namespace("https://orcid.org/")),
                   ("ror"     , ROR   := Namespace("https://ror.org/")),
                   ("doi"     , DOI   := Namespace("https://doi.org/")),
-                  ("obi"     , OBI   := Namespace("http://purl.obolibrary.org/OBI_")),
-                  ("t4fs"    , T4FS  := Namespace("http://purl.obolibrary.org/T4FS_")),
+                  ("obi"     , OBI   := Namespace("http://purl.obolibrary.org/obo/OBI_")),
+                  ("t4fs"    , T4FS  := Namespace("http://purl.obolibrary.org/obo/T4FS_")),
   ])
 
   for prefix, ns in ns_dict.items():
@@ -366,7 +366,7 @@ type ['info:eu-repo/semantics/conferencePoster']
 #+end_src
 
 #+RESULTS:
-: 5296
+: 5349
 
 *** Clean up
 :PROPERTIES:
