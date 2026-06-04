@@ -4,3 +4,4 @@ queries.md
 *.properties
 __pycache__/
 /sandbox/
+RDF_dumps/
