@@ -1,14 +1,23 @@
 PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
 PREFIX wd:       <http://www.wikidata.org/entity/>
+base <https://kg.nfdi4bioimage.de/n4bikg/>
 
-<https://kg.nfdi4bioimage.de/n4bikg/owl>
-        a                      wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
+# Define graphs as such with wd:31386861 (RDF graph) and under CC-BY-SA License.
+<core> a wd:Q31386861 ;
+         nfdicore:NFDI_0000142 wd:Q18199165 .
+<services> a wd:Q31386861 ;
+          nfdicore:NFDI_0000142 wd:Q18199165 .
+<owl> a wd:Q31386861 ;
+          nfdicore:NFDI_0000142 wd:Q18199165 .
 
-<https://kg.nfdi4bioimage.de/n4bikg/services>
-        a                      wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX wd:       <http://www.wikidata.org/entity/>
+base <https://kg.nfdi4bioimage.de/n4bikg/>
 
-<https://kg.nfdi4bioimage.de/n4bikg/core>
-        a                      wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
+# Define graphs as such with wd:31386861 (RDF graph) and under CC-BY-SA License.
+<core> a wd:Q31386861 ;
+         nfdicore:NFDI_0000142 wd:Q18199165 .
+<services> a wd:Q31386861 ;
+          nfdicore:NFDI_0000142 wd:Q18199165 .
+<owl> a wd:Q31386861 ;
+          nfdicore:NFDI_0000142 wd:Q18199165 .

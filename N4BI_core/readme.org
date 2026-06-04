@@ -8,7 +8,7 @@ The first subject we create represent the consortium itself.
 
 * Python code
 :PROPERTIES:
-:ID:       c90a39ee-274a-4895-a727-2b143101cb78
+:ID:       6b173951-481d-4aa7-836b-c36dab42ff6b
 :END:
 :PROPERTIES:
 :ID:       6cf75b8d-721e-45d2-a549-ca20aabfc749
@@ -183,4 +183,703 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 | https://kg.nfdi4bioimage.de/n4bikg/core     | http://www.wikidata.org/entity/Q18199165 | Creative Commons Attribution-ShareAlike 4.0 International | https://creativecommons.org/licenses/by-sa/4.0/deed.id |
 | https://kg.nfdi4bioimage.de/n4bikg/owl      | http://www.wikidata.org/entity/Q18199165 | Creative Commons Attribution-ShareAlike 4.0 International | https://creativecommons.org/licenses/by-sa/4.0/deed.id |
 | https://kg.nfdi4bioimage.de/n4bikg/services | http://www.wikidata.org/entity/Q18199165 | Creative Commons Attribution-ShareAlike 4.0 International | https://creativecommons.org/licenses/by-sa/4.0/deed.id |
+
+* Updates
+:PROPERTIES:
+:ID:       50bbbc47-8af1-4446-9a3e-66ab5fc1feb8
+:END:
+
+** [2026-06-04 Thu] Insert affiliated institutions via wikidata
+:PROPERTIES:
+:ID:       1e31a3fb-550b-4abf-a5dd-94dcfbd93d78
+:header-args:sparql: :url https://query.wikidata.org/sparql :noweb yes :exports both :eval no-exports 
+:END:
+
+*** Test query
+:PROPERTIES:
+:ID:       43e2eff2-56e6-4933-8eff-174d6f8b0d5b
+:END:
+#+begin_src sparql
+  select * where {?s ?p ?o} limit 10
+#+end_src
+
+#+RESULTS:
+| s                              | p                                     | o                                                 |
+|--------------------------------+---------------------------------------+---------------------------------------------------|
+| http://wikiba.se/ontology#Dump | http://creativecommons.org/ns#license | http://creativecommons.org/publicdomain/zero/1.0/ |
+| http://wikiba.se/ontology#Dump | http://schema.org/softwareVersion     | 1.0.0                                             |
+| http://wikiba.se/ontology#Dump | http://schema.org/dateModified        | 2025-07-11T23:01:33Z                              |
+| http://wikiba.se/ontology#Dump | http://schema.org/dateModified        | 2025-07-11T23:01:34Z                              |
+| http://wikiba.se/ontology#Dump | http://schema.org/dateModified        | 2025-07-11T23:01:35Z                              |
+| http://wikiba.se/ontology#Dump | http://schema.org/dateModified        | 2025-07-11T23:01:36Z                              |
+| http://wikiba.se/ontology#Dump | http://schema.org/dateModified        | 2025-07-11T23:01:37Z                              |
+| http://wikiba.se/ontology#Dump | http://schema.org/dateModified        | 2025-07-11T23:01:38Z                              |
+| http://wikiba.se/ontology#Dump | http://schema.org/dateModified        | 2025-07-11T23:01:39Z                              |
+| http://wikiba.se/ontology#Dump | http://schema.org/dateModified        | 2025-07-11T23:01:40Z                              |
+
+*** Prefixes
+:PROPERTIES:
+:ID:       b6eb32bd-2d8c-4524-9286-52daa749db66
+:END:
+
+#+begin_src sparql :noweb-ref wd-prefixes :eval no
+  PREFIX bd: <http://www.bigdata.com/rdf#>
+  PREFIX cc: <http://creativecommons.org/ns#>
+  PREFIX dct: <http://purl.org/dc/terms/>
+  PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+  PREFIX mwapi: <https://www.mediawiki.org/ontology#API/>
+  PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+  PREFIX owl: <http://www.w3.org/2002/07/owl#>
+  PREFIX p: <http://www.wikidata.org/prop/>
+  PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+  PREFIX pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/>
+  PREFIX pqv: <http://www.wikidata.org/prop/qualifier/value/>
+  PREFIX pr: <http://www.wikidata.org/prop/reference/>
+  PREFIX prn: <http://www.wikidata.org/prop/reference/value-normalized/>
+  PREFIX prov: <http://www.w3.org/ns/prov#>
+  PREFIX prv: <http://www.wikidata.org/prop/reference/value/>
+  PREFIX ps: <http://www.wikidata.org/prop/statement/>
+  PREFIX psn: <http://www.wikidata.org/prop/statement/value-normalized/>
+  PREFIX psv: <http://www.wikidata.org/prop/statement/value/>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX schema: <http://schema.org/>
+  PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+  PREFIX wd: <http://www.wikidata.org/entity/>
+  PREFIX wdata: <http://www.wikidata.org/wiki/Special:EntityData/>
+  PREFIX wdno: <http://www.wikidata.org/prop/novalue/>
+  PREFIX wdsubgraph: <https://query.wikidata.org/subgraph/>
+  PREFIX wdref: <http://www.wikidata.org/reference/>
+  PREFIX wds: <http://www.wikidata.org/entity/statement/>
+  PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+  PREFIX wdtn: <http://www.wikidata.org/prop/direct-normalized/>
+  PREFIX wdv: <http://www.wikidata.org/value/>
+  PREFIX wikibase: <http://wikiba.se/ontology#>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  prefix ror: <https://ror.org/>
+#+end_src
+
+*** Labels
+:PROPERTIES:
+:ID:       ce1cd144-8f7a-4a76-aec0-fec5c93e80d0
+:END:
+#+begin_src sparql :noweb-ref wikibase-label-service :eval no
+    service wikibase:{ bd:serviceParam wikibase:language "en". }
+#+end_src
+
+*** Get nfdi4bioimage ID
+:PROPERTIES:
+:ID:       805c6c62-35b7-42ba-9a91-725caef9e887
+:END:
+#+begin_src sparql
+  select * where {
+    ?s rdfs:label "NFDI4BIOIMAGE"@en .
+  }
+#+end_src
+
+#+RESULTS:
+| s                                         |
+|-------------------------------------------|
+| http://www.wikidata.org/entity/Q113500855 |
+|                                           |
+
+*** n4bi affiliations
+:PROPERTIES:
+:ID:       e5a37dee-81fc-46d0-be5e-25f3faf67ad3
+:END:
+#+begin_src sparql
+  <<wd-prefixes>>
+  select distinct ?affiliation ?affiliationLabel ?ror where {
+    service wikibase:label {bd:serviceParam wikibase:language "en" .}
+    {
+    select distinct ?affiliation ?ror where {
+      wd:Q113500855 wdt:P1416 ?affiliation .
+      optional {?affiliation wdt:P6782 ?ror_id .
+      }
+    bind(iri(concat(str(ror:),?ror_id)) as ?ror)
+      }
+    }
+  }
+#+end_src
+
+#+RESULTS:
+| affiliation                               | affiliationLabel                                                     | ror                       |
+|-------------------------------------------+----------------------------------------------------------------------+---------------------------|
+| http://www.wikidata.org/entity/Q880999    | Helmholtz Centre for Environmental Research                          | https://ror.org/000h6jb29 |
+| http://www.wikidata.org/entity/Q1248645   | Leibniz Institute for Plasma Science and Technology                  | https://ror.org/004hd5y14 |
+| http://www.wikidata.org/entity/Q1493545   | Max Planck Institute for Evolutionary Biology                        | https://ror.org/0534re684 |
+| http://www.wikidata.org/entity/Q154804    | Leipzig University                                                   | https://ror.org/03s7gtk40 |
+| http://www.wikidata.org/entity/Q161982    | Johannes Gutenberg University Mainz                                  | https://ror.org/023b0x485 |
+| http://www.wikidata.org/entity/Q835440    | University of Konstanz                                               | https://ror.org/0546hnb39 |
+| http://www.wikidata.org/entity/Q168426    | University of Münster                                                | https://ror.org/00pd74e08 |
+| http://www.wikidata.org/entity/Q116959508 | German BioImaging – Gesellschaft für Mikroskopie und Bildanalyse     | https://ror.org/05tpnw772 |
+| http://www.wikidata.org/entity/Q1562772   | HAWK University of Applied Sciences and Arts                         | https://ror.org/00f5q5839 |
+| http://www.wikidata.org/entity/Q1664946   | Leibniz Institute of Photonic Technology                             | https://ror.org/02se0t636 |
+| http://www.wikidata.org/entity/Q449325    | German Cancer Research Center                                        | https://ror.org/04cdgtt98 |
+| http://www.wikidata.org/entity/Q317032    | University of Düsseldorf                                             | https://ror.org/024z2rq82 |
+| http://www.wikidata.org/entity/Q151510    | Heidelberg University                                                | https://ror.org/038t36y30 |
+| http://www.wikidata.org/entity/Q54096     | University of Cologne                                                | https://ror.org/00rcxh774 |
+| http://www.wikidata.org/entity/Q695267    | European Molecular Biology Laboratory                                | https://ror.org/03mstc592 |
+| http://www.wikidata.org/entity/Q697111    | Forschungszentrum Jülich                                             | https://ror.org/02nv7yv05 |
+| http://www.wikidata.org/entity/Q152838    | University of Göttingen                                              | https://ror.org/01y9bpm73 |
+| http://www.wikidata.org/entity/Q158158    | TU Dresden                                                           | https://ror.org/042aqky30 |
+| http://www.wikidata.org/entity/Q702499    | Osnabrück University                                                 | https://ror.org/04qmmjx98 |
+| http://www.wikidata.org/entity/Q1813719   | Leibniz Institute for Analytical Sciences - ISAS                     | https://ror.org/02jhqqg57 |
+| http://www.wikidata.org/entity/Q1813751   | Leibniz Institute for Natural Product Research and Infection Biology | https://ror.org/055s37c97 |
+| http://www.wikidata.org/entity/Q1813753   | Leibniz Institute for Neurobiology                                   | https://ror.org/01zwmgk08 |
+| http://www.wikidata.org/entity/Q153987    | University of Freiburg                                               | https://ror.org/0245cg223 |
+
+
+*** Ontology term to describe affiliation in nfdicore?
+:PROPERTIES:
+:ID:       0e95840b-5cf8-4aad-aa7d-24924d27a055
+:END:
+#+begin_src sparql :url http://kg.nfdi4bioimage.de/N4BIKG/query
+  prefix n4bikg: <https://kg.nfdi4bioimage.de/n4bikg/>
+  prefix owl: <http://www.w3.org/2002/07/owl#>
+  prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+  select distinct ?p ?p_label where {
+    graph n4bikg:owl {
+      ?p a owl:ObjectProperty ;
+         rdfs:label ?p_label .
+      }
+    }
+#+end_src
+
+#+RESULTS:
+| p                                                           | p_label                        |
+|-------------------------------------------------------------+--------------------------------|
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001006         | has external identifier        |
+| http://purl.obolibrary.org/obo/BFO_0000050                  | part of                        |
+| http://purl.obolibrary.org/obo/BFO_0000051                  | has part                       |
+| http://purl.obolibrary.org/obo/BFO_0000054                  | has realization                |
+| http://purl.obolibrary.org/obo/BFO_0000055                  | realizes                       |
+| http://purl.obolibrary.org/obo/BFO_0000056                  | participates in                |
+| http://purl.obolibrary.org/obo/BFO_0000057                  | has participant                |
+| http://purl.obolibrary.org/obo/BFO_0000058                  | is concretized by              |
+| http://purl.obolibrary.org/obo/BFO_0000059                  | concretizes                    |
+| http://purl.obolibrary.org/obo/BFO_0000062                  | preceded by                    |
+| http://purl.obolibrary.org/obo/BFO_0000063                  | precedes                       |
+| http://purl.obolibrary.org/obo/BFO_0000066                  | occurs in                      |
+| http://purl.obolibrary.org/obo/BFO_0000183                  | environs                       |
+| http://purl.obolibrary.org/obo/BFO_0000084                  | generically depends on         |
+| http://purl.obolibrary.org/obo/BFO_0000101                  | is carrier of                  |
+| http://purl.obolibrary.org/obo/BFO_0000108                  | exists at                      |
+| http://purl.obolibrary.org/obo/BFO_0000115                  | has member part                |
+| http://purl.obolibrary.org/obo/BFO_0000178                  | has continuant part            |
+| http://purl.obolibrary.org/obo/BFO_0000129                  | member part of                 |
+| http://purl.obolibrary.org/obo/BFO_0000117                  | has occurrent part             |
+| http://purl.obolibrary.org/obo/BFO_0000132                  | occurrent part of              |
+| http://purl.obolibrary.org/obo/BFO_0000121                  | has temporal part              |
+| http://purl.obolibrary.org/obo/BFO_0000139                  | temporal part of               |
+| http://purl.obolibrary.org/obo/BFO_0000124                  | location of                    |
+| http://purl.obolibrary.org/obo/BFO_0000171                  | located in                     |
+| http://purl.obolibrary.org/obo/BFO_0000127                  | material basis of              |
+| http://purl.obolibrary.org/obo/BFO_0000218                  | has material basis             |
+| http://purl.obolibrary.org/obo/BFO_0000176                  | continuant part of             |
+| http://purl.obolibrary.org/obo/BFO_0000153                  | temporally projects onto       |
+| http://purl.obolibrary.org/obo/BFO_0000184                  | history of                     |
+| http://purl.obolibrary.org/obo/BFO_0000185                  | has history                    |
+| http://purl.obolibrary.org/obo/BFO_0000194                  | specifically depended on by    |
+| http://purl.obolibrary.org/obo/BFO_0000195                  | specifically depends on        |
+| http://purl.obolibrary.org/obo/BFO_0000196                  | bearer of                      |
+| http://purl.obolibrary.org/obo/BFO_0000197                  | inheres in                     |
+| http://purl.obolibrary.org/obo/BFO_0000199                  | occupies temporal region       |
+| http://purl.obolibrary.org/obo/BFO_0000200                  | occupies spatiotemporal region |
+| http://purl.obolibrary.org/obo/BFO_0000210                  | occupies spatial region        |
+| http://purl.obolibrary.org/obo/BFO_0000216                  | spatially projects onto        |
+| http://purl.obolibrary.org/obo/BFO_0000221                  | first instant of               |
+| http://purl.obolibrary.org/obo/BFO_0000222                  | has first instant              |
+| http://purl.obolibrary.org/obo/BFO_0000223                  | last instant of                |
+| http://purl.obolibrary.org/obo/BFO_0000224                  | has last instant               |
+| http://purl.obolibrary.org/obo/IAO_0000136                  | is about                       |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000226         | is subject of                  |
+| http://purl.obolibrary.org/obo/IAO_0000219                  | denotes                        |
+| http://purl.obolibrary.org/obo/IAO_0000235                  | denoted by                     |
+| http://www.w3.org/ns/dcat#downloadURL                       | URL de descarga                |
+| http://www.w3.org/ns/dcat#downloadURL                       | URL de téléchargement          |
+| http://www.w3.org/ns/dcat#downloadURL                       | URL di scarico                 |
+| http://www.w3.org/ns/dcat#downloadURL                       | URL souboru ke stažení         |
+| http://www.w3.org/ns/dcat#downloadURL                       | URL μεταφόρτωσης               |
+| http://www.w3.org/ns/dcat#downloadURL                       | download URL                   |
+| http://www.w3.org/ns/dcat#downloadURL                       | downloadURL                    |
+| http://www.w3.org/ns/dcat#downloadURL                       | رابط تحميل                       |
+| http://www.w3.org/ns/dcat#downloadURL                       | ダウンロードURL                  |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000103         | has best practice              |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000104         | best practice of               |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000112         | has contact point              |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000240         | has agent                      |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000113         | contact point of               |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000241         | is agent of                    |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000116         | has contributor                |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000117         | contributor of                 |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000125         | has data set                   |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000126         | data set of                    |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000132         | has file format                |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000133         | file format of                 |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000137         | has funding organization       |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000138         | funding organization of        |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142         | has license                    |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000143         | license of                     |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000144         | has location                   |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000146         | has media type                 |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000147         | media type of                  |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000152         | has input                      |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001024         | is input of                    |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000153         | has output                     |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001023         | is output of                   |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000182         | has parent organization        |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000187         | has programming language       |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000188         | programming language of        |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000191         | published by                   |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000192         | publisher of                   |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000194         | resource of project            |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000195         | represents collection          |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000196         | represented collection of      |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000199         | has software                   |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000200         | software of                    |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201         | has sparql endpoint            |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000202         | sparql endpoint of             |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000204         | has specification              |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000205         | specification of               |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000207         | has standard                   |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000208         | standard of                    |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000211         | has subject area               |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000212         | subject area of                |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000213         | has subsidiary organization    |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000216         | has technology                 |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000217         | technology of                  |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001003         | is identified by               |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001027         | has creator                    |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001028         | creator of                     |
+| https://ld.openmicroscopy.org/core/mime_type                | mime_type                      |
+| https://ld.openmicroscopy.org/core/external                 | external                       |
+| https://ld.openmicroscopy.org/core/bin_data                 | bin_data                       |
+| https://ld.openmicroscopy.org/core/samples_per_pixel        | samples_per_pixel              |
+| https://ld.openmicroscopy.org/core/acquisition_mode         | acquisition_mode               |
+| https://ld.openmicroscopy.org/core/contrast_method          | contrast_method                |
+| https://ld.openmicroscopy.org/core/emission_wavelength      | emission_wavelength            |
+| https://ld.openmicroscopy.org/core/filter_set               | filter_set                     |
+| https://ld.openmicroscopy.org/core/pinhole_size             | pinhole_size                   |
+| https://ld.openmicroscopy.org/core/pockel_cell_setting      | pockel_cell_setting            |
+| https://ld.openmicroscopy.org/core/illumination_type        | illumination_type              |
+| https://ld.openmicroscopy.org/core/detector_settings        | detector_settings              |
+| https://ld.openmicroscopy.org/core/light_source_settings    | light_source_settings          |
+| https://ld.openmicroscopy.org/core/nd_filter                | nd_filter                      |
+| https://ld.openmicroscopy.org/core/fluor                    | fluor                          |
+| https://ld.openmicroscopy.org/core/light_path               | light_path                     |
+| https://ld.openmicroscopy.org/core/excitation_wavelength    | excitation_wavelength          |
+| https://ld.openmicroscopy.org/core/amplification_gain       | amplification_gain             |
+| https://ld.openmicroscopy.org/core/transmittance_range      | transmittance_range            |
+| https://ld.openmicroscopy.org/core/filter_wheel             | filter_wheel                   |
+| https://ld.openmicroscopy.org/core/id                       | id                             |
+| https://ld.openmicroscopy.org/core/name                     | name                           |
+| https://ld.openmicroscopy.org/core/tuneable                 | tuneable                       |
+| https://ld.openmicroscopy.org/core/pockel_cell              | pockel_cell                    |
+| https://ld.openmicroscopy.org/core/pump                     | pump                           |
+| https://ld.openmicroscopy.org/core/repetition_rate          | repetition_rate                |
+| https://ld.openmicroscopy.org/core/laser_medium             | laser_medium                   |
+| https://ld.openmicroscopy.org/core/frequency_multiplication | frequency_multiplication       |
+| https://ld.openmicroscopy.org/core/pulse                    | pulse                          |
+| https://ld.openmicroscopy.org/core/k                        | k                              |
+| https://ld.openmicroscopy.org/core/structured_annotations   | structured_annotations         |
+| https://ld.openmicroscopy.org/core/rights                   | rights                         |
+| https://ld.openmicroscopy.org/core/binary_only              | binary_only                    |
+| https://ld.openmicroscopy.org/core/creator                  | creator                        |
+| https://ld.openmicroscopy.org/core/lens_na                  | lens_na                        |
+| https://ld.openmicroscopy.org/core/iris                     | iris                           |
+| https://ld.openmicroscopy.org/core/calibrated_magnification | calibrated_magnification       |
+| https://ld.openmicroscopy.org/core/working_distance         | working_distance               |
+| https://ld.openmicroscopy.org/core/correction               | correction                     |
+| https://ld.openmicroscopy.org/core/nominal_magnification    | nominal_magnification          |
+| https://ld.openmicroscopy.org/core/immersion                | immersion                      |
+| https://ld.openmicroscopy.org/core/interleaved              | interleaved                    |
+| https://ld.openmicroscopy.org/core/physical_size_z          | physical_size_z                |
+| https://ld.openmicroscopy.org/core/physical_size_x          | physical_size_x                |
+| https://ld.openmicroscopy.org/core/time_increment           | time_increment                 |
+| https://ld.openmicroscopy.org/core/metadata_only            | metadata_only                  |
+| https://ld.openmicroscopy.org/core/physical_size_y          | physical_size_y                |
+| https://ld.openmicroscopy.org/core/significant_bits         | significant_bits               |
+| https://ld.openmicroscopy.org/core/big_endian               | big_endian                     |
+| https://ld.openmicroscopy.org/core/hash_sha1                | hash_sha1                      |
+| https://ld.openmicroscopy.org/core/delta_t                  | delta_t                        |
+| https://ld.openmicroscopy.org/core/position_z               | position_z                     |
+| https://ld.openmicroscopy.org/core/exposure_time            | exposure_time                  |
+| https://ld.openmicroscopy.org/core/status                   | status                         |
+| https://ld.openmicroscopy.org/core/well_origin_y            | well_origin_y                  |
+| https://ld.openmicroscopy.org/core/column_naming_convention | column_naming_convention       |
+| https://ld.openmicroscopy.org/core/row_naming_convention    | row_naming_convention          |
+| https://ld.openmicroscopy.org/core/well_origin_x            | well_origin_x                  |
+| https://ld.openmicroscopy.org/core/columns                  | columns                        |
+| https://ld.openmicroscopy.org/core/rows                     | rows                           |
+| https://ld.openmicroscopy.org/core/field_index              | field_index                    |
+| https://ld.openmicroscopy.org/core/maximum_field_count      | maximum_field_count            |
+| https://ld.openmicroscopy.org/core/end_time                 | end_time                       |
+| https://ld.openmicroscopy.org/core/start_time               | start_time                     |
+| https://ld.openmicroscopy.org/core/protocol_description     | protocol_description           |
+| https://ld.openmicroscopy.org/core/protocol_identifier      | protocol_identifier            |
+| https://ld.openmicroscopy.org/core/reagent_set_description  | reagent_set_description        |
+| https://ld.openmicroscopy.org/core/reagent_set_identifier   | reagent_set_identifier         |
+| https://ld.openmicroscopy.org/core/plane_count              | plane_count                    |
+| https://ld.openmicroscopy.org/core/external_description     | external_description           |
+| https://ld.openmicroscopy.org/core/reagent                  | reagent                        |
+| https://ld.openmicroscopy.org/core/image                    | image                          |
+| https://ld.openmicroscopy.org/core/timepoint                | timepoint                      |
+| https://ld.openmicroscopy.org/core/read_out_rate            | read_out_rate                  |
+| https://ld.openmicroscopy.org/core/integration              | integration                    |
+| https://ld.openmicroscopy.org/core/binning                  | binning                        |
+| https://ld.openmicroscopy.org/core/acquisition_date         | acquisition_date               |
+| https://ld.openmicroscopy.org/core/objective_settings       | objective_settings             |
+| https://ld.openmicroscopy.org/core/stage_label              | stage_label                    |
+| https://ld.openmicroscopy.org/core/experiment               | experiment                     |
+| https://ld.openmicroscopy.org/core/instrument               | instrument                     |
+| https://ld.openmicroscopy.org/core/imaging_environment      | imaging_environment            |
+| https://ld.openmicroscopy.org/core/co2_percent              | co2_percent                    |
+| https://ld.openmicroscopy.org/core/air_pressure             | air_pressure                   |
+| https://ld.openmicroscopy.org/core/humidity                 | humidity                       |
+| https://ld.openmicroscopy.org/core/temperature              | temperature                    |
+| https://ld.openmicroscopy.org/core/microscope               | microscope                     |
+| https://ld.openmicroscopy.org/core/attenuation              | attenuation                    |
+| https://ld.openmicroscopy.org/core/refractive_index         | refractive_index               |
+| https://ld.openmicroscopy.org/core/correction_collar        | correction_collar              |
+| https://ld.openmicroscopy.org/core/medium                   | medium                         |
+| https://ld.openmicroscopy.org/core/reagent_identifier       | reagent_identifier             |
+| https://ld.openmicroscopy.org/core/rights_held              | rights_held                    |
+| https://ld.openmicroscopy.org/core/rights_holder            | rights_holder                  |
+| https://ld.openmicroscopy.org/core/z                        | z                              |
+| https://ld.openmicroscopy.org/core/y                        | y                              |
+| https://ld.openmicroscopy.org/core/x                        | x                              |
+| https://ld.openmicroscopy.org/core/transmittance            | transmittance                  |
+| https://ld.openmicroscopy.org/core/cut_in_tolerance         | cut_in_tolerance               |
+| https://ld.openmicroscopy.org/core/cut_out                  | cut_out                        |
+| https://ld.openmicroscopy.org/core/cut_in                   | cut_in                         |
+| https://ld.openmicroscopy.org/core/cut_out_tolerance        | cut_out_tolerance              |
+| https://ld.openmicroscopy.org/core/file_name                | file_name                      |
+| https://ld.openmicroscopy.org/core/email                    | email                          |
+| https://ld.openmicroscopy.org/core/first_name               | first_name                     |
+| https://ld.openmicroscopy.org/core/institution              | institution                    |
+| https://ld.openmicroscopy.org/core/last_name                | last_name                      |
+| https://ld.openmicroscopy.org/core/middle_name              | middle_name                    |
+| https://ld.openmicroscopy.org/core/user_name                | user_name                      |
+-> the "has_participant' links to BFO_0000057 but that one does not exist in the BFO. Updated nfdi core has RO_0000057 instead which we will use here.
+
+
+*** Construct triples
+:PROPERTIES:
+:ID:       78a20617-396f-48ee-8ada-0048f726ef0b
+:END:
+
+**** What's in core atm?
+:PROPERTIES:
+:ID:       830c9f8e-2c08-4b9b-8146-f8a993114203
+:END:
+#+begin_src sparql :url http://kg.nfdi4bioimage.de/N4BIKG/query
+  prefix n4bikg: <https://kg.nfdi4bioimage.de/n4bikg/>
+  prefix owl: <http://www.w3.org/2002/07/owl#>
+  prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+  select * where {
+  graph n4bikg:core { ?s ?p ?o }
+      }
+#+end_src
+
+#+RESULTS:
+| s                                           | p                                                   | o                                                                               |
+|---------------------------------------------+-----------------------------------------------------+---------------------------------------------------------------------------------|
+| https://nfdi4bioimage.de/rdf/node           | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001039                             |
+| https://nfdi4bioimage.de/rdf/node           | http://purl.org/dc/elements/1.1/description         | Nationale Forschungsdateninfrastruktur für Mikroskopie und Bildanalyse          |
+| https://nfdi4bioimage.de/rdf/node           | http://purl.org/dc/elements/1.1/description         | National Research Data Infrastructure for Microscopy and Bioimage Analysis      |
+| https://nfdi4bioimage.de/rdf/node           | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000136 | 2023-03-01                                                                      |
+| https://nfdi4bioimage.de/rdf/node           | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001006 | https://wikidata.org/entity/Q113500855                                          |
+| https://nfdi4bioimage.de/rdf/node           | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008 | https://nfdi4bioimage.de                                                        |
+| https://nfdi4bioimage.de/rdf/node           | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0010015 | N4BI                                                                            |
+| https://nfdi4bioimage.de/rdf/node           | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0010015 | NFDI4BIOIMAGE                                                                   |
+| https://nfdi4bioimage.de/rdf/node           | http://www.w3.org/2000/01/rdf-schema#label          | The NFDI4BIOIMAGE consortium                                                    |
+| https://nfdi4bioimage.de/rdf/node           | http://www.w3.org/2000/01/rdf-schema#comment        | This IRI represents the NFDI4BIOIMAGE consortium as an object in the RDF sense. |
+| https://kg.nfdi4bioimage.de/n4bikg/core     | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://www.wikidata.org/entity/Q31386861                                        |
+| https://kg.nfdi4bioimage.de/n4bikg/core     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142 | http://www.wikidata.org/entity/Q18199165                                        |
+| https://kg.nfdi4bioimage.de/n4bikg/owl      | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://www.wikidata.org/entity/Q31386861                                        |
+| https://kg.nfdi4bioimage.de/n4bikg/owl      | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142 | http://www.wikidata.org/entity/Q18199165                                        |
+| https://kg.nfdi4bioimage.de/n4bikg/services | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://www.wikidata.org/entity/Q31386861                                        |
+| https://kg.nfdi4bioimage.de/n4bikg/services | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142 | http://www.wikidata.org/entity/Q18199165                                        |
+
+#+begin_src sparql :results output 
+  <<wd-prefixes>>
+  construct {
+    <https://nfdi4bioimage.de/rdf/node> <http://purl.obolibrary.org/obo/RO_0000057> ?ror .
+    ?ror rdfs:seeAlso ?affiliation .
+    ?ror rdfs:label ?affiliationLabel } where {
+      select distinct ?affiliation ?affiliationLabel ?ror where {
+        service wikibase:label {bd:serviceParam wikibase:language "en" .}
+        {
+          select distinct ?affiliation ?ror where {
+            wd:Q113500855 wdt:P1416 ?affiliation .
+            optional {?affiliation wdt:P6782 ?ror_id .
+            }
+            bind(iri(concat(str(ror:),?ror_id)) as ?ror)
+          }
+        }
+      }
+    }
+#+end_src
+
+#+RESULTS:
+#+begin_example :tangle n4bi_core.rdf.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:bd="http://www.bigdata.com/rdf#"
+	xmlns:cc="http://creativecommons.org/ns#"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:geo="http://www.opengis.net/ont/geosparql#"
+	xmlns:mwapi="https://www.mediawiki.org/ontology#API/"
+	xmlns:ontolex="http://www.w3.org/ns/lemon/ontolex#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:p="http://www.wikidata.org/prop/"
+	xmlns:pq="http://www.wikidata.org/prop/qualifier/"
+	xmlns:pqn="http://www.wikidata.org/prop/qualifier/value-normalized/"
+	xmlns:pqv="http://www.wikidata.org/prop/qualifier/value/"
+	xmlns:pr="http://www.wikidata.org/prop/reference/"
+	xmlns:prn="http://www.wikidata.org/prop/reference/value-normalized/"
+	xmlns:prov="http://www.w3.org/ns/prov#"
+	xmlns:prv="http://www.wikidata.org/prop/reference/value/"
+	xmlns:ps="http://www.wikidata.org/prop/statement/"
+	xmlns:psn="http://www.wikidata.org/prop/statement/value-normalized/"
+	xmlns:psv="http://www.wikidata.org/prop/statement/value/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:schema="http://schema.org/"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:wd="http://www.wikidata.org/entity/"
+	xmlns:wdata="http://www.wikidata.org/wiki/Special:EntityData/"
+	xmlns:wdno="http://www.wikidata.org/prop/novalue/"
+	xmlns:wdsubgraph="https://query.wikidata.org/subgraph/"
+	xmlns:wdref="http://www.wikidata.org/reference/"
+	xmlns:wds="http://www.wikidata.org/entity/statement/"
+	xmlns:wdt="http://www.wikidata.org/prop/direct/"
+	xmlns:wdtn="http://www.wikidata.org/prop/direct-normalized/"
+	xmlns:wdv="http://www.wikidata.org/value/"
+	xmlns:wikibase="http://wikiba.se/ontology#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:ror="https://ror.org/"
+	xmlns:sesame="http://www.openrdf.org/schema/sesame#"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:hint="http://www.bigdata.com/queryHints#"
+	xmlns:bds="http://www.bigdata.com/rdf/search#"
+	xmlns:gas="http://www.bigdata.com/rdf/gas#"
+	xmlns:geof="http://www.opengis.net/def/geosparql/function/"
+	xmlns:mediawiki="https://www.mediawiki.org/ontology#"
+	xmlns:wikibaseqs="http://wikiba.se/queryService#">
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/03s7gtk40"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/03s7gtk40">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q154804"/>
+	<rdfs:label xml:lang="en">Leipzig University</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/024z2rq82"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/024z2rq82">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q317032"/>
+	<rdfs:label xml:lang="en">University of Düsseldorf</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/004hd5y14"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/004hd5y14">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q1248645"/>
+	<rdfs:label xml:lang="en">Leibniz Institute for Plasma Science and Technology</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/01y9bpm73"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/01y9bpm73">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q152838"/>
+	<rdfs:label xml:lang="en">University of Göttingen</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/0245cg223"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/0245cg223">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q153987"/>
+	<rdfs:label xml:lang="en">University of Freiburg</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/0534re684"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/0534re684">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q1493545"/>
+	<rdfs:label xml:lang="en">Max Planck Institute for Evolutionary Biology</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/023b0x485"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/023b0x485">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q161982"/>
+	<rdfs:label xml:lang="en">Johannes Gutenberg University Mainz</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/00f5q5839"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/00f5q5839">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q1562772"/>
+	<rdfs:label xml:lang="en">HAWK University of Applied Sciences and Arts</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/02se0t636"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/02se0t636">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q1664946"/>
+	<rdfs:label xml:lang="en">Leibniz Institute of Photonic Technology</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/02jhqqg57"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/02jhqqg57">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q1813719"/>
+	<rdfs:label xml:lang="en">Leibniz Institute for Analytical Sciences - ISAS</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/055s37c97"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/055s37c97">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q1813751"/>
+	<rdfs:label xml:lang="en">Leibniz Institute for Natural Product Research and Infection Biology</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/01zwmgk08"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/01zwmgk08">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q1813753"/>
+	<rdfs:label xml:lang="en">Leibniz Institute for Neurobiology</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/038t36y30"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/038t36y30">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q151510"/>
+	<rdfs:label xml:lang="en">Heidelberg University</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/03mstc592"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/03mstc592">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q695267"/>
+	<rdfs:label xml:lang="en">European Molecular Biology Laboratory</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/042aqky30"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/042aqky30">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q158158"/>
+	<rdfs:label xml:lang="en">TU Dresden</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/02nv7yv05"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/02nv7yv05">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q697111"/>
+	<rdfs:label xml:lang="en">Forschungszentrum Jülich</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/04qmmjx98"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/04qmmjx98">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q702499"/>
+	<rdfs:label xml:lang="en">Osnabrück University</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/0546hnb39"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/0546hnb39">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q835440"/>
+	<rdfs:label xml:lang="en">University of Konstanz</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/00pd74e08"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/00pd74e08">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q168426"/>
+	<rdfs:label xml:lang="en">University of Münster</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/04cdgtt98"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/04cdgtt98">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q449325"/>
+	<rdfs:label xml:lang="en">German Cancer Research Center</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/000h6jb29"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/000h6jb29">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q880999"/>
+	<rdfs:label xml:lang="en">Helmholtz Centre for Environmental Research</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/00rcxh774"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/00rcxh774">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q54096"/>
+	<rdfs:label xml:lang="en">University of Cologne</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://nfdi4bioimage.de/rdf/node">
+	<RO_0000057 xmlns="http://purl.obolibrary.org/obo/" rdf:resource="https://ror.org/05tpnw772"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ror.org/05tpnw772">
+	<rdfs:seeAlso rdf:resource="http://www.wikidata.org/entity/Q116959508"/>
+	<rdfs:label xml:lang="en">German BioImaging – Gesellschaft für Mikroskopie und Bildanalyse</rdfs:label>
+</rdf:Description>
+
+</rdf:RDF>
+#+end_example
 

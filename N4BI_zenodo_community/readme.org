@@ -285,6 +285,7 @@ type ['info:eu-repo/semantics/conferencePoster']
                   ("doi"     , DOI   := Namespace("https://doi.org/")),
                   ("obi"     , OBI   := Namespace("http://purl.obolibrary.org/obo/OBI_")),
                   ("t4fs"    , T4FS  := Namespace("http://purl.obolibrary.org/obo/T4FS_")),
+                  ("sio"     , SIO   := Namespace("http://semanticscience.org/resource/")),
   ])
 
   for prefix, ns in ns_dict.items():
@@ -315,6 +316,9 @@ type ['info:eu-repo/semantics/conferencePoster']
 
     # The record's DOI is the subject for most of the triples to be constructed.
     subj = URIRef("https://doi.org/"+doi.string)
+
+    # Add record as part of community.
+    graph.add((n4bicomm, SIO.SIO_000088, subj))
 
     # Get creators and contributors.
     title = xml_root.find('title')
@@ -360,13 +364,13 @@ type ['info:eu-repo/semantics/conferencePoster']
         property, val = parse_relation(relation)
         graph.add((subj, property, val))
 
-  graph.serialize('../RDF_dumps/n4bi_zenodo_community.n3')
+  graph.serialize('../RDF_dumps/N4BI_zenodo_community.n3')
 
   print(len(graph))
 #+end_src
 
 #+RESULTS:
-: 5349
+: 4f207e4d-c2e2-4722-9593-a772dbd47190
 
 *** Clean up
 :PROPERTIES:

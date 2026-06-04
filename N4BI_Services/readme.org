@@ -100,3 +100,112 @@ and the prefixes
 #+end_src
 
 #+RESULTS:
+
+* Updates [2026-06-04 Thu]
+:PROPERTIES:
+:ID:       3113f4c3-d48d-466c-b2ec-9f890406989a
+:END:
+
+** More OMERO instances
+:PROPERTIES:
+:ID:       ded2089c-29c6-4ca6-a0f5-c859809c082e
+:END:
+see [[https://nfdi4bioimage.de/en/services/omero-services/]]
+
+- Evaluate this INSERT DATA query in the online frontend
+#+begin_src sparql :url http://kg.nfdi4bioimage.de/#/datasets/N4BiKG/update :eval no
+   PREFIX dc:       <http://purl.org/dc/elements/1.1/>
+   PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
+   PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+   PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+   PREFIX sio:      <http://semanticscience.org/resource/>
+   PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+   PREFIX zenodo:   <https://zenodo.org/ns/>
+   PREFIX t4fs:     <http://purl.obolibrary.org/obo/T4FS_>
+
+   insert data {
+       GRAPH <https://kg.nfdi4bioimage.de/n4bikg/services> {
+         <https://omero-training.gerbi-gmb.de/> a t4fs:0000397 ,
+                                                  <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 ;
+         ^wdt:P121 <https://nfdi4bioimage.de/rdf/node> ;
+         rdfs:comment "The OMERO Training Instance is intended for researchers, trainers, and community members who require an OMERO instance for
+  workshops, demonstrations, training sessions, or presentations. It provides a ready-to-use environment that supports hands-on learning and
+  the practical exploration of image data management workflows.
+  Bonus: you can visit this instance and explore the features of OMERO playfully by going on a treasure hunt.
+  If you want to use the OMERO Training Instance for your courses, please contact our HelpDesk." .
+        <https://omero-nfdi.uni-muenster.de> rdfs:comment "The Rich OMERO Playground Instance is designed for advanced users, developers, and OMERO administrators who want to test plugins and
+ scripts in a standardized, community-run environment. As a non-production instance built by the community for the community, it serves as
+ a safe playground for experimentation and development. Developers can request admin-level access to the OMERO server and SSH access
+ to the underlying system. To get started, please contact us via the HelpDesk." .
+       }
+   }
+#+end_src
+- TiM OMERO
+#+begin_src sparql :url http://kg.nfdi4bioimage.de/#/datasets/N4BiKG/update :eval no
+  PREFIX t4fs: <http://purl.obolibrary.org/obo/T4FS_>
+  PREFIX wdt:  <http://www.wikidata.org/prop/direct/>
+  PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+  INSERT DATA {
+    GRAPH <https://kg.nfdi4bioimage.de/n4bikg/services> {
+      <https://omero-tim.gerbi-gmb.de> a t4fs:0000397 ,
+                                         <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001> ;
+      rdfs:comment """The Trends-in-Microscopy (TiM) OMERO Instance is a comprehensive collection of extensively annotated bioimaging datasets acquired using a wide range of microscopy technologies during the biannual TiM community meetings organized by German BioImaging. The datasets have been collaboratively collected, annotated, and curated in accordance with the Recommended Metadata for Biological Images (REMBI) standard. The platform provides a practical example of structured bioimage data management and standardized metadata annotation in biological microscopy. If you are new to OMERO and would like to explore its interface and capabilities, we encourage you to browse the TiM OMERO Instance.""" .
+      <https://nfdi4bioimage.de/rdf/node> wdt:P121 <https://omero-tim.gerbi-gmb.de> .
+    }
+  }
+#+end_src
+
+*** All triples in the services graph
+:PROPERTIES:
+:ID:       1a88a31a-489b-441f-8f7e-289cc8c13ee5
+:END:
+#+begin_src sparql :url http://kg.nfdi4bioimage.de/N4BIKG/query
+  select * where {
+    GRAPH <https://kg.nfdi4bioimage.de/n4bikg/services> {?s ?p ?o}
+  }
+
+#+end_src
+
+#+RESULTS:
+| s                                             | p                                                   | o                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|-----------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| https://nfdi4bioimage.de/rdf/node             | http://www.wikidata.org/prop/direct/P121            | https://omero-nfdi.uni-muenster.de                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| https://nfdi4bioimage.de/rdf/node             | http://www.wikidata.org/prop/direct/P121            | https://omero-training.gerbi-gmb.de/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| https://nfdi4bioimage.de/rdf/node             | http://www.wikidata.org/prop/direct/P121            | https://omero-tim.gerbi-gmb.de                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| https://omero-nfdi.uni-muenster.de            | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| https://omero-nfdi.uni-muenster.de            | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://purl.obolibrary.org/obo/T4FS_0000397                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| https://omero-nfdi.uni-muenster.de            | http://www.w3.org/2000/01/rdf-schema#comment        | The Rich OMERO Playground Instance is designed for advanced users, developers, and OMERO administrators who want to test plugins and scripts in a standardized, community-run environment. As a non-production instance built by the community for the community, it serves as a safe playground for experimentation and development. Developers can request admin-level access to the OMERO server and SSH access to the underlying system. To get started, please contact us via the HelpDesk.                                                                                                                                                                                                             |
+| https://omero-nfdi.uni-muenster.de            | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201 | https://omero-nfdi.uni-muenster.de/vkg/sparql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| https://omero-nfdi.uni-muenster.de/vkg/sparql | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://www.wikidata.org/entity/Q33002955                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| https://evolomero.evolbio.mpg.de/vkg/sparql   | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://www.wikidata.org/entity/Q33002955                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| https://evolomero.evolbio.mpg.de              | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| https://evolomero.evolbio.mpg.de              | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://purl.obolibrary.org/obo/T4FS_0000397                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| https://evolomero.evolbio.mpg.de              | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201 | https://evolomero.evolbio.mpg.de/vkg/sparql                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| https://omero-training.gerbi-gmb.de/          | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| https://omero-training.gerbi-gmb.de/          | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://purl.obolibrary.org/obo/T4FS_0000397                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| https://omero-training.gerbi-gmb.de/          | http://www.w3.org/2000/01/rdf-schema#comment        | The OMERO Training Instance is intended for researchers, trainers, and community members who require an OMERO instance for   workshops, demonstrations, training sessions, or presentations. It provides a ready-to-use environment that supports hands-on learning and the practical exploration of image data management workflows. Bonus: you can visit this instance and explore the features of OMERO playfully by going on a treasure hunt.  If you want to use the OMERO Training Instance for your courses, please contact our HelpDesk.                                                                                                                                                             |
+| https://omero-tim.gerbi-gmb.de                | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| https://omero-tim.gerbi-gmb.de                | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://purl.obolibrary.org/obo/T4FS_0000397                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| https://omero-tim.gerbi-gmb.de                | http://www.w3.org/2000/01/rdf-schema#comment        | The Trends-in-Microscopy (TiM) OMERO Instance is a comprehensive collection of extensively annotated bioimaging datasets acquired using a wide range of microscopy technologies during the biannual TiM community meetings organized by German BioImaging. The datasets have been collaboratively collected, annotated, and curated in accordance with the Recommended Metadata for Biological Images (REMBI) standard. The platform provides a practical example of structured bioimage data management and standardized metadata annotation in biological microscopy. If you are new to OMERO and would like to explore its interface and capabilities, we encourage you to browse the TiM OMERO Instance. |
+
+
+** TODO Services that are not OMERO [0/3]
+:PROPERTIES:
+:ID:       cfe57251-16e2-4e15-a233-9046a7fed85c
+:END:
+
+*** TODO Training Materials
+:PROPERTIES:
+:ID:       3604ef78-8114-4a3e-b47d-271064213c95
+:END:
+
+*** TODO Remote Desktops
+:PROPERTIES:
+:ID:       161f3c0b-85d3-43f7-a65d-2c9ef4f5de71
+:END:
+
+*** TODO Analysis (JPipe, Galaxy, ...)
+:PROPERTIES:
+:ID:       81df4919-2248-404c-8f4c-8c4bf9e9e6a4
+:END:
