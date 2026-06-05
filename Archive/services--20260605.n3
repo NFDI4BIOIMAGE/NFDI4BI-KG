@@ -1,0 +1,99 @@
+PREFIX :             <https://nfdi.fiz-karlsruhe.de/ontology#>
+PREFIX adms:         <http://www.w3.org/ns/adms#>
+PREFIX bd:           <http://www.bigdata.com/rdf#>
+PREFIX bds:          <http://www.bigdata.com/rdf/search#>
+PREFIX bibo:         <http://purl.org/ontology/bibo/>
+PREFIX cc:           <http://creativecommons.org/ns#>
+PREFIX core:         <https://ld.openmicroscopy.org/core/>
+PREFIX datacite:     <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+PREFIX dc:           <http://purl.org/dc/elements/1.1/>
+PREFIX dcat:         <http://www.w3.org/ns/dcat#>
+PREFIX dcite:        <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#>
+PREFIX dct:          <http://purl.org/dc/terms/>
+PREFIX dcterms:      <http://purl.org/dc/terms/>
+PREFIX doap:         <http://usefulinc.com/ns/doap#>
+PREFIX edam:         <http://purl.obolibrary.org/obo/edam#>
+PREFIX edamontology: <http://edamontology.org/>
+PREFIX fn:           <http://www.w3.org/2005/xpath-functions#>
+PREFIX foaf:         <http://xmlns.com/foaf/0.1/>
+PREFIX gas:          <http://www.bigdata.com/rdf/gas#>
+PREFIX geo:          <http://www.opengis.net/ont/geosparql#>
+PREFIX geof:         <http://www.opengis.net/def/geosparql/function/>
+PREFIX hint:         <http://www.bigdata.com/queryHints#>
+PREFIX linkml:       <https://w3id.org/linkml/>
+PREFIX mediawiki:    <https://www.mediawiki.org/ontology#>
+PREFIX mwapi:        <https://www.mediawiki.org/ontology#API/>
+PREFIX n4bikg:       <https://kg.nfdi4bioimage.de/n4bikg/>
+PREFIX ncit:         <http://purl.obolibrary.org/obo/NCIT_>
+PREFIX nfdicore:     <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX obi:          <http://purl.obolibrary.org/obo/OBI_>
+PREFIX obo:          <http://purl.obolibrary.org/obo/>
+PREFIX oboInOwl:     <http://www.geneontology.org/formats/oboInOwl#>
+PREFIX ontolex:      <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX ontology:     <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX orcid:        <https://orcid.org/>
+PREFIX owl:          <http://www.w3.org/2002/07/owl#>
+PREFIX p:            <http://www.wikidata.org/prop/>
+PREFIX pq:           <http://www.wikidata.org/prop/qualifier/>
+PREFIX pqn:          <http://www.wikidata.org/prop/qualifier/value-normalized/>
+PREFIX pqv:          <http://www.wikidata.org/prop/qualifier/value/>
+PREFIX pr:           <http://www.wikidata.org/prop/reference/>
+PREFIX prn:          <http://www.wikidata.org/prop/reference/value-normalized/>
+PREFIX prov:         <http://www.w3.org/ns/prov#>
+PREFIX prv:          <http://www.wikidata.org/prop/reference/value/>
+PREFIX ps:           <http://www.wikidata.org/prop/statement/>
+PREFIX psn:          <http://www.wikidata.org/prop/statement/value-normalized/>
+PREFIX psv:          <http://www.wikidata.org/prop/statement/value/>
+PREFIX rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:         <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ror:          <https://ror.org/>
+PREFIX schema:       <http://schema.org/>
+PREFIX sesame:       <http://www.openrdf.org/schema/sesame#>
+PREFIX sio:          <http://semanticscience.org/resource/>
+PREFIX skos:         <http://www.w3.org/2004/02/skos/core#>
+PREFIX t4fs:         <http://purl.obolibrary.org/obo/T4FS_>
+PREFIX terms:        <http://purl.org/dc/terms/>
+PREFIX vann:         <http://purl.org/vocab/vann/>
+PREFIX wd:           <http://www.wikidata.org/entity/>
+PREFIX wdata:        <http://www.wikidata.org/wiki/Special:EntityData/>
+PREFIX wdno:         <http://www.wikidata.org/prop/novalue/>
+PREFIX wdref:        <http://www.wikidata.org/reference/>
+PREFIX wds:          <http://www.wikidata.org/entity/statement/>
+PREFIX wdsubgraph:   <https://query.wikidata.org/subgraph/>
+PREFIX wdt:          <http://www.wikidata.org/prop/direct/>
+PREFIX wdtn:         <http://www.wikidata.org/prop/direct-normalized/>
+PREFIX wdv:          <http://www.wikidata.org/value/>
+PREFIX wikibase:     <http://wikiba.se/ontology#>
+PREFIX wikibaseqs:   <http://wikiba.se/queryService#>
+PREFIX xml:          <http://www.w3.org/XML/1998/namespace>
+PREFIX xo:           <http://rhizomik.net/redefer/xsl/xsd2owl-functions.xsl>
+PREFIX xs:           <http://www.w3.org/2001/XMLSchema#>
+PREFIX xsd:          <http://www.w3.org/2001/XMLSchema#>
+PREFIX xsi:          <http://www.w3.org/2001/XMLSchema-instance#>
+PREFIX zenodo:       <https://zenodo.org/ns/>
+
+<https://omero-tim.gerbi-gmb.de>
+        rdf:type      obo:T4FS_0000397 , nfdicore:NFDI_0000001;
+        rdfs:comment  "The Trends-in-Microscopy (TiM) OMERO Instance is a comprehensive collection of extensively annotated bioimaging datasets acquired using a wide range of microscopy technologies during the biannual TiM community meetings organized by German BioImaging. The datasets have been collaboratively collected, annotated, and curated in accordance with the Recommended Metadata for Biological Images (REMBI) standard. The platform provides a practical example of structured bioimage data management and standardized metadata annotation in biological microscopy. If you are new to OMERO and would like to explore its interface and capabilities, we encourage you to browse the TiM OMERO Instance." .
+
+<https://omero-training.gerbi-gmb.de/>
+        rdf:type      obo:T4FS_0000397 , nfdicore:NFDI_0000001;
+        rdfs:comment  "The OMERO Training Instance is intended for researchers, trainers, and community members who require an OMERO instance for   workshops, demonstrations, training sessions, or presentations. It provides a ready-to-use environment that supports hands-on learning and the practical exploration of image data management workflows. Bonus: you can visit this instance and explore the features of OMERO playfully by going on a treasure hunt.\n If you want to use the OMERO Training Instance for your courses, please contact our HelpDesk." .
+
+<https://evolomero.evolbio.mpg.de>
+        rdf:type       obo:T4FS_0000397 , nfdicore:NFDI_0000001;
+        dcat:accesURL  <https://evolomero.evolbio.mpg.de/vkg/sparql> .
+
+<https://evolomero.evolbio.mpg.de/vkg/sparql>
+        rdf:type  wd:Q33002955 .
+
+<https://omero-nfdi.uni-muenster.de/vkg/sparql>
+        rdf:type  wd:Q33002955 .
+
+<https://omero-nfdi.uni-muenster.de>
+        rdf:type       obo:T4FS_0000397 , nfdicore:NFDI_0000001;
+        rdfs:comment   "The Rich OMERO Playground Instance is designed for advanced users, developers, and OMERO administrators who want to test plugins and scripts in a standardized, community-run environment. As a non-production instance built by the community for the community, it serves as a safe playground for experimentation and development. Developers can request admin-level access to the OMERO server and SSH access to the underlying system. To get started, please contact us via the HelpDesk.";
+        dcat:accesURL  <https://omero-nfdi.uni-muenster.de/vkg/sparql> .
+
+<https://nfdi4bioimage.de/rdf/node>
+        wdt:P121  <https://omero-tim.gerbi-gmb.de> , <https://omero-training.gerbi-gmb.de/> , <https://omero-nfdi.uni-muenster.de> .
