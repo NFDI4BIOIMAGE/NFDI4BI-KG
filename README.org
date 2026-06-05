@@ -57,6 +57,7 @@ group by ?graph
 ** Example queries
 :PROPERTIES:
 :ID:       88e593e5-defe-4211-ab3d-c407739d75f7
+:header-args:sparql: :url http://kg.nfdi4bioimage.de/N4BIKG/sparql
 :END:
 
 *** spo
@@ -755,6 +756,282 @@ Some records must have the full name set as 'family name'.
 | https://orcid.org/0009-0004-5318-5966 |        1 |
 | https://orcid.org/0009-0005-1758-1790 |        1 |
 | https://orcid.org/0009-0009-8508-8585 |        1 |
+
+*** Number of images per OMERO instance.
+:PROPERTIES:
+:ID:       ca976018-1a67-495e-8e4c-63cb04f6d755
+:END:
+
+#+begin_src sparql 
+  <<prefixes>>
+  prefix omecore: <https://ld.openmicroscopy.org/core/>
+  select * where {
+    graph n4bikg:services {
+      ?omero dcat:accesURL ?sparql_endpoint_url .
+   }
+    }
+#+end_src
+
+#+RESULTS:
+| omero                              | sparql_endpoint_url                           |
+|------------------------------------+-----------------------------------------------|
+| https://omero-nfdi.uni-muenster.de | https://omero-nfdi.uni-muenster.de/vkg/sparql |
+| https://evolomero.evolbio.mpg.de   | https://evolomero.evolbio.mpg.de/vkg/sparql   |
+#+begin_src sparql
+
+      service <https://evolomero.evolbio.mpg.de/vkg/sparql> {
+          ?img a omecore:Image .
+          }
+      # }
+      # }
+#+end_src
+ 
+#+RESULTS:
+| img                                        |
+|--------------------------------------------|
+| https://evolomero.evolbio.mpg.de/Image/75  |
+| https://evolomero.evolbio.mpg.de/Image/13  |
+| https://evolomero.evolbio.mpg.de/Image/93  |
+| https://evolomero.evolbio.mpg.de/Image/94  |
+| https://evolomero.evolbio.mpg.de/Image/325 |
+| https://evolomero.evolbio.mpg.de/Image/34  |
+| https://evolomero.evolbio.mpg.de/Image/182 |
+| https://evolomero.evolbio.mpg.de/Image/18  |
+| https://evolomero.evolbio.mpg.de/Image/2   |
+| https://evolomero.evolbio.mpg.de/Image/183 |
+| https://evolomero.evolbio.mpg.de/Image/268 |
+| https://evolomero.evolbio.mpg.de/Image/37  |
+| https://evolomero.evolbio.mpg.de/Image/282 |
+| https://evolomero.evolbio.mpg.de/Image/66  |
+| https://evolomero.evolbio.mpg.de/Image/315 |
+| https://evolomero.evolbio.mpg.de/Image/45  |
+| https://evolomero.evolbio.mpg.de/Image/285 |
+| https://evolomero.evolbio.mpg.de/Image/199 |
+| https://evolomero.evolbio.mpg.de/Image/180 |
+| https://evolomero.evolbio.mpg.de/Image/190 |
+| https://evolomero.evolbio.mpg.de/Image/203 |
+| https://evolomero.evolbio.mpg.de/Image/31  |
+| https://evolomero.evolbio.mpg.de/Image/82  |
+| https://evolomero.evolbio.mpg.de/Image/264 |
+| https://evolomero.evolbio.mpg.de/Image/188 |
+| https://evolomero.evolbio.mpg.de/Image/269 |
+| https://evolomero.evolbio.mpg.de/Image/309 |
+| https://evolomero.evolbio.mpg.de/Image/172 |
+| https://evolomero.evolbio.mpg.de/Image/69  |
+| https://evolomero.evolbio.mpg.de/Image/54  |
+| https://evolomero.evolbio.mpg.de/Image/10  |
+| https://evolomero.evolbio.mpg.de/Image/293 |
+| https://evolomero.evolbio.mpg.de/Image/295 |
+| https://evolomero.evolbio.mpg.de/Image/278 |
+| https://evolomero.evolbio.mpg.de/Image/52  |
+| https://evolomero.evolbio.mpg.de/Image/170 |
+| https://evolomero.evolbio.mpg.de/Image/111 |
+| https://evolomero.evolbio.mpg.de/Image/324 |
+| https://evolomero.evolbio.mpg.de/Image/291 |
+| https://evolomero.evolbio.mpg.de/Image/169 |
+| https://evolomero.evolbio.mpg.de/Image/281 |
+| https://evolomero.evolbio.mpg.de/Image/29  |
+| https://evolomero.evolbio.mpg.de/Image/254 |
+| https://evolomero.evolbio.mpg.de/Image/56  |
+| https://evolomero.evolbio.mpg.de/Image/306 |
+| https://evolomero.evolbio.mpg.de/Image/152 |
+| https://evolomero.evolbio.mpg.de/Image/165 |
+| https://evolomero.evolbio.mpg.de/Image/290 |
+| https://evolomero.evolbio.mpg.de/Image/22  |
+| https://evolomero.evolbio.mpg.de/Image/185 |
+| https://evolomero.evolbio.mpg.de/Image/287 |
+| https://evolomero.evolbio.mpg.de/Image/258 |
+| https://evolomero.evolbio.mpg.de/Image/89  |
+| https://evolomero.evolbio.mpg.de/Image/63  |
+| https://evolomero.evolbio.mpg.de/Image/106 |
+| https://evolomero.evolbio.mpg.de/Image/72  |
+| https://evolomero.evolbio.mpg.de/Image/167 |
+| https://evolomero.evolbio.mpg.de/Image/108 |
+| https://evolomero.evolbio.mpg.de/Image/299 |
+| https://evolomero.evolbio.mpg.de/Image/155 |
+| https://evolomero.evolbio.mpg.de/Image/28  |
+| https://evolomero.evolbio.mpg.de/Image/197 |
+| https://evolomero.evolbio.mpg.de/Image/23  |
+| https://evolomero.evolbio.mpg.de/Image/14  |
+| https://evolomero.evolbio.mpg.de/Image/64  |
+| https://evolomero.evolbio.mpg.de/Image/6   |
+| https://evolomero.evolbio.mpg.de/Image/301 |
+| https://evolomero.evolbio.mpg.de/Image/158 |
+| https://evolomero.evolbio.mpg.de/Image/279 |
+| https://evolomero.evolbio.mpg.de/Image/68  |
+| https://evolomero.evolbio.mpg.de/Image/189 |
+| https://evolomero.evolbio.mpg.de/Image/58  |
+| https://evolomero.evolbio.mpg.de/Image/294 |
+| https://evolomero.evolbio.mpg.de/Image/305 |
+| https://evolomero.evolbio.mpg.de/Image/320 |
+| https://evolomero.evolbio.mpg.de/Image/161 |
+| https://evolomero.evolbio.mpg.de/Image/277 |
+| https://evolomero.evolbio.mpg.de/Image/300 |
+| https://evolomero.evolbio.mpg.de/Image/312 |
+| https://evolomero.evolbio.mpg.de/Image/101 |
+| https://evolomero.evolbio.mpg.de/Image/313 |
+| https://evolomero.evolbio.mpg.de/Image/99  |
+| https://evolomero.evolbio.mpg.de/Image/175 |
+| https://evolomero.evolbio.mpg.de/Image/46  |
+| https://evolomero.evolbio.mpg.de/Image/53  |
+| https://evolomero.evolbio.mpg.de/Image/151 |
+| https://evolomero.evolbio.mpg.de/Image/267 |
+| https://evolomero.evolbio.mpg.de/Image/42  |
+| https://evolomero.evolbio.mpg.de/Image/256 |
+| https://evolomero.evolbio.mpg.de/Image/5   |
+| https://evolomero.evolbio.mpg.de/Image/55  |
+| https://evolomero.evolbio.mpg.de/Image/86  |
+| https://evolomero.evolbio.mpg.de/Image/85  |
+| https://evolomero.evolbio.mpg.de/Image/260 |
+| https://evolomero.evolbio.mpg.de/Image/270 |
+| https://evolomero.evolbio.mpg.de/Image/81  |
+| https://evolomero.evolbio.mpg.de/Image/65  |
+| https://evolomero.evolbio.mpg.de/Image/59  |
+| https://evolomero.evolbio.mpg.de/Image/160 |
+| https://evolomero.evolbio.mpg.de/Image/329 |
+| https://evolomero.evolbio.mpg.de/Image/24  |
+| https://evolomero.evolbio.mpg.de/Image/191 |
+| https://evolomero.evolbio.mpg.de/Image/83  |
+| https://evolomero.evolbio.mpg.de/Image/103 |
+| https://evolomero.evolbio.mpg.de/Image/35  |
+| https://evolomero.evolbio.mpg.de/Image/318 |
+| https://evolomero.evolbio.mpg.de/Image/157 |
+| https://evolomero.evolbio.mpg.de/Image/41  |
+| https://evolomero.evolbio.mpg.de/Image/265 |
+| https://evolomero.evolbio.mpg.de/Image/112 |
+| https://evolomero.evolbio.mpg.de/Image/50  |
+| https://evolomero.evolbio.mpg.de/Image/26  |
+| https://evolomero.evolbio.mpg.de/Image/198 |
+| https://evolomero.evolbio.mpg.de/Image/286 |
+| https://evolomero.evolbio.mpg.de/Image/8   |
+| https://evolomero.evolbio.mpg.de/Image/176 |
+| https://evolomero.evolbio.mpg.de/Image/96  |
+| https://evolomero.evolbio.mpg.de/Image/266 |
+| https://evolomero.evolbio.mpg.de/Image/314 |
+| https://evolomero.evolbio.mpg.de/Image/173 |
+| https://evolomero.evolbio.mpg.de/Image/196 |
+| https://evolomero.evolbio.mpg.de/Image/113 |
+| https://evolomero.evolbio.mpg.de/Image/95  |
+| https://evolomero.evolbio.mpg.de/Image/104 |
+| https://evolomero.evolbio.mpg.de/Image/317 |
+| https://evolomero.evolbio.mpg.de/Image/32  |
+| https://evolomero.evolbio.mpg.de/Image/261 |
+| https://evolomero.evolbio.mpg.de/Image/76  |
+| https://evolomero.evolbio.mpg.de/Image/181 |
+| https://evolomero.evolbio.mpg.de/Image/74  |
+| https://evolomero.evolbio.mpg.de/Image/4   |
+| https://evolomero.evolbio.mpg.de/Image/274 |
+| https://evolomero.evolbio.mpg.de/Image/9   |
+| https://evolomero.evolbio.mpg.de/Image/201 |
+| https://evolomero.evolbio.mpg.de/Image/61  |
+| https://evolomero.evolbio.mpg.de/Image/187 |
+| https://evolomero.evolbio.mpg.de/Image/36  |
+| https://evolomero.evolbio.mpg.de/Image/11  |
+| https://evolomero.evolbio.mpg.de/Image/272 |
+| https://evolomero.evolbio.mpg.de/Image/60  |
+| https://evolomero.evolbio.mpg.de/Image/43  |
+| https://evolomero.evolbio.mpg.de/Image/110 |
+| https://evolomero.evolbio.mpg.de/Image/156 |
+| https://evolomero.evolbio.mpg.de/Image/62  |
+| https://evolomero.evolbio.mpg.de/Image/195 |
+| https://evolomero.evolbio.mpg.de/Image/49  |
+| https://evolomero.evolbio.mpg.de/Image/12  |
+| https://evolomero.evolbio.mpg.de/Image/193 |
+| https://evolomero.evolbio.mpg.de/Image/168 |
+| https://evolomero.evolbio.mpg.de/Image/7   |
+| https://evolomero.evolbio.mpg.de/Image/88  |
+| https://evolomero.evolbio.mpg.de/Image/328 |
+| https://evolomero.evolbio.mpg.de/Image/15  |
+| https://evolomero.evolbio.mpg.de/Image/159 |
+| https://evolomero.evolbio.mpg.de/Image/40  |
+| https://evolomero.evolbio.mpg.de/Image/73  |
+| https://evolomero.evolbio.mpg.de/Image/154 |
+| https://evolomero.evolbio.mpg.de/Image/177 |
+| https://evolomero.evolbio.mpg.de/Image/303 |
+| https://evolomero.evolbio.mpg.de/Image/288 |
+| https://evolomero.evolbio.mpg.de/Image/311 |
+| https://evolomero.evolbio.mpg.de/Image/21  |
+| https://evolomero.evolbio.mpg.de/Image/107 |
+| https://evolomero.evolbio.mpg.de/Image/276 |
+| https://evolomero.evolbio.mpg.de/Image/284 |
+| https://evolomero.evolbio.mpg.de/Image/17  |
+| https://evolomero.evolbio.mpg.de/Image/296 |
+| https://evolomero.evolbio.mpg.de/Image/78  |
+| https://evolomero.evolbio.mpg.de/Image/162 |
+| https://evolomero.evolbio.mpg.de/Image/292 |
+| https://evolomero.evolbio.mpg.de/Image/321 |
+| https://evolomero.evolbio.mpg.de/Image/3   |
+| https://evolomero.evolbio.mpg.de/Image/298 |
+| https://evolomero.evolbio.mpg.de/Image/297 |
+| https://evolomero.evolbio.mpg.de/Image/319 |
+| https://evolomero.evolbio.mpg.de/Image/84  |
+| https://evolomero.evolbio.mpg.de/Image/70  |
+| https://evolomero.evolbio.mpg.de/Image/202 |
+| https://evolomero.evolbio.mpg.de/Image/109 |
+| https://evolomero.evolbio.mpg.de/Image/39  |
+| https://evolomero.evolbio.mpg.de/Image/19  |
+| https://evolomero.evolbio.mpg.de/Image/20  |
+| https://evolomero.evolbio.mpg.de/Image/25  |
+| https://evolomero.evolbio.mpg.de/Image/79  |
+| https://evolomero.evolbio.mpg.de/Image/252 |
+| https://evolomero.evolbio.mpg.de/Image/38  |
+| https://evolomero.evolbio.mpg.de/Image/251 |
+| https://evolomero.evolbio.mpg.de/Image/302 |
+| https://evolomero.evolbio.mpg.de/Image/204 |
+| https://evolomero.evolbio.mpg.de/Image/100 |
+| https://evolomero.evolbio.mpg.de/Image/273 |
+| https://evolomero.evolbio.mpg.de/Image/323 |
+| https://evolomero.evolbio.mpg.de/Image/259 |
+| https://evolomero.evolbio.mpg.de/Image/307 |
+| https://evolomero.evolbio.mpg.de/Image/194 |
+| https://evolomero.evolbio.mpg.de/Image/263 |
+| https://evolomero.evolbio.mpg.de/Image/33  |
+| https://evolomero.evolbio.mpg.de/Image/30  |
+| https://evolomero.evolbio.mpg.de/Image/102 |
+| https://evolomero.evolbio.mpg.de/Image/92  |
+| https://evolomero.evolbio.mpg.de/Image/51  |
+| https://evolomero.evolbio.mpg.de/Image/153 |
+| https://evolomero.evolbio.mpg.de/Image/192 |
+| https://evolomero.evolbio.mpg.de/Image/27  |
+| https://evolomero.evolbio.mpg.de/Image/178 |
+| https://evolomero.evolbio.mpg.de/Image/163 |
+| https://evolomero.evolbio.mpg.de/Image/310 |
+| https://evolomero.evolbio.mpg.de/Image/80  |
+| https://evolomero.evolbio.mpg.de/Image/289 |
+| https://evolomero.evolbio.mpg.de/Image/67  |
+| https://evolomero.evolbio.mpg.de/Image/97  |
+| https://evolomero.evolbio.mpg.de/Image/105 |
+| https://evolomero.evolbio.mpg.de/Image/179 |
+| https://evolomero.evolbio.mpg.de/Image/283 |
+| https://evolomero.evolbio.mpg.de/Image/280 |
+| https://evolomero.evolbio.mpg.de/Image/47  |
+| https://evolomero.evolbio.mpg.de/Image/174 |
+| https://evolomero.evolbio.mpg.de/Image/322 |
+| https://evolomero.evolbio.mpg.de/Image/91  |
+| https://evolomero.evolbio.mpg.de/Image/255 |
+| https://evolomero.evolbio.mpg.de/Image/44  |
+| https://evolomero.evolbio.mpg.de/Image/200 |
+| https://evolomero.evolbio.mpg.de/Image/77  |
+| https://evolomero.evolbio.mpg.de/Image/164 |
+| https://evolomero.evolbio.mpg.de/Image/253 |
+| https://evolomero.evolbio.mpg.de/Image/171 |
+| https://evolomero.evolbio.mpg.de/Image/87  |
+| https://evolomero.evolbio.mpg.de/Image/275 |
+| https://evolomero.evolbio.mpg.de/Image/184 |
+| https://evolomero.evolbio.mpg.de/Image/1   |
+| https://evolomero.evolbio.mpg.de/Image/57  |
+| https://evolomero.evolbio.mpg.de/Image/308 |
+| https://evolomero.evolbio.mpg.de/Image/304 |
+| https://evolomero.evolbio.mpg.de/Image/316 |
+| https://evolomero.evolbio.mpg.de/Image/48  |
+| https://evolomero.evolbio.mpg.de/Image/186 |
+| https://evolomero.evolbio.mpg.de/Image/98  |
+| https://evolomero.evolbio.mpg.de/Image/271 |
+| https://evolomero.evolbio.mpg.de/Image/262 |
+| https://evolomero.evolbio.mpg.de/Image/90  |
+| https://evolomero.evolbio.mpg.de/Image/16  |
+| https://evolomero.evolbio.mpg.de/Image/257 |
+| https://evolomero.evolbio.mpg.de/Image/71  |
 
 * Updates
 :PROPERTIES:
