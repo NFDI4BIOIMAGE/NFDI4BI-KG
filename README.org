@@ -784,7 +784,6 @@ Some records must have the full name set as 'family name'.
 :ID:       dda0ca04-9f7e-4b8d-9083-7a3fc76eadca
 :END:
 
-  
 *** Affected terms
 :PROPERTIES:
 :ID:       64427198-2322-481d-90c0-996a89055036

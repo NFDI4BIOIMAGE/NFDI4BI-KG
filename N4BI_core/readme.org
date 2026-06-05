@@ -625,8 +625,11 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
 ** Date of last update
 :PROPERTIES:
+:ID:       89269026-11a1-422a-8526-1c823d49539f
+:END:
+:PROPERTIES:
 :ID:       08470056-1ad3-44c2-beb2-5966cff60a25
-:header-args:rdf: :noweb no-export :tangle ../RDF_dumps/graph_dates.n3
+:header-args:sparql: :url http://kg.nfdi4bioimage.de/N4BIKG/query
 :END:
 #+RESULTS:
 | g                                                        | cls |
@@ -637,44 +640,35 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 | https://kg.nfdi4bioimage.de/n4bikg/owl                   |     |
 | https://nfdi4bioimage.de/kg/owl                          |     |
 
-Add these IRIs as =owl:Graph= to the core KG
-#+begin_src rdf :noweb-ref statements
-# Define graphs as such with wd:31386861 (RDF graph) and under CC-BY-SA License.
-<core> a wd:Q31386861 ;
-         nfdicore:NFDI_0000142 wd:Q18199165 .
-<services> a wd:Q31386861 ;
-          nfdicore:NFDI_0000142 wd:Q18199165 .
-<owl> a wd:Q31386861 ;
-          nfdicore:NFDI_0000142 wd:Q18199165 .
+*** Add date of today to all graphs (eval in fuseki online, needs admin login)
+:PROPERTIES:
+:ID:       30b9a5b4-6480-4d06-b13b-939c46169ba5
+:END:
+#+begin_src sparql :eval no
+  prefix : <https://kg.nfdi4bioimage.de/n4bikg/>
+  prefix biolink: <https://w3id.org/biolink/vocab/>
+  prefix xsd: prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+  insert data {
+    graph :core {
+  :core  biolink:update_date "2026-06-05"^^xsd:date .
+  :services biolink:update_date "2026-06-05"^^xsd:date .
+  :n4bi_zenodo_community biolink:update_date "2026-06-05"^^xsd:date .
+      }
+    }
 #+end_src
 
-Cleanup:
-#+begin_src bash :dir ../RDF_dumps :results output :session noconda
-  JAVA=$(which java)
-  export JAVA_HOME=/usr
-  echo $JAVA
-  echo $JAVA_HOME
-  cat graph_licenses.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
-  /opt/apache-jena/bin/riot --output n3 tmp.n3 | tee graph_licenses.n3
+#+begin_src sparql :url http://kg.nfdi4bioimage.de/N4BIKG/query
 
+  prefix : <https://kg.nfdi4bioimage.de/n4bikg/>
+  prefix biolink: <https://w3id.org/biolink/vocab/>
+  select * where {
+    graph :core {?g biolink:update_date ?dt .}
+    }
 #+end_src
 
 #+RESULTS:
-#+begin_example
-/usr/bin/java
-/usr
-PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
-PREFIX wd:       <http://www.wikidata.org/entity/>
-
-<https://kg.nfdi4bioimage.de/n4bikg/owl>
-        a                      wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
-
-<https://kg.nfdi4bioimage.de/n4bikg/services>
-        a                      wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
-
-<https://kg.nfdi4bioimage.de/n4bikg/core>
-        a                      wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
-#+end_example
+| g                                                        |         dt |
+|----------------------------------------------------------+------------|
+| https://kg.nfdi4bioimage.de/n4bikg/core                  | 2026-06-05 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | 2026-06-05 |
+| https://kg.nfdi4bioimage.de/n4bikg/services              | 2026-06-05 |
