@@ -76,14 +76,18 @@ ror:00f5q5839  rdfs:label  "HAWK University of Applied Sciences and Arts"@en;
         rdfs:seeAlso  wd:Q1562772 .
 
 n4bikg:services  rdf:type      wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
+        nfdicore:NFDI_0000142  wd:Q18199165;
+        <https://w3id.org/biolink/vocab/update_date>
+                "2026-06-05"^^xs:date .
 
 n4bikg:owl  rdf:type           wd:Q31386861;
         nfdicore:NFDI_0000142  wd:Q18199165 .
 
 n4bikg:n4bi_zenodo_community
         rdf:type               wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
+        nfdicore:NFDI_0000142  wd:Q18199165;
+        <https://w3id.org/biolink/vocab/update_date>
+                "2026-06-05"^^xs:date .
 
 ror:01y9bpm73  rdfs:label  "University of Göttingen"@en;
         rdfs:seeAlso  wd:Q152838 .
@@ -152,7 +156,9 @@ ror:042aqky30  rdfs:label  "TU Dresden"@en;
         rdfs:seeAlso  wd:Q158158 .
 
 n4bikg:core  rdf:type          wd:Q31386861;
-        nfdicore:NFDI_0000142  wd:Q18199165 .
+        nfdicore:NFDI_0000142  wd:Q18199165;
+        <https://w3id.org/biolink/vocab/update_date>
+                "2026-06-05"^^xs:date .
 
 <https://nfdi4bioimage.de/rdf/node>
         rdf:type               nfdicore:NFDI_0001039;
