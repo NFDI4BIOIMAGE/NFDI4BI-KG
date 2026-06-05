@@ -1,6 +1,7 @@
 #+title: NFDI4BI-KG
 #+author: All contributors
 #+date: [2025-03-24 Mon] 
+#+property: header-args :noweb yes
 * NFDI4BI-KG: The NFDI4BIOIMAGE Knowledge Graph
 :PROPERTIES:
 :ID:       fc647655-1e49-41e7-96f2-6e7ce03c577d
@@ -793,7 +794,7 @@ Find all terms from the nfdi core ontology used in our KG and check if they are 
 #+begin_src sparql :url http://kg.nfdi4bioimage.de/N4BIKG/query
 
   prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_>
-  select ?g ?p ?o where {
+  select ?g ?s ?p ?o where {
     graph ?g {?s ?p ?o}
 
     values ?g {
@@ -808,16 +809,16 @@ Find all terms from the nfdi core ontology used in our KG and check if they are 
 #+end_src
 
 #+RESULTS: query affected terms
-| g                                                        | p                                                   | o                                                   |
-|----------------------------------------------------------+-----------------------------------------------------+-----------------------------------------------------|
-| https://kg.nfdi4bioimage.de/n4bikg/services              | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
-| https://kg.nfdi4bioimage.de/n4bikg/services              | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201 | https://omero-nfdi.uni-muenster.de/vkg/sparql       |
-| https://kg.nfdi4bioimage.de/n4bikg/services              | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
-| https://kg.nfdi4bioimage.de/n4bikg/services              | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201 | https://evolomero.evolbio.mpg.de/vkg/sparql         |
-| https://kg.nfdi4bioimage.de/n4bikg/services              | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
-| https://kg.nfdi4bioimage.de/n4bikg/services              | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
-| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000195 | https://zenodo.org/communities/nfdi4bioimage        |
-| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008 | https://zenodo.org/communities/nfdi4bioimage        |
+| g                                                        | s                                            | p                                                   | o                                                   |
+|----------------------------------------------------------+----------------------------------------------+-----------------------------------------------------+-----------------------------------------------------|
+| https://kg.nfdi4bioimage.de/n4bikg/services              | https://omero-nfdi.uni-muenster.de           | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
+| https://kg.nfdi4bioimage.de/n4bikg/services              | https://omero-nfdi.uni-muenster.de           | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201 | https://omero-nfdi.uni-muenster.de/vkg/sparql       |
+| https://kg.nfdi4bioimage.de/n4bikg/services              | https://evolomero.evolbio.mpg.de             | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
+| https://kg.nfdi4bioimage.de/n4bikg/services              | https://evolomero.evolbio.mpg.de             | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201 | https://evolomero.evolbio.mpg.de/vkg/sparql         |
+| https://kg.nfdi4bioimage.de/n4bikg/services              | https://omero-training.gerbi-gmb.de/         | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
+| https://kg.nfdi4bioimage.de/n4bikg/services              | https://omero-tim.gerbi-gmb.de               | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | https://nfdi4bioimage.de/rdf/node            | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000195 | https://zenodo.org/communities/nfdi4bioimage        |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | https://zenodo.org/communities/nfdi4bioimage | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008 | https://zenodo.org/communities/nfdi4bioimage        |
 
 *** Load most recent version
 :PROPERTIES:
@@ -848,10 +849,492 @@ Find all terms from the nfdi core ontology used in our KG and check if they are 
 : https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000001 True
 
 
-*** TODO Need to replace the three properties
+*** DONE Need to replace the three properties[3/3]
+CLOSED: [2026-06-05 Fri 12:27]
 :PROPERTIES:
 :ID:       3faedb6a-be5d-4da7-8a9c-5bb9a5b4acaa
+:header-args:sparql: :url http://kg.nfdi4bioimage.de/N4BIKG/sparql
 :END:
+
+**** DONE NFDI_0000201
+CLOSED: [2026-06-05 Fri 11:10]
+:PROPERTIES:
+:ID:       9cce5cf8-c72a-4209-baa8-a9f14d688bdf
+:END:
+#+begin_src sparql
+  select * where {
+    <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000201> ?prop ?val .
+    }
+#+end_src
+
+#+RESULTS:
+| prop                                                | val                                                          |
+|-----------------------------------------------------+--------------------------------------------------------------|
+| http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://www.w3.org/2002/07/owl#ObjectProperty                 |
+| http://www.w3.org/2000/01/rdf-schema#label          | has sparql endpoint                                          |
+| http://www.w3.org/2000/01/rdf-schema#comment        | The property relates a data resource to its SPARQL Endpoint. |
+| http://www.w3.org/2000/01/rdf-schema#subPropertyOf  | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000226          |
+| https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000012 | sparqlEndpoint                                               |
+| http://www.w3.org/2002/07/owl#inverseOf             | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000202          |
+
+#+begin_src bash :results output raw :cache no
+  arq --data https://ise-fizkarlsruhe.github.io/nfdicore/ontology.ttl " 
+  prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/NFDI_> 
+  prefix owl: <http://www.w3.org/2002/07/owl#>
+  prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  select * where { 
+      ?prop a owl:ObjectProperty .
+      ?prop rdfs:label ?label .
+      filter(contains(?label, \"sparql\"))
+  } "
+#+end_src
+
+#+RESULTS:
+----------------
+| prop | label |
+================
+
+no alternative in nfdi core. looking up ols, returns dcat:acessURL
+
+***** sparql updates (eval in fuseki online, requires admin login)
+:PROPERTIES:
+:ID:       edbeda6b-cff1-4d64-91df-4bc2f9dbcf36
+:END:
+#+begin_src sparql :eval no
+  <<prefixes>>
+  prefix n4bikg: <https://kg.nfdi4bioimage.de/n4bikg/>
+  prefix dcat: <http://www.w3.org/ns/dcat#>
+
+  delete { graph n4bikg:services {?s nfdicore:NFDI_0000201 ?val}}
+  insert {graph n4bikg:services {?s dcat:accesURL ?val}}
+  where {
+    graph n4bikg:services {?s nfdicore:NFDI_0000201 ?val} .
+  }
+#+end_src
+
+**** DONE NFDI_000195 (op)
+CLOSED: [2026-06-05 Fri 11:10]
+:PROPERTIES:
+:ID:       ed2a3b37-83ce-49e8-adbf-88b9db47e869
+:END:
+- affected graph: n4bi_zenodo_community
+- affected terms
+
+#+begin_src sparql :noweb-ref prefixes
+  prefix n4bikg: <https://kg.nfdi4bioimage.de/n4bikg/>
+  prefix dcat: <http://www.w3.org/ns/dcat#>
+  PREFIX schema:     <http://schema.org/>
+#+end_src
+
+#+begin_src sparql
+  <<prefixes>>
+  select * where {
+    {
+    graph n4bikg:n4bi_zenodo_community {?s nfdicore:NFDI_0000195 ?o}
+      }
+    union {
+      graph n4bikg:owl { nfdicore:NFDI_0000195 rdfs:label ?label195}
+      }
+   }
+#+end_src
+
+#+RESULTS:
+| s                                 | o                                            | label195              |
+|-----------------------------------+----------------------------------------------+-----------------------|
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage |                       |
+|                                   |                                              | represents collection |
+
+will replace by (zenodo_communit provo:wasAttributedTo n4bi)
+
+***** sparql update
+:PROPERTIES:
+:ID:       9234f400-8b02-4471-b2f6-f0fedd6e703a
+:END:
+#+begin_src sparql :eval no
+  <<prefixes>>
+  prefix prov <https://www.w3.org/TR/prov-o/#>
+
+  delete {
+    graph n4bikg:n4bi_zenodo_community {?s nfdicore:NFDI_0000195 ?collection}
+    }
+  insert {
+    graph n4bikg:n4bi_zenodo_community {?collection prov:wasAttributedTo ?s;
+                                                    a prov:Collection .}
+    }
+  where {
+    graph n4bikg:n4bi_zenodo_community {?s nfdicore:NFDI_0000195 ?collection}
+    }
+  
+#+end_src
+
+***** check
+:PROPERTIES:
+:ID:       f29c36d6-44e7-430b-8b57-bc4ccd334a0a
+:END:
+#+begin_src sparql
+  <<prefixes>>
+  prefix prov: <https://www.w3.org/TR/prov-o/#>
+  select * where {
+    optional
+    {
+    graph n4bikg:n4bi_zenodo_community {?s nfdicore:NFDI_0000195 ?collection}
+    }
+    optional {
+    graph n4bikg:n4bi_zenodo_community {?s ^prov:wasAttributedTo ?collection .
+                                        ?collection ?prop ?val .}
+    }
+    }
+#+end_src
+
+#+RESULTS:
+| s                                 | collection                                   | prop                                                | val                                          |
+|-----------------------------------+----------------------------------------------+-----------------------------------------------------+----------------------------------------------|
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | https://www.w3.org/TR/prov-o/#Collection     |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0001008 | https://zenodo.org/communities/nfdi4bioimage |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://purl.org/dc/elements/1.1/identifier          | nfdi4bioimage                                |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15268798      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11261115      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.8434325       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.8414319       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.8349563       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.8340248       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.8329306       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.8139354       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.8070038       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.8019760       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.7928333       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.7890311       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.7656540       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.7394675       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.7082609       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.7082514       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.7015307       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.6560026       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.6504714       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.6504467       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.6504208       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.6501614       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.5101158       |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15423904      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15373555      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15308773      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15225616      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15152576      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15083018      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15065070      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15047849      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15033241      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15031842      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15026373      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14999220      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14998017      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14997835      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14988921      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14979253      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14975462      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14954254      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14953098      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14951142      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14950686      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14937632      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14909526      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14845059      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14832855      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14792534      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14716546      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14650434      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14626054      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14623257      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14620253      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14418209      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14412107      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14381522      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14278058      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14234608      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14186101      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14178789      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14044640      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14044380      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14035822      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14014252      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14013026      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14006558      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14001388      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13991322      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13970736      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13861026      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13837146      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13831274      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13747937      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13684187      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13640979      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13628852      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13506641      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13380289      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.13168693      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.12699637      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.12623730      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.12521485      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.12087272      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.12077569      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11574994      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11574435      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11548617      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11525313      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11503289      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11502721      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11501662      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11448638      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11412513      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11369042      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11350689      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11344132      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11312181      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11259495      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11235513      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11235081      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11220181      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11191762      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11146807      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11126631      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11122233      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11109616      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11080237      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.11031747      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10978831      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10968458      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10947701      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10939520      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10935236      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10907116      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10886750      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10808486      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10793700      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10730424      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10687659      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10617006      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10609771      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10389955      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10083555      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10008465      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.1038/s41598-019-56067-w   |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17296688      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17251110      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17186869      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17174207      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17103962      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17098115      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17093454      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17092348      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17092303      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17087096      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17085991      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17014253      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16993955      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16993649      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16993297      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16993178      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16993059      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16992904      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16992716      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16992303      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16991961      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16980661      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16980386      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16980217      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16979744      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16911980      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16880913      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16812312      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16793739      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16736342      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16736220      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16735994      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16735893      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16735885      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16561545      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16561338      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.16412004      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15858127      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15796252      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15793536      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15771899      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15756866      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15751975      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15750255      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15735577      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15698366      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15606013      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15597856      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15575379      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15546497      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15481680      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15479606      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15469809      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15424704      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15393592      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15379632      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15367563      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15319829      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15279551      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15267559      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15223802      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15193418      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15182563      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.15165424      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14848838      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14001044      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10816895      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17404133      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17372593      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17191504      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.10203284      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14264509      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14264885      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.14710820      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17424911      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17429285      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17472821      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17476640      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17477053      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17487264      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17541532      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17564219      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17579804      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17604591      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17607828      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17639350      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17659149      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17669681      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17671971      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17775761      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17775957      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17787401      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17856704      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17876813      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17897525      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17898202      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17974214      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17977384      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.17978132      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18184329      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18230666      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18415225      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18454238      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18659976      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18694155      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18712011      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18735653      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18754248      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18782352      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18953151      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18957947      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18984621      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.18998676      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19001717      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19046270      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19063027      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19107804      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19177652      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19184109      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19239481      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19246441      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19335305      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19352622      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19366801      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19450032      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19469051      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19627003      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.19949157      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.20024684      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.20039402      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.20271104      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.20275730      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.20282961      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.20509378      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | http://semanticscience.org/resource/SIO_000088      | https://doi.org/10.5281/zenodo.20512957      |
+| https://nfdi4bioimage.de/rdf/node | https://zenodo.org/communities/nfdi4bioimage | https://www.w3.org/TR/prov-o/#wasAttributedTo       | https://nfdi4bioimage.de/rdf/node            |
+
+**** DONE NFDI_001008 (op)
+CLOSED: [2026-06-05 Fri 11:42]
+:PROPERTIES:
+:ID:       57dd40fa-d7d0-4edf-89eb-8e237441daa7
+:END:
+- affected graph: n4bi_zenodo_community
+- affected terms
+
+
+#+begin_src sparql
+  <<prefixes>>
+  select * where {
+    {
+    graph n4bikg:n4bi_zenodo_community {?s nfdicore:NFDI_0001008 ?o}
+      }
+    union {
+      graph n4bikg:owl { nfdicore:NFDI_0001008 rdfs:label ?label }
+      }
+   }
+#+end_src
+
+#+RESULTS:
+| s                                            | o                                            | label   |
+|----------------------------------------------+----------------------------------------------+---------|
+| https://zenodo.org/communities/nfdi4bioimage | https://zenodo.org/communities/nfdi4bioimage |         |
+|                                              |                                              | has url |
+
+will replace by (zenodo_communit provo:wasAttributedTo n4bi)
+
+***** sparql update
+:PROPERTIES:
+:ID:       e37f7a12-6c74-4903-a596-979b2bb80206
+:END:
+#+begin_src sparql :eval no
+  <<prefixes>>
+  prefix prov <https://www.w3.org/TR/prov-o/#>
+
+  delete {
+    graph n4bikg:n4bi_zenodo_community {?s nfdicore:NFDI_0001008 ?o}
+    }
+  insert {
+    graph n4bikg:n4bi_zenodo_community {?s schema:url ?s .}
+    }
+  where {
+    graph n4bikg:n4bi_zenodo_community {?s nfdicore:NFDI_0001008 ?o}
+    }
+#+end_src
+
+***** check
+:PROPERTIES:
+:ID:       24492f6d-fe6f-4eb5-aee0-0f0b0dc413fe
+:END:
+#+begin_src sparql
+  <<prefixes>>
+  select * where {
+    optional
+    {
+    graph n4bikg:n4bi_zenodo_community {?s nfdicore:NFDI_0001080 ?o}
+    }
+    optional {
+    graph n4bikg:n4bi_zenodo_community {?s schema:url ?o .}
+    }
+    }
+#+end_src
+
+#+RESULTS:
+| s                                            | o                                            |
+|----------------------------------------------+----------------------------------------------|
+| https://zenodo.org/communities/nfdi4bioimage | https://zenodo.org/communities/nfdi4bioimage |
+
+*** Update nfdicore ontology
+:PROPERTIES:
+:ID:       ffb0e1ea-7cdb-47d1-a723-776e2810140a
+:END:
+#+begin_src bash
+  wget -O RDF_dumps/nfdicore-3.0.5.ttl https://ise-fizkarlsruhe.github.io/nfdicore/ontology.ttl 
+  wget -O RDF_dumps/
+#+end_src
+
+#+RESULTS:
 
 * Varia
 :PROPERTIES:
@@ -916,3 +1399,70 @@ PREFIX xsd:          <http://www.w3.org/2001/XMLSchema#>
 PREFIX xsi:          <http://www.w3.org/2001/XMLSchema-instance#>
 PREFIX zenodo:       <https://zenodo.org/ns/>
 ]]
+* Archiving
+:PROPERTIES:
+:ID:       074c9b38-5850-42fc-a75a-69e34d489883
+:END:
+After each update operation, all graphs should be dumped and git committed to serve as a starting point for the next round of updates.
+** [2026-06-05 Fri]
+:PROPERTIES:
+:ID:       6cd8a80c-486e-4d02-9240-a444b630c7ca
+:header-args:sparql: :url http://kg.nfdi4bioimage.de/N4BIKG/sparql
+:END:
+*** core
+:PROPERTIES:
+:ID:       ea6af02c-37f6-458c-b65f-24b541074ee0
+:END:
+#+begin_src sparql :results output file :file Archive/core--20260605.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/core>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/core--20260605.n3]]
+*** services
+:PROPERTIES:
+:ID:       d554b550-5d7e-4ce1-923a-dbbee28a54ac
+:END:
+#+begin_src sparql :results output file :file Archive/services--20260605.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/services>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/services--20260605.n3]]
+*** n4bi_zenodo_community
+:PROPERTIES:
+:ID:       020393fb-e7fe-4a8d-bc51-d8d60743174e
+:END:
+#+begin_src sparql :results output file :file Archive/n4bi_zenodo_community--20260605.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/n4bi_zenodo_community--20260605.n3]]
+*** owl
+:PROPERTIES:
+:ID:       645eacc4-3744-4596-8eb6-9e374966ba66
+:END:
+#+begin_src sparql :results output file :file Archive/owl--20260605.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/owl>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/owl--20260605.n3]]
+*** git
+:PROPERTIES:
+:ID:       b678e448-d2b1-4583-879d-cc5208809ee6
+:END:
+#+begin_src bash
+  git add Archive/*.n3
+  git commit -m "Archiving graphs."
+#+end_src
+

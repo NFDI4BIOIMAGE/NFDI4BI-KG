@@ -41,6 +41,7 @@ with Scythe("https://zenodo.org/oai2d") as scythe:
 for rec0 in records:
 
   creator = rec0.metadata.get('creator', [])
+  contributor = rec0.metadata.get('contributor', [])
   date = rec0.metadata.get('date', [])
   description = rec0.metadata.get('description', [])
   identifier = rec0.metadata.get('identifier', [])
@@ -80,4 +81,4 @@ for rec0 in records:
       g.add((subject, DC.type, Literal(tp)))
 
 
-g.serialize("/home/grotec/Repositories/NFDI4BI-KG/N4BI_zenodo_community.n3")
+g.serialize("/home/grotec/Repositories/NFDI4BI-KG/RDF_dumps/N4BI_zenodo_community.n3")

@@ -6,149 +6,16 @@
 :PROPERTIES:
 :ID:       71e7d956-3288-4586-acaf-c8eb072ac48f
 :END:
-** Get one record based on DOI
+** Session
 :PROPERTIES:
-:ID:       8ded542a-1c03-4158-8b21-9a905cf5b507
+:ID:       a96dcf36-4c66-46ba-9c1e-23b400bba768
 :END:
-#+begin_src python :session rdf :results output :async yes
-  from oaipmh_scythe import Scythe
-  from bs4 import BeautifulSoup
-  from rdflib import Graph, Namespace, URIRef, Literal, FOAF, DC
-
-  with Scythe("https://zenodo.org/oai2d") as scythe:
-    record = scythe. list_records(set_='user-nfdi4bioimage', metadata_prefix='oai_datacite')
-#+end_src
-
-** Testrun on nfdi4bioimage community
-:PROPERTIES:
-:ID:       9ae10ebb-ddf2-42c0-9b28-35655ef08457
-:END:
-#+begin_src python :session rdf :results output :async yes
-  from oaipmh_scythe import Scythe
-  import pprint
-  with Scythe("https://zenodo.org/oai2d") as scythe:
-    records = scythe.list_records(set_='user-nfdi4bioimage', metadata_prefix='oai_datacite')
-
-    rec0 = next(records)
-
-  for key, val in rec.metadata.items():
-    
-      print(key, val)
-  print(rec0.xml)
-#+end_src
-#+RESULTS:
-#+begin_example
-creator ['Moore, Josh', 'Waagmeester, Andra', 'Hettne, Kristina', 'Wolstencroft, Katherine', 'Kunis, Susanne']
-date ['2024-02-26']
-description ['&lt;p&gt;In 2005, the first version of OMERO stored RDF natively. However, just a year after the 1.0 release of RDF, performance considerations led to the development of a more traditional SQL approach for OMERO. A binary protocol makes it possible to query and retrieve metadata but the resulting information cannot immediately be combined with other sources. This is the adventure of rediscovering the benefit of RDF triples as a -- if not the -- common exchange mechanism.&lt;/p&gt;\n&lt;p&gt;&nbsp;&lt;/p&gt;\n&lt;p&gt;This poster was presented at SWAT4HCLS in Leiden, NL, 2024 as &lt;strong&gt;Poster 54&lt;/strong&gt;. See &lt;a href="https://www.swat4ls.org/workshops/leiden2024"&gt;https://www.swat4ls.org/workshops/leiden2024&lt;/a&gt; for more information.&lt;/p&gt;', '&lt;p&gt;NFDI4BIOIMAGE is funded by DFG grant number NFDI 46/1, project number 501864659.&lt;/p&gt;']
-identifier ['https://doi.org/10.5281/zenodo.10687659', 'oai:zenodo.org:10687659']
-language ['eng']
-publisher ['Zenodo']
-relation ['https://zenodo.org/communities/nfdi4bioimage/', 'https://doi.org/10.5281/zenodo.10687658']
-rights ['info:eu-repo/semantics/openAccess', 'Creative Commons Attribution 4.0 International', 'https://creativecommons.org/licenses/by/4.0/legalcode']
-source ['SWAT4HCLS, 15th International Semantic Web Applications and Tools for Health Care and Life Sciences Conference, Leiden, The Netherlands, 26-29 February, 2024']
-subject ['Open Microscopy Environment (OME)', 'Bioimaging', 'Resource Description Framework (RDF)']
-title ['RDF as a bridge to domain-platforms like OMERO, or There and back again.']
-type ['info:eu-repo/semantics/conferencePoster']
-<Element {http://www.openarchives.org/OAI/2.0/}record at 0x7f5d52b86580>
-#+end_example
-** Obsolete: Generate RDF from NFDI4BIOIMAGE's zenodo community
-:PROPERTIES:
-:ID:       7719c86c-b08a-4642-9cd1-f78942e5c44f
-:END:
-
-#+begin_src python :session rdf :results output :async yes :tangle /home/grotec/Repositories/NFDI4BI-KG/src/python/zenodo_community_harvest.py
-
-  from oaipmh_scythe import Scythe
-  from rdflib import Graph, BNode, Literal, URIRef, DC, FOAF, XSD, RDF, RDFS, Namespace
-
-  SIO = Namespace('http://semanticscience.org/resource/')
-  ZND = Namespace('https://zenodo.org/')
-  zenodo = Namespace('https://zenodo.org/ns/')
-
-  def add_persons(graph, person_list, property_term):
-    for c in person_list:
-        bn = BNode()
-        name_str = c.split(", ")
-        if len(name_str) > 1:
-          last = name_str[0]
-          first = ", ".join(name_str[1:])
-          graph.add((bn, FOAF.firstName, Literal(first)))
-          graph.add((bn, FOAF.lastName, Literal(last)))
-        else:
-          graph.add((bn, FOAF.name, Literal(name_str)))
-
-        graph.add((subject, property_term, bn))
-
-    return graph
-
-  g = Graph(bind_namespaces='rdflib')
-  g.bind("sio", SIO)
-  g.bind("znd", ZND)
-  g.bind("zenodo", zenodo)
-
-  n4bi = URIRef("https://nfdi4bioimage.de/rdf/node")
-  n4bicomm = URIRef("https://zenodo.org/communities/nfdi4bioimage")
-
-  g.add((n4bi, zenodo.community, n4bicomm))
-  g.add((n4bicomm, RDF.type, SIO.SIO_001064))
-  g.add((n4bicomm, DC.identifier, Literal('user-nfdi4bioimage')))
-  g.add((n4bicomm, SIO.SIO_000296, Literal('https://zenodo.org/communities/nfdi4bioimage')))
-
-  with Scythe("https://zenodo.org/oai2d") as scythe:
-    records = scythe.list_records(set_='user-nfdi4bioimage')
-
-  for rec0 in records:
-
-    creator = rec0.metadata.get('creator', [])
-    date = rec0.metadata.get('date', [])
-    description = rec0.metadata.get('description', [])
-    identifier = rec0.metadata.get('identifier', [])
-    publisher = rec0.metadata.get('publisher', [])
-    relation = rec0.metadata.get('relation', [])
-    rights = rec0.metadata.get('rights', [])
-    subjects = rec0.metadata.get('subject', [])
-    title = rec0.metadata.get('title', [])
-    tpe = rec0.metadata.get('type', [])
-
-    subject = URIRef(rec0.metadata['identifier'][0])
-
-    g.add((n4bicomm, SIO.SIO_000088, subject))
-
-    g = add_persons(g, contributor, DC.contributor)
-    g = add_persons(g, creator, DC.creator)
-    for p in publisher:
-      g.add((subject, DC.publisher, Literal(p)))
-    for dt in date:
-      g.add((subject, DC.date, Literal(dt, datatype=XSD.date)))
-
-    for desc in description:
-      g.add((subject, DC.description, Literal(desc)))
-
-    for right in rights:
-        g.add((subject, DC.rights, Literal(right)))
-
-    for sbjct in subjects:
-        g.add((subject, DC.subject, Literal(sbjct)))
-
-    for t in title:
-        g.add((subject, DC.title, Literal(t)))
-
-    for rel in relation:
-        g.add((subject, DC.relation, URIRef(rel)))
-
-    for id in identifier:
-        g.add((subject, DC.identifier, URIRef(id)))
-
-    for tp in tpe:
-        g.add((subject, DC.type, Literal(tp)))
-
-
-  g.serialize("/home/grotec/Repositories/NFDI4BI-KG/N4BI_zenodo_community.n3")
+#+begin_src emacs-lisp
+  (setq org-babel-python-command "/home/grotec/.local/share/mamba/envs/rdf/bin/python")
 #+end_src
 
 #+RESULTS:
-: fe35bb5c-223d-4e77-919b-ba877a4781a8
+: /home/grotec/.local/share/mamba/envs/rdf/bin/python
 
 ** Convert xml returned from scythe to rdf
 :PROPERTIES:
@@ -370,7 +237,7 @@ type ['info:eu-repo/semantics/conferencePoster']
 #+end_src
 
 #+RESULTS:
-: 4f207e4d-c2e2-4722-9593-a772dbd47190
+: 7362
 
 *** Clean up
 :PROPERTIES:
@@ -385,15 +252,27 @@ Cleanup:
   echo $JAVA_HOME
   RIOT=/opt/apache-jena/bin/riot
   cat n4bi_zenodo_community.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
-  $RIOT --output n3 n4bi_zenodo_community.n3 > tmp.n3
-  $RIOT --output turtle tmp.n3 > n4bi_zenodo_community.ttl
-  mv tmp.n3 n4bi_zenodo_community.n3
+  $RIOT --output n3 N4BI_zenodo_community.n3 > tmp.n3
+  $RIOT --output turtle tmp.n3 > N4BI_zenodo_community.ttl
+  mv tmp.n3 N4BI_zenodo_community.n3
 #+end_src
 
 #+RESULTS:
 : /usr/bin/java
 : /usr
 
+#+begin_src sparql :url http://kg.nfdi4bioimage.de/#/dataset/N4BIKG/query :eval no
+  drop graph <https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community>
+#+end_src
+
+#+RESULTS:
+| HTTP/1.1 400 Bad Request       |                          |          |
+|--------------------------------+--------------------------+----------|
+| Server: nginx/1.22.1           |                          |          |
+| Date: Thu                      | 04 Jun 2026 11:51:15 GMT |          |
+| Content-Length: 0              |                          |          |
+| Connection: keep-alive         |                          |          |
+| Cache-Control: must-revalidate | no-cache                 | no-store |
 
 ** Convert datacite xsd schema to owl ontology
 :PROPERTIES:
@@ -531,4 +410,175 @@ Cleanup:
 | dcite:westBoundLongitude          |
 -------------------------------------
 #+end_example
+
+** Get one record based on DOI
+:PROPERTIES:
+:ID:       8ded542a-1c03-4158-8b21-9a905cf5b507
+:END:
+#+begin_src python :session rdf :results output :async yes
+  from oaipmh_scythe import Scythe
+  from bs4 import BeautifulSoup
+  from rdflib import Graph, Namespace, URIRef, Literal, FOAF, DC
+
+  with Scythe("https://zenodo.org/oai2d") as scythe:
+    record = scythe. list_records(set_='user-nfdi4bioimage', metadata_prefix='oai_datacite')
+#+end_src
+
+#+RESULTS:
+
+** Testrun on nfdi4bioimage community
+:PROPERTIES:
+:ID:       9ae10ebb-ddf2-42c0-9b28-35655ef08457
+:END:
+#+begin_src python :session rdf :results output :async yes
+  from oaipmh_scythe import Scythe
+  import pprint
+  with Scythe("https://zenodo.org/oai2d") as scythe:
+    records = scythe.list_records(set_='user-nfdi4bioimage', metadata_prefix='oai_datacite')
+
+    rec0 = next(records)
+
+  for key, val in rec0.metadata.items():
+    
+      print(key, val)
+  print(rec0.xml)
+#+end_src
+#+RESULTS:
+#+begin_example
+schemaVersion ['4.5']
+datacentreSymbol ['CERN.ZENODO']
+payload [None]
+resource [None]
+alternateIdentifiers [None]
+alternateIdentifier ['oai:zenodo.org:14951142']
+creators [None]
+creator [None]
+creatorName ['Kandpal, Niraj']
+givenName ['Niraj', 'Peter', 'Astrid', 'Monica']
+familyName ['Kandpal', 'Zentis', 'Schauss', 'Valencia-Schneider']
+nameIdentifier ['0009-0007-5101-4786', '0000-0002-6999-132X', '0000-0002-6658-2192', '0000-0003-3430-2683']
+titles [None]
+title ['OMERO.mde : Electron Microscopy Use Case']
+publisher ['Zenodo']
+publicationYear ['2023']
+contributors [None]
+contributor [None, None, None]
+contributorName ['Zentis, Peter', 'Schauss, Astrid', 'Valencia-Schneider, Monica']
+affiliation ['Exzellenzcluster CECAD in der Universität zu Köln', 'University of Cologne']
+dates [None]
+date ['2023-09-22', '2025-03-15']
+resourceType ['Presentation']
+identifier ['10.5281/zenodo.14951142']
+relatedIdentifiers [None]
+relatedIdentifier ['10.5281/zenodo.14951141', 'https://zenodo.org/communities/nfdi4bioimage/']
+rightsList [None]
+rights ['Creative Commons Attribution 4.0 International', None]
+descriptions [None]
+description ['Presentation slides from RDM4mic meeting in Muenster from 19-21 September 2023. These slides contain data management use case at CECAD Imaging facility. We are using OMERO.mde to annotate EM(Electron Microscopy) data with metadata at the imaging facility. This presentation provide a use case with specific template for Electron\xa0 Microscopy.']
+fundingReferences [None]
+fundingReference [None]
+funderName ['Deutsche Forschungsgemeinschaft']
+funderIdentifier ['10.13039/501100001659']
+awardNumber ['NFDI 46/1 - 501864659']
+awardTitle ['NFDI4BIOIMAGE']
+<Element {http://www.openarchives.org/OAI/2.0/}record at 0x77b2e8936000>
+#+end_example
+
+** Obsolete: Generate RDF from NFDI4BIOIMAGE's zenodo community
+:PROPERTIES:
+:ID:       7719c86c-b08a-4642-9cd1-f78942e5c44f
+:END:
+
+#+begin_src python :session rdf :results output :async yes :tangle /home/grotec/Repositories/NFDI4BI-KG/src/python/zenodo_community_harvest.py
+
+  from oaipmh_scythe import Scythe
+  from rdflib import Graph, BNode, Literal, URIRef, DC, FOAF, XSD, RDF, RDFS, Namespace
+
+  SIO = Namespace('http://semanticscience.org/resource/')
+  ZND = Namespace('https://zenodo.org/')
+  zenodo = Namespace('https://zenodo.org/ns/')
+
+  def add_persons(graph, person_list, property_term):
+    for c in person_list:
+        bn = BNode()
+        name_str = c.split(", ")
+        if len(name_str) > 1:
+          last = name_str[0]
+          first = ", ".join(name_str[1:])
+          graph.add((bn, FOAF.firstName, Literal(first)))
+          graph.add((bn, FOAF.lastName, Literal(last)))
+        else:
+          graph.add((bn, FOAF.name, Literal(name_str)))
+
+        graph.add((subject, property_term, bn))
+
+    return graph
+
+  g = Graph(bind_namespaces='rdflib')
+  g.bind("sio", SIO)
+  g.bind("znd", ZND)
+  g.bind("zenodo", zenodo)
+
+  n4bi = URIRef("https://nfdi4bioimage.de/rdf/node")
+  n4bicomm = URIRef("https://zenodo.org/communities/nfdi4bioimage")
+
+  g.add((n4bi, zenodo.community, n4bicomm))
+  g.add((n4bicomm, RDF.type, SIO.SIO_001064))
+  g.add((n4bicomm, DC.identifier, Literal('user-nfdi4bioimage')))
+  g.add((n4bicomm, SIO.SIO_000296, Literal('https://zenodo.org/communities/nfdi4bioimage')))
+
+  with Scythe("https://zenodo.org/oai2d") as scythe:
+    records = scythe.list_records(set_='user-nfdi4bioimage')
+
+  for rec0 in records:
+
+    creator = rec0.metadata.get('creator', [])
+    date = rec0.metadata.get('date', [])
+    description = rec0.metadata.get('description', [])
+    identifier = rec0.metadata.get('identifier', [])
+    publisher = rec0.metadata.get('publisher', [])
+    relation = rec0.metadata.get('relation', [])
+    rights = rec0.metadata.get('rights', [])
+    subjects = rec0.metadata.get('subject', [])
+    title = rec0.metadata.get('title', [])
+    tpe = rec0.metadata.get('type', [])
+
+    subject = URIRef(rec0.metadata['identifier'][0])
+
+    g.add((n4bicomm, SIO.SIO_000088, subject))
+
+    g = add_persons(g, contributor, DC.contributor)
+    g = add_persons(g, creator, DC.creator)
+    for p in publisher:
+      g.add((subject, DC.publisher, Literal(p)))
+    for dt in date:
+      g.add((subject, DC.date, Literal(dt, datatype=XSD.date)))
+
+    for desc in description:
+      g.add((subject, DC.description, Literal(desc)))
+
+    for right in rights:
+        g.add((subject, DC.rights, Literal(right)))
+
+    for sbjct in subjects:
+        g.add((subject, DC.subject, Literal(sbjct)))
+
+    for t in title:
+        g.add((subject, DC.title, Literal(t)))
+
+    for rel in relation:
+        g.add((subject, DC.relation, URIRef(rel)))
+
+    for id in identifier:
+        g.add((subject, DC.identifier, URIRef(id)))
+
+    for tp in tpe:
+        g.add((subject, DC.type, Literal(tp)))
+
+
+  g.serialize("/home/grotec/Repositories/NFDI4BI-KG/N4BI_zenodo_community.n3")
+#+end_src
+
+#+RESULTS:
+: fe35bb5c-223d-4e77-919b-ba877a4781a8
 
