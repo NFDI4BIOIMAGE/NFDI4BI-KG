@@ -1737,7 +1737,7 @@ After each update operation, all graphs should be dumped and git committed to se
 :PROPERTIES:
 :ID:       b678e448-d2b1-4583-879d-cc5208809ee6
 :END:
-#+begin_src bash
+#+begin_src bash :results output raw replace
   git add Archive/*.n3
   git commit -m "Archiving graphs."
 #+end_src

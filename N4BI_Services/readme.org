@@ -323,6 +323,22 @@ CLOSED: [2026-06-05 Fri 22:17]
 | https://omero.nfdi4bioimage.de/vkg/sparql   | https://omero.nfdi4bioimage.de/vkg/sparql   | http://www.wikidata.org/entity/Q33002955                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | http://www.wikidata.org/entity/Q33002955            |
 
 
+
+*** DONE rdfs:comment for omero.nfdi4bioimage and evolomero
+CLOSED: [2026-06-05 Fri 22:48]
+:PROPERTIES:
+:ID:       ce77eb64-cf62-4b07-8aeb-20aaa85a6465
+:END:
+#+begin_src sparql
+  prefix n4bikg: <https://kg.nfdi4bioimage.de/n4bikg/>
+  PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+
+  insert data {
+    graph n4bikg:services {<https://omero.nfdi4bioimage.de> rdfs:comment """The Rich OMERO Playground Instance is designed for advanced users, developers, and OMERO administrators who want to test plugins and scripts in a standardized, community-run environment. As a non-production instance built by the community for the community, it serves as a safe playground for experimentation and development. Developers can request admin-level access to the OMERO server and SSH access to the underlying system.""" .}
+    graph n4bikg:services {<https://evolomero.evolbio.mpg.de> rdfs:comment """EvolOMERO is the public OMERO instance at the MPI for Evolutionary Biology. It hosts datasets underlying publications authored by MPI affiliates and other, unpublished data to facilitate sharing with non-MPI collaborators.""" . }
+    }
+#+end_src
+
 ** TODO Services that are not OMERO [0/3]
 :PROPERTIES:
 :ID:       cfe57251-16e2-4e15-a233-9046a7fed85c
