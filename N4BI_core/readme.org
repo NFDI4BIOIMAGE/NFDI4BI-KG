@@ -883,3 +883,60 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 </rdf:RDF>
 #+end_example
 
+
+
+** Date of last update
+:PROPERTIES:
+:ID:       08470056-1ad3-44c2-beb2-5966cff60a25
+:header-args:rdf: :noweb no-export :tangle ../RDF_dumps/graph_dates.n3
+:END:
+#+RESULTS:
+| g                                                        | cls |
+|----------------------------------------------------------+-----|
+| https://kg.nfdi4bioimage.de/n4bikg/core                  |     |
+| https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community |     |
+| https://kg.nfdi4bioimage.de/n4bikg/services              |     |
+| https://kg.nfdi4bioimage.de/n4bikg/owl                   |     |
+| https://nfdi4bioimage.de/kg/owl                          |     |
+
+Add these IRIs as =owl:Graph= to the core KG
+#+begin_src rdf :noweb-ref statements
+# Define graphs as such with wd:31386861 (RDF graph) and under CC-BY-SA License.
+<core> a wd:Q31386861 ;
+         nfdicore:NFDI_0000142 wd:Q18199165 .
+<services> a wd:Q31386861 ;
+          nfdicore:NFDI_0000142 wd:Q18199165 .
+<owl> a wd:Q31386861 ;
+          nfdicore:NFDI_0000142 wd:Q18199165 .
+#+end_src
+
+Cleanup:
+#+begin_src bash :dir ../RDF_dumps :results output :session noconda
+  JAVA=$(which java)
+  export JAVA_HOME=/usr
+  echo $JAVA
+  echo $JAVA_HOME
+  cat graph_licenses.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
+  /opt/apache-jena/bin/riot --output n3 tmp.n3 | tee graph_licenses.n3
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+/usr/bin/java
+/usr
+PREFIX nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/>
+PREFIX wd:       <http://www.wikidata.org/entity/>
+
+<https://kg.nfdi4bioimage.de/n4bikg/owl>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .
+
+<https://kg.nfdi4bioimage.de/n4bikg/services>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .
+
+<https://kg.nfdi4bioimage.de/n4bikg/core>
+        a                      wd:Q31386861;
+        nfdicore:NFDI_0000142  wd:Q18199165 .
+#+end_example
