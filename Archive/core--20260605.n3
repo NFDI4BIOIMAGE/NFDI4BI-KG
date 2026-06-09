@@ -72,7 +72,8 @@ PREFIX xsd:          <http://www.w3.org/2001/XMLSchema#>
 PREFIX xsi:          <http://www.w3.org/2001/XMLSchema-instance#>
 PREFIX zenodo:       <https://zenodo.org/ns/>
 
-ror:00f5q5839  rdfs:label  "HAWK University of Applied Sciences and Arts"@en;
+ror:00f5q5839  rdf:type  obo:OBI_0000828;
+        rdfs:label    "HAWK University of Applied Sciences and Arts"@en;
         rdfs:seeAlso  wd:Q1562772 .
 
 n4bikg:services  rdf:type      wd:Q31386861;
@@ -89,70 +90,92 @@ n4bikg:n4bi_zenodo_community
         <https://w3id.org/biolink/vocab/update_date>
                 "2026-06-05"^^xs:date .
 
-ror:01y9bpm73  rdfs:label  "University of Göttingen"@en;
+ror:01y9bpm73  rdf:type  obo:OBI_0000828;
+        rdfs:label    "University of Göttingen"@en;
         rdfs:seeAlso  wd:Q152838 .
 
-ror:02jhqqg57  rdfs:label  "Leibniz Institute for Analytical Sciences - ISAS"@en;
+ror:02jhqqg57  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Leibniz Institute for Analytical Sciences - ISAS"@en;
         rdfs:seeAlso  wd:Q1813719 .
 
-ror:03mstc592  rdfs:label  "European Molecular Biology Laboratory"@en;
+ror:03mstc592  rdf:type  obo:OBI_0000828;
+        rdfs:label    "European Molecular Biology Laboratory"@en;
         rdfs:seeAlso  wd:Q695267 .
 
-ror:02se0t636  rdfs:label  "Leibniz Institute of Photonic Technology"@en;
+ror:02se0t636  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Leibniz Institute of Photonic Technology"@en;
         rdfs:seeAlso  wd:Q1664946 .
 
-ror:02nv7yv05  rdfs:label  "Forschungszentrum Jülich"@en;
+ror:02nv7yv05  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Forschungszentrum Jülich"@en;
         rdfs:seeAlso  wd:Q697111 .
 
-ror:004hd5y14  rdfs:label  "Leibniz Institute for Plasma Science and Technology"@en;
+ror:004hd5y14  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Leibniz Institute for Plasma Science and Technology"@en;
         rdfs:seeAlso  wd:Q1248645 .
 
-ror:01zwmgk08  rdfs:label  "Leibniz Institute for Neurobiology"@en;
-    rdfs:seeAlso  wd:Q1813753 .
+ror:01zwmgk08  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Leibniz Institute for Neurobiology"@en;
+        rdfs:seeAlso  wd:Q1813753 .
 
-ror:055s37c97  rdfs:label  "Leibniz Institute for Natural Product Research and Infection Biology"@en;
+ror:055s37c97  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Leibniz Institute for Natural Product Research and Infection Biology"@en;
         rdfs:seeAlso  wd:Q1813751 .
 
-ror:0534re684  rdfs:label  "Max Planck Institute for Evolutionary Biology"@en;
+ror:0534re684  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Max Planck Institute for Evolutionary Biology"@en;
         rdfs:seeAlso  wd:Q1493545 .
 
-ror:00pd74e08  rdfs:label  "University of Münster"@en;
+ror:00pd74e08  rdf:type  obo:OBI_0000828;
+        rdfs:label    "University of Münster"@en;
         rdfs:seeAlso  wd:Q168426 .
 
-ror:0245cg223  rdfs:label  "University of Freiburg"@en;
+ror:0245cg223  rdf:type  obo:OBI_0000828;
+        rdfs:label    "University of Freiburg"@en;
         rdfs:seeAlso  wd:Q153987 .
 
-ror:04qmmjx98  rdfs:label  "Osnabrück University"@en;
+ror:04qmmjx98  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Osnabrück University"@en;
         rdfs:seeAlso  wd:Q702499 .
 
-ror:023b0x485  rdfs:label  "Johannes Gutenberg University Mainz"@en;
+ror:023b0x485  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Johannes Gutenberg University Mainz"@en;
         rdfs:seeAlso  wd:Q161982 .
 
-ror:038t36y30  rdfs:label  "Heidelberg University"@en;
+ror:038t36y30  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Heidelberg University"@en;
         rdfs:seeAlso  wd:Q151510 .
 
-ror:000h6jb29  rdfs:label  "Helmholtz Centre for Environmental Research"@en;
+ror:000h6jb29  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Helmholtz Centre for Environmental Research"@en;
         rdfs:seeAlso  wd:Q880999 .
 
-ror:00rcxh774  rdfs:label  "University of Cologne"@en;
+ror:00rcxh774  rdf:type  obo:OBI_0000828;
+        rdfs:label    "University of Cologne"@en;
         rdfs:seeAlso  wd:Q54096 .
 
-ror:024z2rq82  rdfs:label  "University of Düsseldorf"@en;
+ror:024z2rq82  rdf:type  obo:OBI_0000828;
+        rdfs:label    "University of Düsseldorf"@en;
         rdfs:seeAlso  wd:Q317032 .
 
-ror:04cdgtt98  rdfs:label  "German Cancer Research Center"@en;
+ror:04cdgtt98  rdf:type  obo:OBI_0000828;
+        rdfs:label    "German Cancer Research Center"@en;
         rdfs:seeAlso  wd:Q449325 .
 
-ror:0546hnb39  rdfs:label  "University of Konstanz"@en;
+ror:0546hnb39  rdf:type  obo:OBI_0000828;
+        rdfs:label    "University of Konstanz"@en;
         rdfs:seeAlso  wd:Q835440 .
 
-ror:05tpnw772  rdfs:label  "German BioImaging – Gesellschaft für Mikroskopie und Bildanalyse"@en;
+ror:05tpnw772  rdf:type  obo:OBI_0000828;
+        rdfs:label    "German BioImaging – Gesellschaft für Mikroskopie und Bildanalyse"@en;
         rdfs:seeAlso  wd:Q116959508 .
 
-ror:03s7gtk40  rdfs:label  "Leipzig University"@en;
+ror:03s7gtk40  rdf:type  obo:OBI_0000828;
+        rdfs:label    "Leipzig University"@en;
         rdfs:seeAlso  wd:Q154804 .
 
-ror:042aqky30  rdfs:label  "TU Dresden"@en;
+ror:042aqky30  rdf:type  obo:OBI_0000828;
+        rdfs:label    "TU Dresden"@en;
         rdfs:seeAlso  wd:Q158158 .
 
 n4bikg:core  rdf:type          wd:Q31386861;
@@ -161,12 +184,12 @@ n4bikg:core  rdf:type          wd:Q31386861;
                 "2026-06-05"^^xs:date .
 
 <https://nfdi4bioimage.de/rdf/node>
-    rdf:type               nfdicore:NFDI_0001039;
+        rdf:type               nfdicore:NFDI_0001039;
         rdfs:comment           "This IRI represents the NFDI4BIOIMAGE consortium as an object in the RDF sense.";
         rdfs:label             "The NFDI4BIOIMAGE consortium";
         obo:RO_0000057         ror:00f5q5839 , ror:01y9bpm73 , ror:02jhqqg57 , ror:03mstc592 , ror:02se0t636 , ror:02nv7yv05 , ror:004hd5y14 , ror:01zwmgk08 , ror:055s37c97 , ror:0534re684 , ror:00pd74e08 , ror:0245cg223 , ror:04qmmjx98 , ror:023b0x485 , ror:038t36y30 , ror:000h6jb29 , ror:00rcxh774 , ror:042aqky30 , ror:03s7gtk40 , ror:05tpnw772 , ror:0546hnb39 , ror:04cdgtt98 , ror:024z2rq82;
         dc:description         "Nationale Forschungsdateninfrastruktur für Mikroskopie und Bildanalyse"@de , "National Research Data Infrastructure for Microscopy and Bioimage Analysis"@en;
         nfdicore:NFDI_0000136  "2023-03-01"^^xs:date;
-    nfdicore:NFDI_0001006  <https://wikidata.org/entity/Q113500855>;
+        nfdicore:NFDI_0001006  <https://wikidata.org/entity/Q113500855>;
         nfdicore:NFDI_0001008  "https://nfdi4bioimage.de";
         nfdicore:NFDI_0010015  "N4BI" , "NFDI4BIOIMAGE" .
