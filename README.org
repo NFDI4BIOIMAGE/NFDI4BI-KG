@@ -1746,3 +1746,85 @@ After each update operation, all graphs should be dumped and git committed to se
 :ID:       490429d5-3477-4438-8e1f-e6efed1c9678
 :END:
 =dcat:accesURL= should be =dcat:accessURL=
+
+** [2026-06-09 Fri]
+:PROPERTIES:
+:ID:       6cd8a80c-486e-4d02-9240-a444b630c7ca
+:header-args:sparql: :url http://kg.nfdi4bioimage.de/N4BIKG/sparql
+:END:
+*** core
+:PROPERTIES:
+:ID:       ea6af02c-37f6-458c-b65f-24b541074ee0
+:END:
+#+begin_src sparql :results output file :file Archive/core--20260605.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/core>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/core--20260605.n3]]
+*** services
+:PROPERTIES:
+:ID:       d554b550-5d7e-4ce1-923a-dbbee28a54ac
+:END:
+#+begin_src sparql :results output file :file Archive/services--20260605.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/services>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/services--20260605.n3]]
+*** n4bi_zenodo_community
+:PROPERTIES:
+:ID:       020393fb-e7fe-4a8d-bc51-d8d60743174e
+:END:
+#+begin_src sparql :results output file :file Archive/n4bi_zenodo_community--20260605.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/n4bi_zenodo_community--20260605.n3]]
+*** owl
+:PROPERTIES:
+:ID:       645eacc4-3744-4596-8eb6-9e374966ba66
+:END:
+#+begin_src sparql :results output file :file Archive/owl--20260605.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/owl>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/owl--20260605.n3]]
+*** git
+:PROPERTIES:
+:ID:       b678e448-d2b1-4583-879d-cc5208809ee6
+:END:
+#+begin_src bash :results output raw replace
+  git add Archive/*.n3
+  git commit -m "Archiving graphs."
+#+end_src
+
+#+RESULTS:
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.org
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[main e2660a8] Archiving graphs.
+ 1 file changed, 49 insertions(+), 26 deletions(-)
+
+*** TODO Fix typo
+:PROPERTIES:
+:ID:       490429d5-3477-4438-8e1f-e6efed1c9678
+:END:
+=dcat:accesURL= should be =dcat:accessURL=
