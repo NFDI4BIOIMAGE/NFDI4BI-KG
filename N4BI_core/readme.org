@@ -227,6 +227,7 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
   PREFIX dct: <http://purl.org/dc/terms/>
   PREFIX geo: <http://www.opengis.net/ont/geosparql#>
   PREFIX mwapi: <https://www.mediawiki.org/ontology#API/>
+  PREFIX obo:   <http://purl.obolibrary.org/obo/>
   PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
   PREFIX owl: <http://www.w3.org/2002/07/owl#>
   PREFIX p: <http://www.wikidata.org/prop/>
@@ -329,7 +330,7 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 | http://www.wikidata.org/entity/Q153987    | University of Freiburg                                               | https://ror.org/0245cg223 |
 
 
-*** Ontology term to describe affiliation in nfdicore?
+**** Ontology term to describe affiliation in nfdicore?
 :PROPERTIES:
 :ID:       0e95840b-5cf8-4aad-aa7d-24924d27a055
 :END:
@@ -564,7 +565,7 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 -> the "has_participant' links to BFO_0000057 but that one does not exist in the BFO. Updated nfdi core has RO_0000057 instead which we will use here.
 
 
-*** Construct triples
+**** Construct triples
 :PROPERTIES:
 :ID:       78a20617-396f-48ee-8ada-0048f726ef0b
 :END:
@@ -603,6 +604,10 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 | https://kg.nfdi4bioimage.de/n4bikg/services | http://www.w3.org/1999/02/22-rdf-syntax-ns#type     | http://www.wikidata.org/entity/Q31386861                                        |
 | https://kg.nfdi4bioimage.de/n4bikg/services | https://nfdi.fiz-karlsruhe.de/ontology/NFDI_0000142 | http://www.wikidata.org/entity/Q18199165                                        |
 
+**** sparql construct query
+:PROPERTIES:
+:ID:       4d3e4a5c-ece7-4fd6-bd45-0df4a89ba06a
+:END:
 #+begin_src sparql :results output file link :file n4bi_core.rdf.xml
   <<wd-prefixes>>
   construct {
@@ -672,3 +677,40 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 | https://kg.nfdi4bioimage.de/n4bikg/core                  | 2026-06-05 |
 | https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community | 2026-06-05 |
 | https://kg.nfdi4bioimage.de/n4bikg/services              | 2026-06-05 |
+
+*** Update [2026-06-09 Tue]
+:PROPERTIES:
+:ID:       2e4cda49-1530-4c53-ad10-c121abe4b2fd
+:END:
+
+**** Add type to RORs
+:PROPERTIES:
+:ID:       a7c25c8c-d8a7-4990-ac92-3acd06bfd249
+:END:
+type should be http://purl.obolibrary.org/obo/OBI_0000828
+
+**** sparql construct query
+:PROPERTIES:
+:ID:       4d3e4a5c-ece7-4fd6-bd45-0df4a89ba06a
+:END:
+begin_src sparql :results output file link :file ../RDF_dumps/n4bi_core.rdf.xml :noweb yes :url https://query.wikidata.org/sparql
+
+#+begin_src sparql  :noweb yes :url https://query.wikidata.org/sparql :results output file :file ../RDF_dumps/core_update.rdf.xml
+   <<wd-prefixes>>
+  construct {?ror a obo:OBI_0000828 .}
+  where {
+       select distinct ?ror where {
+         service wikibase:label {bd:serviceParam wikibase:language "en" .}
+         {
+           select distinct ?ror where {
+             wd:Q113500855 wdt:P1416 ?affiliation .
+             ?affiliation wdt:P6782 ?ror_id .
+             bind(iri(concat(str(ror:),?ror_id)) as ?ror)
+           }
+         }
+       }
+     }
+#+end_src
+
+#+RESULTS:
+[[file:../RDF_dumps/core_update.rdf.xml]]
