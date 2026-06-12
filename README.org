@@ -1823,8 +1823,44 @@ no changes added to commit (use "git add" and/or "git commit -a")
 [main e2660a8] Archiving graphs.
  1 file changed, 49 insertions(+), 26 deletions(-)
 
-*** TODO Fix typo
+*** DONE Fix typo
+CLOSED: [2026-06-12 Fri 16:02]
 :PROPERTIES:
 :ID:       490429d5-3477-4438-8e1f-e6efed1c9678
 :END:
 =dcat:accesURL= should be =dcat:accessURL=
+
+*** Archive
+:PROPERTIES:
+:ID:       b678e448-d2b1-4583-879d-cc5208809ee6
+:END:
+#+begin_src sparql :results output file :file Archive/services.n3 :var graph="<https://kg.nfdi4bioimage.de/n4bikg/services>"
+  construct {?s ?p ?o} where {
+    graph $graph {?s ?p ?o}
+    }
+#+end_src
+
+#+RESULTS:
+[[file:Archive/services.n3]]
+
+#+begin_src bash :results output raw replace
+  git add Archive/*.n3
+  git commit -m "Archiving graphs."
+#+end_src
+
+#+RESULTS:
+[main 068674c] Archiving graphs.
+ 1 file changed, 109 insertions(+)
+ create mode 100644 Archive/services.n3
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.org
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[main e2660a8] Archiving graphs.
+ 1 file changed, 49 insertions(+), 26 deletions(-)
