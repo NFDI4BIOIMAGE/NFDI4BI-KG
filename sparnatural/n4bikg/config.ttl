@@ -1,0 +1,252 @@
+@prefix : <http://kg.nfdi4bioimage.de/n4bikg/sparnat-config#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix this: <http://kg.nfdi4bioimage.de/n4bikg/sparnat-config/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix omecore: <https://ld.openmicroscopy.org/core/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix nfdicore: <https://nfdi.fiz-karlsruhe.de/ontology/> .
+@prefix volipi: <http://data.sparna.fr/ontologies/volipi#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix sparnacore: <http://data.sparna.fr/ontologies/sparnatural-config-core#> .
+@prefix datasources: <http://data.sparna.fr/ontologies/sparnatural-config-datasources#> .
+@prefix sparql: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix datacite:     <https://schema.datacite.org/meta/kernel-4.6/metadata.xsd#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix omekg: <https://ld.openmicroscopy.org/omekg/> .
+@prefix omekgprop: <https://ld.openmicroscopy.org/omekg#> .
+
+@base <http://kg.nfdi4bioimage.de/n4bikg/sparnat-config#> .
+
+<http://kg.nfdi4bioimage.de/n4bikg/sparnat-config> rdf:type owl:Ontology ;
+                                                    owl:imports <http://data.sparna.fr/ontologies/sparnatural-config-core> ,
+    <http://data.sparna.fr/ontologies/sparnatural-config-datasources> ,
+                                                                omecore: ,
+                                                                <https://nfdi.fiz-karlsruhe.de/ontology/3.0.5> .
+
+###  http://kg.nfdi4bioimage.de/n4bikg/sparnat-config#hasParticipantOrganization
+:hasParticipantOrganization sh:path <http://purl.obolibrary.org/obo/RO_0000057> ;
+    rdfs:label: "has participating organization" ;
+    sh:nodeKind sh:IRI ;
+    dash:searchWidget sparnacore:ListProperty ;
+    sh:class obo:OBI_0000828 ;
+    sh:name "has participating organization" ;
+    .
+
+###  http://kg.nfdi4bioimage.de/n4bikg/sparnat-config#providesService
+:providesService sh:path <http://www.wikidata.org/prop/direct/P121> ;
+    dash:searchWidget sparnacore:ListProperty ;
+    sh:name "provides service" ;
+    sh:nodeKind sh:IRI ;
+    sh:class obo:T4FS_0000397 ;
+    .
+
+:hasOMERO sh:path <http://www.wikidata.org/prop/direct/P121> ;
+    dash:searchWidget sparnacore:ListProperty ;
+    sh:name "provides" ;
+    sh:nodeKind sh:IRI ;
+    sh:class omekg:OMEROServer ;
+    .
+
+###  http://kg.nfdi4bioimage.de/n4bikg/sparnat-config/NFDIConsortium
+this:NFDIConsortium rdf:type sh:NodeShape ;
+     # volipi:iconName "fa-brands fa-connectdevelop" ;
+    volipi:icon <https://avatars.githubusercontent.com/u/133001729?s=72&v=2> ;
+    volipi:iconName "fa-solid fa-connectdevelop";
+    rdfs:label "N4BI Consortium" ;
+    sh:name "N4BI Consortium" ;
+    sh:targetClass nfdicore:NFDI_0001039 ;
+    sh:property :hasParticipantOrganization , :providesService, :hasOMERO ;
+    .
+
+###  http://kg.nfdi4bioimage.de/n4bikg/sparnat-config/Service
+this:Service a sh:NodeShape ;
+    sh:order "1"^^xsd:integer ;
+    volipi:iconName "fa-solid fa-screwdriver-wrench";
+    rdfs:label "Service" ;
+    sh:description "A service provided by the NFDI4BIOIMAGE consortium"@en ;
+    sh:property rdfs:comment ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass <http://purl.obolibrary.org/obo/T4FS_0000397> ;
+    .
+
+this:OMEROServer a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:name "OMERO";
+    rdfs:label "OMERO";
+    volipi:icon <https://www.openmicroscopy.org/img/logos/ome-logomark.svg> ;
+    volipi:iconName "fa-solid fa-microscope";
+    sh:targetClass omekg:OMEROServer ;
+    sh:property this:sparql_service ;
+    sh:property this:ome_project, this:ome_dataset, this:ome_image ;
+    .
+
+this:sparql_service sh:path sparql:service;
+    sh:class sparql:Service;
+    sh:name "has SPARQL service";
+    rdfs:label "has SPARQL service";
+    sh:node this:SparqlService ;
+    sh:class sparql:Service;
+    .
+this:ome_project sh:path dcterms:hasPart ;
+    sparnacore:sparqlService <https://omero.nfdi4bioimage.de/vkg>, <https://evolomero.evolbio.mpg.de/vkg> ; # Takes only the first one 
+    rdfs:label "has OME Project" ;
+    sh:name "has OME Project" ;
+    sh:node this:OME_Project ;
+    sh:class omecore:Project ;
+    .
+
+this:ome_dataset sh:path dcterms:hasPart ;
+    sparnacore:sparqlService <https://omero.nfdi4bioimage.de/vkg> ;
+    rdfs:label "has OME Dataset" ;
+    sh:name "has OME Dataset" ;
+    sh:node this:OME_Dataset ;
+    sh:class this:omecore:Dataset;
+    .
+
+this:ome_image sh:path dcterms:hasPart ;
+    sparnacore:sparqlService <https://omero.nfdi4bioimage.de/vkg> ;
+    rdfs:label "has OME Image" ;
+    sh:name "has OME Image" ;
+    sh:node this:OME_Image ;
+    sh:class omecore:Image ;
+    .
+
+this:SparqlService a sh:NodeShape;
+volipi:icon <https://raw.githubusercontent.com/cygri/rdf-logos/refs/heads/master/svg/sparql.svg> ;
+volipi:iconName "fa-solid fa-circle-nodes";
+sh:targetClass sparql:Service ;
+sh:name "SPARQLService";
+rdfs:label "SPARQL Service";
+.
+<https://omero.nfdi4bioimage.de> <http://www.w3.org/ns/sparql-service-description#service> <https://omero.nfdi4bioimage.de/vkg> .
+<https://omero.nfdi4bioimage.de/vkg> a sparql:Service ; sparql:endpoint <https://omero.nfdi4bioimage.de/vkg/sparql> .
+<https://evolomero.evolbio.mpg.de/vkg> a sparql:Service ; sparql:endpoint <https://evolomero.evolbio.mpg.de/vkg/sparql> .
+this:OME_Project a sh:NodeShape ;
+    rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+    sparnacore:sparqlString "<https://ld.openmicroscopy.org/core/Project>";
+    sh:nodeKind sh:IRI ;
+    sh:name "OME Project" ;
+    rdfs:label "OME Project" ;
+    volipi:iconName "fa-solid fa-diagram-project" ;
+    sh:class this:ProjectProxy ;
+    sh:property rdfs:label ;
+    sh:deactivated true;
+    .
+
+ this:OME_Dataset a sh:NodeShape ;
+     sh:nodeKind sh:IRI ;
+     sh:name "OME Dataset" ;
+     rdfs:label "OME Dataset" ;
+     volipi:iconName "fa-solid fa-table-cells" ;
+    sh:targetClass omecore:Dataset ;
+    sh:property rdfs:label ;
+    sh:deactivated true;
+.
+
+this:OME_Image a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:name "OME Image" ;
+    rdfs:label "OME Image" ;
+    volipi:iconName "fa-solid fa-image" ;
+    sh:targetClass omecore:Image;
+    sh:property rdfs:label, this:ome_detail, this:thumbnail ;
+    sh:deactivated true;
+   .
+
+this:thumbnail sh:path omekgprop:thumbnail;
+    sh:name "has thumbnail";
+    sh:node this:Thumbnail;
+    .
+this:Thumbnail a sh:NodeShape ;
+    sh:nodeKind sh:IRI;
+    sh:name "OMERO Thumbnail";
+    volipi:iconName "fa-solid fa-thumb";
+    sh:datatype xsd:anyURI;
+    .
+this:ome_detail sh:path <https://ld.openmicroscopy.org/omekg#ome_details>;
+    sh:name "Image view";
+    rdfs:label "Image view";
+    sh:node this:OMEROImageView;
+    sh:nodeKind sh:IRI;
+    .
+this:OMEROImageView a sh:NodeShape;
+    sh:name "OMERO Image Viewer";
+    sh:datatype xsd:anyURI;
+    .
+this:ResearchOrganization a sh:NodeShape ;
+    rdfs:label "Research organization" ;
+    sh:name "Research organization" ;
+    sh:property rdfs:label , this:affiliate ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass obo:OBI_0000828 ;
+    volipi:iconName "fa-solid fa-school" ;
+    .
+
+this:affiliate sh:path [sh:inversePath datacite:affiliation ] ;
+    dash:searchWidget sparnacore:ListProperty ;
+    datasources:datasource this:ResearcherLabelDatasource ;
+    sh:name "affiliate" ;
+    sh:class foaf:Person ;
+    sh:nodeKind sh:IRI ;
+    .
+
+this:ResearcherLabelDatasource a datasources:SparqlDatasource ;
+    datasources:queryString """prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+
+select ?uri (concat(?rdfs_label,\" (\",str(?uri),\")\") as ?label) where {
+  ?uri a foaf:Person;
+      rdfs:label ?rdfs_label .
+} """ ;
+    .
+
+rdfs:label sh:path rdfs:label ;
+    dash:searchWidget sparnacore:ListProperty ;
+    sh:nodeKind sh:Literal ;
+    rdfs:label "label/name" ;
+    sh:name "label/name" ;
+    sh:datatype xsd:string .
+
+this:Researcher a sh:NodeShape ;
+    volipi:iconName "fa-brands fa-orcid" ;
+    rdfs:label "Researcher" ;
+    sh:name "Researcher" ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass foaf:Person ;
+    sh:property this:affiliation ,  [sh:path datacite:givenName ;  sh:datatype xsd:string] ,  [sh:path datacite:familyName;  sh:datatype xsd:string] ,  rdfs:label ;
+    .
+
+this:affiliation sh:path datacite:affiliation ;
+    sh:class obo:OBI_0000828 ;
+    rdfs:label "has affiliation" ;
+    sh:name "has affiliation" ;
+    sh:nodeKind sh:IRI ;
+    sh:node this:ResearchOrganization ;
+    .
+
+this:ZenodoRecord a sh:NodeShape ;
+     # volipi:iconName "fa-solid fa-file" ;
+    volipi:icon <https://about.zenodo.org/static/img/icons/zenodo-icon-black.svg> ;
+    volipi:iconName "fa-solid fa-upload";
+    rdfs:label "Zenodo.org Record" ;
+    sh:name "Zenodo.org Record" ;
+    sh:property [sh:path datacite:IsPartOf ; sh:nodeKind sh:IRI ;] ,
+    [sh:nodeKind sh:IRI ; sh:path datacite:IsVersionOf ] ,
+    [sh:nodeKind sh:IRI ; sh:path datacite:creator ;  sh:class foaf:Person ; datasources:datasource datasources:list_rdfslabel_count ;  dash:searchWidget sparnacore:ListProperty] ,
+    [sh:nodeKind sh:Literal ; sh:path datacite:description ] ,
+    [sh:nodeKind sh:Literal ; sh:path datacite:resourceType ] ,
+    [sh:nodeKind sh:Literal ; sh:path datacite:right ] ,
+    [sh:nodeKind sh:Literal ; sh:path datacite:subject ] ,
+    [sh:nodeKind sh:Literal ; sh:path datacite:title ] ,
+    [sh:nodeKind sh:Literal ; sh:path datacite:Updated ; sh:datatype xsd:date ] ,
+    [sh:nodeKind sh:Literal ; sh:path datacite:Created ; sh:datatype xsd:date ] ;
+    sh:targetClass obo:T4FS_0000113 ;
+    .
