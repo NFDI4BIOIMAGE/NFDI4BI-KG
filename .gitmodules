@@ -1,0 +1,3 @@
+[submodule "sparnatural"]
+	path = sparnatural
+	url = git@gitlab.gwdg.de:mpievolbio-scicomp/sparnatural-mpi
