@@ -11,20 +11,23 @@
 :ID:       a96dcf36-4c66-46ba-9c1e-23b400bba768
 :END:
 #+begin_src emacs-lisp
-  (setq org-babel-python-command "/home/grotec/.local/share/mamba/envs/rdf/bin/python")
+  (setq org-babel-python-command "/home/grotec/.local/share/mamba/envs/n4bikg/bin/python")
 #+end_src
 
 #+RESULTS:
-: /home/grotec/.local/share/mamba/envs/rdf/bin/python
+: /home/grotec/.local/share/mamba/envs/n4bikg/bin/python
 
 ** Convert xml returned from scythe to rdf
 :PROPERTIES:
 :ID:       71f8edf7-1675-4504-83e7-116fbfde65dd
 :END:
-#+begin_src python :session rdf :results output :async yes
+#+begin_src python :session rdf :results output :async yes :tangle /home/grotec/Repositories/NFDI4BI-KG/src/python/zenodo_community_harvest.py
   from oaipmh_scythe import Scythe
   from bs4 import BeautifulSoup
   from rdflib import Graph, Namespace, URIRef, Literal, BNode, FOAF, DC, XSD, RDF, RDFS
+
+  import logging
+  logging.basicConfig(level=logging.WARNING)
 
   def parse_person(graph, person):
 
@@ -224,20 +227,26 @@
         graph.add((subj, DCITE.contributor, person))
 
     for date in dates:
-        property, val = parse_date(date)
-        graph.add((subj, property, val))
+        try:
+            property, val = parse_date(date)
+            graph.add((subj, property, val))
+        except ValueError:
+            logging.warning("Could not convert string %s to xsd:date literal.", str(date))
+            pass
+        except:
+            raise
 
     for relation in relations:
         property, val = parse_relation(relation)
         graph.add((subj, property, val))
 
-  graph.serialize('../RDF_dumps/N4BI_zenodo_community.n3')
+  graph.serialize('/home/grotec/org/repos/NFDI4BI-KG/RDF_dumps/n4bi_zenodo_community.n3')
 
   print(len(graph))
 #+end_src
 
 #+RESULTS:
-: 7362
+: 5f3abb00-e179-4c2a-9856-ff4f6649fdc4
 
 *** Clean up
 :PROPERTIES:
@@ -245,21 +254,18 @@
 :END:
 
 Cleanup:
-#+begin_src bash :dir ../RDF_dumps :results output :session noconda
+#+begin_src bash :dir /home/grotec/org/repos/NFDI4BI-KG/RDF_dumps :results output
+  export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
   JAVA=$(which java)
-  export JAVA_HOME=/usr
   echo $JAVA
   echo $JAVA_HOME
   RIOT=/opt/apache-jena/bin/riot
-  cat n4bi_zenodo_community.n3 | sed 's/^-\{2,\}.*$//' > tmp.n3
-  $RIOT --output n3 N4BI_zenodo_community.n3 > tmp.n3
-  $RIOT --output turtle tmp.n3 > N4BI_zenodo_community.ttl
-  mv tmp.n3 N4BI_zenodo_community.n3
+  $RIOT --output turtle n4bi_zenodo_community.n3 > n4bi_zenodo_community.ttl
 #+end_src
 
 #+RESULTS:
 : /usr/bin/java
-: /usr
+: /usr/lib/jvm/java-21-openjdk-amd64
 
 #+begin_src sparql :url http://kg.nfdi4bioimage.de/#/dataset/N4BIKG/query :eval no
   drop graph <https://kg.nfdi4bioimage.de/n4bikg/n4bi_zenodo_community>
@@ -484,101 +490,4 @@ awardTitle ['NFDI4BIOIMAGE']
 <Element {http://www.openarchives.org/OAI/2.0/}record at 0x77b2e8936000>
 #+end_example
 
-** Obsolete: Generate RDF from NFDI4BIOIMAGE's zenodo community
-:PROPERTIES:
-:ID:       7719c86c-b08a-4642-9cd1-f78942e5c44f
-:END:
-
-#+begin_src python :session rdf :results output :async yes :tangle /home/grotec/Repositories/NFDI4BI-KG/src/python/zenodo_community_harvest.py
-
-  from oaipmh_scythe import Scythe
-  from rdflib import Graph, BNode, Literal, URIRef, DC, FOAF, XSD, RDF, RDFS, Namespace
-
-  SIO = Namespace('http://semanticscience.org/resource/')
-  ZND = Namespace('https://zenodo.org/')
-  zenodo = Namespace('https://zenodo.org/ns/')
-
-  def add_persons(graph, person_list, property_term):
-    for c in person_list:
-        bn = BNode()
-        name_str = c.split(", ")
-        if len(name_str) > 1:
-          last = name_str[0]
-          first = ", ".join(name_str[1:])
-          graph.add((bn, FOAF.firstName, Literal(first)))
-          graph.add((bn, FOAF.lastName, Literal(last)))
-        else:
-          graph.add((bn, FOAF.name, Literal(name_str)))
-
-        graph.add((subject, property_term, bn))
-
-    return graph
-
-  g = Graph(bind_namespaces='rdflib')
-  g.bind("sio", SIO)
-  g.bind("znd", ZND)
-  g.bind("zenodo", zenodo)
-
-  n4bi = URIRef("https://nfdi4bioimage.de/rdf/node")
-  n4bicomm = URIRef("https://zenodo.org/communities/nfdi4bioimage")
-
-  g.add((n4bi, zenodo.community, n4bicomm))
-  g.add((n4bicomm, RDF.type, SIO.SIO_001064))
-  g.add((n4bicomm, DC.identifier, Literal('user-nfdi4bioimage')))
-  g.add((n4bicomm, SIO.SIO_000296, Literal('https://zenodo.org/communities/nfdi4bioimage')))
-
-  with Scythe("https://zenodo.org/oai2d") as scythe:
-    records = scythe.list_records(set_='user-nfdi4bioimage')
-
-  for rec0 in records:
-
-    creator = rec0.metadata.get('creator', [])
-    date = rec0.metadata.get('date', [])
-    description = rec0.metadata.get('description', [])
-    identifier = rec0.metadata.get('identifier', [])
-    publisher = rec0.metadata.get('publisher', [])
-    relation = rec0.metadata.get('relation', [])
-    rights = rec0.metadata.get('rights', [])
-    subjects = rec0.metadata.get('subject', [])
-    title = rec0.metadata.get('title', [])
-    tpe = rec0.metadata.get('type', [])
-
-    subject = URIRef(rec0.metadata['identifier'][0])
-
-    g.add((n4bicomm, SIO.SIO_000088, subject))
-
-    g = add_persons(g, contributor, DC.contributor)
-    g = add_persons(g, creator, DC.creator)
-    for p in publisher:
-      g.add((subject, DC.publisher, Literal(p)))
-    for dt in date:
-      g.add((subject, DC.date, Literal(dt, datatype=XSD.date)))
-
-    for desc in description:
-      g.add((subject, DC.description, Literal(desc)))
-
-    for right in rights:
-        g.add((subject, DC.rights, Literal(right)))
-
-    for sbjct in subjects:
-        g.add((subject, DC.subject, Literal(sbjct)))
-
-    for t in title:
-        g.add((subject, DC.title, Literal(t)))
-
-    for rel in relation:
-        g.add((subject, DC.relation, URIRef(rel)))
-
-    for id in identifier:
-        g.add((subject, DC.identifier, URIRef(id)))
-
-    for tp in tpe:
-        g.add((subject, DC.type, Literal(tp)))
-
-
-  g.serialize("/home/grotec/Repositories/NFDI4BI-KG/N4BI_zenodo_community.n3")
-#+end_src
-
-#+RESULTS:
-: fe35bb5c-223d-4e77-919b-ba877a4781a8
 
